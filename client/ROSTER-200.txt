@@ -1,0 +1,216 @@
+excluded 59 chains before selecting:
+    8  Eeveelution -- reachable by evolving Eevee, so not its own card
+   23  cosmetic variant of a card already selected
+    1  carries too many types to have a losing matchup
+   27  Unown letter -- identical to unowna, which is kept
+
+198 chains / 421 sprites  (budget 200 chains)
+
+  roles: fighter 48  skirmisher 42  tank 36  sniper 28  runner 24  bruiser 12  artillery 8
+  costs: 3 44  2 40  4 34  5 30  6 19  1 16  7 15
+  traits: wincon 60  air 32  jumps 22  true 12  building 1
+  chain lengths: 2 76  3 72  1 49  4 1
+  types covered: 18 of 18
+  already have art: 43 chains (99 sprites)
+  need generating: 155 chains (322 sprites)
+
+THE ROSTER
+
+   1  spearow         fighter    FLYING                 spearow > fearow                          air
+   1  aron            fighter    STEEL/ROCK             aron > lairon > aggron                    
+   1  charmander      fighter    DRAGON/FIRE            charmander > charmeleon > charizard       
+   1  rattata         fighter    NORMAL                 rattata > raticate                        
+   1  pichu           fighter    ELECTRIC/FAIRY         pichu > pikachu > raichu                     [needs art]
+   1  zubat           skirmisher POISON/FLYING          zubat > golbat > crobat                   air
+   1  caterpie        skirmisher BUG                    caterpie > metapod > butterfree           
+   1  sprigatito      skirmisher GRASS/DARK             sprigatito > floragato > meowscarada         [needs art]
+   1  fennekin        skirmisher FIRE/PSYCHIC           fennekin > braixen > delphox                 [needs art]
+   1  poliwag         skirmisher WATER/FIGHTING         poliwag > poliwhirl                          [needs art]
+   1  azurill         skirmisher WATER/FAIRY            azurill > marill > azumarill                 [needs art]
+   1  smoliv          skirmisher GRASS/NORMAL           smoliv > dolliv > arboliva                   [needs art]
+   1  mareep          skirmisher ELECTRIC               mareep > flaffy > ampharos                   [needs art]
+   1  squirtle        sniper     WATER                  squirtle > wartortle > blastoise          
+   1  litwick         sniper     GHOST/FIRE             litwick > lampent > chandelure               [needs art]
+   1  klink           sniper     STEEL                  klink > klang > klinklang                    [needs art]
+   2  clauncher       artillery  WATER                  clauncher > clawitzer                     
+   2  unowna          artillery  PSYCHIC                unowna                                       [needs art]
+   2  geodude         fighter    GROUND/ROCK            geodude > graveler > golem                
+   2  trapinch        fighter    BUG/GROUND             trapinch > vibrava > flygon               
+   2  bagon           fighter    DRAGON                 bagon > shelgon > salamence               
+   2  koffing         fighter    POISON                 koffing                                   
+   2  ditto           fighter    NORMAL                 ditto                                     
+   2  eevee           fighter    NORMAL                 eevee                                     
+   2  ledyba          fighter    BUG/FIGHTING/FLYING    ledyba > ledian                           air   [needs art]
+   2  shellder        fighter    WATER/ICE/ROCK         shellder > cloyster                          [needs art]
+   2  venonat         fighter    BUG/FLYING/POISON      venonat > venomoth                        air   [needs art]
+   2  croagunk        fighter    POISON/FIGHTING/WATER  croagunk > toxicroak                         [needs art]
+   2  starly          fighter    NORMAL/FLYING          starly > staravia > staraptor             air   [needs art]
+   2  swinub          fighter    GROUND/ICE             swinub > piloswine > mamoswine               [needs art]
+   2  impidimp        fighter    DARK/FAIRY             impidimp > morgrem > grimmsnarl              [needs art]
+   2  greavard        fighter    GHOST/ROCK             greavard > houndstone                        [needs art]
+   2  alolangeodude   fighter    ELECTRIC/ROCK          alolangeodude > alolangraveler > alolangolem   [needs art]
+   2  nidoranf        fighter    POISON/GROUND          nidoranf > nidorina > nidoqueen              [needs art]
+   2  seedot          fighter    GRASS/DARK             seedot > nuzleaf > shiftry                   [needs art]
+   2  hisuigrowlithe  fighter    FIRE/ROCK              hisuigrowlithe > hisuiarcanine               [needs art]
+   2  blipbug         runner     BUG/PSYCHIC            blipbug > dottler > orbeetle              wincon,jumps   [needs art]
+   2  pidgey          skirmisher NORMAL/FLYING          pidgey > pidgeotto > pidgeot              air
+   2  bulbasaur       skirmisher GRASS/POISON           bulbasaur > ivysaur > venusaur            
+   2  chinchou        skirmisher WATER/ELECTRIC         chinchou > lanturn                        
+   2  duskull         skirmisher DARK/GHOST             duskull > dusclops > dusknoir             
+   2  togepi          skirmisher FAIRY/NORMAL           togepi > togetic > togekiss               
+   2  noibat          skirmisher DRAGON/FLYING          noibat > noivern                          air   [needs art]
+   2  magnemite       skirmisher ELECTRIC/STEEL         magnemite > magneton > magnezone             [needs art]
+   2  deino           skirmisher DRAGON/DARK            deino > zweilous > hydreigon                 [needs art]
+   2  scorbunny       skirmisher FIRE                   scorbunny > raboot > cinderace               [needs art]
+   2  salandit        skirmisher FIRE/POISON            salandit > salazzle                          [needs art]
+   2  smoochum        skirmisher ICE/PSYCHIC            smoochum > jynx                              [needs art]
+   2  hoppip          sniper     FLYING/GRASS           hoppip > skiploom > jumpluff              air
+   2  budew           sniper     GRASS/POISON           budew > roselia > roserade                   [needs art]
+   2  snom            sniper     BUG/ICE                snom > frosmoth                              [needs art]
+   2  popplio         sniper     WATER/FAIRY            popplio > brionne > primarina                [needs art]
+   2  grubbin         sniper     BUG/ELECTRIC           grubbin > charjabug > vikavolt               [needs art]
+   2  skrelp          sniper     POISON/WATER           skrelp > dragalge                            [needs art]
+   2  snivy           sniper     GRASS                  snivy > servine > serperior                  [needs art]
+   2  gothita         sniper     PSYCHIC                gothita > gothorita > gothitelle             [needs art]
+   3  abra            artillery  PSYCHIC                abra > kadabra > alakazam                 
+   3  wishiwashi      bruiser    WATER                  wishiwashi > wishiwashischool > wishiwashischool > wishiwashischool   [needs art]
+   3  galariandarumaka bruiser    ICE/FIRE               galariandarumaka > galariandarmanitan        [needs art]
+   3  crabrawler      bruiser    ICE/FIGHTING           crabrawler > crabominable                    [needs art]
+   3  drilbur         fighter    GROUND/STEEL           drilbur > excadrill                       true
+   3  larvitar        fighter    DARK/ROCK              larvitar > pupitar > tyranitar            
+   3  spheal          fighter    WATER/ICE              spheal > sealeo > walrein                 
+   3  machop          fighter    FIGHTING               machop > machoke > machamp                
+   3  fomantis        fighter    GRASS/FIGHTING         fomantis > lurantis                       true   [needs art]
+   3  torchic         fighter    FIRE/FIGHTING/FLYING   torchic > combusken > blaziken            air   [needs art]
+   3  quaxly          fighter    WATER/FIGHTING/FLYING  quaxly > quaxwell > quaquaval             air   [needs art]
+   3  glimmet         fighter    POISON/ROCK/GRASS      glimmet > glimmora                           [needs art]
+   3  paras           fighter    BUG/POISON/GRASS       paras > parasect                             [needs art]
+   3  tepig           fighter    FIRE/FIGHTING          tepig > pignite > emboar                     [needs art]
+   3  slugma          fighter    FIRE/ROCK              slugma > magcargo                            [needs art]
+   3  galarianslowpoke fighter    PSYCHIC/POISON         galarianslowpoke                             [needs art]
+   3  oddish          fighter    GRASS/POISON           oddish > gloom > vileplume                   [needs art]
+   3  turtwig         fighter    GRASS/GROUND           turtwig > grotle > torterra                  [needs art]
+   3  seel            fighter    ICE/WATER              seel > dewgong                               [needs art]
+   3  tympole         fighter    WATER/GROUND           tympole > palpitoad > seismitoad             [needs art]
+   3  pineco          fighter    BUG/STEEL              pineco > forretress                          [needs art]
+   3  pancham         fighter    FIGHTING/DARK          pancham > pangoro                            [needs art]
+   3  galarianzigzagoon fighter    DARK                   galarianzigzagoon > galarianlinoone > obstagoon   [needs art]
+   3  totodile        fighter    WATER                  totodile > croconaw > feraligatr             [needs art]
+   3  scraggy         fighter    DARK/FIGHTING          scraggy > scrafty                            [needs art]
+   3  cacnea          fighter    GRASS/DARK             cacnea > cacturne                            [needs art]
+   3  diglett         runner     GROUND/NORMAL          diglett > dugtrio                         wincon,jumps
+   3  voltorb         runner     ELECTRIC               voltorb > electrode                       wincon,jumps
+   3  yamper          runner     ELECTRIC               yamper > boltund                          wincon,jumps
+   3  alolandiglett   runner     GROUND/STEEL           alolandiglett > alolandugtrio             wincon,jumps   [needs art]
+   3  hisuizorua      runner     NORMAL/GHOST           hisuizorua > hisuizoroark                 wincon,jumps   [needs art]
+   3  hisuivoltorb    runner     ELECTRIC/GRASS         hisuivoltorb > hisuielectrode             wincon,jumps   [needs art]
+   3  roggenrola      skirmisher ROCK                   roggenrola > boldore > gigalith           
+   3  elgyem          skirmisher PSYCHIC                elgyem > beheeyem                         
+   3  yanma           skirmisher BUG/FLYING             yanma > yanmega                           air,true   [needs art]
+   3  dreepy          skirmisher DRAGON/GHOST           dreepy > drakloak > dragapult                [needs art]
+   3  archen          skirmisher ROCK/FLYING            archen > archeops                         air   [needs art]
+   3  staryu          skirmisher WATER/PSYCHIC          staryu > starmie                             [needs art]
+   3  solosis         skirmisher PSYCHIC                solosis > duosion > reuniclus                [needs art]
+   3  rowlet          sniper     GRASS/FLYING/GHOST     rowlet > dartix > decidueye               air   [needs art]
+   3  snorunt         sniper     GHOST/ICE              snorunt > glalie > froslass                  [needs art]
+   3  ralts           sniper     PSYCHIC/FAIRY          ralts > kirlia                               [needs art]
+   3  sandshrew       tank       GROUND/NORMAL          sandshrew > sandslash                     wincon
+   3  alolansandshrew tank       ICE/STEEL              alolansandshrew > alolansandslash         wincon   [needs art]
+   4  cubchoo         bruiser    ICE/WATER              cubchoo > beartic                            [needs art]
+   4  karrablast      bruiser    BUG/STEEL              karrablast > escavalier                      [needs art]
+   4  bounsweet       bruiser    GRASS/FIGHTING         bounsweet > steenee > tsareena               [needs art]
+   4  shedinja        bruiser    BUG/GHOST              shedinja                                     [needs art]
+   4  stunky          bruiser    DARK/POISON            stunky > skuntank                            [needs art]
+   4  girafarig       bruiser    NORMAL/PSYCHIC         girafarig > farigiraf                        [needs art]
+   4  pikachulibre    fighter    ELECTRIC/FIGHTING/FAIRY pikachulibre                                 [needs art]
+   4  gulpin          fighter    POISON                 gulpin > swalot                              [needs art]
+   4  skiddo          fighter    GRASS                  skiddo > gogoat                              [needs art]
+   4  sneasel         runner     ICE/DARK               sneasel > weavile                         wincon,jumps   [needs art]
+   4  hisuisneasel    runner     POISON/FIGHTING        hisuisneasel > sneasler                   wincon,jumps   [needs art]
+   4  nymble          runner     BUG/DARK               nymble > lokix                            wincon,jumps   [needs art]
+   4  pawmi           runner     ELECTRIC/FIGHTING      pawmi > pawmo > pawmot                    wincon,jumps   [needs art]
+   4  alolanmeowth    runner     NORMAL/DARK            alolanmeowth > alolanpersian              wincon,jumps   [needs art]
+   4  buneary         runner     NORMAL/FIGHTING        buneary > lopunny > megalopunny           wincon,jumps   [needs art]
+   4  froakie         runner     WATER/DARK             froakie > frogadier > greninja            wincon,jumps   [needs art]
+   4  joltik          runner     BUG/ELECTRIC           joltik > galvantula                       wincon,jumps   [needs art]
+   4  electrike       runner     ELECTRIC               electrike > manectric > megamanectric     wincon,jumps   [needs art]
+   4  meowth          runner     NORMAL                 meowth > persian                          wincon,jumps   [needs art]
+   4  mienfoo         runner     FIGHTING               mienfoo > mienshao                        wincon,jumps   [needs art]
+   4  taillow         runner     FLYING                 taillow > swellow                         wincon,air   [needs art]
+   4  gastly          skirmisher GHOST/POISON           gastly > haunter > gengar                 
+   4  wattrel         skirmisher FLYING/ELECTRIC        wattrel > kilowattrel                     air   [needs art]
+   4  baltoy          skirmisher GROUND/PSYCHIC         baltoy > claydol                             [needs art]
+   4  swablu          skirmisher FAIRY                  swablu > altaria > megaaltaria               [needs art]
+   4  exeggcute       sniper     GRASS/PSYCHIC          exeggcute                                 
+   4  larvesta        sniper     FIRE/BUG               larvesta > volcarona                         [needs art]
+   4  latias          sniper     DRAGON/PSYCHIC         latias                                       [needs art]
+   4  bronzor         tank       STEEL/PSYCHIC          bronzor > bronzong                        wincon
+   4  phantump        tank       GHOST/GRASS            phantump > trevenant                      wincon   [needs art]
+   4  stufful         tank       NORMAL/FIGHTING        stufful > bewear                          wincon   [needs art]
+   4  wimpod          tank       BUG/WATER              wimpod > golisopod                        wincon   [needs art]
+   4  elekid          tank       ELECTRIC               elekid > electabuzz > electivire          wincon   [needs art]
+   4  spoink          tank       PSYCHIC                spoink > grumpig                          wincon   [needs art]
+   5  darmanitanzen   artillery  FIRE/PSYCHIC           darmanitanzen                                [needs art]
+   5  cosmog          artillery  PSYCHIC                cosmog > cosmoem                             [needs art]
+   5  volbeat         bruiser    BUG/FLYING             volbeat                                   air   [needs art]
+   5  ponyta          runner     FIRE                   ponyta > rapidash                         wincon,jumps
+   5  gible           runner     DRAGON/GROUND          gible > gabite > garchomp                 wincon,jumps   [needs art]
+   5  fletchling      skirmisher FLYING/FIRE            fletchling > fletchinder > talonflame     air
+   5  mantyke         skirmisher WATER/FLYING           mantyke > mantine                         air   [needs art]
+   5  wingull         skirmisher WATER/FLYING           wingull > pelipper                        air   [needs art]
+   5  porygon         skirmisher NORMAL                 porygon > porygon2 > porygonz                [needs art]
+   5  typhlosion      skirmisher FIRE                   typhlosion                                   [needs art]
+   5  politoed        skirmisher WATER                  politoed                                     [needs art]
+   5  galarianslowking sniper     PSYCHIC/POISON         galarianslowking                             [needs art]
+   5  sobble          sniper     WATER                  sobble > drizzile > inteleon                 [needs art]
+   5  beldum          tank       PSYCHIC/STEEL          beldum > metang > metagross               wincon
+   5  onix            tank       ROCK/GROUND            onix > steelix > megasteelix              wincon
+   5  weezing         tank       POISON                 weezing                                   wincon
+   5  dratini         tank       DRAGON/FLYING/WATER    dratini > dragonair > dragonite           wincon,air   [needs art]
+   5  gligar          tank       GROUND/POISON/FLYING   gligar > gliscor                          wincon,air   [needs art]
+   5  alolanraichu    tank       ELECTRIC/FAIRY/PSYCHIC alolanraichu                              wincon   [needs art]
+   5  shelloseastsea  tank       WATER/ROCK/GROUND      shelloseastsea > gastrodoneastsea         wincon   [needs art]
+   5  inkay           tank       DARK/PSYCHIC/WATER     inkay > malamar                           wincon   [needs art]
+   5  tinkatink       tank       STEEL/FAIRY            tinkatink > tinkatuff > tinkaton          wincon   [needs art]
+   5  vullaby         tank       DARK/FLYING            vullaby > mandibuzz                       wincon,air   [needs art]
+   5  snover          tank       GRASS/ICE              snover > abomasnow > megaabomasnow        wincon   [needs art]
+   5  numel           tank       FIRE/GROUND            numel > camerupt > megacamerupt           wincon   [needs art]
+   5  ferroseed       tank       GRASS/STEEL            ferroseed > ferrothorn                    wincon   [needs art]
+   5  dwebble         tank       BUG/ROCK               dwebble > crustle                         wincon   [needs art]
+   5  cubone          tank       GROUND/GHOST           cubone                                    wincon   [needs art]
+   5  hippopotas      tank       GROUND/NORMAL          hippopotas > hippodown                    wincon   [needs art]
+   5  oinkolognefemale tank       NORMAL                 oinkolognefemale                          wincon   [needs art]
+   6  galariandarmanitanzen bruiser    ICE/FIRE               galariandarmanitanzen                     building   [needs art]
+   6  dunsparce       bruiser    NORMAL/GROUND/BUG      dunsparce                                 true   [needs art]
+   6  scyther         runner     BUG/FLYING             scyther                                   wincon,air,true   [needs art]
+   6  duraludon       skirmisher DRAGON/STEEL           duraludon > archaludon                       [needs art]
+   6  emolga          skirmisher ELECTRIC/FLYING        emolga                                    air   [needs art]
+   6  dipplin         sniper     DRAGON/GRASS           dipplin > hydrapple                          [needs art]
+   6  rotomfan        sniper     ELECTRIC/FLYING        rotomfan                                  air   [needs art]
+   6  drampa          sniper     DRAGON/NORMAL          drampa                                       [needs art]
+   6  fluttermane     sniper     GHOST/FAIRY            fluttermane                                  [needs art]
+   6  klefki          sniper     STEEL/FAIRY            klefki                                       [needs art]
+   6  sigilyph        sniper     PSYCHIC/FLYING         sigilyph                                  air   [needs art]
+   6  flapple         sniper     DRAGON/GRASS           flapple                                      [needs art]
+   6  exeggutor       tank       GRASS/PSYCHIC          exeggutor                                 wincon
+   6  scizor          tank       BUG/STEEL/FIGHTING     scizor                                    wincon,true   [needs art]
+   6  mimikyu         tank       GHOST/FAIRY            mimikyu                                   wincon,true   [needs art]
+   6  kleavor         tank       BUG/ROCK/DARK          kleavor                                   wincon,true   [needs art]
+   6  dhelmise        tank       GRASS/GHOST/STEEL      dhelmise                                  wincon   [needs art]
+   6  frigibax        tank       DRAGON/ICE             frigibax > arctibax > baxcalibur          wincon   [needs art]
+   6  alolanmarowak   tank       GROUND/FIRE/GHOST      alolanmarowak                             wincon   [needs art]
+   7  genesect        artillery  BUG/STEEL              genesect                                     [needs art]
+   7  lunala          artillery  PSYCHIC/GHOST          lunala                                       [needs art]
+   7  meloetta        artillery  NORMAL                 meloetta                                     [needs art]
+   7  raikou          runner     ELECTRIC               raikou                                    wincon,jumps
+   7  keldeo          runner     WATER/FIGHTING         keldeo                                    wincon,jumps,true   [needs art]
+   7  zapdos          skirmisher ELECTRIC/FLYING        zapdos                                    air
+   7  galarianmoltres skirmisher DARK/FLYING/PSYCHIC/GHOST galarianmoltres                           air   [needs art]
+   7  articuno        skirmisher ICE/FLYING             articuno                                  air   [needs art]
+   7  hooh            skirmisher FIRE/FLYING            hooh                                      air   [needs art]
+   7  galarianarticuno sniper     PSYCHIC/FLYING/FAIRY/DARK galarianarticuno                          air   [needs art]
+   7  enamorus        sniper     FLYING/FAIRY           enamorus                                  air   [needs art]
+   7  entei           tank       FIRE                   entei                                     wincon
+   7  mimikyubusted   tank       GHOST/FAIRY            mimikyubusted                             wincon,true   [needs art]
+   7  dudunsparse     tank       NORMAL/GROUND/BUG      dudunsparse                               wincon,true   [needs art]
+   7  urshifusingle   tank       FIGHTING/DARK          urshifusingle                             wincon,true   [needs art]

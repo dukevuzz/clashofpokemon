@@ -1,0 +1,81 @@
+# Everything on one box, which is right until frames start slipping.
+#
+# Only the game server cares about latency; the api and the database are
+# touched at login and at match end, never during play. So co-locating costs
+# nothing on the hot path -- and nothing here assumes it, so splitting later
+# is a change of address rather than a change of code.
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: lane
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
+      POSTGRES_DB: lane
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    # Never published to the host. An exposed Postgres is found within hours.
+    expose: ["5432"]
+    # Capped so a vacuum can never starve the match loop, which must finish
+    # inside 33ms and is shared by every match on the node.
+    deploy:
+      resources:
+        limits: { cpus: "0.5", memory: 2g }
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lane"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    logging: &logs
+      driver: json-file
+      options: { max-size: "10m", max-file: "3" }
+
+  api:
+    image: ${REGISTRY:-ducvu123}/clashofpokemon-api:${TAG:-latest}
+    build: ../api
+    restart: unless-stopped
+    depends_on:
+      postgres: { condition: service_healthy }
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/lane
+      SPRING_DATASOURCE_USERNAME: lane
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+      CLASH_INTERNAL_KEY: ${INTERNAL_KEY:?set INTERNAL_KEY in .env}
+    expose: ["4500"]
+    logging: *logs
+
+  server:
+    image: ${REGISTRY:-ducvu123}/clashofpokemon-server:${TAG:-latest}
+    build: ../server
+    restart: unless-stopped
+    depends_on: [api]
+    environment:
+      CLASH_API: http://api:4500
+      CLASH_INTERNAL_KEY: ${INTERNAL_KEY}
+    expose: ["4400"]
+    # Longer than a match. Compose sends SIGKILL after *ten seconds* by
+    # default, which would cut every game in progress on every deploy.
+    stop_grace_period: 250s
+    logging: *logs
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on: [api, server]
+    ports: ["80:80", "443:443"]
+    # Compose does not pass .env into a container unless it is named here, and
+    # Caddy reads {$GAME_HOST} from its own environment -- so without this the
+    # site address expands to nothing and Caddy reads the whole file as global
+    # options and refuses to start.
+    environment:
+      GAME_HOST: ${GAME_HOST:?set GAME_HOST in .env}
+      API_HOST: ${API_HOST:?set API_HOST in .env}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddydata:/data
+    logging: *logs
+
+volumes:
+  pgdata:
+  caddydata:

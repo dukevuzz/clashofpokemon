@@ -1,0 +1,63 @@
+name: ci
+
+on:
+  push: { branches: [main] }
+  pull_request:
+
+jobs:
+  client:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: client/package-lock.json }
+      - run: npm ci
+        working-directory: client
+      - run: npx tsc --noEmit
+        working-directory: client
+      - run: npx vitest run
+        working-directory: client
+
+  server:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 25, cache: maven }
+      - run: ./mvnw -B test
+        working-directory: server
+
+  api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 25, cache: maven }
+      # Testcontainers needs a docker daemon, which the runner has.
+      - run: ./mvnw -B test
+        working-directory: api
+
+  # Both services as real processes, and a real browser against them. Slower,
+  # and the only thing that checks the wire between the parts.
+  whole-stack:
+    if: github.ref == 'refs/heads/main'
+    needs: [client, server, api]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 25, cache: maven }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: client/package-lock.json }
+      - run: ./mvnw -B package -DskipTests
+        working-directory: server
+      - run: ./mvnw -B package -DskipTests
+        working-directory: api
+      - run: ./mvnw -B test -DskipTests=false
+        working-directory: e2e
+      - run: npm ci && npx playwright install --with-deps chromium
+        working-directory: client
+      - name: browser against the real stack
+        run: |
+          ./run-stack.sh
+          cd client && npx playwright test tests/e2e/online.spec.ts

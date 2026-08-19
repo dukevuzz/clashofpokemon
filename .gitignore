@@ -1,0 +1,21 @@
+# Secrets. The example is committed; the real one never is.
+.env
+*.env
+!.env.example
+
+# Build output
+target/
+dist/
+node_modules/
+*.jar
+
+# Test output
+test-results/
+playwright-report/
+.playwright/
+
+# Editors and OS
+.idea/
+.vscode/
+*.iml
+.DS_Store

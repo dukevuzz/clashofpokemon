@@ -1,0 +1,1808 @@
+{
+  "version": "c0fd82fc7983",
+  "cards": [
+    {
+      "id": "charmander",
+      "name": "Charmander",
+      "elixir": 1,
+      "rarity": "common",
+      "role": "fighter",
+      "types": [
+        "DRAGON",
+        "FIRE"
+      ],
+      "sheet": "charmander"
+    },
+    {
+      "id": "squirtle",
+      "name": "Squirtle",
+      "elixir": 1,
+      "rarity": "common",
+      "role": "sniper",
+      "types": [
+        "WATER"
+      ],
+      "sheet": "squirtle"
+    },
+    {
+      "id": "aron",
+      "name": "Aron",
+      "elixir": 1,
+      "rarity": "common",
+      "role": "fighter",
+      "types": [
+        "STEEL",
+        "ROCK"
+      ],
+      "sheet": "aron"
+    },
+    {
+      "id": "spearow",
+      "name": "Spearow",
+      "elixir": 1,
+      "rarity": "common",
+      "role": "fighter",
+      "types": [
+        "FLYING"
+      ],
+      "sheet": "spearow"
+    },
+    {
+      "id": "pidgey",
+      "name": "Pidgey",
+      "elixir": 1,
+      "rarity": "common",
+      "role": "skirmisher",
+      "types": [
+        "NORMAL",
+        "FLYING"
+      ],
+      "sheet": "pidgey"
+    },
+    {
+      "id": "fennekin",
+      "name": "Fennekin",
+      "elixir": 1,
+      "rarity": "common",
+      "role": "skirmisher",
+      "types": [
+        "FIRE",
+        "PSYCHIC"
+      ],
+      "sheet": "fennekin"
+    },
+    {
+      "id": "litwick",
+      "name": "Litwick",
+      "elixir": 1,
+      "rarity": "common",
+      "role": "sniper",
+      "types": [
+        "GHOST",
+        "FIRE"
+      ],
+      "sheet": "litwick"
+    },
+    {
+      "id": "bulbasaur",
+      "name": "Bulbasaur",
+      "elixir": 2,
+      "rarity": "rare",
+      "role": "skirmisher",
+      "types": [
+        "GRASS",
+        "POISON"
+      ],
+      "sheet": "bulbasaur"
+    },
+    {
+      "id": "machop",
+      "name": "Machop",
+      "elixir": 2,
+      "rarity": "uncommon",
+      "role": "fighter",
+      "types": [
+        "FIGHTING"
+      ],
+      "sheet": "machop"
+    },
+    {
+      "id": "zubat",
+      "name": "Zubat",
+      "elixir": 2,
+      "rarity": "common",
+      "role": "skirmisher",
+      "types": [
+        "POISON",
+        "FLYING"
+      ],
+      "sheet": "zubat"
+    },
+    {
+      "id": "geodude",
+      "name": "Geodude",
+      "elixir": 2,
+      "rarity": "common",
+      "role": "fighter",
+      "types": [
+        "GROUND",
+        "ROCK"
+      ],
+      "sheet": "geodude"
+    },
+    {
+      "id": "caterpie",
+      "name": "Caterpie",
+      "elixir": 2,
+      "rarity": "common",
+      "role": "skirmisher",
+      "types": [
+        "BUG"
+      ],
+      "sheet": "caterpie"
+    },
+    {
+      "id": "spheal",
+      "name": "Spheal",
+      "elixir": 2,
+      "rarity": "uncommon",
+      "role": "fighter",
+      "types": [
+        "WATER",
+        "ICE"
+      ],
+      "sheet": "spheal"
+    },
+    {
+      "id": "larvitar",
+      "name": "Larvitar",
+      "elixir": 2,
+      "rarity": "rare",
+      "role": "fighter",
+      "types": [
+        "DARK",
+        "ROCK"
+      ],
+      "sheet": "larvitar"
+    },
+    {
+      "id": "togepi",
+      "name": "Togepi",
+      "elixir": 2,
+      "rarity": "rare",
+      "role": "skirmisher",
+      "types": [
+        "FAIRY",
+        "NORMAL"
+      ],
+      "sheet": "togepi"
+    },
+    {
+      "id": "bagon",
+      "name": "Bagon",
+      "elixir": 2,
+      "rarity": "uncommon",
+      "role": "fighter",
+      "types": [
+        "DRAGON"
+      ],
+      "sheet": "bagon"
+    },
+    {
+      "id": "clauncher",
+      "name": "Clauncher",
+      "elixir": 2,
+      "rarity": "rare",
+      "role": "artillery",
+      "types": [
+        "WATER"
+      ],
+      "sheet": "clauncher"
+    },
+    {
+      "id": "elgyem",
+      "name": "Elgyem",
+      "elixir": 2,
+      "rarity": "rare",
+      "role": "skirmisher",
+      "types": [
+        "PSYCHIC"
+      ],
+      "sheet": "elgyem"
+    },
+    {
+      "id": "chinchou",
+      "name": "Chinchou",
+      "elixir": 2,
+      "rarity": "uncommon",
+      "role": "skirmisher",
+      "types": [
+        "WATER",
+        "ELECTRIC"
+      ],
+      "sheet": "chinchou"
+    },
+    {
+      "id": "hoppip",
+      "name": "Hoppip",
+      "elixir": 2,
+      "rarity": "special",
+      "role": "sniper",
+      "types": [
+        "FLYING",
+        "GRASS"
+      ],
+      "sheet": "hoppip"
+    },
+    {
+      "id": "koffing",
+      "name": "Koffing",
+      "elixir": 2,
+      "rarity": "uncommon",
+      "role": "fighter",
+      "types": [
+        "POISON"
+      ],
+      "sheet": "koffing"
+    },
+    {
+      "id": "sandshrew",
+      "name": "Sandshrew",
+      "elixir": 2,
+      "rarity": "uncommon",
+      "role": "tank",
+      "types": [
+        "GROUND",
+        "NORMAL"
+      ],
+      "sheet": "sandshrew"
+    },
+    {
+      "id": "trapinch",
+      "name": "Trapinch",
+      "elixir": 2,
+      "rarity": "rare",
+      "role": "fighter",
+      "types": [
+        "BUG",
+        "GROUND"
+      ],
+      "sheet": "trapinch"
+    },
+    {
+      "id": "duskull",
+      "name": "Duskull",
+      "elixir": 2,
+      "rarity": "uncommon",
+      "role": "skirmisher",
+      "types": [
+        "DARK",
+        "GHOST"
+      ],
+      "sheet": "duskull"
+    },
+    {
+      "id": "growlithe",
+      "name": "Growlithe",
+      "elixir": 2,
+      "rarity": "uncommon",
+      "role": "fighter",
+      "types": [
+        "FIRE"
+      ],
+      "sheet": "growlithe"
+    },
+    {
+      "id": "grimer",
+      "name": "Grimer",
+      "elixir": 2,
+      "rarity": "uncommon",
+      "role": "fighter",
+      "types": [
+        "POISON"
+      ],
+      "sheet": "grimer"
+    },
+    {
+      "id": "sewaddle",
+      "name": "Sewaddle",
+      "elixir": 2,
+      "rarity": "uncommon",
+      "role": "fighter",
+      "types": [
+        "GRASS",
+        "BUG"
+      ],
+      "sheet": "sewaddle"
+    },
+    {
+      "id": "ledyba",
+      "name": "Ledyba",
+      "elixir": 2,
+      "rarity": "uncommon",
+      "role": "fighter",
+      "types": [
+        "BUG",
+        "FIGHTING",
+        "FLYING"
+      ],
+      "sheet": "ledyba"
+    },
+    {
+      "id": "paras",
+      "name": "Paras",
+      "elixir": 2,
+      "rarity": "rare",
+      "role": "fighter",
+      "types": [
+        "BUG",
+        "POISON",
+        "GRASS"
+      ],
+      "sheet": "paras"
+    },
+    {
+      "id": "chespin",
+      "name": "Chespin",
+      "elixir": 2,
+      "rarity": "common",
+      "role": "fighter",
+      "types": [
+        "GRASS",
+        "FIGHTING"
+      ],
+      "sheet": "chespin"
+    },
+    {
+      "id": "rowlet",
+      "name": "Rowlet",
+      "elixir": 2,
+      "rarity": "hatch",
+      "role": "sniper",
+      "types": [
+        "GRASS",
+        "FLYING",
+        "GHOST"
+      ],
+      "sheet": "rowlet"
+    },
+    {
+      "id": "cottonee",
+      "name": "Cottonee",
+      "elixir": 2,
+      "rarity": "uncommon",
+      "role": "skirmisher",
+      "types": [
+        "GRASS",
+        "FAIRY"
+      ],
+      "sheet": "cottonee"
+    },
+    {
+      "id": "capsakid",
+      "name": "Capsakid",
+      "elixir": 2,
+      "rarity": "uncommon",
+      "role": "skirmisher",
+      "types": [
+        "GRASS",
+        "FIRE"
+      ],
+      "sheet": "capsakid"
+    },
+    {
+      "id": "deino",
+      "name": "Deino",
+      "elixir": 2,
+      "rarity": "rare",
+      "role": "skirmisher",
+      "types": [
+        "DRAGON",
+        "DARK"
+      ],
+      "sheet": "deino"
+    },
+    {
+      "id": "honedge",
+      "name": "Honedge",
+      "elixir": 2,
+      "rarity": "rare",
+      "role": "fighter",
+      "types": [
+        "GHOST",
+        "STEEL"
+      ],
+      "sheet": "honedge"
+    },
+    {
+      "id": "mareanie",
+      "name": "Mareanie",
+      "elixir": 2,
+      "rarity": "rare",
+      "role": "fighter",
+      "types": [
+        "WATER",
+        "POISON"
+      ],
+      "sheet": "mareanie"
+    },
+    {
+      "id": "magikarp",
+      "name": "Magikarp",
+      "elixir": 2,
+      "rarity": "special",
+      "role": "fighter",
+      "types": [
+        "WATER"
+      ],
+      "sheet": "magikarp"
+    },
+    {
+      "id": "swinub",
+      "name": "Swinub",
+      "elixir": 2,
+      "rarity": "common",
+      "role": "fighter",
+      "types": [
+        "GROUND",
+        "ICE"
+      ],
+      "sheet": "swinub"
+    },
+    {
+      "id": "piplup",
+      "name": "Piplup",
+      "elixir": 2,
+      "rarity": "uncommon",
+      "role": "fighter",
+      "types": [
+        "WATER",
+        "ICE",
+        "STEEL"
+      ],
+      "sheet": "piplup"
+    },
+    {
+      "id": "cleffa",
+      "name": "Cleffa",
+      "elixir": 2,
+      "rarity": "uncommon",
+      "role": "fighter",
+      "types": [
+        "FAIRY",
+        "NORMAL"
+      ],
+      "sheet": "cleffa"
+    },
+    {
+      "id": "popplio",
+      "name": "Popplio",
+      "elixir": 2,
+      "rarity": "hatch",
+      "role": "sniper",
+      "types": [
+        "WATER",
+        "FAIRY"
+      ],
+      "sheet": "popplio"
+    },
+    {
+      "id": "snivy",
+      "name": "Snivy",
+      "elixir": 2,
+      "rarity": "hatch",
+      "role": "sniper",
+      "types": [
+        "GRASS"
+      ],
+      "sheet": "snivy"
+    },
+    {
+      "id": "dewpider",
+      "name": "Dewpider",
+      "elixir": 2,
+      "rarity": "uncommon",
+      "role": "fighter",
+      "types": [
+        "WATER",
+        "BUG"
+      ],
+      "sheet": "dewpider"
+    },
+    {
+      "id": "riolu",
+      "name": "Riolu",
+      "elixir": 2,
+      "rarity": "rare",
+      "role": "skirmisher",
+      "types": [
+        "FIGHTING",
+        "STEEL"
+      ],
+      "sheet": "riolu"
+    },
+    {
+      "id": "ditto",
+      "name": "Ditto",
+      "elixir": 2,
+      "rarity": "special",
+      "role": "fighter",
+      "types": [
+        "NORMAL"
+      ],
+      "sheet": "ditto"
+    },
+    {
+      "id": "eevee",
+      "name": "Eevee",
+      "elixir": 3,
+      "rarity": "special",
+      "role": "fighter",
+      "types": [
+        "NORMAL"
+      ],
+      "sheet": "eevee"
+    },
+    {
+      "id": "pikachu",
+      "name": "Pikachu",
+      "elixir": 3,
+      "rarity": "common",
+      "role": "fighter",
+      "types": [
+        "ELECTRIC",
+        "FAIRY"
+      ],
+      "sheet": "pikachu"
+    },
+    {
+      "id": "abra",
+      "name": "Abra",
+      "elixir": 3,
+      "rarity": "rare",
+      "role": "artillery",
+      "types": [
+        "PSYCHIC"
+      ],
+      "sheet": "abra"
+    },
+    {
+      "id": "roggenrola",
+      "name": "Roggenrola",
+      "elixir": 3,
+      "rarity": "epic",
+      "role": "skirmisher",
+      "types": [
+        "ROCK"
+      ],
+      "sheet": "roggenrola"
+    },
+    {
+      "id": "yamper",
+      "name": "Yamper",
+      "elixir": 3,
+      "rarity": "uncommon",
+      "role": "runner",
+      "types": [
+        "ELECTRIC"
+      ],
+      "sheet": "yamper"
+    },
+    {
+      "id": "bronzor",
+      "name": "Bronzor",
+      "elixir": 3,
+      "rarity": "rare",
+      "role": "tank",
+      "types": [
+        "STEEL",
+        "PSYCHIC"
+      ],
+      "sheet": "bronzor"
+    },
+    {
+      "id": "rattata",
+      "name": "Rattata",
+      "elixir": 3,
+      "rarity": "common",
+      "role": "fighter",
+      "types": [
+        "NORMAL"
+      ],
+      "sheet": "rattata"
+    },
+    {
+      "id": "diglett",
+      "name": "Diglett",
+      "elixir": 3,
+      "rarity": "uncommon",
+      "role": "runner",
+      "types": [
+        "GROUND",
+        "NORMAL"
+      ],
+      "sheet": "diglett"
+    },
+    {
+      "id": "drilbur",
+      "name": "Drilbur",
+      "elixir": 3,
+      "rarity": "rare",
+      "role": "fighter",
+      "types": [
+        "GROUND",
+        "STEEL"
+      ],
+      "sheet": "drilbur"
+    },
+    {
+      "id": "voltorb",
+      "name": "Voltorb",
+      "elixir": 3,
+      "rarity": "uncommon",
+      "role": "runner",
+      "types": [
+        "ELECTRIC"
+      ],
+      "sheet": "voltorb"
+    },
+    {
+      "id": "drowzee",
+      "name": "Drowzee",
+      "elixir": 3,
+      "rarity": "epic",
+      "role": "skirmisher",
+      "types": [
+        "PSYCHIC"
+      ],
+      "sheet": "drowzee"
+    },
+    {
+      "id": "seel",
+      "name": "Seel",
+      "elixir": 3,
+      "rarity": "uncommon",
+      "role": "fighter",
+      "types": [
+        "ICE",
+        "WATER"
+      ],
+      "sheet": "seel"
+    },
+    {
+      "id": "marill",
+      "name": "Marill",
+      "elixir": 3,
+      "rarity": "common",
+      "role": "skirmisher",
+      "types": [
+        "WATER",
+        "FAIRY"
+      ],
+      "sheet": "marill"
+    },
+    {
+      "id": "sandile",
+      "name": "Sandile",
+      "elixir": 3,
+      "rarity": "hatch",
+      "role": "fighter",
+      "types": [
+        "DARK",
+        "GROUND"
+      ],
+      "sheet": "sandile"
+    },
+    {
+      "id": "gible",
+      "name": "Gible",
+      "elixir": 3,
+      "rarity": "epic",
+      "role": "runner",
+      "types": [
+        "DRAGON",
+        "GROUND"
+      ],
+      "sheet": "gible"
+    },
+    {
+      "id": "girafarig",
+      "name": "Girafarig",
+      "elixir": 3,
+      "rarity": "epic",
+      "role": "bruiser",
+      "types": [
+        "NORMAL",
+        "PSYCHIC"
+      ],
+      "sheet": "girafarig"
+    },
+    {
+      "id": "rookidee",
+      "name": "Rookidee",
+      "elixir": 3,
+      "rarity": "rare",
+      "role": "fighter",
+      "types": [
+        "STEEL",
+        "FLYING"
+      ],
+      "sheet": "rookidee"
+    },
+    {
+      "id": "glimmet",
+      "name": "Glimmet",
+      "elixir": 3,
+      "rarity": "rare",
+      "role": "fighter",
+      "types": [
+        "POISON",
+        "ROCK",
+        "GRASS"
+      ],
+      "sheet": "glimmet"
+    },
+    {
+      "id": "feebas",
+      "name": "Feebas",
+      "elixir": 3,
+      "rarity": "special",
+      "role": "fighter",
+      "types": [
+        "WATER"
+      ],
+      "sheet": "feebas"
+    },
+    {
+      "id": "sneasel",
+      "name": "Sneasel",
+      "elixir": 3,
+      "rarity": "epic",
+      "role": "runner",
+      "types": [
+        "ICE",
+        "DARK"
+      ],
+      "sheet": "sneasel"
+    },
+    {
+      "id": "dreepy",
+      "name": "Dreepy",
+      "elixir": 3,
+      "rarity": "hatch",
+      "role": "skirmisher",
+      "types": [
+        "DRAGON",
+        "GHOST"
+      ],
+      "sheet": "dreepy"
+    },
+    {
+      "id": "crabrawler",
+      "name": "Crabrawler",
+      "elixir": 3,
+      "rarity": "rare",
+      "role": "bruiser",
+      "types": [
+        "ICE",
+        "FIGHTING"
+      ],
+      "sheet": "crabrawler"
+    },
+    {
+      "id": "staryu",
+      "name": "Staryu",
+      "elixir": 3,
+      "rarity": "rare",
+      "role": "skirmisher",
+      "types": [
+        "WATER",
+        "PSYCHIC"
+      ],
+      "sheet": "staryu"
+    },
+    {
+      "id": "onix",
+      "name": "Onix",
+      "elixir": 4,
+      "rarity": "epic",
+      "role": "tank",
+      "types": [
+        "ROCK",
+        "GROUND"
+      ],
+      "sheet": "onix"
+    },
+    {
+      "id": "beldum",
+      "name": "Beldum",
+      "elixir": 4,
+      "rarity": "epic",
+      "role": "tank",
+      "types": [
+        "PSYCHIC",
+        "STEEL"
+      ],
+      "sheet": "beldum"
+    },
+    {
+      "id": "exeggcute",
+      "name": "Exeggcute",
+      "elixir": 4,
+      "rarity": "epic",
+      "role": "sniper",
+      "types": [
+        "GRASS",
+        "PSYCHIC"
+      ],
+      "sheet": "exeggcute"
+    },
+    {
+      "id": "hippopotas",
+      "name": "Hippopotas",
+      "elixir": 4,
+      "rarity": "epic",
+      "role": "tank",
+      "types": [
+        "GROUND",
+        "NORMAL"
+      ],
+      "sheet": "hippopotas"
+    },
+    {
+      "id": "bounsweet",
+      "name": "Bounsweet",
+      "elixir": 4,
+      "rarity": "epic",
+      "role": "bruiser",
+      "types": [
+        "GRASS",
+        "FIGHTING"
+      ],
+      "sheet": "bounsweet"
+    },
+    {
+      "id": "litten",
+      "name": "Litten",
+      "elixir": 4,
+      "rarity": "epic",
+      "role": "tank",
+      "types": [
+        "FIRE",
+        "DARK"
+      ],
+      "sheet": "litten"
+    },
+    {
+      "id": "snorunt",
+      "name": "Snorunt",
+      "elixir": 4,
+      "rarity": "epic",
+      "role": "sniper",
+      "types": [
+        "GHOST",
+        "ICE"
+      ],
+      "sheet": "snorunt"
+    },
+    {
+      "id": "dratini",
+      "name": "Dratini",
+      "elixir": 4,
+      "rarity": "epic",
+      "role": "tank",
+      "types": [
+        "DRAGON",
+        "FLYING",
+        "WATER"
+      ],
+      "sheet": "dratini"
+    },
+    {
+      "id": "wingull",
+      "name": "Wingull",
+      "elixir": 4,
+      "rarity": "epic",
+      "role": "skirmisher",
+      "types": [
+        "WATER",
+        "FLYING"
+      ],
+      "sheet": "wingull"
+    },
+    {
+      "id": "larvesta",
+      "name": "Larvesta",
+      "elixir": 4,
+      "rarity": "epic",
+      "role": "sniper",
+      "types": [
+        "FIRE",
+        "BUG"
+      ],
+      "sheet": "larvesta"
+    },
+    {
+      "id": "tinkatink",
+      "name": "Tinkatink",
+      "elixir": 4,
+      "rarity": "epic",
+      "role": "tank",
+      "types": [
+        "STEEL",
+        "FAIRY"
+      ],
+      "sheet": "tinkatink"
+    },
+    {
+      "id": "gastly",
+      "name": "Gastly",
+      "elixir": 5,
+      "rarity": "ultra",
+      "role": "skirmisher",
+      "types": [
+        "GHOST",
+        "POISON"
+      ],
+      "sheet": "gastly"
+    },
+    {
+      "id": "fletchling",
+      "name": "Fletchling",
+      "elixir": 5,
+      "rarity": "ultra",
+      "role": "skirmisher",
+      "types": [
+        "FLYING",
+        "FIRE"
+      ],
+      "sheet": "fletchling"
+    },
+    {
+      "id": "pawniard",
+      "name": "Pawniard",
+      "elixir": 5,
+      "rarity": "ultra",
+      "role": "tank",
+      "types": [
+        "DARK",
+        "STEEL"
+      ],
+      "sheet": "pawniard"
+    },
+    {
+      "id": "vivillon",
+      "name": "Vivillon",
+      "elixir": 5,
+      "rarity": "hatch",
+      "role": "skirmisher",
+      "types": [
+        "BUG"
+      ],
+      "sheet": "vivillon"
+    },
+    {
+      "id": "politoed",
+      "name": "Politoed",
+      "elixir": 5,
+      "rarity": "common",
+      "role": "skirmisher",
+      "types": [
+        "WATER"
+      ],
+      "sheet": "politoed"
+    },
+    {
+      "id": "gallade",
+      "name": "Gallade",
+      "elixir": 5,
+      "rarity": "common",
+      "role": "tank",
+      "types": [
+        "PSYCHIC",
+        "FIGHTING"
+      ],
+      "sheet": "gallade"
+    },
+    {
+      "id": "sudowoodo",
+      "name": "Sudowoodo",
+      "elixir": 6,
+      "rarity": "epic",
+      "role": "tank",
+      "types": [
+        "ROCK",
+        "GRASS"
+      ],
+      "sheet": "sudowoodo"
+    },
+    {
+      "id": "dunsparce",
+      "name": "Dunsparce",
+      "elixir": 6,
+      "rarity": "unique",
+      "role": "bruiser",
+      "types": [
+        "NORMAL",
+        "GROUND",
+        "BUG"
+      ],
+      "sheet": "dunsparce"
+    },
+    {
+      "id": "duraludon",
+      "name": "Duraludon",
+      "elixir": 6,
+      "rarity": "unique",
+      "role": "skirmisher",
+      "types": [
+        "DRAGON",
+        "STEEL"
+      ],
+      "sheet": "duraludon"
+    },
+    {
+      "id": "finizen",
+      "name": "Finizen",
+      "elixir": 6,
+      "rarity": "unique",
+      "role": "runner",
+      "types": [
+        "WATER"
+      ],
+      "sheet": "finizen"
+    },
+    {
+      "id": "aerodactyl",
+      "name": "Aerodactyl",
+      "elixir": 6,
+      "rarity": "unique",
+      "role": "runner",
+      "types": [
+        "ROCK",
+        "FLYING"
+      ],
+      "sheet": "aerodactyl"
+    },
+    {
+      "id": "ceruledge",
+      "name": "Ceruledge",
+      "elixir": 6,
+      "rarity": "unique",
+      "role": "tank",
+      "types": [
+        "FIRE",
+        "GHOST"
+      ],
+      "sheet": "ceruledge"
+    },
+    {
+      "id": "gardevoir",
+      "name": "Gardevoir",
+      "elixir": 6,
+      "rarity": "epic",
+      "role": "sniper",
+      "types": [
+        "PSYCHIC",
+        "FAIRY"
+      ],
+      "sheet": "gardevoir"
+    },
+    {
+      "id": "kangaskhan",
+      "name": "Kangaskhan",
+      "elixir": 6,
+      "rarity": "unique",
+      "role": "tank",
+      "types": [
+        "FIGHTING",
+        "NORMAL"
+      ],
+      "sheet": "kangaskhan"
+    },
+    {
+      "id": "scizor",
+      "name": "Scizor",
+      "elixir": 6,
+      "rarity": "unique",
+      "role": "tank",
+      "types": [
+        "BUG",
+        "STEEL",
+        "FIGHTING"
+      ],
+      "sheet": "scizor"
+    },
+    {
+      "id": "torkoal",
+      "name": "Torkoal",
+      "elixir": 6,
+      "rarity": "unique",
+      "role": "tank",
+      "types": [
+        "FIRE",
+        "GROUND"
+      ],
+      "sheet": "torkoal"
+    },
+    {
+      "id": "mimikyu",
+      "name": "Mimikyu",
+      "elixir": 6,
+      "rarity": "unique",
+      "role": "tank",
+      "types": [
+        "GHOST",
+        "FAIRY"
+      ],
+      "sheet": "mimikyu"
+    },
+    {
+      "id": "kleavor",
+      "name": "Kleavor",
+      "elixir": 6,
+      "rarity": "unique",
+      "role": "tank",
+      "types": [
+        "BUG",
+        "ROCK",
+        "DARK"
+      ],
+      "sheet": "kleavor"
+    },
+    {
+      "id": "skarmory",
+      "name": "Skarmory",
+      "elixir": 6,
+      "rarity": "unique",
+      "role": "tank",
+      "types": [
+        "STEEL",
+        "FLYING"
+      ],
+      "sheet": "skarmory"
+    },
+    {
+      "id": "orthworm",
+      "name": "Orthworm",
+      "elixir": 6,
+      "rarity": "unique",
+      "role": "tank",
+      "types": [
+        "STEEL",
+        "GROUND"
+      ],
+      "sheet": "orthworm"
+    },
+    {
+      "id": "heracross",
+      "name": "Heracross",
+      "elixir": 6,
+      "rarity": "unique",
+      "role": "tank",
+      "types": [
+        "BUG",
+        "FIGHTING"
+      ],
+      "sheet": "heracross"
+    },
+    {
+      "id": "armarouge",
+      "name": "Armarouge",
+      "elixir": 6,
+      "rarity": "unique",
+      "role": "skirmisher",
+      "types": [
+        "FIRE",
+        "PSYCHIC"
+      ],
+      "sheet": "armarouge"
+    },
+    {
+      "id": "snorlax",
+      "name": "Snorlax",
+      "elixir": 6,
+      "rarity": "epic",
+      "role": "tank",
+      "types": [
+        "NORMAL"
+      ],
+      "sheet": "snorlax"
+    },
+    {
+      "id": "zapdos",
+      "name": "Zapdos",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "skirmisher",
+      "types": [
+        "ELECTRIC",
+        "FLYING"
+      ],
+      "sheet": "zapdos"
+    },
+    {
+      "id": "raikou",
+      "name": "Raikou",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "runner",
+      "types": [
+        "ELECTRIC"
+      ],
+      "sheet": "raikou"
+    },
+    {
+      "id": "entei",
+      "name": "Entei",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "tank",
+      "types": [
+        "FIRE"
+      ],
+      "sheet": "entei"
+    },
+    {
+      "id": "mew",
+      "name": "Mew",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "artillery",
+      "types": [
+        "PSYCHIC"
+      ],
+      "sheet": "mew"
+    },
+    {
+      "id": "deoxys",
+      "name": "Deoxys",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "runner",
+      "types": [
+        "PSYCHIC"
+      ],
+      "sheet": "deoxys"
+    },
+    {
+      "id": "lugia",
+      "name": "Lugia",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "runner",
+      "types": [
+        "WATER",
+        "FLYING",
+        "PSYCHIC"
+      ],
+      "sheet": "lugia"
+    },
+    {
+      "id": "giratina",
+      "name": "Giratina",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "tank",
+      "types": [
+        "DRAGON",
+        "GHOST"
+      ],
+      "sheet": "giratina"
+    },
+    {
+      "id": "dialga",
+      "name": "Dialga",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "tank",
+      "types": [
+        "DRAGON",
+        "STEEL"
+      ],
+      "sheet": "dialga"
+    },
+    {
+      "id": "palkia",
+      "name": "Palkia",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "tank",
+      "types": [
+        "DRAGON",
+        "WATER"
+      ],
+      "sheet": "palkia"
+    },
+    {
+      "id": "suicune",
+      "name": "Suicune",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "tank",
+      "types": [
+        "WATER"
+      ],
+      "sheet": "suicune"
+    },
+    {
+      "id": "articuno",
+      "name": "Articuno",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "skirmisher",
+      "types": [
+        "ICE",
+        "FLYING"
+      ],
+      "sheet": "articuno"
+    },
+    {
+      "id": "moltres",
+      "name": "Moltres",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "skirmisher",
+      "types": [
+        "FIRE",
+        "FLYING"
+      ],
+      "sheet": "moltres"
+    },
+    {
+      "id": "celebi",
+      "name": "Celebi",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "sniper",
+      "types": [
+        "GRASS",
+        "PSYCHIC"
+      ],
+      "sheet": "celebi"
+    },
+    {
+      "id": "jirachi",
+      "name": "Jirachi",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "sniper",
+      "types": [
+        "STEEL",
+        "PSYCHIC"
+      ],
+      "sheet": "jirachi"
+    },
+    {
+      "id": "darkrai",
+      "name": "Darkrai",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "skirmisher",
+      "types": [
+        "DARK",
+        "GHOST"
+      ],
+      "sheet": "darkrai"
+    },
+    {
+      "id": "xerneas",
+      "name": "Xerneas",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "sniper",
+      "types": [
+        "FAIRY",
+        "GRASS"
+      ],
+      "sheet": "xerneas"
+    },
+    {
+      "id": "yveltal",
+      "name": "Yveltal",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "tank",
+      "types": [
+        "DARK",
+        "FLYING"
+      ],
+      "sheet": "yveltal"
+    },
+    {
+      "id": "zekrom",
+      "name": "Zekrom",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "sniper",
+      "types": [
+        "DRAGON",
+        "ELECTRIC"
+      ],
+      "sheet": "zekrom"
+    },
+    {
+      "id": "reshiram",
+      "name": "Reshiram",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "sniper",
+      "types": [
+        "DRAGON",
+        "FIRE"
+      ],
+      "sheet": "reshiram"
+    },
+    {
+      "id": "kyurem",
+      "name": "Kyurem",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "sniper",
+      "types": [
+        "DRAGON",
+        "ICE"
+      ],
+      "sheet": "kyurem"
+    },
+    {
+      "id": "magearna",
+      "name": "Magearna",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "tank",
+      "types": [
+        "STEEL",
+        "FAIRY"
+      ],
+      "sheet": "magearna"
+    },
+    {
+      "id": "marshadow",
+      "name": "Marshadow",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "runner",
+      "types": [
+        "GHOST",
+        "FIGHTING"
+      ],
+      "sheet": "marshadow"
+    },
+    {
+      "id": "regirock",
+      "name": "Regirock",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "tank",
+      "types": [
+        "ROCK"
+      ],
+      "sheet": "regirock"
+    },
+    {
+      "id": "regice",
+      "name": "Regice",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "tank",
+      "types": [
+        "ICE"
+      ],
+      "sheet": "regice"
+    },
+    {
+      "id": "registeel",
+      "name": "Registeel",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "tank",
+      "types": [
+        "STEEL"
+      ],
+      "sheet": "registeel"
+    }
+  ],
+  "troops": [
+    {
+      "id": "togekiss",
+      "name": "Togekiss",
+      "blurb": "Steady. No strength, no weakness."
+    },
+    {
+      "id": "blastoise",
+      "name": "Blastoise",
+      "blurb": "One heavy shell. Breaks tanks, wasted on runners."
+    },
+    {
+      "id": "crobat",
+      "name": "Crobat",
+      "blurb": "Six fast strikes, then a long breath."
+    },
+    {
+      "id": "alakazam",
+      "name": "Alakazam",
+      "blurb": "Strikes first, from further out. Hits softest."
+    }
+  ],
+  "branches": [
+    "vaporeon",
+    "jolteon",
+    "flareon",
+    "espeon",
+    "umbreon",
+    "leafeon",
+    "glaceon",
+    "sylveon"
+  ],
+  "rules": {
+    "deckSize": 6,
+    "handSize": 4,
+    "elixirMax": 10,
+    "matchSeconds": 180
+  },
+  "wireCards": [
+    "abra",
+    "aegislash",
+    "aerodactyl",
+    "aggron",
+    "alakazam",
+    "araquanid",
+    "arcanine",
+    "archaludon",
+    "armarouge",
+    "aron",
+    "articuno",
+    "azumarill",
+    "bagon",
+    "beheeyem",
+    "beldum",
+    "bisharp",
+    "blastoise",
+    "boldore",
+    "boltund",
+    "bounsweet",
+    "braixen",
+    "brionne",
+    "bronzong",
+    "bronzor",
+    "bulbasaur",
+    "butterfree",
+    "capsakid",
+    "caterpie",
+    "celebi",
+    "ceruledge",
+    "chandelure",
+    "charizard",
+    "charmander",
+    "charmeleon",
+    "chesnaught",
+    "chespin",
+    "chinchou",
+    "clauncher",
+    "clawitzer",
+    "clefable",
+    "clefairy",
+    "cleffa",
+    "corviknight",
+    "corvisquire",
+    "cottonee",
+    "crabominable",
+    "crabrawler",
+    "crobat",
+    "darkrai",
+    "dartix",
+    "decidueye",
+    "deino",
+    "delphox",
+    "deoxys",
+    "deoxysattack",
+    "deoxysdefense",
+    "deoxysspeed",
+    "dewgong",
+    "dewpider",
+    "dialga",
+    "diglett",
+    "ditto",
+    "doublade",
+    "dragapult",
+    "dragonair",
+    "dragonite",
+    "drakloak",
+    "dratini",
+    "dreepy",
+    "drilbur",
+    "drowzee",
+    "dugtrio",
+    "dunsparce",
+    "duraludon",
+    "dusclops",
+    "dusknoir",
+    "duskull",
+    "eevee",
+    "electrode",
+    "elgyem",
+    "empoleon",
+    "entei",
+    "espeon",
+    "excadrill",
+    "exeggcute",
+    "farigiraf",
+    "fearow",
+    "feebas",
+    "fennekin",
+    "finizen",
+    "flareon",
+    "fletchinder",
+    "fletchling",
+    "flygon",
+    "froslass",
+    "gabite",
+    "gallade",
+    "garchomp",
+    "gardevoir",
+    "gastly",
+    "gengar",
+    "geodude",
+    "gible",
+    "gigalith",
+    "girafarig",
+    "giratina",
+    "glaceon",
+    "glalie",
+    "glimmet",
+    "glimmora",
+    "golbat",
+    "golem",
+    "graveler",
+    "grimer",
+    "growlithe",
+    "gyarados",
+    "haunter",
+    "heracross",
+    "hippodown",
+    "hippopotas",
+    "honedge",
+    "hoppip",
+    "hydreigon",
+    "hypno",
+    "incineroar",
+    "ivysaur",
+    "jirachi",
+    "jolteon",
+    "jumpluff",
+    "kadabra",
+    "kangaskhan",
+    "kingambit",
+    "kleavor",
+    "koffing",
+    "krokorok",
+    "krookodile",
+    "kyurem",
+    "lairon",
+    "lampent",
+    "lanturn",
+    "larvesta",
+    "larvitar",
+    "leafeon",
+    "leavanny",
+    "ledian",
+    "ledyba",
+    "litten",
+    "litwick",
+    "lucario",
+    "lugia",
+    "machamp",
+    "machoke",
+    "machop",
+    "magearna",
+    "magikarp",
+    "mamoswine",
+    "mareanie",
+    "marill",
+    "marshadow",
+    "megasteelix",
+    "metagross",
+    "metang",
+    "metapod",
+    "mew",
+    "milotic",
+    "mimikyu",
+    "moltres",
+    "muk",
+    "onix",
+    "orthworm",
+    "palafin",
+    "palkia",
+    "paras",
+    "parasect",
+    "pawniard",
+    "pelipper",
+    "pidgeot",
+    "pidgeotto",
+    "pidgey",
+    "pikachu",
+    "piloswine",
+    "piplup",
+    "politoed",
+    "popplio",
+    "primarina",
+    "prinplup",
+    "pupitar",
+    "quilladin",
+    "raichu",
+    "raikou",
+    "raticate",
+    "rattata",
+    "regice",
+    "regirock",
+    "registeel",
+    "reshiram",
+    "riolu",
+    "roggenrola",
+    "rookidee",
+    "rowlet",
+    "salamence",
+    "sandile",
+    "sandshrew",
+    "sandslash",
+    "scizor",
+    "scovillain",
+    "sealeo",
+    "seel",
+    "serperior",
+    "servine",
+    "sewaddle",
+    "shelgon",
+    "skarmory",
+    "skiploom",
+    "sneasel",
+    "snivy",
+    "snorlax",
+    "snorunt",
+    "spearow",
+    "spheal",
+    "squirtle",
+    "starmie",
+    "staryu",
+    "steelix",
+    "steenee",
+    "sudowoodo",
+    "suicune",
+    "swadloon",
+    "swinub",
+    "sylveon",
+    "talonflame",
+    "tinkatink",
+    "tinkaton",
+    "tinkatuff",
+    "togekiss",
+    "togepi",
+    "togetic",
+    "torkoal",
+    "torracat",
+    "toxapex",
+    "trapinch",
+    "tsareena",
+    "tyranitar",
+    "umbreon",
+    "vaporeon",
+    "venusaur",
+    "vibrava",
+    "vivillon",
+    "volcarona",
+    "voltorb",
+    "walrein",
+    "wartortle",
+    "weavile",
+    "whimsicott",
+    "wingull",
+    "xerneas",
+    "yamper",
+    "yveltal",
+    "zapdos",
+    "zekrom",
+    "zubat",
+    "zweilous"
+  ]
+}

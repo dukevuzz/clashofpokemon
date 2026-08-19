@@ -1,0 +1,10 @@
+# Local runs, without DNS or certificates.
+#
+#   docker compose -f docker-compose.yml -f docker-compose.local.yml up --build
+#
+# Caddy listens on plain ports rather than terminating TLS, so the client can
+# be pointed at http://localhost:4400. In production the base file stands
+# alone and Caddy gets real certificates for real names.
+services:
+  caddy:
+    ports: ["4400:4400", "4500:4500"]

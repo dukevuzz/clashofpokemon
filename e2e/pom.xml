@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>4.0.0</version>
+		<relativePath/>
+	</parent>
+
+	<groupId>io.github.excalibase</groupId>
+	<artifactId>clashofpokemon-e2e</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Clash of Pokemon :: e2e</name>
+	<description>Both tiers, running, talking to each other</description>
+
+	<!--
+		Depends on neither of them.
+
+		Deliberately: this drives the two services the way a browser does, over
+		HTTP and a WebSocket, against the jars they actually ship. A test
+		module that imported their classes could call a service directly and
+		pass while the wire between them was broken — which is the only thing
+		this exists to check.
+
+		It also means the two builds stay independent. Neither has to know
+		this module exists.
+	-->
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>testcontainers-postgresql</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>testcontainers-junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<!--
+						Off by default. This needs two jars built and a Docker
+						daemon, so `mvn test` at the top of a fresh checkout
+						should not fail for want of either.
+
+						Run it with: mvn test -DskipTests=false
+					-->
+					<skipTests>${skipTests}</skipTests>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<properties>
+		<java.version>25</java.version>
+		<skipTests>true</skipTests>
+	</properties>
+</project>
