@@ -1,0 +1,553 @@
+/*
+ * The guide's skin.
+ *
+ * Every colour is a palette token published by `theme.ts` at boot -- the same
+ * call the game makes -- so this page and the board cannot drift apart. There
+ * are no literal hex values below for anything the palette already names.
+ *
+ * Two deliberate departures from the game's own UI, both because this is a
+ * document and the game is not:
+ *
+ *   - PokemonClassic is a pixel face at a fixed size. It is perfect for a
+ *     six-character label and unreadable for a paragraph, so it sets headings
+ *     and labels only and the prose is a system sans.
+ *   - The page scrolls, and text is selectable. `ui.css` disables both,
+ *     correctly, for a surface you drag cards across.
+ */
+
+:root {
+  --g-gap: 20px;
+  --g-round: 10px;
+  --g-line: 2px solid var(--edge);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  overscroll-behavior-y: none;
+}
+
+h2, h3, h4, .g-title, .g-facet-name, .g-nav a, .g-fact b, dt {
+  font-family: "PokemonClassic", monospace;
+  font-weight: normal;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+h2 { font-size: 17px; margin: 0 0 12px; color: var(--gold); }
+h3 { font-size: 15px; margin: 0 0 6px; }
+h4 { font-size: 12px; margin: 0 0 8px; color: var(--accent); }
+
+p { margin: 0 0 12px; }
+b { color: var(--gold); font-weight: 600; }
+i { color: var(--dim); }
+
+a { color: var(--accent); }
+
+/* ------------------------------------------------------------------ chrome */
+
+.g-top {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; gap: 16px;
+  padding: 12px 20px;
+  background: var(--panelDim);
+  border-bottom: var(--g-line);
+}
+
+.g-title { font-size: 13px; color: var(--gold); }
+
+.g-back {
+  font-family: "PokemonClassic", monospace;
+  font-size: 10px;
+  text-decoration: none;
+  color: var(--text);
+  background: var(--panelLit);
+  border: var(--g-line);
+  border-radius: var(--g-round);
+  padding: 8px 12px;
+}
+
+.g-back:hover, .g-back:focus-visible { background: var(--accent); color: var(--edge); }
+
+.g-shell {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: var(--g-gap);
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: var(--g-gap);
+}
+
+.g-nav {
+  position: sticky; top: 72px;
+  align-self: start;
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 8px;
+  background: var(--panelDim);
+  border: var(--g-line);
+  border-radius: var(--g-round);
+}
+
+.g-nav a {
+  font-size: 9px;
+  color: var(--dim);
+  text-decoration: none;
+  padding: 9px 10px;
+  border-radius: 6px;
+}
+
+.g-nav a:hover { background: var(--panel); color: var(--text); }
+.g-nav-on { background: var(--panel); color: var(--gold) !important; }
+
+.g-main { min-width: 0; display: flex; flex-direction: column; gap: var(--g-gap); }
+
+.g-main > section {
+  background: var(--panel);
+  border: var(--g-line);
+  border-radius: var(--g-round);
+  padding: 20px;
+}
+
+.g-lede { color: var(--dim); font-size: 17px; }
+.g-dim { color: var(--dim); font-size: 14px; }
+
+/* ------------------------------------------------------------------- facts */
+
+.g-grid-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.g-fact {
+  display: flex; flex-direction: column; gap: 4px;
+  background: var(--panelDim);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.g-fact b { font-size: 13px; }
+.g-fact span { font-size: 13px; color: var(--dim); }
+
+.g-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.g-table th, .g-table td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--panelDim);
+}
+
+.g-table th { font-size: 13px; color: var(--dim); font-weight: 600; }
+
+.g-roles div { display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--panelDim); }
+.g-roles dt { font-size: 10px; color: var(--gold); min-width: 92px; }
+.g-roles dd { margin: 0; color: var(--dim); font-size: 14px; }
+
+/* -------------------------------------------------------------- type chart */
+
+.g-chart-pick { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; }
+
+.g-type {
+  font-family: "PokemonClassic", monospace;
+  font-size: 8px;
+  color: #fff;
+  padding: 5px 7px;
+  border: 2px solid var(--edge);
+  border-radius: 5px;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.6);
+}
+
+button.g-type { cursor: pointer; opacity: 0.55; }
+button.g-type:hover { opacity: 0.85; }
+.g-type-on { opacity: 1; outline: 2px solid var(--gold); }
+
+.g-chart-rows { display: flex; flex-direction: column; gap: 10px; }
+
+.g-eff {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  background: var(--panelDim);
+  border-left: 4px solid var(--dim);
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+.g-eff-good { border-left-color: var(--green); }
+.g-eff-bad { border-left-color: var(--red); }
+.g-eff-none { border-left-color: var(--edge); }
+.g-eff-label { font-size: 13px; color: var(--dim); min-width: 170px; }
+.g-eff-types { display: flex; flex-wrap: wrap; gap: 5px; }
+
+/* ----------------------------------------------------------------- filters */
+
+.g-filters {
+  display: flex; flex-direction: column; gap: 12px;
+  background: var(--panelDim);
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.g-search, .g-select {
+  font: inherit;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--edge);
+  border: var(--g-line);
+  border-radius: 6px;
+  padding: 10px 12px;
+  width: 100%;
+}
+
+.g-select { width: auto; padding: 6px 10px; font-size: 13px; }
+.g-search::placeholder { color: var(--dim); opacity: 0.7; }
+
+.g-facet { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; }
+.g-facet-name { font-size: 9px; color: var(--dim); min-width: 62px; }
+.g-facet-pills { display: flex; flex-wrap: wrap; gap: 5px; flex: 1 1 200px; }
+
+.g-pill {
+  font-family: "PokemonClassic", monospace;
+  font-size: 8px;
+  color: var(--dim);
+  background: var(--panel);
+  border: 2px solid var(--panel);
+  border-radius: 5px;
+  padding: 6px 8px;
+  cursor: pointer;
+}
+
+.g-pill:hover { border-color: var(--dim); color: var(--text); }
+.g-pill-on { background: var(--edge); border-color: var(--gold); color: var(--gold); }
+
+/* The count and the active filters, which must never scroll out of reach. */
+.g-result {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  color: var(--dim);
+}
+
+.g-result b { font-size: 17px; }
+
+.g-chip, .g-clear {
+  font: inherit; font-size: 13px;
+  color: var(--text);
+  background: var(--panelLit);
+  border: 2px solid var(--edge);
+  border-radius: 999px;
+  padding: 3px 10px;
+  cursor: pointer;
+}
+
+.g-chip:hover { background: var(--red); }
+.g-clear { background: none; border-color: var(--dim); color: var(--dim); }
+.g-clear:hover { color: var(--text); border-color: var(--text); }
+
+.g-empty {
+  background: var(--panelDim);
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  color: var(--dim);
+}
+
+/* -------------------------------------------------------------------- grid */
+
+.g-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  gap: 10px;
+}
+
+.g-card {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  background: var(--panelDim);
+  border: var(--g-line);
+  border-radius: 8px;
+  padding: 12px 6px 8px;
+  cursor: pointer;
+  color: var(--text);
+  font: inherit;
+}
+
+.g-card:hover, .g-card:focus-visible {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .g-card:hover, .g-card:focus-visible { transform: none; }
+}
+
+.g-art, .g-sheet-art, .g-chain-art { display: block; image-rendering: pixelated; }
+
+.g-name {
+  font-size: 12px;
+  text-align: center;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.g-rarity { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+.g-cost, .g-count {
+  position: absolute; top: 4px;
+  font-family: "PokemonClassic", monospace;
+  font-size: 9px;
+  padding: 3px 5px;
+  border-radius: 4px;
+}
+
+.g-cost { left: 4px; background: var(--elixir); color: #fff; }
+.g-count { right: 4px; background: var(--edge); color: var(--dim); }
+
+/* ------------------------------------------------------------ detail sheet */
+
+.g-modal {
+  position: fixed; inset: 0; z-index: 50;
+  display: flex; align-items: flex-start; justify-content: center;
+  padding: 24px 16px;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.62);
+}
+
+.g-sheet {
+  width: min(560px, 100%);
+  background: var(--panel);
+  border: var(--g-line);
+  border-radius: var(--g-round);
+  padding: 18px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+
+.g-sheet-top { display: flex; align-items: flex-start; gap: 14px; }
+.g-sheet-sub { margin: 0 0 6px; font-size: 13px; color: var(--dim); text-transform: capitalize; }
+.g-types { display: flex; flex-wrap: wrap; gap: 4px; margin: 0; }
+
+.g-x {
+  margin-left: auto;
+  font-size: 22px; line-height: 1;
+  color: var(--dim);
+  background: none; border: none; cursor: pointer;
+  padding: 0 4px;
+}
+
+.g-x:hover { color: var(--text); }
+
+.g-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+
+.g-stats > div { background: var(--panelDim); border-radius: 6px; padding: 8px 10px; }
+.g-stats dt { font-size: 8px; color: var(--dim); margin-bottom: 3px; }
+.g-stats dd { margin: 0; font-size: 14px; font-variant-numeric: tabular-nums; }
+
+.g-block { background: var(--panelDim); border-radius: 8px; padding: 14px; }
+.g-block p:last-child { margin-bottom: 0; }
+
+.g-chain { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 8px; }
+.g-chain-step { display: flex; align-items: center; gap: 6px; }
+.g-arrow { color: var(--dim); }
+.g-chain-here { outline: 2px solid var(--gold); border-radius: 4px; }
+
+.g-foot {
+  color: var(--dim);
+  font-size: 13px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 12px;
+  padding: 20px;
+}
+
+/* ------------------------------------------------------------------ narrow */
+
+@media (max-width: 760px) {
+  .g-shell { grid-template-columns: minmax(0, 1fr); padding: 12px; }
+
+  /* The rail becomes a scrolling strip rather than a hamburger: one tap to any
+     section still, and it cannot hide the fact that there are nine of them. */
+  .g-nav {
+    position: sticky; top: 60px;
+    flex-direction: row;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  /* The strip sits *below* the header rather than replacing it, so an anchor
+     jump has two bars to clear, not one. Sized for both or every section
+     landing puts its own heading underneath the nav. */
+  html { scroll-padding-top: 124px; }
+
+  .g-nav a { white-space: nowrap; }
+  .g-eff-label { min-width: 100%; }
+  .g-facet-name { min-width: 100%; }
+}
+
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* Each step of an evolution chain carries its own cost, because the cost
+   climbs -- that is the fact the chain exists to show. */
+.g-chain-one { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+
+.g-chain-cost {
+  font-family: "PokemonClassic", monospace;
+  font-size: 8px;
+  color: #fff;
+  background: var(--elixir);
+  border-radius: 4px;
+  padding: 2px 5px;
+}
+
+/* Wide tables scroll inside their own box rather than pushing the page
+   sideways -- the role table has seven columns and a phone has none to spare. */
+.g-scroll { overflow-x: auto; margin-bottom: 12px; }
+.g-scroll .g-table { min-width: 460px; margin-bottom: 0; }
+.g-role-name { font-family: "PokemonClassic", monospace; font-size: 9px; color: var(--gold); }
+
+/* ---------------------------------------------------------------- feedback */
+
+.g-form { display: flex; flex-direction: column; gap: 12px; }
+
+.g-textarea {
+  font: inherit;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--edge);
+  border: var(--g-line);
+  border-radius: 8px;
+  padding: 12px;
+  resize: vertical;
+  min-height: 120px;
+}
+
+.g-textarea::placeholder { color: var(--dim); opacity: 0.6; }
+
+.g-form-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+
+.g-send {
+  font-family: "PokemonClassic", monospace;
+  font-size: 10px;
+  color: var(--edge);
+  background: var(--gold);
+  border: var(--g-line);
+  border-radius: var(--g-round);
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+.g-send:hover:not(:disabled) { background: var(--accent); }
+.g-send:disabled { background: var(--panelDim); color: var(--dim); cursor: default; }
+
+.g-error { color: var(--red); font-size: 14px; }
+
+.g-sent {
+  background: var(--panelDim);
+  border-left: 4px solid var(--green);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.g-sent p:last-of-type { margin-bottom: 12px; }
+
+/* A chain step is a way into that card, so it has to look like one. */
+button.g-chain-one {
+  background: var(--panel);
+  border: 2px solid var(--panel);
+  border-radius: 8px;
+  padding: 6px 6px 5px;
+  cursor: pointer;
+  color: var(--text);
+  font: inherit;
+}
+
+button.g-chain-one:hover:not(:disabled),
+button.g-chain-one:focus-visible:not(:disabled) {
+  border-color: var(--gold);
+  background: var(--panelLit);
+}
+
+/* Where you already are: marked, and not a link back to itself. */
+button.g-chain-one:disabled { cursor: default; border-color: var(--gold); }
+
+.g-chain-name { font-size: 11px; color: var(--dim); max-width: 72px; line-height: 1.2; }
+button.g-chain-one:disabled .g-chain-name { color: var(--gold); }
+
+/*
+ * Matchups on a card.
+ *
+ * Asked for as "x4 or x2 on pokemon we select, like Lugia has a section of
+ * weakness". The multiplier is the number being looked up, so it leads the
+ * row and everything else follows it; the example card is a button because
+ * the answer to "what beats this" is only useful if you can go and read it.
+ */
+.g-match { margin-top: 10px; }
+.g-match-title {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--dim);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.g-match-rows { display: flex; flex-wrap: wrap; gap: 5px; }
+.g-match-row {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 7px;
+  padding: 5px 9px;
+  border: 2px solid var(--panel);
+  border-radius: 7px;
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.86rem;
+  cursor: pointer;
+}
+.g-match-row:hover { border-color: var(--dim); }
+.g-match-mult {
+  font-weight: 700;
+  /* Digits line up down a wrapped list, which is most of why it is readable. */
+  font-variant-numeric: tabular-nums;
+}
+.g-match-bad .g-match-mult { color: #ff8577; }
+.g-match-good .g-match-mult { color: #86d98f; }
+.g-match-types { display: inline-flex; gap: 4px; }
+.g-match-type { font-size: 0.74rem; letter-spacing: 0.04em; }
+.g-match-eg { color: var(--dim); font-size: 0.78rem; }
+
+/*
+ * The card, walking up a lane.
+ *
+ * Pixel art at whatever width the panel gives it: `image-rendering: pixelated`
+ * is doing the real work, and without it the browser smooths a 24px sprite
+ * into mush. Aspect ratio is fixed so the strip does not jump about while the
+ * canvas sizes itself on the first frame.
+ */
+.g-showcase { margin: 12px 0 4px; }
+.g-showcase-canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 176 / 248;
+  border-radius: var(--g-round);
+  background: #2c3a26;
+  image-rendering: pixelated;
+}
+.g-showcase-note { margin: 6px 2px 0; }

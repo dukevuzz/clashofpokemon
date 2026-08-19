@@ -1,0 +1,260 @@
+{
+ "ABSORB": {
+  "frames": 3,
+  "h": 64,
+  "sheet": "ABILITY_ABSORB",
+  "w": 80
+ },
+ "ACROBATICS": {
+  "frames": 4,
+  "h": 38,
+  "sheet": "ABILITY_ACROBATICS",
+  "w": 40
+ },
+ "BITE": {
+  "frames": 12,
+  "h": 48,
+  "sheet": "ABILITY_BITE",
+  "w": 32
+ },
+ "BLAST_BURN": {
+  "frames": 15,
+  "h": 80,
+  "sheet": "ABILITY_BLAST_BURN",
+  "w": 80
+ },
+ "DEFENSE_CURL": {
+  "frames": 18,
+  "h": 32,
+  "sheet": "ABILITY_DEFENSE_CURL",
+  "w": 40
+ },
+ "DIG": {
+  "frames": 20,
+  "h": 32,
+  "sheet": "ABILITY_DIG",
+  "w": 80
+ },
+ "DRAGON_CLAW": {
+  "frames": 10,
+  "h": 88,
+  "sheet": "ABILITY_DRAGON_CLAW",
+  "w": 108
+ },
+ "DRAGON_TAIL": {
+  "frames": 20,
+  "h": 72,
+  "sheet": "ABILITY_DRAGON_TAIL",
+  "w": 80
+ },
+ "DREAM_EATER": {
+  "frames": 20,
+  "h": 56,
+  "sheet": "ABILITY_DREAM_EATER",
+  "w": 56
+ },
+ "EGG_BOMB": {
+  "frames": 16,
+  "h": 80,
+  "sheet": "ABILITY_EGG_BOMB",
+  "w": 80
+ },
+ "EXPLOSION": {
+  "frames": 20,
+  "h": 128,
+  "sheet": "ABILITY_EXPLOSION",
+  "w": 168
+ },
+ "FIRESTARTER": {
+  "frames": 15,
+  "h": 32,
+  "sheet": "ABILITY_FIRESTARTER",
+  "w": 32
+ },
+ "FIRE_FANG": {
+  "frames": 10,
+  "h": 64,
+  "sheet": "ABILITY_FIRE_FANG",
+  "w": 80
+ },
+ "FLAME_CHARGE": {
+  "frames": 20,
+  "h": 192,
+  "sheet": "ABILITY_FLAME_CHARGE",
+  "w": 40
+ },
+ "GUILLOTINE": {
+  "frames": 6,
+  "h": 48,
+  "sheet": "ABILITY_GUILLOTINE",
+  "w": 48
+ },
+ "HAPPY_HOUR": {
+  "frames": 20,
+  "h": 72,
+  "sheet": "ABILITY_HAPPY_HOUR",
+  "w": 88
+ },
+ "HEAVY_SLAM": {
+  "frames": 12,
+  "h": 80,
+  "sheet": "ABILITY_HEAVY_SLAM",
+  "w": 112
+ },
+ "HURRICANE": {
+  "frames": 20,
+  "h": 80,
+  "sheet": "ABILITY_HURRICANE",
+  "w": 56
+ },
+ "HYDRO_PUMP": {
+  "frames": 20,
+  "h": 160,
+  "sheet": "ABILITY_HYDRO_PUMP",
+  "w": 96
+ },
+ "HYPER_DRILL": {
+  "frames": 4,
+  "h": 27,
+  "sheet": "ABILITY_HYPER_DRILL",
+  "w": 33
+ },
+ "ICE_BALL": {
+  "frames": 8,
+  "h": 32,
+  "sheet": "ABILITY_ICE_BALL",
+  "w": 32
+ },
+ "IRON_TAIL": {
+  "frames": 7,
+  "h": 40,
+  "sheet": "ABILITY_IRON_TAIL",
+  "w": 40
+ },
+ "LEECH_LIFE": {
+  "frames": 20,
+  "h": 72,
+  "sheet": "ABILITY_LEECH_LIFE",
+  "w": 80
+ },
+ "MAGICAL_LEAF": {
+  "frames": 9,
+  "h": 48,
+  "sheet": "ABILITY_MAGICAL_LEAF",
+  "w": 48
+ },
+ "MANTIS_BLADES": {
+  "frames": 10,
+  "h": 72,
+  "sheet": "ABILITY_MANTIS_BLADES",
+  "w": 72
+ },
+ "NIGHTMARE": {
+  "frames": 15,
+  "h": 48,
+  "sheet": "ABILITY_NIGHTMARE",
+  "w": 64
+ },
+ "PLAY_ROUGH": {
+  "frames": 20,
+  "h": 56,
+  "sheet": "ABILITY_PLAY_ROUGH",
+  "w": 64
+ },
+ "ROCK_ARTILLERY": {
+  "frames": 12,
+  "h": 96,
+  "sheet": "ABILITY_ROCK_ARTILLERY",
+  "w": 80
+ },
+ "ROCK_SLIDE": {
+  "frames": 20,
+  "h": 256,
+  "sheet": "ABILITY_ROCK_SLIDE",
+  "w": 80
+ },
+ "ROLLOUT": {
+  "frames": 7,
+  "h": 41,
+  "sheet": "ABILITY_ROLLOUT",
+  "w": 64
+ },
+ "SAND_TOMB": {
+  "frames": 14,
+  "h": 104,
+  "sheet": "ABILITY_SAND_TOMB",
+  "w": 104
+ },
+ "SHADOW_BALL": {
+  "frames": 20,
+  "h": 64,
+  "sheet": "ABILITY_SHADOW_BALL",
+  "w": 64
+ },
+ "SMOG": {
+  "frames": 9,
+  "h": 50,
+  "sheet": "ABILITY_SMOG",
+  "w": 45
+ },
+ "SPIRIT_SHACKLE": {
+  "frames": 4,
+  "h": 40,
+  "sheet": "ABILITY_SPIRIT_SHACKLE",
+  "w": 136
+ },
+ "STRING_SHOT": {
+  "frames": 1,
+  "h": 64,
+  "sheet": "ABILITY_STRING_SHOT",
+  "w": 64
+ },
+ "TELEPORT": {
+  "frames": 7,
+  "h": 80,
+  "sheet": "ABILITY_TELEPORT",
+  "w": 56
+ },
+ "THUNDER": {
+  "frames": 9,
+  "h": 224,
+  "sheet": "ABILITY_THUNDER",
+  "w": 32
+ },
+ "TROP_KICK": {
+  "frames": 7,
+  "h": 64,
+  "sheet": "ABILITY_TROP_KICK",
+  "w": 64
+ },
+ "VOLT_SWITCH": {
+  "frames": 7,
+  "h": 128,
+  "sheet": "ABILITY_VOLT_SWITCH",
+  "w": 72
+ },
+ "WATER_PULSE": {
+  "frames": 20,
+  "h": 56,
+  "sheet": "ABILITY_WATER_PULSE",
+  "w": 64
+ },
+ "WISH": {
+  "frames": 15,
+  "h": 40,
+  "sheet": "ABILITY_WISH",
+  "w": 80
+ },
+ "WONDER_ROOM": {
+  "frames": 8,
+  "h": 64,
+  "sheet": "ABILITY_WONDER_ROOM",
+  "w": 64
+ },
+ "WOOD_HAMMER": {
+  "frames": 16,
+  "h": 150,
+  "sheet": "ABILITY_WOOD_HAMMER",
+  "w": 200
+ }
+}

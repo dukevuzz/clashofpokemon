@@ -1,0 +1,26 @@
+spring:
+  application.name: clashofpokemon-api
+
+  # Blocking JDBC on virtual threads. Every request here reads or writes one
+  # row and returns; Loom carries that with plain imperative code, and the
+  # stack trace stays the call stack.
+  threads.virtual.enabled: true
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/clashofpokemon}
+    username: ${DB_USER:clashofpokemon}
+    password: ${DB_PASSWORD:clashofpokemon}
+    hikari:
+      # The pool is the ceiling, not the thread count. Virtual threads do not
+      # change what Postgres can do concurrently, and a pool sized in the
+      # thousands only moves the queue somewhere less visible.
+      maximum-pool-size: 20
+
+  flyway:
+    enabled: true
+
+management:
+  endpoints.web.exposure.include: health,info
+  endpoint.health.probes.enabled: true
+
+server.port: ${PORT:4500}

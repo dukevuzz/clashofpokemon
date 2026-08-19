@@ -1,0 +1,387 @@
+{
+ "version": 1,
+ "tickHz": 30,
+ "snapHz": 15,
+ "inviteLength": 5,
+ "actions": [
+  "Walk",
+  "Idle",
+  "Attack",
+  "Shoot"
+ ],
+ "statusBits": [
+  "paralysis",
+  "flinch",
+  "confusion",
+  "armorBreak",
+  "burn",
+  "poison",
+  "sleep"
+ ],
+ "rejectCodes": [
+  "elixir",
+  "slot",
+  "zone",
+  "stale",
+  "rate",
+  "over",
+  "notstarted"
+ ],
+ "fromClient": [
+  {
+   "t": "auth",
+   "fields": [
+    "deck",
+    "t",
+    "ticket",
+    "troop"
+   ],
+   "example": {
+    "t": "auth",
+    "ticket": "a.signed.ticket",
+    "deck": [
+     "charmander"
+    ],
+    "troop": "togekiss"
+   }
+  },
+  {
+   "t": "auth",
+   "fields": [
+    "branch",
+    "deck",
+    "t",
+    "ticket",
+    "troop"
+   ],
+   "example": {
+    "t": "auth",
+    "ticket": "a.signed.ticket",
+    "deck": [
+     "charmander"
+    ],
+    "troop": "togekiss",
+    "branch": "espeon"
+   }
+  },
+  {
+   "t": "auth",
+   "fields": [
+    "deck",
+    "invite",
+    "t",
+    "ticket",
+    "troop"
+   ],
+   "example": {
+    "t": "auth",
+    "ticket": "a.signed.ticket",
+    "deck": [
+     "charmander"
+    ],
+    "troop": "togekiss",
+    "invite": {
+     "create": true
+    }
+   }
+  },
+  {
+   "t": "auth",
+   "fields": [
+    "deck",
+    "invite",
+    "t",
+    "ticket",
+    "troop"
+   ],
+   "example": {
+    "t": "auth",
+    "ticket": "a.signed.ticket",
+    "deck": [
+     "charmander"
+    ],
+    "troop": "togekiss",
+    "invite": {
+     "code": "ABCDE"
+    }
+   }
+  },
+  {
+   "t": "loaded",
+   "fields": [
+    "t"
+   ],
+   "example": {
+    "t": "loaded"
+   }
+  },
+  {
+   "t": "deploy",
+   "fields": [
+    "seq",
+    "slot",
+    "t",
+    "x",
+    "y"
+   ],
+   "example": {
+    "t": "deploy",
+    "seq": 1,
+    "slot": 0,
+    "x": 144,
+    "y": 560
+   }
+  },
+  {
+   "t": "deploy",
+   "fields": [
+    "form",
+    "seq",
+    "slot",
+    "t",
+    "x",
+    "y"
+   ],
+   "example": {
+    "t": "deploy",
+    "seq": 2,
+    "slot": 1,
+    "x": 144,
+    "y": 560,
+    "form": "deoxysattack"
+   }
+  },
+  {
+   "t": "choose",
+   "fields": [
+    "cardId",
+    "choiceId",
+    "seq",
+    "t"
+   ],
+   "example": {
+    "t": "choose",
+    "seq": 3,
+    "choiceId": "c1",
+    "cardId": "espeon"
+   }
+  },
+  {
+   "t": "leave",
+   "fields": [
+    "t"
+   ],
+   "example": {
+    "t": "leave"
+   }
+  },
+  {
+   "t": "ping",
+   "fields": [
+    "c",
+    "t"
+   ],
+   "example": {
+    "t": "ping",
+    "c": 1700000000000
+   }
+  }
+ ],
+ "fromServer": [
+  {
+   "t": "hello",
+   "fields": [
+    "matchId",
+    "me",
+    "seat",
+    "snap",
+    "t",
+    "them",
+    "tick",
+    "v",
+    "you"
+   ],
+   "example": {
+    "t": "hello",
+    "v": 1,
+    "matchId": "m_abc",
+    "you": "acct_1",
+    "seat": 1,
+    "tick": 30,
+    "snap": 15,
+    "me": {
+     "deck": [
+      "charmander"
+     ],
+     "troop": "togekiss"
+    },
+    "them": {
+     "id": "acct_2",
+     "name": "Bo",
+     "deck": [
+      "squirtle"
+     ],
+     "troop": "togekiss"
+    }
+   }
+  },
+  {
+   "t": "start",
+   "fields": [
+    "seed",
+    "startedAt",
+    "t"
+   ],
+   "example": {
+    "t": "start",
+    "seed": 12345,
+    "startedAt": 1700000000000
+   }
+  },
+  {
+   "t": "invite",
+   "fields": [
+    "code",
+    "t"
+   ],
+   "example": {
+    "t": "invite",
+    "code": "ABCDE"
+   }
+  },
+  {
+   "t": "snap",
+   "fields": [
+    "left",
+    "me",
+    "p",
+    "t",
+    "tick",
+    "u",
+    "w"
+   ],
+   "example": {
+    "t": "snap",
+    "tick": 30,
+    "left": 178.5,
+    "u": [
+     [
+      1,
+      100.5,
+      500.5,
+      156,
+      0,
+      0,
+      4,
+      0,
+      0
+     ]
+    ],
+    "w": [
+     [
+      7,
+      546,
+      1,
+      0,
+      0
+     ]
+    ],
+    "p": [
+     [
+      120.5,
+      480.5
+     ]
+    ],
+    "me": {
+     "e": 5.5,
+     "hand": [
+      "charmander",
+      null,
+      "squirtle",
+      "machop"
+     ],
+     "next": "geodude"
+    }
+   }
+  },
+  {
+   "t": "ev",
+   "fields": [
+    "e",
+    "t",
+    "tick"
+   ],
+   "example": {
+    "t": "ev",
+    "tick": 30,
+    "e": [
+     {
+      "e": "ready",
+      "id": 1
+     }
+    ]
+   }
+  },
+  {
+   "t": "over",
+   "fields": [
+    "result",
+    "t",
+    "youWon"
+   ],
+   "example": {
+    "t": "over",
+    "result": "player",
+    "youWon": true
+   }
+  },
+  {
+   "t": "reject",
+   "fields": [
+    "code",
+    "seq",
+    "t"
+   ],
+   "example": {
+    "t": "reject",
+    "seq": 1,
+    "code": "elixir"
+   }
+  },
+  {
+   "t": "peer",
+   "fields": [
+    "state",
+    "t"
+   ],
+   "example": {
+    "t": "peer",
+    "state": "disconnected"
+   }
+  },
+  {
+   "t": "pong",
+   "fields": [
+    "c",
+    "t",
+    "tick"
+   ],
+   "example": {
+    "t": "pong",
+    "c": 1700000000000,
+    "tick": 30
+   }
+  },
+  {
+   "t": "error",
+   "fields": [
+    "message",
+    "t"
+   ],
+   "example": {
+    "t": "error",
+    "message": "auth first"
+   }
+  }
+ ]
+}

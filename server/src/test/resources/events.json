@@ -1,0 +1,183 @@
+{
+ "events": [
+  {
+   "kind": "spawn",
+   "fields": [
+    "arrive",
+    "card",
+    "e",
+    "id",
+    "lane",
+    "side",
+    "x",
+    "y"
+   ],
+   "example": {
+    "e": "spawn",
+    "id": 1,
+    "card": "charmander",
+    "side": 1,
+    "lane": 0,
+    "x": 100.5,
+    "y": 500.5,
+    "arrive": 0.5
+   }
+  },
+  {
+   "kind": "ready",
+   "fields": [
+    "e",
+    "id"
+   ],
+   "example": {
+    "e": "ready",
+    "id": 1
+   }
+  },
+  {
+   "kind": "hit",
+   "fields": [
+    "amount",
+    "e",
+    "from",
+    "id",
+    "mult"
+   ],
+   "example": {
+    "e": "hit",
+    "id": 2,
+    "amount": 42,
+    "mult": 2,
+    "from": 1
+   }
+  },
+  {
+   "kind": "cast",
+   "fields": [
+    "at",
+    "e",
+    "id",
+    "skill"
+   ],
+   "example": {
+    "e": "cast",
+    "id": 1,
+    "skill": "EMBER",
+    "at": 2
+   }
+  },
+  {
+   "kind": "status",
+   "fields": [
+    "e",
+    "id",
+    "kind",
+    "seconds"
+   ],
+   "example": {
+    "e": "status",
+    "id": 2,
+    "kind": "burn",
+    "seconds": 3.5
+   }
+  },
+  {
+   "kind": "shot",
+   "fields": [
+    "amount",
+    "e",
+    "from",
+    "mult",
+    "to"
+   ],
+   "example": {
+    "e": "shot",
+    "from": 1,
+    "to": 2,
+    "amount": 12,
+    "mult": 1.5
+   }
+  },
+  {
+   "kind": "death",
+   "fields": [
+    "e",
+    "id",
+    "tower"
+   ],
+   "example": {
+    "e": "death",
+    "id": 2,
+    "tower": false
+   }
+  },
+  {
+   "kind": "towerDown",
+   "fields": [
+    "e",
+    "id"
+   ],
+   "example": {
+    "e": "towerDown",
+    "id": 7
+   }
+  },
+  {
+   "kind": "kingWakes",
+   "fields": [
+    "e",
+    "id"
+   ],
+   "example": {
+    "e": "kingWakes",
+    "id": 9
+   }
+  },
+  {
+   "kind": "evolve",
+   "fields": [
+    "e",
+    "from",
+    "side",
+    "to"
+   ],
+   "example": {
+    "e": "evolve",
+    "side": 1,
+    "from": "charmander",
+    "to": "charmeleon"
+   }
+  },
+  {
+   "kind": "choice",
+   "fields": [
+    "e",
+    "from",
+    "id",
+    "options",
+    "side"
+   ],
+   "example": {
+    "e": "choice",
+    "side": 2,
+    "id": "c1",
+    "from": "eevee",
+    "options": [
+     "espeon",
+     "umbreon"
+    ]
+   }
+  },
+  {
+   "kind": "over",
+   "fields": [
+    "e",
+    "result"
+   ],
+   "example": {
+    "e": "over",
+    "result": "player"
+   }
+  }
+ ]
+}

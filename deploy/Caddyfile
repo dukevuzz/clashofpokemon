@@ -1,0 +1,32 @@
+# TLS is not optional for this client: it builds its socket address from the
+# page's protocol, so a page served over https connects with wss://.
+
+{$GAME_HOST} {
+	# `handle` blocks, not bare directives. Caddy sorts directives by its own
+	# precedence rather than the order they are written, so a catch-all
+	# `respond` beat every `reverse_proxy` above it and served the fallback
+	# message to /status and to socket upgrades alike. `handle` blocks are
+	# mutually exclusive and evaluated in written order.
+	@upgrade header Connection *Upgrade*
+	handle @upgrade {
+		reverse_proxy server:4400
+	}
+
+	handle /status {
+		reverse_proxy server:4400
+	}
+
+	handle /me/match {
+		reverse_proxy server:4400
+	}
+
+	# Anything else is a person typing the address in. Tomcat answers that
+	# with `Can "Upgrade" only to "WebSocket".`, which is true and unhelpful.
+	handle {
+		respond "Clash of Pokemon game server. This address is a WebSocket endpoint; try /status." 200
+	}
+}
+
+{$API_HOST} {
+	reverse_proxy api:4500
+}

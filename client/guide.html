@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!--
+      No user-scalable=no here, unlike the game. The board must not zoom under a
+      double-tap mid-match; a page of text must be zoomable, and taking that
+      away from anyone who needs it to read is not a trade this page has to make.
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#1e2432" />
+    <title>Field Guide — Clash of Pokémon</title>
+    <!--
+      In the head as well as on the page, so it is in the source and in the
+      search result rather than only in the rendering. A rights holder looking
+      at this should find the answer before they have to ask.
+    -->
+    <meta
+      name="copyright"
+      content="Pokémon © 1995–2026 Nintendo / Creatures Inc. / GAME FREAK inc. Non-commercial fan project, not affiliated with or endorsed by the rights holders."
+    />
+    <meta
+      name="description"
+      content="How Clash of Pokémon works: elixir, towers, deploying, types, evolution, and every Pokémon in the game."
+    />
+    <link rel="stylesheet" href="/fonts.css" />
+    <link rel="stylesheet" href="/guide.css" />
+  </head>
+  <body>
+    <div id="guide"></div>
+    <script type="module" src="/src/guide/main.tsx"></script>
+  </body>
+</html>

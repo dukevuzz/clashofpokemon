@@ -1,0 +1,49 @@
+{
+  "tileSize": 24,
+  "ground": {
+    "grass": {
+      "sheet": "ground_grass",
+      "tiles": 1
+    },
+    "road": {
+      "sheet": "ground_road",
+      "tiles": 1
+    },
+    "sand": {
+      "sheet": "ground_sand",
+      "tiles": 1
+    },
+    "water": {
+      "sheet": "ground_water",
+      "tiles": 1
+    }
+  },
+  "towers": {
+    "king": {
+      "sheet": "tower_king",
+      "w": 64,
+      "h": 116,
+      "mount": [
+        32,
+        46
+      ],
+      "seat": [
+        31.5,
+        25.5
+      ]
+    },
+    "side": {
+      "sheet": "tower_side",
+      "w": 64,
+      "h": 98,
+      "mount": [
+        32,
+        41
+      ],
+      "seat": [
+        31.5,
+        25.5
+      ]
+    }
+  }
+}

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!--
+      viewport-fit=cover so the board reaches under an iPhone notch, and
+      user-scalable=no so a double-tap during a match does not zoom the page.
+    -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#0b0b0e" />
+    <title>Clash of Pokémon</title>
+    <!--
+      In the head as well as on the page, so it is in the source and in the
+      search result rather than only in the rendering. A rights holder looking
+      at this should find the answer before they have to ask.
+    -->
+    <meta
+      name="copyright"
+      content="Pokémon © 1995–2026 Nintendo / Creatures Inc. / GAME FREAK inc. Non-commercial fan project, not affiliated with or endorsed by the rights holders."
+    />
+    <link rel="stylesheet" href="/fonts.css" />
+    <!-- Dialogs and popups are DOM; see src/ui/modal.ts for why. -->
+    <link rel="stylesheet" href="/ui.css" />
+    <style>
+      html, body {
+        margin: 0; padding: 0; height: 100%; overflow: hidden;
+        background: #0b0b0e;
+        /* No text is drawn by the DOM -- this only affects the loading state. */
+        color: #cfcfd6;
+        font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+        /* Stops the pull-to-refresh gesture firing when you drag a card down. */
+        overscroll-behavior: none;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+      #game { width: 100vw; height: 100dvh; }
+      /* Force the face to load before Phaser measures anything. */
+      .font-preload { position: absolute; left: -9999px; font-family: "PokemonClassic"; }
+      #game canvas { display: block; }
+    </style>
+  </head>
+  <body>
+    <div id="game"></div>
+    <span class="font-preload">.</span>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

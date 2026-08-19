@@ -1,0 +1,591 @@
+/*
+ * The DOM half of the interface.
+ *
+ * Everything else in this game is drawn to canvas by Phaser, which has no
+ * box-shadow, no border-image, no flexbox and no text layout. That is fine for
+ * the board -- it has to sit between sprite layers and move with the arena --
+ * and it is the wrong tool for a dialog. Our `panel()` stacks four rounded
+ * rectangles to fake a single box-shadow, and every glyph it draws is
+ * rasterised into the canvas and then rescaled with it.
+ *
+ * pokemonAutoChess's UI reads better than ours largely because it is React and
+ * CSS, so all of that is free. This file is where we take the same deal for the
+ * parts that are genuinely documents: dialogs, detail popups, lists.
+ *
+ * The tokens are PAC's own, from app/public/src/style/index.css and colors.css,
+ * so a panel drawn here and a panel drawn by widgets.ts agree.
+ */
+
+:root {
+  --lr-bg-primary: var(--panelLit);
+  --lr-bg-secondary: var(--panel);
+  --lr-bg-tertiary: var(--panelDim);
+  --lr-fg: #ffffff;
+  --lr-fg-dim: var(--dim);
+  --lr-gold: var(--gold);
+  --lr-shadow: var(--edge);
+
+  /* PAC's --border-thick / --border-thin / --shadow-clickable, verbatim. */
+  --lr-border-thick: 4px solid black;
+  --lr-border-thin: 2px solid black;
+  --lr-shadow-clickable: var(--lr-shadow) 2px 2px 0px;
+}
+
+/*
+ * The overlay is sized to the CANVAS, not to the window.
+ *
+ * Phaser letterboxes: with Scale.FIT the canvas is centred with bars either
+ * side, so a dialog covering the viewport would dim the bars too and float
+ * unanchored in them. modal.ts measures the canvas and writes these positions,
+ * which is also what keeps the dialog aligned when the window resizes.
+ */
+.lr-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 10;
+  /* Fade in, because a dialog that appears between two frames reads as a
+     glitch rather than as a thing opening. */
+  animation: lr-fade 120ms ease-out;
+}
+
+@keyframes lr-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* A dialog you answer while the match runs. Sits low so the board stays in
+   view, does not dim, and lets the pointer through everywhere but its own box
+   -- the clock never stops, so the player has to be able to keep playing. */
+.lr-passthrough {
+  pointer-events: none;
+  background: none;
+  align-items: flex-end;
+  padding-bottom: 4%;
+}
+
+.lr-passthrough .lr-modal {
+  pointer-events: auto;
+  max-width: 94%;
+  padding: 10px 14px 12px;
+}
+
+.lr-passthrough .lr-modal h2 { margin-bottom: 8px; font-size: 1rem; }
+
+.lr-modal {
+  box-sizing: border-box;
+  max-width: 86%;
+  max-height: 84%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 14px 16px 18px;
+  border-radius: 12px;
+  border: var(--lr-border-thick);
+  background: var(--lr-bg-secondary);
+  color: var(--lr-fg);
+  /* The inset bevel every PAC box carries, plus the hard offset shadow. */
+  box-shadow:
+    inset -6px -6px 0px 0px var(--lr-bg-tertiary),
+    var(--lr-shadow-clickable),
+    0 8px 32px rgba(0, 0, 0, 0.45);
+  animation: lr-pop 140ms cubic-bezier(0.2, 1.3, 0.5, 1);
+}
+
+@keyframes lr-pop {
+  from { transform: scale(0.92); }
+  to   { transform: scale(1); }
+}
+
+.lr-modal h2 {
+  margin: 0 0 12px;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  color: var(--lr-gold);
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.lr-modal p { margin: 0 0 10px; color: var(--lr-fg-dim); line-height: 1.45; }
+
+/* A row of choices. Wraps rather than scrolling sideways on a phone. */
+.lr-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.lr-choice {
+  flex: 0 0 auto;
+  width: 108px;
+  padding: 8px 6px 10px;
+  border-radius: 12px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-primary);
+  box-shadow:
+    inset -5px -5px 0px 0px var(--lr-bg-tertiary),
+    var(--lr-shadow-clickable);
+  cursor: pointer;
+  text-align: center;
+  color: var(--lr-fg);
+  font: inherit;
+  /* Only the transform animates: transitioning box-shadow or background makes
+     a press feel laggy rather than immediate. */
+  transition: transform 90ms ease-out;
+}
+
+.lr-choice:hover { background: var(--panelLit); transform: translateY(-2px); }
+
+.lr-choice:active {
+  transform: translateY(1px);
+  box-shadow:
+    inset 5px 5px 0px 0px var(--lr-bg-tertiary),
+    var(--lr-shadow-clickable);
+}
+
+/* Portraits are 40x40 pixel art, so they must not be smoothed on the way up.
+   Size comes from portraits.styleFor, which also picks the atlas cell. */
+.lr-choice .lr-art {
+  margin: 0 auto 6px;
+  image-rendering: pixelated;
+}
+
+.lr-choice .lr-name { font-weight: 700; font-size: 0.9rem; }
+.lr-choice .lr-sub { font-size: 0.72rem; color: var(--lr-fg-dim); margin-top: 2px; }
+
+/* ------------------------------------------------------------------ screens
+ *
+ * A full-screen panel over the canvas, for the parts of the game that are
+ * documents rather than boards: the Pokedex, the deck builder.
+ *
+ * The Dex was a virtualised table drawn with Phaser text at hand-computed
+ * column offsets -- `this.add.text(510, 18, ...)` -- with its own scroll
+ * handler, its own wheel handler, and its own row recycling, because a canvas
+ * has no scrollbox and building 1,149 rows eagerly stalled the scene. The
+ * browser has all of that already, and renders text at native resolution
+ * instead of through the canvas rescale.
+ */
+
+.lr-screen {
+  position: absolute;
+  inset: 0;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--lr-fg);
+  z-index: 9;
+  font: 15px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.lr-screen header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--lr-bg-secondary);
+  border-bottom: var(--lr-border-thick);
+}
+
+.lr-screen header h1 {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  color: var(--lr-gold);
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.lr-screen .lr-spacer { flex: 1 1 auto; }
+
+.lr-search {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 7px 10px;
+  border-radius: 10px;
+  border: var(--lr-border-thin);
+  background: #262626;
+  color: var(--lr-fg);
+  font: inherit;
+}
+.lr-search::placeholder { color: #8b93a6; }
+
+.lr-btn {
+  flex: 0 0 auto;
+  padding: 7px 12px;
+  border-radius: 10px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-primary);
+  color: var(--lr-fg);
+  font: inherit;
+  cursor: pointer;
+  box-shadow:
+    inset -4px -4px 0px 0px var(--lr-bg-tertiary),
+    var(--lr-shadow-clickable);
+}
+/* The guide is a separate page, so its entry in the menu row is an anchor. It
+   still has to sit in that row looking exactly like the buttons beside it. */
+a.lr-btn { display: inline-block; text-decoration: none; text-align: center; }
+.lr-btn:hover { background: var(--panelLit); }
+.lr-btn[aria-pressed="true"] { background: #3f7a46; }
+.lr-btn:active {
+  box-shadow: inset 4px 4px 0px 0px var(--lr-bg-tertiary), var(--lr-shadow-clickable);
+}
+
+/* The list. Native scrolling, native text -- the two things the canvas
+   version had to reimplement and could not do as well. */
+.lr-list {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.lr-row {
+  display: grid;
+  grid-template-columns: 44px 1fr auto auto;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  /* Zebra striping does more for scanning a dense table than any amount of
+     spacing, and costs one selector. */
+}
+.lr-row:nth-child(even) { background: rgba(0, 0, 0, 0.12); }
+.lr-row:hover { background: rgba(105, 183, 235, 0.16); }
+.lr-row[aria-selected="true"] { background: rgba(105, 183, 235, 0.28); }
+
+.lr-row .lr-face { width: 40px; height: 40px; image-rendering: pixelated; }
+.lr-row .lr-id { min-width: 0; }
+.lr-row .lr-id b { display: block; font-size: 0.95rem; }
+.lr-row .lr-id small { color: var(--lr-fg-dim); font-size: 0.72rem; }
+.lr-row.dim b { color: #99a2b5; }
+
+.lr-nums { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.lr-nums .lr-cost { color: #d98cff; font-weight: 700; }
+.lr-nums small { display: block; color: var(--lr-fg-dim); font-size: 0.72rem; }
+
+.lr-types { display: flex; gap: 3px; }
+.lr-types span {
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #10121a;
+}
+
+/* The detail pane. Sticks to the bottom on a phone, sits beside on a wide
+   screen -- one media query, where the canvas version would have needed a
+   second layout written by hand. */
+.lr-detail {
+  flex: 0 0 auto;
+  max-height: 42%;
+  overflow-y: auto;
+  padding: 10px 12px 14px;
+  background: var(--lr-bg-secondary);
+  border-top: var(--lr-border-thick);
+}
+.lr-detail h2 { margin: 0 0 2px; font-size: 1.05rem; }
+.lr-detail .lr-sub { color: var(--lr-fg-dim); font-size: 0.78rem; margin-bottom: 8px; }
+.lr-detail dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 12px;
+  font-size: 0.85rem;
+}
+.lr-detail dt { color: var(--lr-fg-dim); }
+.lr-detail dd { margin: 0; }
+.lr-detail .lr-skill { margin-top: 8px; font-size: 0.85rem; line-height: 1.45; }
+.lr-detail .lr-skill b { color: var(--lr-gold); }
+
+/* -------------------------------------------------------------------- menu
+ *
+ * Was Phaser text and rectangles at hand-computed coordinates, and blurry for
+ * a structural reason: everything drawn into the canvas is rasterised at the
+ * design size and then rescaled with the canvas to fit the window -- a 0.78x
+ * resample of every glyph at a typical viewport. A menu is a document, so it
+ * is one now.
+ */
+
+/* Fills the host, which is the element sized to the canvas. Absolute rather
+   than fixed: a fixed child with no offsets collapses, and it collapsed
+   silently on a phone while working on a desktop. */
+.lr-menu {
+  position: absolute;
+  inset: 0;
+  pointer-events: auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: 8;
+  padding: 22px 18px 40px;
+  box-sizing: border-box;
+  background: var(--bg);
+  color: var(--lr-fg);
+  font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+  text-align: center;
+}
+
+.lr-menu h1 {
+  margin: 0 0 2px;
+  font-size: clamp(1.8rem, 7vw, 2.6rem);
+  letter-spacing: 0.12em;
+  color: var(--lr-gold);
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.55);
+}
+.lr-tagline { margin: 0; color: var(--lr-fg-dim); font-size: 0.85rem; }
+.lr-record { margin: 2px 0 18px; color: var(--lr-fg-dim); font-size: 0.78rem; }
+
+.lr-card {
+  margin: 0 auto 16px;
+  max-width: 560px;
+  padding: 12px;
+  border-radius: 12px;
+  border: var(--lr-border-thick);
+  background: var(--lr-bg-secondary);
+  box-shadow:
+    inset -6px -6px 0px 0px var(--lr-bg-tertiary),
+    var(--lr-shadow-clickable);
+  text-align: left;
+}
+.lr-card h2 {
+  margin: 0 0 10px;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lr-fg-dim);
+}
+
+/* The deck. A grid rather than eight computed x offsets, so it reflows on a
+   narrow phone instead of running off the edge. */
+.lr-deck {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+  gap: 8px;
+}
+.lr-slot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 4px 6px;
+  border-radius: 10px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-primary);
+  box-shadow: inset -4px -4px 0 0 var(--lr-bg-tertiary), var(--lr-shadow-clickable);
+  color: var(--lr-fg);
+  font: inherit;
+  cursor: pointer;
+}
+.lr-slot:hover { background: var(--panelLit); }
+.lr-slot .lr-face { image-rendering: pixelated; }
+.lr-slot-name { font-size: 0.68rem; color: var(--lr-fg-dim); }
+.lr-cost-pip {
+  position: absolute;
+  top: -7px; left: -7px;
+  width: 22px; height: 22px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  border: var(--lr-border-thin);
+  background: var(--elixir);
+  font-size: 0.72rem; font-weight: 700;
+}
+.lr-avg { margin: 10px 0 0; font-size: 0.8rem; color: var(--lr-fg-dim); }
+.lr-avg b { font-size: 1.3rem; color: #d98cff; }
+
+.lr-troops { display: grid; gap: 8px; }
+.lr-troop {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px; border-radius: 10px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-primary);
+  box-shadow: inset -4px -4px 0 0 var(--lr-bg-tertiary), var(--lr-shadow-clickable);
+  color: var(--lr-fg); font: inherit; cursor: pointer; text-align: left;
+}
+.lr-troop:hover { background: var(--panelLit); }
+.lr-troop[aria-pressed="true"] { background: #3f7a46; border-color: var(--lr-gold); }
+.lr-troop .lr-face { flex: 0 0 auto; image-rendering: pixelated; }
+.lr-troop-body { display: flex; flex-direction: column; min-width: 0; }
+.lr-troop-body b { font-size: 0.9rem; }
+.lr-troop-body small { color: var(--lr-fg-dim); font-size: 0.72rem; }
+.lr-troop-nums { color: #9fd0f0 !important; }
+
+.lr-play {
+  display: block;
+  width: min(340px, 92%);
+  margin: 6px auto 12px;
+  padding: 14px;
+  border-radius: 14px;
+  border: var(--lr-border-thick);
+  background: var(--elixir);
+  color: var(--lr-fg);
+  font: 700 1.5rem/1 system-ui, sans-serif;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  box-shadow: inset -7px -7px 0 0 #8d3ba3, var(--lr-shadow-clickable);
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4);
+}
+.lr-play:hover { background: #d97cf2; }
+/* A deck mid-edit. Greyed rather than hidden, so the reason stays readable. */
+.lr-play:disabled {
+  background: #5a4a63;
+  color: #a9a2b0;
+  cursor: not-allowed;
+  box-shadow: inset -7px -7px 0 0 #453850, var(--lr-shadow-clickable);
+}
+.lr-play:disabled:hover { background: #5a4a63; }
+.lr-play:active { box-shadow: inset 7px 7px 0 0 #8d3ba3, var(--lr-shadow-clickable); }
+.lr-play small {
+  display: block;
+  margin-top: 5px;
+  font: 400 0.72rem/1 system-ui, sans-serif;
+  letter-spacing: 0.04em;
+  opacity: 0.85;
+}
+
+.lr-menu-row { display: flex; gap: 10px; justify-content: center; }
+.lr-menu-row .lr-btn { min-width: 140px; font-weight: 700; letter-spacing: 0.08em; }
+
+.lr-link {
+  display: block; margin: 14px auto 0;
+  background: none; border: 0; cursor: pointer;
+  color: var(--lr-fg-dim); font: inherit; font-size: 0.78rem;
+  text-decoration: underline;
+}
+.lr-hint { margin: 8px 0 0; color: var(--lr-fg-dim); font-size: 0.75rem; }
+
+/* The online entry sits under PLAY and reads as the same kind of action, with
+   a different weight -- a real opponent is the bigger commitment of the two. */
+.lr-play-online {
+  border-color: var(--lr-gold);
+}
+
+/* Playing somebody you chose: a code to read out, or a box to type one into.
+   Kept quieter than the two PLAY buttons -- it is the deliberate path, not the
+   default one, and it should not compete with them for attention. */
+.lr-invite {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.lr-invite-row {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  align-items: center;
+}
+
+.lr-invite-row .lr-search { text-align: center; letter-spacing: 0.18em; }
+
+.lr-invite-code {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin: 0;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-primary);
+  box-shadow: inset -4px -4px 0 0 var(--lr-bg-tertiary), var(--lr-shadow-clickable);
+}
+
+/* The code is read aloud and typed by somebody else, so it is the largest
+   thing on the screen while it is up. */
+.lr-invite-code b {
+  font-size: 1.9rem;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+  color: var(--lr-gold);
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.lr-invite-code small { color: var(--lr-fg-dim); }
+
+/* The fan-project notice on the menu. Quiet, but never hidden -- small enough
+   to stay out of the way of playing, large enough to actually read. */
+.lr-legal {
+  max-width: 46ch;
+  margin: 12px auto 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--dim);
+  opacity: 0.75;
+  text-align: center;
+}
+
+/*
+ * Learning, as one block.
+ *
+ * The tutorial and the guide teach the same things in two ways -- one by
+ * playing, one by reading -- and separately both were being missed. Together
+ * above the play buttons they read as a single offer, and the gap here is
+ * tighter than the gap between play buttons so they group visually as well.
+ */
+.lr-learn {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 14px;
+}
+
+/*
+ * The guide, while the tutorial is still on offer.
+ *
+ * Deliberately quiet: two full-size buttons stacked would compete, and the
+ * tutorial is the better first answer for somebody who has never played. This
+ * is the second sentence, not a second shout.
+ */
+.lr-guide {
+  display: block;
+  width: min(340px, 92%);
+  margin: 0 auto;
+  padding: 7px;
+  color: var(--gold);
+  font: 600 0.95rem/1 system-ui, sans-serif;
+  text-align: center;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.lr-guide:hover { color: var(--accent); }
+
+/*
+ * And once the tutorial has been done, the guide takes its place at full size
+ * rather than vanishing -- it is the part that stays useful, since nine
+ * lessons cannot cover a hundred and twenty-seven Pokemon.
+ */
+.lr-play-guide {
+  background: #3f6f9a;
+  box-shadow: inset -7px -7px 0 0 #2b4d6b, var(--lr-shadow-clickable);
+  text-decoration: none;
+}
+.lr-play-guide:hover { background: #4b86b8; }
+
+/*
+ * The guide, at the top of the play buttons.
+ *
+ * It used to be the third of three identical grey buttons beside DECK and DEX,
+ * where it read as a utility and players said they never saw it. Same link,
+ * given the weight of what it is: the only place that explains the game.
+ *
+ * Green rather than gold. Gold needs dark text to be readable, and `.lr-play`
+ * carries a dark text-shadow sized for *white* text on purple -- dark text sat
+ * on its own shadow and came out blurry. Keeping the family's white-on-colour
+ * treatment means the shadow does its job, and green reads as "start here"
+ * without competing with the purple play buttons.
+ */
+.lr-play-guide {
+  background: #3f9a52;
+  box-shadow: inset -7px -7px 0 0 #2b6b39, var(--lr-shadow-clickable);
+  text-decoration: none;
+}
+.lr-play-guide:hover { background: #4bb463; }

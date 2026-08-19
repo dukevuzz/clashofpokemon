@@ -1,0 +1,1055 @@
+706 chains from 1149 species
+
+  379 have NO evolution (54%)
+  327 do evolve
+  51 are fully sprited today
+
+
+==============================================================================
+1 FORM — 379 chains   (terminal: plays as-is, never grows)
+==============================================================================
+   1 goomy                  fighter    common     DRAGON/WATER         hp  65 atk  4 spd 35  0/1  
+   2 bugnest                fighter    special                         hp 100 atk  0 spd  0  0/1  building
+   2 burmyplant             skirmisher rare       BUG/GRASS            hp  70 atk  7 spd 46  0/1  
+   2 burmysandy             skirmisher rare       BUG/GROUND/GRASS     hp  70 atk  7 spd 46  0/1  
+   2 burmytrash             skirmisher rare       BUG/GROUND/GRASS     hp  70 atk  7 spd 46  0/1  
+   2 combee                 fighter    special    BUG/GRASS            hp  75 atk  5 spd 50  0/1  
+   2 ditto                  fighter    special    NORMAL               hp  50 atk  5 spd 40  ART  
+   2 eevee                  fighter    special    NORMAL               hp  60 atk  5 spd 43  ART  branches x8
+   2 egg                    fighter    special                         hp  30 atk  1 spd 41  0/1  
+   2 falinkstrooper         fighter    special    FIGHTING/STEEL       hp  30 atk  1 spd 50  0/1  
+   2 flabebe                sniper     uncommon   FAIRY/GRASS          hp  60 atk  6 spd 49  0/1  
+   2 koffing                fighter    uncommon   POISON               hp  65 atk  5 spd 44  ART  
+   2 meltan                 fighter    special    STEEL                hp  50 atk  5 spd 40  0/1  
+   2 petilil                fighter    uncommon   GRASS                hp  85 atk  5 spd 54  0/1  
+   2 pillarwood             fighter    special                         hp 100 atk  0 spd  0  0/1  building
+   2 substitute             fighter    special                         hp  80 atk  1 spd 28  0/1  
+   2 unowna                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unownb                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unownc                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unownd                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unowne                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unownexclamation       artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unownf                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unowng                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unownh                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unowni                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unownj                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unownk                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unownl                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unownm                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unownn                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unowno                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unownp                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unownq                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unownquestion          artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unownr                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unowns                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unownt                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unownu                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unownv                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unownw                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unownx                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unowny                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   2 unownz                 artillery  special    PSYCHIC              hp 100 atk  1 spd 40  0/1  
+   3 arrokuda               bruiser    special    WATER                hp  80 atk 10 spd 46  0/1  
+   3 cherubi                sniper     epic       GRASS                hp  90 atk  6 spd 52  0/1  
+   3 espurr                 runner     uncommon   PSYCHIC              hp  80 atk  3 spd 66  0/1  wincon,jumps
+   3 galarianslowpoke       fighter    uncommon   PSYCHIC/POISON       hp  80 atk  7 spd 35  0/1  
+   3 slowpoke               fighter    uncommon   PSYCHIC/WATER        hp  80 atk  7 spd 35  0/1  
+   4 exeggcute              sniper     epic       GRASS/PSYCHIC        hp 110 atk  9 spd 38  ART  
+   4 floette                sniper     uncommon   FAIRY/GRASS          hp 120 atk 10 spd 49  0/1  
+   4 latias                 sniper     unique     DRAGON/PSYCHIC       hp 120 atk  9 spd 60  0/1  
+   4 latios                 sniper     unique     DRAGON/PSYCHIC       hp 120 atk  9 spd 60  0/1  
+   4 phione                 sniper     special    WATER                hp 125 atk 10 spd 57  0/1  
+   4 pikachulibre           fighter    special    ELECTRIC/FIGHTING/FAIRY hp 120 atk  8 spd 54  0/1  
+   4 pikachusurfer          fighter    special    ELECTRIC/WATER/FAIRY hp 120 atk  8 spd 54  0/1  
+   4 shedinja               bruiser    epic       BUG/GHOST            hp 100 atk 14 spd 38  0/1  
+   4 tatsugiricurly         bruiser    special    WATER                hp  80 atk 18 spd 50  0/1  
+   4 tatsugiridroopy        bruiser    special    WATER                hp  80 atk 10 spd 50  0/1  
+   4 tatsugiristretchy      runner     special    WATER                hp  80 atk 10 spd 75  0/1  wincon,jumps
+   5 alolanraichu           tank       common     ELECTRIC/FAIRY/PSYCHIC hp 220 atk 17 spd 54  0/1  wincon
+   5 charcadet              bruiser    unique     FIRE                 hp 150 atk 15 spd 33  0/1  
+   5 cherrim                sniper     epic       GRASS                hp 180 atk 15 spd 52  0/1  
+   5 clamperl               tank       epic       WATER/PSYCHIC/DARK   hp 100 atk  8 spd 35  0/1  wincon
+   5 cubone                 tank       epic       GROUND/GHOST         hp 110 atk 11 spd 36  0/1  wincon
+   5 darmanitanzen          artillery  epic       FIRE/PSYCHIC         hp 220 atk 14 spd 41  0/1  
+   5 espeon                 runner     special    PSYCHIC              hp 150 atk  8 spd 70  ART  wincon,jumps
+   5 flareon                tank       special    FIRE                 hp 150 atk 12 spd 43  ART  wincon
+   5 florges                sniper     uncommon   FAIRY/GRASS          hp 210 atk 19 spd 49  0/1  
+   5 galarianslowbro        tank       uncommon   PSYCHIC/POISON       hp 160 atk 12 spd 35  0/1  wincon
+   5 galarianslowking       sniper     uncommon   PSYCHIC/POISON       hp 160 atk 11 spd 35  0/1  
+   5 galarianweezing        tank       uncommon   POISON/FAIRY         hp 155 atk 10 spd 44  0/1  wincon
+   5 glaceon                tank       special    ICE                  hp 150 atk 12 spd 43  ART  wincon
+   5 hisuianlilligant       runner     uncommon   GRASS/FIGHTING       hp 180 atk 14 spd 59  0/1  wincon,jumps
+   5 hisuiantyphlosion      skirmisher uncommon   FIRE/GHOST           hp 230 atk 24 spd 51  0/1  
+   5 hisuiavalugg           tank       rare       ICE/ROCK             hp 170 atk 17 spd 38  0/1  wincon
+   5 illumise               bruiser    unique     BUG/FLYING           hp 130 atk 12 spd 52  0/1  air
+   5 indeedeefemale         skirmisher unique     NORMAL/PSYCHIC       hp 190 atk  9 spd 61  0/1  
+   5 indeedeemale           skirmisher unique     NORMAL/PSYCHIC       hp 160 atk 13 spd 61  0/1  
+   5 jolteon                runner     special    ELECTRIC             hp 150 atk  8 spd 83  ART  wincon,jumps
+   5 leafeon                runner     special    GRASS                hp 150 atk  9 spd 61  ART  wincon,jumps
+   5 lilligant              tank       uncommon   GRASS                hp 180 atk 10 spd 54  0/1  wincon
+   5 meowsticfemale         runner     uncommon   PSYCHIC              hp 150 atk  8 spd 66  0/1  wincon,jumps
+   5 meowsticmale           runner     uncommon   PSYCHIC              hp 150 atk  8 spd 66  0/1  wincon,jumps
+   5 milcery                skirmisher unique     FAIRY                hp 150 atk 10 spd 41  0/1  
+   5 mothim                 skirmisher rare       BUG/FLYING           hp 150 atk 13 spd 46  0/1  air
+   5 oinkolognefemale       tank       uncommon   NORMAL               hp 185 atk 13 spd 50  0/1  wincon
+   5 pillariron             tank       special                         hp 200 atk  0 spd  0  0/1  wincon,building
+   5 politoed               skirmisher common     WATER                hp 220 atk 17 spd 54  0/1  
+   5 poliwrath              tank       common     WATER/FIGHTING       hp 220 atk 17 spd 54  0/1  wincon
+   5 slowbro                tank       uncommon   PSYCHIC/WATER        hp 160 atk 12 spd 35  0/1  wincon
+   5 slowking               sniper     uncommon   PSYCHIC/WATER        hp 160 atk 11 spd 35  0/1  
+   5 sylveon                tank       special    FAIRY                hp 150 atk 12 spd 43  ART  wincon
+   5 typhlosion             skirmisher uncommon   FIRE                 hp 230 atk 24 spd 51  0/1  
+   5 umbreon                tank       special    DARK                 hp 150 atk 12 spd 43  ART  wincon
+   5 vaporeon               tank       special    WATER                hp 150 atk 12 spd 43  ART  wincon
+   5 vivillon               skirmisher hatch      BUG                  hp 180 atk 19 spd 52  0/1  
+   5 vivillonarchipelago    skirmisher hatch      BUG/FIGHTING         hp 180 atk 19 spd 52  0/1  
+   5 vivilloncontinental    skirmisher hatch      BUG                  hp 180 atk 19 spd 52  0/1  
+   5 vivillonelegant        skirmisher hatch      BUG/PSYCHIC          hp 180 atk 19 spd 52  0/1  
+   5 vivillonfancy          skirmisher hatch      BUG/FAIRY            hp 180 atk 19 spd 52  0/1  
+   5 vivillongarden         skirmisher hatch      BUG/GRASS            hp 180 atk 19 spd 52  0/1  
+   5 vivillonhighplains     skirmisher hatch      BUG                  hp 180 atk 19 spd 52  0/1  
+   5 vivillonicysnow        skirmisher hatch      BUG/NORMAL           hp 180 atk 19 spd 52  0/1  
+   5 vivillonjungle         skirmisher hatch      BUG/POISON           hp 180 atk 19 spd 52  0/1  
+   5 vivillonmarine         skirmisher hatch      BUG/WATER            hp 180 atk 19 spd 52  0/1  
+   5 vivillonmodern         skirmisher hatch      BUG                  hp 180 atk 19 spd 52  0/1  
+   5 vivillonmonsoon        skirmisher hatch      BUG/STEEL            hp 180 atk 19 spd 52  0/1  
+   5 vivillonocean          skirmisher hatch      BUG                  hp 180 atk 19 spd 52  0/1  
+   5 vivillonpokeball       skirmisher hatch      BUG                  hp 180 atk 19 spd 52  0/1  
+   5 vivillonpolar          skirmisher hatch      BUG/GHOST            hp 180 atk 19 spd 52  0/1  
+   5 vivillonriver          skirmisher hatch      BUG/WATER            hp 180 atk 19 spd 52  0/1  
+   5 vivillonsandstorm      skirmisher hatch      BUG/ROCK             hp 180 atk 19 spd 52  0/1  
+   5 vivillonsavanna        skirmisher hatch      BUG/ELECTRIC         hp 180 atk 19 spd 52  0/1  
+   5 vivillonsun            skirmisher hatch      BUG/FIRE             hp 180 atk 19 spd 52  0/1  
+   5 vivillontundra         skirmisher hatch      BUG/ICE              hp 180 atk 19 spd 52  0/1  
+   5 volbeat                bruiser    unique     BUG/FLYING           hp 130 atk 12 spd 52  0/1  air
+   5 weezing                tank       uncommon   POISON               hp 155 atk 10 spd 44  ART  wincon
+   5 wormadamplant          skirmisher rare       BUG/GRASS            hp 150 atk 13 spd 46  0/1  
+   5 wormadamsandy          skirmisher rare       BUG/GROUND/GRASS     hp 150 atk 13 spd 46  0/1  
+   5 wormadamtrash          skirmisher rare       BUG/GROUND/GRASS     hp 150 atk 13 spd 46  0/1  
+   5 wurmple                tank       epic       BUG                  hp 110 atk 12 spd 31  0/1  wincon
+   6 absol                  tank       unique     DARK                 hp 200 atk 19 spd 49  0/1  wincon
+   6 aegislashblade         bruiser    rare       GHOST/STEEL          hp 210 atk 34 spd 44  0/1  
+   6 aerodactyl             runner     unique     ROCK/FLYING          hp 200 atk 14 spd 67  0/1  wincon,air
+   6 alcremiecaramelswirl   skirmisher unique     FAIRY                hp 180 atk 16 spd 41  0/1  
+   6 alcremielemon          skirmisher unique     FAIRY                hp 180 atk 16 spd 41  0/1  
+   6 alcremiematcha         skirmisher unique     FAIRY                hp 180 atk 16 spd 41  0/1  
+   6 alcremiemint           skirmisher unique     FAIRY                hp 180 atk 16 spd 41  0/1  
+   6 alcremierainbowswirl   skirmisher unique     FAIRY                hp 180 atk 16 spd 41  0/1  
+   6 alcremieruby           skirmisher unique     FAIRY                hp 180 atk 16 spd 41  0/1  
+   6 alcremierubyswirl      skirmisher unique     FAIRY                hp 180 atk 16 spd 41  0/1  
+   6 alcremiesalted         skirmisher unique     FAIRY                hp 180 atk 16 spd 41  0/1  
+   6 alcremievanilla        skirmisher unique     FAIRY                hp 180 atk 16 spd 41  0/1  
+   6 alolanexeggutor        tank       epic       DRAGON/GRASS/PSYCHIC hp 350 atk 26 spd 38  0/1  wincon
+   6 alolanmarowak          tank       epic       GROUND/FIRE/GHOST    hp 250 atk 22 spd 36  0/1  wincon
+   6 applin                 tank       unique     DRAGON/GRASS         hp 160 atk 12 spd 31  0/1  wincon
+   6 arctovish              tank       unique     ICE/WATER            hp 180 atk 22 spd 43  0/1  wincon
+   6 arctozolt              tank       unique     ELECTRIC/ICE         hp 180 atk 22 spd 43  0/1  wincon
+   6 armarouge              skirmisher unique     FIRE/PSYCHIC         hp 200 atk 16 spd 51  0/1  
+   6 audino                 skirmisher unique     NORMAL               hp 200 atk 17 spd 41  0/1  
+   6 azelf                  sniper     unique     PSYCHIC/FAIRY        hp 200 atk 15 spd 62  0/1  
+   6 basculegionfemale      skirmisher unique     WATER/GHOST          hp 190 atk 19 spd 56  0/1  
+   6 basculinblue           bruiser    unique     WATER                hp 160 atk 15 spd 56  0/1  
+   6 basculinred            bruiser    unique     WATER                hp 160 atk 15 spd 56  0/1  
+   6 basculinwhite          tank       unique     WATER/GHOST          hp 160 atk 15 spd 56  0/1  wincon
+   6 bellossom              tank       special    GRASS                hp 300 atk 30 spd 41  0/1  wincon
+   6 bruxish                tank       unique     WATER/PSYCHIC        hp 200 atk 18 spd 54  0/1  wincon
+   6 carnivine              skirmisher unique     GRASS                hp 180 atk 21 spd 29  0/1  
+   6 castform               skirmisher unique                          hp 180 atk 18 spd 47  0/1  
+   6 castformhail           skirmisher unique     ICE                  hp 180 atk 18 spd 47  0/1  
+   6 castformrain           skirmisher unique     WATER                hp 180 atk 18 spd 47  0/1  
+   6 castformsun            skirmisher unique     FIRE                 hp 180 atk 18 spd 47  0/1  
+   6 ceruledge              tank       unique     FIRE/GHOST           hp 200 atk 20 spd 51  0/1  wincon
+   6 chatot                 skirmisher unique     FLYING               hp 200 atk 18 spd 54  0/1  air
+   6 cherrimsunlight        sniper     epic       GRASS                hp 250 atk 25 spd 52  0/1  
+   6 comfey                 sniper     unique     GRASS/FAIRY          hp 150 atk 13 spd 64  0/1  
+   6 cramorant              skirmisher unique     FLYING/WATER         hp 200 atk 19 spd 52  0/1  air
+   6 cryogonal              sniper     unique     ICE                  hp 200 atk 15 spd 59  0/1  
+   6 dedenne                tank       unique     ELECTRIC/FAIRY       hp 200 atk 18 spd 50  0/1  wincon
+   6 deoxysspeed            skirmisher legendary  PSYCHIC              hp 250 atk 15 spd100  0/1  
+   6 dhelmise               tank       unique     GRASS/GHOST/STEEL    hp 200 atk 19 spd 38  0/1  wincon
+   6 dracovish              tank       unique     DRAGON/WATER         hp 180 atk 20 spd 49  0/1  wincon
+   6 dracozolt              tank       unique     DRAGON/ELECTRIC      hp 180 atk 20 spd 49  0/1  wincon
+   6 drampa                 sniper     unique     DRAGON/NORMAL        hp 250 atk 12 spd 37  0/1  
+   6 druddigon              tank       unique     DRAGON               hp 170 atk 19 spd 40  0/1  wincon
+   6 dunsparce              bruiser    unique     NORMAL/GROUND/BUG    hp 220 atk 15 spd 35  0/1  true
+   6 eiscue                 tank       unique     ICE/WATER            hp 175 atk 12 spd 32  0/1  wincon
+   6 eiscuenoice            runner     unique     ICE/WATER            hp 175 atk 12 spd 83  0/1  wincon,jumps
+   6 emolga                 skirmisher unique     ELECTRIC/FLYING      hp 150 atk 20 spd 66  0/1  air
+   6 exeggutor              tank       epic       GRASS/PSYCHIC        hp 300 atk 22 spd 38  ART  wincon
+   6 falinksbrass           tank       unique     FIGHTING/STEEL       hp 150 atk 14 spd 50  0/1  wincon
+   6 flapple                sniper     unique     DRAGON/GRASS         hp 180 atk 19 spd 50  0/1  
+   6 fluttermane            sniper     unique     GHOST/FAIRY          hp 150 atk 17 spd 59  0/1  
+   6 furfrou                runner     unique     NORMAL               hp 200 atk 16 spd 65  0/1  wincon,jumps
+   6 galariandarmanitanzen  bruiser    epic       ICE/FIRE             hp 220 atk 30 spd  1  0/1  building
+   6 gallade                tank       common     PSYCHIC/FIGHTING     hp 260 atk 38 spd 51  0/1  wincon
+   6 gardevoir              sniper     epic       PSYCHIC/FAIRY        hp 230 atk 26 spd 51  0/1  
+   6 gorebyss               skirmisher epic       WATER/PSYCHIC        hp 200 atk 18 spd 35  0/1  
+   6 greattusk              tank       unique     GROUND/FIGHTING      hp 185 atk 20 spd 56  0/1  wincon
+   6 hawlucha               runner     unique     FIGHTING/FLYING      hp 180 atk 17 spd 63  0/1  wincon,air
+   6 heatmor                tank       unique     FIRE                 hp 200 atk 22 spd 46  0/1  wincon
+   6 heracross              tank       unique     BUG/FIGHTING         hp 190 atk 21 spd 52  0/1  wincon
+   6 hisuisamurott          tank       epic       WATER/DARK           hp 280 atk 36 spd 47  0/1  wincon
+   6 hitmonlee              tank       unique     FIGHTING             hp 200 atk 24 spd 56  0/1  wincon
+   6 hoopa                  tank       unique     PSYCHIC/DARK/GHOST   hp 180 atk 15 spd 47  0/1  wincon
+   6 huntail                tank       epic       WATER/DARK           hp 140 atk 30 spd 35  0/1  wincon
+   6 ironbundle             runner     unique     ICE/WATER            hp 200 atk 13 spd 69  0/1  wincon,jumps
+   6 ironhands              tank       unique     FIGHTING/ELECTRIC    hp 230 atk 20 spd 41  0/1  wincon
+   6 ironthorns             tank       unique     ROCK/ELECTRIC        hp 200 atk 18 spd 30  0/1  wincon
+   6 kangaskhan             tank       unique     FIGHTING/NORMAL      hp 200 atk 15 spd 54  0/1  wincon
+   6 kecleon                tank       unique                          hp 200 atk 22 spd 38  0/1  wincon
+   6 kecleonpurple          tank       special                         hp 200 atk 22 spd 38  0/1  wincon
+   6 kleavor                tank       unique     BUG/ROCK/DARK        hp 170 atk 22 spd 55  0/1  wincon,true
+   6 klefki                 sniper     unique     STEEL/FAIRY          hp 150 atk 15 spd 49  0/1  
+   6 komala                 tank       unique     NORMAL/GRASS         hp 170 atk 20 spd 45  0/1  wincon
+   6 kubfu                  tank       unique     FIGHTING             hp 150 atk 15 spd 50  0/1  wincon
+   6 lapras                 bruiser    unique     WATER/ICE            hp 225 atk 12 spd 38  0/1  
+   6 lunatone               skirmisher unique     ROCK/PSYCHIC/DARK    hp 200 atk 20 spd 47  0/1  
+   6 luvdisc                sniper     unique     WATER                hp 150 atk 14 spd 56  0/1  
+   6 lycanrocday            runner     epic       ROCK                 hp 190 atk 22 spd 61  0/1  wincon,jumps
+   6 lycanrocnight          runner     epic       ROCK/DARK            hp 190 atk 22 spd 61  0/1  wincon,jumps
+   6 maractus               tank       unique     GRASS                hp 175 atk 16 spd 44  0/1  wincon
+   6 marowak                tank       epic       GROUND/GHOST         hp 250 atk 22 spd 36  0/1  wincon
+   6 mawile                 tank       unique     STEEL/FAIRY          hp 180 atk 18 spd 47  0/1  wincon
+   6 mesprit                sniper     unique     PSYCHIC/FAIRY        hp 200 atk 15 spd 51  0/1  
+   6 miltank                tank       unique     NORMAL               hp 200 atk 13 spd 57  0/1  wincon
+   6 mimikyu                tank       unique     GHOST/FAIRY          hp 180 atk 14 spd 56  0/1  wincon,true
+   6 minior                 sniper     unique     FLYING/ROCK          hp 200 atk 14 spd 44  0/1  air
+   6 miniorkernelblue       sniper     unique     FLYING/ROCK          hp 200 atk 14 spd 44  0/1  air
+   6 miniorkernelgreen      sniper     unique     FLYING/ROCK          hp 200 atk 14 spd 44  0/1  air
+   6 miniorkernelorange     sniper     unique     FLYING/ROCK          hp 200 atk 14 spd 44  0/1  air
+   6 miniorkernelred        sniper     unique     FLYING/ROCK          hp 200 atk 14 spd 44  0/1  air
+   6 minun                  runner     unique     ELECTRIC             hp 140 atk 12 spd 61  0/1  wincon,jumps
+   6 morpeko                tank       unique     DARK/ELECTRIC        hp 200 atk 18 spd 56  0/1  wincon
+   6 morpekohangry          tank       unique     DARK/ELECTRIC        hp 200 atk 18 spd 56  0/1  wincon
+   6 nihilego               sniper     legendary  POISON/ROCK          hp 200 atk 22 spd 58  0/1  
+   6 oricoriobaile          skirmisher unique     GRASS/FIRE           hp 175 atk 15 spd 60  0/1  
+   6 oricoriopau            skirmisher unique     GRASS/PSYCHIC        hp 175 atk 15 spd 60  0/1  
+   6 oricoriopompom         skirmisher unique     GRASS/ELECTRIC       hp 175 atk 15 spd 60  0/1  
+   6 oricoriosensu          skirmisher unique     GRASS/GHOST          hp 175 atk 15 spd 60  0/1  
+   6 orthworm               tank       unique     STEEL/GROUND         hp 185 atk 12 spd 40  0/1  wincon
+   6 pachirisu              runner     unique     ELECTRIC/NORMAL      hp 180 atk 14 spd 61  0/1  wincon,jumps
+   6 passimian              skirmisher unique     FIGHTING             hp 180 atk 20 spd 50  0/1  
+   6 pillarconcrete         tank       special                         hp 300 atk  0 spd  0  0/1  wincon,building
+   6 pincurchin             tank       unique     ELECTRIC/WATER       hp 180 atk 15 spd 30  0/1  wincon
+   6 pinsir                 tank       unique     BUG                  hp 190 atk 20 spd 52  0/1  wincon
+   6 plusle                 runner     unique     ELECTRIC             hp 140 atk 12 spd 61  0/1  wincon,jumps
+   6 pyukumuku              tank       unique     WATER/POISON         hp 150 atk 10 spd 27  0/1  wincon
+   6 qwilfish               tank       unique     WATER/POISON         hp 150 atk 13 spd 52  0/1  wincon
+   6 relicanth              tank       unique     ROCK/WATER           hp 220 atk 13 spd 43  0/1  wincon
+   6 rotom                  sniper     unique     ELECTRIC/GHOST       hp 200 atk 10 spd 54  0/1  
+   6 rotomdrone             skirmisher unique     ELECTRIC             hp 180 atk 12 spd 54  0/1  
+   6 rotomfan               sniper     unique     ELECTRIC/FLYING      hp 200 atk 10 spd 54  0/1  air
+   6 rotomfrost             skirmisher unique     ELECTRIC/ICE         hp 200 atk 11 spd 54  0/1  
+   6 rotomheat              tank       unique     ELECTRIC/FIRE        hp 200 atk 13 spd 54  0/1  wincon
+   6 rotommow               tank       unique     ELECTRIC/GRASS       hp 190 atk 14 spd 54  0/1  wincon
+   6 rotomwash              skirmisher unique     ELECTRIC/WATER       hp 180 atk 12 spd 54  0/1  
+   6 samurott               tank       epic       WATER/FIGHTING       hp 290 atk 32 spd 47  0/1  wincon
+   6 scizor                 tank       unique     BUG/STEEL/FIGHTING   hp 170 atk 22 spd 42  0/1  wincon,true
+   6 scyther                runner     unique     BUG/FLYING           hp 170 atk 17 spd 59  0/1  wincon,air,true
+   6 seviper                tank       unique     POISON               hp 180 atk 22 spd 46  0/1  wincon
+   6 sigilyph               sniper     unique     PSYCHIC/FLYING       hp 200 atk 14 spd 56  0/1  air
+   6 slitherwing            tank       unique     BUG/FIGHTING         hp 180 atk 20 spd 45  0/1  wincon
+   6 smeargle               sniper     unique     NORMAL               hp 250 atk 19 spd 49  0/1  
+   6 solrock                skirmisher unique     ROCK/FIRE            hp 200 atk 20 spd 47  0/1  
+   6 spinda                 tank       unique     NORMAL               hp 200 atk 20 spd 44  0/1  wincon
+   6 spiritomb              tank       unique     ROCK/GHOST           hp 150 atk 18 spd 36  0/1  wincon
+   6 stantler               tank       unique     PSYCHIC              hp 180 atk 19 spd 52  0/1  wincon
+   6 stonjourner            tank       unique     ROCK/GROUND          hp 200 atk 20 spd 47  0/1  wincon
+   6 tapubulu               tank       unique     GRASS/FAIRY          hp 200 atk 16 spd 49  0/1  wincon
+   6 tapufini               sniper     unique     FAIRY/WATER          hp 200 atk 16 spd 52  0/1  
+   6 tapukoko               skirmisher unique     ELECTRIC/FAIRY       hp 200 atk 14 spd 67  0/1  
+   6 tapulele               sniper     unique     PSYCHIC/FAIRY        hp 200 atk 15 spd 55  0/1  
+   6 tauros                 runner     unique     NORMAL               hp 200 atk 16 spd 60  0/1  wincon,jumps
+   6 taurosaquabreed        runner     unique     WATER/FIGHTING       hp 200 atk 16 spd 60  0/1  wincon,jumps
+   6 taurosblazebreed       runner     unique     FIRE/FIGHTING        hp 200 atk 16 spd 60  0/1  wincon,jumps
+   6 tauroscombatbreed      runner     unique     FIGHTING/ROCK        hp 200 atk 16 spd 60  0/1  wincon,jumps
+   6 togedemaru             tank       unique     ELECTRIC/STEEL       hp 200 atk 17 spd 50  0/1  wincon
+   6 torkoal                tank       unique     FIRE/GROUND          hp 200 atk 17 spd 31  0/1  wincon
+   6 turtonator             tank       unique     DRAGON/FIRE          hp 200 atk 14 spd 37  0/1  wincon
+   6 tyrogue                tank       unique     FIGHTING             hp 150 atk 11 spd 36  0/1  wincon
+   6 ursalunabloodmoon      tank       ultra      GROUND               hp 380 atk 38 spd 41  0/1  wincon
+   6 uxie                   sniper     unique     PSYCHIC/FAIRY        hp 200 atk 14 spd 55  0/1  
+   6 veluza                 bruiser    unique     WATER/PSYCHIC        hp 180 atk 20 spd 45  0/1  
+   6 vespiquen              sniper     unique     BUG/GRASS            hp 190 atk 16 spd 38  0/1  
+   6 xerneas                sniper     legendary  FAIRY/GRASS          hp 200 atk 22 spd 57  0/1  
+   6 xurkitree              skirmisher legendary  ELECTRIC             hp 200 atk 15 spd 52  0/1  
+   6 zangoose               bruiser    unique     NORMAL               hp 250 atk 18 spd 54  0/1  
+   6 zeraora                runner     unique     ELECTRIC             hp 200 atk 16 spd 71  0/1  wincon,jumps
+   7 appletun               tank       unique     DRAGON/GRASS         hp 250 atk 15 spd 31  0/1  wincon
+   7 arceus                 runner     legendary                       hp 300 atk 21 spd 63  0/1  wincon,jumps
+   7 articuno               skirmisher legendary  ICE/FLYING           hp 300 atk 28 spd 52  0/1  air
+   7 basculegionmale        tank       unique     WATER/GHOST          hp 210 atk 25 spd 56  0/1  wincon
+   7 blacephalon            sniper     legendary  FIRE/GHOST           hp 200 atk 25 spd 69  0/1  
+   7 buzzwole               tank       legendary  BUG/FIGHTING         hp 250 atk 30 spd 50  0/1  wincon
+   7 celebi                 sniper     legendary  GRASS/PSYCHIC        hp 250 atk 25 spd 57  0/1  
+   7 celesteela             tank       legendary  STEEL/FLYING/GRASS   hp 300 atk 30 spd 40  0/1  wincon,air
+   7 chiyu                  skirmisher legendary  FIRE/DARK            hp 200 atk 28 spd 57  0/1  
+   7 cobalion               runner     legendary  STEEL/FIGHTING       hp 300 atk 26 spd 60  0/1  wincon,jumps
+   7 cresselia              sniper     legendary  PSYCHIC/FAIRY        hp 300 atk 14 spd 52  0/1  
+   7 cyclizar               runner     unique     DRAGON/NORMAL        hp 220 atk 17 spd 64  0/1  wincon,jumps
+   7 darkrai                skirmisher legendary  DARK/GHOST           hp 250 atk 22 spd 65  0/1  
+   7 delibird               tank       unique     ICE/FLYING           hp 200 atk 19 spd 49  0/1  wincon,air
+   7 deoxys                 runner     legendary  PSYCHIC              hp 250 atk 20 spd 73  0/1  wincon,jumps
+   7 deoxysattack           sniper     legendary  PSYCHIC              hp 250 atk 25 spd 73  0/1  
+   7 deoxysdefense          tank       legendary  PSYCHIC              hp 250 atk 15 spd 45  0/1  wincon
+   7 dialga                 tank       legendary  DRAGON/STEEL         hp 300 atk 23 spd 54  0/1  wincon
+   7 dondozo                tank       unique     WATER                hp 250 atk 15 spd 30  0/1  wincon
+   7 dudunsparse            tank       unique     NORMAL/GROUND/BUG    hp 260 atk 20 spd 35  0/1  wincon,true
+   7 durant                 runner     unique     STEEL/BUG            hp 190 atk 19 spd 60  0/1  wincon,jumps
+   7 enamorus               sniper     legendary  FLYING/FAIRY         hp 250 atk 23 spd 59  0/1  air
+   7 entei                  tank       legendary  FIRE                 hp 300 atk 27 spd 57  ART  wincon
+   7 eternatus              runner     legendary  DRAGON/POISON        hp 300 atk 18 spd 67  0/1  wincon,jumps
+   7 farfetchd              tank       unique     FLYING/NORMAL        hp 200 atk 20 spd 50  0/1  wincon,air
+   7 fezandipiti            runner     legendary  POISON/FAIRY         hp 250 atk 22 spd 63  0/1  wincon,jumps
+   7 galarianarticuno       sniper     legendary  PSYCHIC/FLYING/FAIRY/DARK hp 300 atk 27 spd 55  0/1  air
+   7 galarianfarfetchd      tank       unique     FLYING/FIGHTING/DARK hp 200 atk 20 spd 50  0/1  wincon,air
+   7 galarianmoltres        skirmisher legendary  DARK/FLYING/PSYCHIC/GHOST hp 300 atk 28 spd 54  0/1  air
+   7 galarianzapdos         tank       legendary  FIGHTING/FLYING      hp 300 atk 27 spd 57  0/1  wincon,air
+   7 genesect               artillery  legendary  BUG/STEEL            hp 200 atk 20 spd 57  0/1  
+   7 giratina               tank       legendary  DRAGON/GHOST         hp 250 atk 32 spd 54  0/1  wincon
+   7 glastrier              tank       legendary  ICE                  hp 280 atk 30 spd 22  0/1  wincon
+   7 guzzlord               tank       legendary  DARK                 hp 300 atk 25 spd 39  0/1  wincon
+   7 heatran                skirmisher legendary  FIRE/STEEL           hp 280 atk 19 spd 50  0/1  
+   7 hitmonchan             tank       unique     FIGHTING             hp 200 atk 22 spd 49  0/1  wincon
+   7 hitmontop              tank       unique     FIGHTING             hp 200 atk 22 spd 45  0/1  wincon
+   7 hooh                   skirmisher legendary  FIRE/FLYING          hp 300 atk 30 spd 50  0/1  air
+   7 hoopaunbound           tank       unique     PSYCHIC/DARK/GHOST   hp 280 atk 25 spd 47  0/1  wincon
+   7 ironvaliant            runner     legendary  FIGHTING/FAIRY       hp 250 atk 25 spd 76  0/1  wincon,jumps
+   7 jirachi                sniper     legendary  STEEL/PSYCHIC        hp 220 atk 27 spd 57  0/1  
+   7 kartana                runner     legendary  STEEL/GRASS          hp 200 atk 35 spd 60  0/1  wincon,jumps
+   7 keldeo                 runner     legendary  WATER/FIGHTING       hp 300 atk 26 spd 60  0/1  wincon,jumps,true
+   7 kyurem                 sniper     legendary  DRAGON/ICE           hp 200 atk 27 spd 55  0/1  
+   7 landorus               sniper     legendary  FLYING/GROUND        hp 250 atk 27 spd 57  0/1  air
+   7 lugia                  runner     legendary  WATER/FLYING/PSYCHIC hp 300 atk 26 spd 60  0/1  wincon,air
+   7 lunala                 artillery  legendary  PSYCHIC/GHOST        hp 300 atk 27 spd 56  0/1  
+   7 magearna               tank       legendary  STEEL/FAIRY          hp 300 atk 25 spd 46  0/1  wincon
+   7 manaphy                sniper     legendary  WATER                hp 250 atk 20 spd 57  0/1  
+   7 marshadow              runner     legendary  GHOST/FIGHTING       hp 200 atk 23 spd 65  0/1  wincon,jumps
+   7 melmetal               tank       legendary  STEEL                hp 320 atk 35 spd 36  0/1  wincon
+   7 meloetta               artillery  legendary  NORMAL               hp 250 atk 23 spd 54  0/1  
+   7 mew                    artillery  legendary  PSYCHIC              hp 200 atk 27 spd 64  0/1  
+   7 mewtwo                 sniper     legendary  PSYCHIC              hp 200 atk 25 spd 67  0/1  
+   7 mimikyubusted          tank       unique     GHOST/FAIRY          hp 180 atk 24 spd 56  0/1  wincon,true
+   7 moltres                skirmisher legendary  FIRE/FLYING          hp 300 atk 28 spd 54  0/1  air
+   7 munkidori              runner     legendary  POISON/PSYCHIC       hp 250 atk 22 spd 68  0/1  wincon,jumps
+   7 necrozma               tank       legendary  PSYCHIC              hp 300 atk 29 spd 50  0/1  wincon
+   7 ogerponcornerstone     runner     legendary  GRASS/ROCK           hp 200 atk 27 spd 70  0/1  wincon,jumps
+   7 ogerponcornerstonemask runner     legendary  GRASS/ROCK           hp 200 atk 27 spd 70  0/1  wincon,jumps
+   7 ogerponhearthflame     runner     legendary  GRASS/FIRE           hp 200 atk 27 spd 70  0/1  wincon,jumps
+   7 ogerponhearthflamemask runner     legendary  GRASS/FIRE           hp 200 atk 27 spd 70  0/1  wincon,jumps
+   7 ogerponteal            runner     legendary  GRASS                hp 200 atk 27 spd 70  0/1  wincon,jumps
+   7 ogerpontealmask        runner     legendary  GRASS                hp 200 atk 27 spd 70  0/1  wincon,jumps
+   7 ogerponwellspring      runner     legendary  GRASS/WATER          hp 200 atk 27 spd 70  0/1  wincon,jumps
+   7 ogerponwellspringmask  runner     legendary  GRASS/WATER          hp 200 atk 27 spd 70  0/1  wincon,jumps
+   7 okidogi                tank       legendary  FIGHTING/POISON      hp 250 atk 28 spd 51  0/1  wincon
+   7 origingiratina         tank       legendary  DRAGON/GHOST         hp 250 atk 32 spd 54  0/1  wincon
+   7 palafinhero            runner     unique     WATER                hp 200 atk 30 spd 80  0/1  wincon,jumps
+   7 palkia                 tank       legendary  DRAGON/WATER         hp 300 atk 22 spd 57  0/1  wincon
+   7 pecharunt              sniper     legendary  POISON/GHOST         hp 250 atk 25 spd 55  0/1  
+   7 pheromosa              runner     legendary  BUG/FIGHTING         hp 200 atk 27 spd 73  0/1  wincon,jumps
+   7 pirouettemeloetta      runner     legendary  NORMAL/FIGHTING      hp 250 atk 23 spd 82  0/1  wincon,jumps
+   7 raikou                 runner     legendary  ELECTRIC             hp 300 atk 26 spd 62  ART  wincon,jumps
+   7 regice                 tank       legendary  ICE                  hp 300 atk 25 spd 41  0/1  wincon
+   7 regidrago              tank       legendary  DRAGON               hp 350 atk 25 spd 51  0/1  wincon
+   7 regieleki              skirmisher legendary  ELECTRIC             hp 250 atk 20 spd 89  0/1  
+   7 regigigas              tank       legendary  NORMAL               hp 400 atk 30 spd 57  0/1  wincon
+   7 regirock               tank       legendary  ROCK                 hp 300 atk 25 spd 41  0/1  wincon
+   7 registeel              tank       legendary  STEEL                hp 300 atk 25 spd 41  0/1  wincon
+   7 reshiram               sniper     legendary  DRAGON/FIRE          hp 200 atk 28 spd 54  0/1  
+   7 roaringmoon            sniper     legendary  DRAGON/DARK          hp 200 atk 25 spd 61  0/1  
+   7 screamtail             runner     unique     PSYCHIC/FAIRY        hp 210 atk 16 spd 71  0/1  wincon,jumps
+   7 shadowlugia            runner     legendary  WATER/FLYING/DARK    hp 300 atk 26 spd 60  0/1  wincon,air
+   7 shadowmewtwo           sniper     legendary  PSYCHIC/DARK         hp 200 atk 25 spd 67  0/1  
+   7 shuckle                tank       unique     BUG/ROCK             hp 150 atk  5 spd 27  0/1  wincon
+   7 skarmory               tank       unique     STEEL/FLYING         hp 190 atk 18 spd 47  0/1  wincon,air
+   7 solgaleo               tank       legendary  PSYCHIC/STEEL        hp 300 atk 27 spd 56  0/1  wincon
+   7 spectrier              runner     legendary  GHOST                hp 280 atk 25 spd 67  0/1  wincon,jumps
+   7 stakataka              tank       legendary  ROCK/STEEL           hp 300 atk 20 spd 29  0/1  wincon
+   7 suicune                tank       legendary  WATER                hp 300 atk 28 spd 52  0/1  wincon
+   7 terrakion              runner     legendary  ROCK/FIGHTING        hp 300 atk 30 spd 60  0/1  wincon,jumps
+   7 thundurus              sniper     legendary  FLYING/ELECTRIC      hp 250 atk 26 spd 61  0/1  air
+   7 tornadus               sniper     legendary  FLYING/ICE           hp 250 atk 26 spd 61  0/1  air
+   7 tropius                tank       unique     GRASS/FLYING         hp 200 atk 17 spd 41  0/1  wincon,air
+   7 ultranecrozma          sniper     legendary  DRAGON/PSYCHIC       hp 300 atk 29 spd 50  0/1  
+   7 urshifurapid           tank       legendary  FIGHTING/WATER       hp 250 atk 25 spd 50  0/1  wincon
+   7 urshifusingle          tank       legendary  FIGHTING/DARK        hp 250 atk 25 spd 50  0/1  wincon,true
+   7 victini                tank       legendary  FIRE/PSYCHIC         hp 300 atk 27 spd 57  0/1  wincon
+   7 virizion               runner     legendary  GRASS/FIGHTING       hp 300 atk 26 spd 60  0/1  wincon,jumps
+   7 volcanion              skirmisher legendary  FIRE/WATER           hp 300 atk 20 spd 47  0/1  
+   7 walkingwake            runner     legendary  DRAGON/WATER         hp 300 atk 25 spd 70  0/1  wincon,jumps
+   7 wyrdeer                tank       unique     PSYCHIC              hp 250 atk 21 spd 42  0/1  wincon
+   7 yveltal                tank       legendary  DARK/FLYING          hp 300 atk 22 spd 57  0/1  wincon,air
+   7 zapdos                 skirmisher legendary  ELECTRIC/FLYING      hp 300 atk 27 spd 57  ART  air
+   7 zekrom                 sniper     legendary  DRAGON/ELECTRIC      hp 200 atk 28 spd 54  0/1  
+   7 zygarde10              runner     legendary  DRAGON/GROUND        hp 250 atk 26 spd 62  0/1  wincon,jumps
+   7 zygarde100             skirmisher legendary  DRAGON/GROUND        hp 350 atk 28 spd 50  0/1  
+   7 zygarde50              sniper     legendary  DRAGON/GROUND        hp 220 atk 23 spd 55  0/1  
+
+==============================================================================
+2 FORMS — 210 chains
+==============================================================================
+   1 poliwag                skirmisher common     WATER/FIGHTING       hp  65 atk  5 spd 54  0/2  
+     poliwag > poliwhirl
+   1 rattata                fighter    common     NORMAL               hp  50 atk  4 spd 56  ART  
+     rattata > raticate
+   1 spearow                fighter    common     FLYING               hp  50 atk  4 spd 57  ART  air
+     spearow > fearow
+   2 alolangrimer           fighter    uncommon   POISON/DARK          hp  70 atk  6 spd 41  0/2  
+     alolangrimer > alolanmuk
+   2 alolanrattata          fighter    common     DARK                 hp  60 atk  6 spd 50  0/2  
+     alolanrattata > alolanraticate
+   2 alolanvulpix           skirmisher rare       ICE/FAIRY            hp  75 atk  6 spd 60  0/2  
+     alolanvulpix > alolanninetales
+   2 anorith                fighter    uncommon   BUG/WATER            hp  60 atk  6 spd 39  0/2  
+     anorith > armaldo
+   2 bidoof                 fighter    uncommon   NORMAL/WATER         hp  70 atk  7 spd 48  0/2  
+     bidoof > bibarel
+   2 capsakid               skirmisher uncommon   GRASS/FIRE           hp  60 atk  6 spd 49  0/2  
+     capsakid > scovillain
+   2 cetoddle               fighter    uncommon   ICE                  hp  90 atk  5 spd 48  0/2  
+     cetoddle > cetitan
+   2 chinchou               skirmisher uncommon   WATER/ELECTRIC       hp  60 atk  7 spd 43  ART  
+     chinchou > lanturn
+   2 clauncher              artillery  rare       WATER                hp  80 atk  7 spd 44  ART  
+     clauncher > clawitzer
+   2 clobbopus              fighter    uncommon   WATER/FIGHTING       hp  70 atk  6 spd 27  0/2  
+     clobbopus > grapploct
+   2 cottonee               skirmisher uncommon   GRASS/FAIRY          hp  60 atk  5 spd 74  0/2  
+     cottonee > whimsicott
+   2 cranidos               fighter    uncommon                        hp  60 atk  7 spd 44  0/2  true
+     cranidos > rampardos
+   2 croagunk               fighter    rare       POISON/FIGHTING/WATER hp  75 atk  6 spd 52  0/2  
+     croagunk > toxicroak
+   2 cutiefly               skirmisher rare       BUG/FAIRY/GRASS      hp  75 atk  5 spd 65  0/2  
+     cutiefly > ribombee
+   2 cyndaquil              skirmisher uncommon   FIRE                 hp  70 atk  7 spd 51  0/2  
+     cyndaquil > quilava
+   2 dewpider               fighter    uncommon   WATER/BUG            hp  60 atk  6 spd 38  0/2  
+     dewpider > araquanid
+   2 ekans                  fighter    uncommon   POISON/DARK          hp  60 atk  8 spd 51  0/2  
+     ekans > arbok
+   2 feebas                 fighter    special    WATER                hp  60 atk  5 spd 51  0/2  
+     feebas > milotic
+   2 finneon                skirmisher rare       WATER                hp  80 atk  6 spd 54  0/2  
+     finneon > lumineon
+   2 galarianyamask         skirmisher rare       GHOST                hp  65 atk  5 spd 45  0/2  
+     galarianyamask > runerigus
+   2 gossifleur             fighter    uncommon   GRASS                hp  70 atk  5 spd 50  0/2  
+     gossifleur > eldegoss
+   2 greavard               fighter    uncommon   GHOST/ROCK           hp  65 atk  6 spd 55  0/2  
+     greavard > houndstone
+   2 grimer                 fighter    uncommon   POISON               hp  80 atk  4 spd 41  0/2  
+     grimer > muk
+   2 growlithe              fighter    uncommon   FIRE                 hp  75 atk  5 spd 55  0/2  
+     growlithe > arcanine
+   2 hisuigrowlithe         fighter    uncommon   FIRE/ROCK            hp  75 atk  5 spd 54  0/2  
+     hisuigrowlithe > hisuiarcanine
+   2 lechonk                fighter    uncommon   NORMAL               hp  75 atk  6 spd 41  0/2  
+     lechonk > oinkolognemale
+   2 ledyba                 fighter    uncommon   BUG/FIGHTING/FLYING  hp  60 atk  5 spd 55  0/2  air
+     ledyba > ledian
+   2 lickitung              fighter    uncommon   NORMAL               hp  70 atk  5 spd 41  0/2  
+     lickitung > lickilicky
+   2 lileep                 skirmisher rare       GRASS                hp  70 atk  7 spd 39  0/2  
+     lileep > cradily
+   2 magikarp               fighter    special    WATER                hp  30 atk  1 spd 51  0/2  
+     magikarp > gyarados
+   2 mimejr                 skirmisher uncommon   FAIRY/PSYCHIC        hp  60 atk  5 spd 54  0/2  
+     mimejr > mrmime
+   2 nickit                 skirmisher rare       DARK                 hp  75 atk  7 spd 54  0/2  
+     nickit > thievul
+   2 noibat                 skirmisher uncommon   DRAGON/FLYING        hp  65 atk  4 spd 64  0/2  air
+     noibat > noivern
+   2 nosepass               skirmisher uncommon   ROCK/STEEL           hp  70 atk  5 spd 38  0/2  
+     nosepass > probopass
+   2 omanyte                skirmisher uncommon   WATER                hp  70 atk  6 spd 43  0/2  
+     omanyte > omastar
+   2 riolu                  skirmisher rare       FIGHTING/STEEL       hp  65 atk  6 spd 54  0/2  
+     riolu > lucario
+   2 salandit               skirmisher rare       FIRE/POISON          hp  70 atk  6 spd 63  0/2  
+     salandit > salazzle
+   2 sandygast              fighter    uncommon   GHOST/GROUND         hp  60 atk  6 spd 36  0/2  
+     sandygast > palossand
+   2 scatterbug             skirmisher hatch      BUG                  hp  70 atk  4 spd 52  0/2  
+     scatterbug > spewpa
+   2 shellder               fighter    uncommon   WATER/ICE/ROCK       hp  70 atk  5 spd 47  0/2  
+     shellder > cloyster
+   2 shroomish              fighter    uncommon   GRASS/FIGHTING       hp  70 atk  7 spd 47  0/2  
+     shroomish > breloom
+   2 sinistea               skirmisher uncommon   GHOST                hp  60 atk  4 spd 47  0/2  
+     sinistea > polteageist
+   2 skitty                 fighter    uncommon   NORMAL/FAIRY         hp  65 atk  6 spd 32  0/2  
+     skitty > delcatty
+   2 skrelp                 sniper     uncommon   POISON/WATER         hp  60 atk  7 spd 39  0/2  
+     skrelp > dragalge
+   2 smoochum               skirmisher uncommon   ICE/PSYCHIC          hp  60 atk  5 spd 61  0/2  
+     smoochum > jynx
+   2 snom                   sniper     rare       BUG/ICE              hp  70 atk  8 spd 46  0/2  
+     snom > frosmoth
+   2 spinarak               skirmisher uncommon   BUG/POISON           hp  60 atk  6 spd 38  0/2  
+     spinarak > ariados
+   2 surskit                skirmisher rare       BUG/WATER            hp  70 atk  6 spd 51  0/2  
+     surskit > masquerain
+   2 tadbulb                fighter    rare       ELECTRIC/WATER       hp  85 atk  5 spd 29  0/2  
+     tadbulb > bellibolt
+   2 tarountula             skirmisher uncommon   BUG/NORMAL           hp  65 atk  6 spd 30  0/2  
+     tarountula > spidops
+   2 tentacool              fighter    uncommon   WATER/POISON         hp  65 atk  4 spd 57  0/2  
+     tentacool > tentacruel
+   2 varoom                 fighter    uncommon   STEEL/POISON         hp  70 atk  6 spd 40  0/2  
+     varoom > revavroom
+   2 venonat                fighter    uncommon   BUG/FLYING/POISON    hp  50 atk  6 spd 54  0/2  air
+     venonat > venomoth
+   2 vulpix                 skirmisher rare       FIRE/PSYCHIC         hp  75 atk  6 spd 57  0/2  
+     vulpix > ninetales
+   2 wiglett                fighter    uncommon   GROUND/WATER         hp  80 atk  5 spd 55  0/2  
+     wiglett > wugtrio
+   2 woobat                 sniper     uncommon   FLYING/PSYCHIC       hp  60 atk  4 spd 62  0/2  air
+     woobat > swoobat
+   2 wooloo                 fighter    uncommon   NORMAL               hp  60 atk  5 spd 56  0/2  
+     wooloo > dubwool
+   3 aipom                  runner     uncommon   NORMAL               hp  70 atk  6 spd 62  0/2  wincon,jumps
+     aipom > ambipom
+   3 alolandiglett          runner     uncommon   GROUND/STEEL         hp  70 atk  7 spd 60  0/2  wincon,jumps
+     alolandiglett > alolandugtrio
+   3 alolansandshrew        tank       uncommon   ICE/STEEL            hp  90 atk  5 spd 46  0/2  wincon
+     alolansandshrew > alolansandslash
+   3 archen                 skirmisher uncommon   ROCK/FLYING          hp  70 atk  6 spd 60  0/2  air
+     archen > archeops
+   3 bergmite               tank       rare       ICE                  hp  90 atk  5 spd 28  0/2  wincon
+     bergmite > avalugg
+   3 binacle                bruiser    rare       ROCK/WATER           hp  80 atk  9 spd 47  0/2  
+     binacle > barbaracle
+   3 bunnelby               fighter    rare       NORMAL/GROUND        hp  80 atk  7 spd 50  0/2  
+     bunnelby > diggersby
+   3 cacnea                 fighter    rare       GRASS/DARK           hp  85 atk  7 spd 43  0/2  
+     cacnea > cacturne
+   3 carvanha               bruiser    rare       WATER/DARK           hp  85 atk 11 spd 55  0/2  
+     carvanha > sharpedo
+   3 chewtle                bruiser    rare       WATER/ROCK           hp  80 atk  9 spd 49  0/2  
+     chewtle > drednaw
+   3 corphish               fighter    uncommon   WATER/DARK           hp  85 atk  6 spd 43  0/2  
+     corphish > crawdaunt
+   3 crabrawler             bruiser    rare       ICE/FIGHTING         hp  90 atk 10 spd 39  0/2  
+     crabrawler > crabominable
+   3 darumaka               bruiser    epic       FIRE/PSYCHIC         hp  80 atk 11 spd 55  0/2  
+     darumaka > darmanitan
+   3 deerlingautumn         fighter    rare       NORMAL/GRASS         hp  80 atk  8 spd 55  0/2  
+     deerlingautumn > sawsbuckautumn
+   3 deerlingspring         fighter    rare       NORMAL/GRASS         hp  80 atk  8 spd 55  0/2  
+     deerlingspring > sawsbuckspring
+   3 deerlingsummer         fighter    rare       NORMAL/GRASS         hp  80 atk  8 spd 55  0/2  
+     deerlingsummer > sawsbucksummer
+   3 deerlingwinter         fighter    rare       NORMAL/GRASS/ICE     hp  80 atk  8 spd 55  0/2  
+     deerlingwinter > sawsbuckwinter
+   3 diglett                runner     uncommon   GROUND/NORMAL        hp  75 atk  5 spd 63  ART  wincon,jumps
+     diglett > dugtrio
+   3 drifloon               skirmisher rare       GHOST/FLYING         hp 100 atk  5 spd 51  0/2  air
+     drifloon > drifblim
+   3 drilbur                fighter    rare       GROUND/STEEL         hp  80 atk  8 spd 56  ART  true
+     drilbur > excadrill
+   3 drowzee                skirmisher epic       PSYCHIC              hp 100 atk  7 spd 46  0/2  
+     drowzee > hypno
+   3 elgyem                 skirmisher rare       PSYCHIC              hp  70 atk  8 spd 38  ART  
+     elgyem > beheeyem
+   3 fidough                fighter    rare       FAIRY                hp  75 atk  7 spd 55  0/2  
+     fidough > dachsbun
+   3 fomantis               fighter    rare       GRASS/FIGHTING       hp  70 atk  8 spd 47  0/2  true
+     fomantis > lurantis
+   3 galariandarumaka       bruiser    epic       ICE/FIRE             hp  80 atk 11 spd 55  0/2  
+     galariandarumaka > galariandarmanitan
+   3 glameow                runner     uncommon   NORMAL/DARK          hp  65 atk  6 spd 70  0/2  wincon,jumps
+     glameow > purugly
+   3 glimmet                fighter    rare       POISON/ROCK/GRASS    hp  80 atk  6 spd 53  0/2  
+     glimmet > glimmora
+   3 goldeen                fighter    rare       WATER/NORMAL         hp  90 atk  8 spd 47  0/2  
+     goldeen > seaking
+   3 golett                 fighter    rare       GROUND/GHOST         hp  80 atk  7 spd 43  0/2  
+     golett > golurk
+   3 helioptile             sniper     epic       NORMAL/ELECTRIC      hp  75 atk  7 spd 60  0/2  
+     helioptile > heliolisk
+   3 hisuivoltorb           runner     uncommon   ELECTRIC/GRASS       hp  60 atk  7 spd 73  0/2  wincon,jumps
+     hisuivoltorb > hisuielectrode
+   3 hisuizorua             runner     uncommon   NORMAL/GHOST         hp  70 atk  7 spd 60  0/2  wincon,jumps
+     hisuizorua > hisuizoroark
+   3 hoothoot               fighter    uncommon   NORMAL/FLYING/PSYCHIC hp  75 atk  5 spd 47  0/2  air
+     hoothoot > noctowl
+   3 kabuto                 fighter    rare       WATER                hp  80 atk  8 spd 51  0/2  
+     kabuto > kabutops
+   3 krabby                 fighter    uncommon   WATER/NORMAL         hp  80 atk  6 spd 49  0/2  
+     krabby > kingler
+   3 kricketot              fighter    rare       BUG                  hp  80 atk  7 spd 46  0/2  
+     kricketot > kricketune
+   3 makuhita               fighter    rare       FIGHTING             hp  80 atk  8 spd 41  0/2  
+     makuhita > hariyama
+   3 mareanie               fighter    rare       WATER/POISON         hp  60 atk  6 spd 35  0/2  
+     mareanie > toxapex
+   3 minccino               runner     uncommon   NORMAL               hp  60 atk  5 spd 74  0/2  wincon,jumps
+     minccino > cinccino
+   3 misdreavus             sniper     epic       GHOST/FAIRY          hp  80 atk  6 spd 59  0/2  
+     misdreavus > mismagius
+   3 munna                  skirmisher rare       PSYCHIC              hp  80 atk  9 spd 34  0/2  
+     munna > musharna
+   3 natu                   skirmisher rare       PSYCHIC/FLYING       hp  90 atk  5 spd 60  0/2  air
+     natu > xatu
+   3 paldeawooper           fighter    rare       POISON/GROUND/WATER  hp  80 atk  6 spd 31  0/2  
+     paldeawooper > clodsire
+   3 pancham                fighter    rare       FIGHTING/DARK        hp  80 atk  8 spd 42  0/2  
+     pancham > pangoro
+   3 paras                  fighter    rare       BUG/POISON/GRASS     hp  90 atk  7 spd 35  0/2  
+     paras > parasect
+   3 patrat                 skirmisher rare       NORMAL               hp  80 atk  8 spd 50  0/2  
+     patrat > watchog
+   3 phanpy                 fighter    rare       GROUND               hp  80 atk  5 spd 41  0/2  
+     phanpy > donphan
+   3 pineco                 fighter    uncommon   BUG/STEEL            hp  75 atk  5 spd 38  0/2  
+     pineco > forretress
+   3 poochyena              bruiser    rare       DARK                 hp  80 atk  9 spd 47  0/2  
+     poochyena > mightyena
+   3 psyduck                fighter    uncommon   WATER/PSYCHIC        hp  75 atk  7 spd 52  0/2  
+     psyduck > golduck
+   3 purrloin               runner     uncommon   DARK                 hp  70 atk  7 spd 59  0/2  wincon,jumps
+     purrloin > liepard
+   3 ralts                  sniper     epic       PSYCHIC/FAIRY        hp  90 atk  6 spd 51  0/2  
+     ralts > kirlia
+   3 remoraid               bruiser    special    WATER                hp  60 atk 13 spd 39  0/2  
+     remoraid > octillery
+   3 rufflet                fighter    uncommon   FLYING               hp  70 atk  7 spd 51  0/2  air
+     rufflet > braviary
+   3 sandshrew              tank       uncommon   GROUND/NORMAL        hp  90 atk  5 spd 46  ART  wincon
+     sandshrew > sandslash
+   3 scraggy                fighter    uncommon   DARK/FIGHTING        hp  70 atk  8 spd 44  0/2  
+     scraggy > scrafty
+   3 seel                   fighter    uncommon   ICE/WATER            hp  80 atk  7 spd 47  0/2  
+     seel > dewgong
+   3 sentret                fighter    rare       GROUND/NORMAL        hp  80 atk  6 spd 54  0/2  
+     sentret > furret
+   3 silicobra              bruiser    rare       GROUND               hp  80 atk 10 spd 48  0/2  
+     silicobra > sandaconda
+   3 sizzlipede             bruiser    uncommon   FIRE/BUG             hp  75 atk  9 spd 46  0/2  
+     sizzlipede > centiskorch
+   3 skwovet                fighter    rare       NORMAL               hp  90 atk  7 spd 28  0/2  
+     skwovet > greedent
+   3 sligoo                 fighter    common     DRAGON/WATER         hp 120 atk  8 spd 35  0/2  
+     sligoo > goodra
+   3 slugma                 fighter    rare       FIRE/ROCK            hp  70 atk  7 spd 35  0/2  
+     slugma > magcargo
+   3 staryu                 skirmisher rare       WATER/PSYCHIC        hp  80 atk  6 spd 62  0/2  
+     staryu > starmie
+   3 sunkern                skirmisher rare       GRASS                hp  80 atk  9 spd 35  0/2  
+     sunkern > sunflora
+   3 swirlix                bruiser    rare       FAIRY                hp  80 atk  9 spd 48  0/2  
+     swirlix > slurpuff
+   3 tangela                tank       uncommon   GRASS                hp 100 atk  4 spd 41  0/2  wincon
+     tangela > tangrowth
+   3 toxel                  fighter    rare       ELECTRIC/POISON      hp  80 atk  8 spd 49  0/2  
+     toxel > toxtricity
+   3 tyrunt                 fighter    rare       DRAGON/ROCK          hp  70 atk  8 spd 48  0/2  
+     tyrunt > tyrantrum
+   3 voltorb                runner     uncommon   ELECTRIC             hp  60 atk  7 spd 73  ART  wincon,jumps
+     voltorb > electrode
+   3 wooper                 fighter    rare       WATER/GROUND         hp  80 atk  8 spd 31  0/2  
+     wooper > quagsire
+   3 wynaut                 fighter    rare       PSYCHIC              hp 110 atk  8 spd 36  0/2  
+     wynaut > wobbuffet
+   3 yamask                 fighter    rare       GHOST                hp  70 atk  6 spd 45  0/2  
+     yamask > cofagrigus
+   3 yamper                 runner     uncommon   ELECTRIC             hp  60 atk  6 spd 77  ART  wincon,jumps
+     yamper > boltund
+   3 yanma                  skirmisher rare       BUG/FLYING           hp  70 atk  8 spd 55  0/2  air,true
+     yanma > yanmega
+   3 zigzagoon              fighter    rare                            hp  80 atk  7 spd 57  0/2  
+     zigzagoon > linoone
+   3 zorua                  runner     uncommon   DARK                 hp  70 atk  7 spd 59  0/2  wincon,jumps
+     zorua > zoroark
+   4 alolanmeowth           runner     rare       NORMAL/DARK          hp  80 atk  7 spd 62  0/2  wincon,jumps
+     alolanmeowth > alolanpersian
+   4 baltoy                 skirmisher epic       GROUND/PSYCHIC       hp  80 atk  8 spd 49  0/2  
+     baltoy > claydol
+   4 bronzor                tank       rare       STEEL/PSYCHIC        hp 100 atk  6 spd 36  ART  wincon
+     bronzor > bronzong
+   4 cubchoo                bruiser    epic       ICE/WATER            hp  90 atk 10 spd 41  0/2  
+     cubchoo > beartic
+   4 girafarig              bruiser    epic       NORMAL/PSYCHIC       hp  90 atk 11 spd 39  0/2  
+     girafarig > farigiraf
+   4 gulpin                 fighter    epic       POISON               hp 120 atk  7 spd 43  0/2  
+     gulpin > swalot
+   4 hisuisliggoo           tank       common     DRAGON/STEEL         hp 110 atk  8 spd 35  0/2  wincon
+     hisuisliggoo > hisuigoodra
+   4 hisuisneasel           runner     epic       POISON/FIGHTING      hp  85 atk  8 spd 63  0/2  wincon,jumps
+     hisuisneasel > sneasler
+   4 joltik                 runner     rare       BUG/ELECTRIC         hp  80 atk  7 spd 60  0/2  wincon,jumps
+     joltik > galvantula
+   4 karrablast             bruiser    epic       BUG/STEEL            hp  70 atk 15 spd 42  0/2  
+     karrablast > escavalier
+   4 larvesta               sniper     epic       FIRE/BUG             hp 100 atk 11 spd 57  0/2  
+     larvesta > volcarona
+   4 meditite               skirmisher epic       PSYCHIC/FIGHTING     hp  80 atk  9 spd 51  0/2  
+     meditite > medicham
+   4 meowth                 runner     rare       NORMAL               hp  80 atk  7 spd 62  0/2  wincon,jumps
+     meowth > persian
+   4 mienfoo                runner     rare       FIGHTING             hp  80 atk  9 spd 59  0/2  wincon,jumps
+     mienfoo > mienshao
+   4 munchlax               bruiser    epic       NORMAL               hp 120 atk  9 spd 35  0/2  
+     munchlax > snorlax
+   4 nymble                 runner     rare       BUG/DARK             hp  80 atk  8 spd 60  0/2  wincon,jumps
+     nymble > lokix
+   4 phantump               tank       rare       GHOST/GRASS          hp  90 atk  8 spd 43  0/2  wincon
+     phantump > trevenant
+   4 pumpkaboo              bruiser    epic       GHOST/GRASS          hp  80 atk 10 spd 52  0/2  
+     pumpkaboo > gourgeist
+   4 shieldon               tank       rare       ROCK/STEEL           hp  90 atk  7 spd 35  0/2  wincon
+     shieldon > bastiodon
+   4 skiddo                 fighter    epic       GRASS                hp 140 atk  8 spd 44  0/2  
+     skiddo > gogoat
+   4 skorupi                bruiser    epic       DARK/BUG/POISON      hp  80 atk  9 spd 55  0/2  
+     skorupi > drapion
+   4 sneasel                runner     epic       ICE/DARK             hp  85 atk  8 spd 65  0/2  wincon,jumps
+     sneasel > weavile
+   4 spoink                 tank       rare       PSYCHIC              hp 100 atk  5 spd 51  0/2  wincon
+     spoink > grumpig
+   4 stufful                tank       epic       NORMAL/FIGHTING      hp 100 atk  8 spd 44  0/2  wincon
+     stufful > bewear
+   4 stunky                 bruiser    epic       DARK/POISON          hp 125 atk  9 spd 52  0/2  
+     stunky > skuntank
+   4 taillow                runner     rare       FLYING               hp  70 atk  7 spd 80  0/2  wincon,air
+     taillow > swellow
+   4 tirtouga               tank       uncommon   WATER                hp 120 atk  8 spd 35  0/2  wincon
+     tirtouga > carracosta
+   4 wailmer                fighter    epic       WATER                hp 180 atk  6 spd 44  0/2  
+     wailmer > wailord
+   4 wattrel                skirmisher epic       FLYING/ELECTRIC      hp  90 atk  7 spd 65  0/2  air
+     wattrel > kilowattrel
+   4 wimpod                 tank       epic       BUG/WATER            hp  90 atk  8 spd 38  0/2  wincon
+     wimpod > golisopod
+   5 amaura                 tank       epic       ICE                  hp 130 atk  7 spd 44  0/2  wincon
+     amaura > aurorus
+   5 barboach               tank       epic       WATER/GROUND         hp 120 atk  9 spd 44  0/2  wincon
+     barboach > whiscash
+   5 bonsley                tank       epic       ROCK/GRASS           hp 125 atk  9 spd 35  1/2  wincon
+     bonsley > sudowoodo
+   5 buizel                 runner     epic       WATER                hp  90 atk  8 spd 62  0/2  wincon,jumps
+     buizel > floatzel
+   5 carbink                tank       epic       ROCK/FAIRY           hp 125 atk  7 spd 41  0/2  wincon
+     carbink > diancie
+   5 chingling              skirmisher unique     PSYCHIC              hp 150 atk 10 spd 46  0/2  
+     chingling > chimecho
+   5 cosmog                 artillery  unique     PSYCHIC              hp 140 atk  5 spd 37  0/2  
+     cosmog > cosmoem
+   5 doduo                  runner     epic       FLYING/NORMAL        hp  90 atk 10 spd 60  0/2  wincon,air
+     doduo > dodrio
+   5 ducklett               skirmisher epic       WATER/FLYING         hp 105 atk 11 spd 56  0/2  air
+     ducklett > swanna
+   5 dwebble                tank       epic       BUG/ROCK             hp  90 atk 12 spd 30  0/2  wincon
+     dwebble > crustle
+   5 ferroseed              tank       epic       GRASS/STEEL          hp 100 atk  8 spd 31  0/2  wincon
+     ferroseed > ferrothorn
+   5 galarianponyta         runner     epic       FAIRY/PSYCHIC        hp  90 atk  8 spd 59  0/2  wincon,jumps
+     galarianponyta > galarianrapidash
+   5 gligar                 tank       epic       GROUND/POISON/FLYING hp 100 atk 11 spd 55  0/2  wincon,air
+     gligar > gliscor
+   5 hippopotas             tank       epic       GROUND/NORMAL        hp 120 atk 11 spd 40  0/2  wincon
+     hippopotas > hippodown
+   5 inkay                  tank       epic       DARK/PSYCHIC/WATER   hp  90 atk  9 spd 48  0/2  wincon
+     inkay > malamar
+   5 mantyke                skirmisher unique     WATER/FLYING         hp 160 atk  6 spd 47  0/2  air
+     mantyke > mantine
+   5 mudbray                tank       epic       GROUND               hp 120 atk 12 spd 35  0/2  wincon
+     mudbray > mudsdale
+   5 murkrow                tank       epic       DARK/FLYING          hp 110 atk  9 spd 48  0/2  wincon,air
+     murkrow > honchkrow
+   5 nincada                runner     epic       BUG                  hp 130 atk 10 spd 76  0/2  wincon,jumps
+     nincada > ninjask
+   5 oshawott               tank       epic       WATER/FIGHTING       hp 100 atk  8 spd 47  0/2  wincon
+     oshawott > dewott
+   5 ponyta                 runner     epic       FIRE                 hp  90 atk 11 spd 59  ART  wincon,jumps
+     ponyta > rapidash
+   5 rockruff               runner     epic       ROCK                 hp  90 atk 12 spd 61  0/2  wincon,jumps
+     rockruff > lycanrocdusk
+   5 shelloseastsea         tank       epic       WATER/ROCK/GROUND    hp 120 atk  9 spd 38  0/2  wincon
+     shelloseastsea > gastrodoneastsea
+   5 shelloswestsea         tank       epic       WATER/GROUND         hp 120 atk  9 spd 38  0/2  wincon
+     shelloswestsea > gastrodonwestsea
+   5 snubull                tank       epic       FAIRY                hp 115 atk 13 spd 39  0/2  wincon
+     snubull > granbull
+   5 trubbish               tank       epic       POISON               hp 110 atk  8 spd 49  0/2  wincon
+     trubbish > garbodor
+   5 vullaby                tank       rare       DARK/FLYING          hp  90 atk 10 spd 51  0/2  wincon,air
+     vullaby > mandibuzz
+   5 wingull                skirmisher epic       WATER/FLYING         hp  90 atk 10 spd 46  0/2  air
+     wingull > pelipper
+   6 cascoon                tank       epic       BUG/POISON           hp 200 atk 23 spd 20  0/2  wincon
+     cascoon > dustox
+   6 dipplin                sniper     unique     DRAGON/GRASS         hp 180 atk 14 spd 31  0/2  
+     dipplin > hydrapple
+   6 duraludon              skirmisher unique     DRAGON/STEEL         hp 180 atk 18 spd 52  0/2  
+     duraludon > archaludon
+   6 finizen                runner     unique     WATER                hp 200 atk 12 spd 64  0/2  wincon,jumps
+     finizen > palafin
+   6 gimmighoul             tank       unique     GHOST/STEEL          hp 200 atk  9 spd 52  0/2  wincon
+     gimmighoul > gholdengo
+   6 hisuianqwilfish        tank       unique     DARK/POISON/WATER    hp 175 atk 13 spd 52  0/2  wincon
+     hisuianqwilfish > overqwil
+   6 poipole                runner     unique     POISON/BUG           hp 160 atk 10 spd 64  0/2  wincon,jumps
+     poipole > naganadel
+   6 sableye                tank       unique     DARK/GHOST           hp 200 atk 13 spd 41  0/2  wincon
+     sableye > megasableye
+   6 silcoon                tank       epic       BUG/NORMAL           hp 200 atk 23 spd 20  0/2  wincon
+     silcoon > beautifly
+   7 groudon                tank       legendary  GROUND               hp 300 atk 20 spd 54  0/2  wincon
+     groudon > primalgroudon
+   7 kyogre                 sniper     legendary  WATER                hp 300 atk 18 spd 54  0/2  
+     kyogre > primalkyogre
+   7 rayquaza               tank       legendary  DRAGON/FLYING        hp 300 atk 27 spd 55  0/2  wincon,air
+     rayquaza > megarayquaza
+   7 shaymin                sniper     legendary  GRASS                hp 200 atk 25 spd 57  0/2  
+     shaymin > shayminsky
+   7 typenull               tank       legendary  NORMAL/BUG/DARK/DRAGON/ELECTRIC/FAIRY/FIGHTING/FIRE/FLYING/GHOST/GRASS/GROUND/ICE/POISON/PSYCHIC/ROCK/STEEL/WATER hp 260 atk 20 spd 55  0/2  wincon,air,true
+     typenull > silvally
+   7 zacian                 runner     legendary  FAIRY                hp 260 atk 22 spd 69  0/2  wincon,jumps
+     zacian > zaciancrowned
+
+==============================================================================
+3 FORMS — 116 chains
+==============================================================================
+   1 aron                   fighter    common     STEEL/ROCK           hp  60 atk  4 spd 41  ART  
+     aron > lairon > aggron
+   1 azurill                skirmisher common     WATER/FAIRY          hp  50 atk  5 spd 41  0/3  
+     azurill > marill > azumarill
+   1 caterpie               skirmisher common     BUG                  hp  60 atk  5 spd 47  ART  
+     caterpie > metapod > butterfree
+   1 charmander             fighter    common     DRAGON/FIRE          hp  60 atk  4 spd 57  ART  
+     charmander > charmeleon > charizard
+   1 fennekin               skirmisher common     FIRE/PSYCHIC         hp  50 atk  4 spd 58  0/3  
+     fennekin > braixen > delphox
+   1 klink                  sniper     common     STEEL                hp  50 atk  4 spd 35  0/3  
+     klink > klang > klinklang
+   1 litwick                sniper     common     GHOST/FIRE           hp  50 atk  4 spd 51  0/3  
+     litwick > lampent > chandelure
+   1 mareep                 skirmisher common     ELECTRIC             hp  60 atk  5 spd 43  0/3  
+     mareep > flaffy > ampharos
+   1 pichu                  fighter    common     ELECTRIC/FAIRY       hp  60 atk  5 spd 54  2/3  
+     pichu > pikachu > raichu
+   1 smoliv                 skirmisher common     GRASS/NORMAL         hp  60 atk  5 spd 25  0/3  
+     smoliv > dolliv > arboliva
+   1 sprigatito             skirmisher common     GRASS/DARK           hp  55 atk  5 spd 63  0/3  
+     sprigatito > floragato > meowscarada
+   1 squirtle               sniper     common     WATER                hp  60 atk  5 spd 50  ART  
+     squirtle > wartortle > blastoise
+   1 zubat                  skirmisher common     POISON/FLYING        hp  50 atk  4 spd 67  ART  air
+     zubat > golbat > crobat
+   2 alolangeodude          fighter    common     ELECTRIC/ROCK        hp  70 atk  4 spd 39  0/3  
+     alolangeodude > alolangraveler > alolangolem
+   2 bagon                  fighter    uncommon   DRAGON               hp  70 atk  5 spd 57  ART  
+     bagon > shelgon > salamence
+   2 bellsprout             fighter    special    GRASS/POISON         hp  60 atk  6 spd 47  0/3  
+     bellsprout > weepinbell > victreebel
+   2 blipbug                runner     common     BUG/PSYCHIC          hp  60 atk  4 spd 58  0/3  wincon,jumps
+     blipbug > dottler > orbeetle
+   2 budew                  sniper     epic       GRASS/POISON         hp  90 atk  5 spd 54  0/3  
+     budew > roselia > roserade
+   2 bulbasaur              skirmisher rare       GRASS/POISON         hp  80 atk  5 spd 51  ART  
+     bulbasaur > ivysaur > venusaur
+   2 chespin                fighter    common     GRASS/FIGHTING       hp  60 atk  7 spd 41  0/3  
+     chespin > quilladin > chesnaught
+   2 chikorita              skirmisher special    GRASS/FAIRY          hp  70 atk  6 spd 51  0/3  
+     chikorita > bayleef > meganium
+   2 chimchar               runner     common     FIRE/FIGHTING        hp  60 atk  4 spd 60  0/3  wincon,jumps
+     chimchar > monferno > infernape
+   2 cleffa                 fighter    uncommon   FAIRY/NORMAL         hp  70 atk  5 spd 44  0/3  
+     cleffa > clefairy > clefable
+   2 deino                  skirmisher rare       DRAGON/DARK          hp  80 atk  5 spd 56  0/3  
+     deino > zweilous > hydreigon
+   2 duskull                skirmisher uncommon   DARK/GHOST           hp  70 atk  6 spd 39  ART  
+     duskull > dusclops > dusknoir
+   2 geodude                fighter    common     GROUND/ROCK          hp  70 atk  4 spd 39  ART  
+     geodude > graveler > golem
+   2 gothita                sniper     hatch      PSYCHIC              hp  70 atk  5 spd 46  0/3  
+     gothita > gothorita > gothitelle
+   2 grubbin                sniper     hatch      BUG/ELECTRIC         hp  75 atk  5 spd 39  0/3  
+     grubbin > charjabug > vikavolt
+   2 honedge                fighter    rare       GHOST/STEEL          hp  75 atk  6 spd 44  0/3  
+     honedge > doublade > aegislash
+   2 hoppip                 sniper     special    FLYING/GRASS         hp  50 atk  5 spd 60  ART  air
+     hoppip > skiploom > jumpluff
+   2 horsea                 skirmisher uncommon   DRAGON/WATER         hp  70 atk  6 spd 52  0/3  
+     horsea > seadra > kingdra
+   2 igglybuff              skirmisher uncommon   NORMAL/FAIRY         hp  65 atk  5 spd 39  0/3  
+     igglybuff > jigglypuff > wigglytuff
+   2 impidimp               fighter    uncommon   DARK/FAIRY           hp  60 atk  6 spd 44  0/3  
+     impidimp > morgrem > grimmsnarl
+   2 lillipup               fighter    common     NORMAL               hp  60 atk  6 spd 51  0/3  
+     lillipup > herdier > stoutland
+   2 lotad                  sniper     rare       GRASS/WATER          hp  60 atk  6 spd 47  0/3  
+     lotad > lombre > ludicolo
+   2 magby                  skirmisher rare       FIRE                 hp  80 atk  6 spd 52  0/3  
+     magby > magmar > magmortar
+   2 magnemite              skirmisher uncommon   ELECTRIC/STEEL       hp  80 atk  5 spd 44  0/3  
+     magnemite > magneton > magnezone
+   2 mudkip                 fighter    common     WATER/GROUND         hp  65 atk  5 spd 44  0/3  
+     mudkip > marshtomp > swampert
+   2 nidoranf               fighter    uncommon   POISON/GROUND        hp  70 atk  5 spd 49  0/3  
+     nidoranf > nidorina > nidoqueen
+   2 nidoranm               fighter    uncommon   POISON/GROUND        hp  70 atk  5 spd 52  0/3  
+     nidoranm > nidorino > nidoking
+   2 pidgey                 skirmisher common     NORMAL/FLYING        hp  60 atk  4 spd 57  ART  air
+     pidgey > pidgeotto > pidgeot
+   2 pidove                 runner     common     NORMAL/FLYING        hp  60 atk  5 spd 64  0/3  wincon,air
+     pidove > tranquill > unfezant
+   2 pikipek                fighter    uncommon   NORMAL/FLYING        hp  70 atk  5 spd 44  0/3  air
+     pikipek > trumbeak > toucannon
+   2 piplup                 fighter    uncommon   WATER/ICE/STEEL      hp  60 atk  6 spd 44  0/3  
+     piplup > prinplup > empoleon
+   2 popplio                sniper     hatch      WATER/FAIRY          hp  65 atk  5 spd 44  0/3  
+     popplio > brionne > primarina
+   2 scorbunny              skirmisher hatch      FIRE                 hp  75 atk  5 spd 63  0/3  
+     scorbunny > raboot > cinderace
+   2 seedot                 fighter    common     GRASS/DARK           hp  60 atk  6 spd 51  0/3  
+     seedot > nuzleaf > shiftry
+   2 sewaddle               fighter    uncommon   GRASS/BUG            hp  60 atk  5 spd 54  0/3  
+     sewaddle > swadloon > leavanny
+   2 snivy                  sniper     hatch      GRASS                hp  90 atk  4 spd 61  0/3  
+     snivy > servine > serperior
+   2 starly                 fighter    common     NORMAL/FLYING        hp  65 atk  5 spd 57  0/3  air
+     starly > staravia > staraptor
+   2 swinub                 fighter    common     GROUND/ICE           hp  65 atk  4 spd 51  0/3  
+     swinub > piloswine > mamoswine
+   2 togepi                 skirmisher rare       FAIRY/NORMAL         hp  80 atk  5 spd 51  ART  
+     togepi > togetic > togekiss
+   2 trapinch               fighter    rare       BUG/GROUND           hp  70 atk  7 spd 57  ART  
+     trapinch > vibrava > flygon
+   2 tynamo                 fighter    uncommon   ELECTRIC/WATER       hp  50 atk  6 spd 41  0/3  
+     tynamo > eelektrik > eelektross
+   2 vanillite              sniper     rare       ICE                  hp  70 atk  6 spd 50  0/3  
+     vanillite > vanillish > vanilluxe
+   2 weedle                 fighter    common     BUG/POISON           hp  60 atk  5 spd 49  0/3  
+     weedle > kakuna > beedrill
+   2 whismur                skirmisher rare       NORMAL               hp  90 atk  6 spd 47  0/3  
+     whismur > loudred > exploud
+   3 abra                   artillery  rare       PSYCHIC              hp  90 atk  4 spd 63  ART  
+     abra > kadabra > alakazam
+   3 dreepy                 skirmisher hatch      DRAGON/GHOST         hp  90 atk  5 spd 71  0/3  
+     dreepy > drakloak > dragapult
+   3 fuecoco                sniper     epic       FIRE/GHOST           hp 110 atk  5 spd 46  0/3  
+     fuecoco > crocalor > skeledirge
+   3 galarianzigzagoon      fighter    rare       DARK                 hp  80 atk  6 spd 55  0/3  
+     galarianzigzagoon > galarianlinoone > obstagoon
+   3 hatenna                fighter    uncommon   FAIRY/PSYCHIC        hp  75 atk  7 spd 34  0/3  
+     hatenna > hattrem > hatterene
+   3 larvitar               fighter    rare       DARK/ROCK            hp  75 atk  7 spd 39  ART  
+     larvitar > pupitar > tyranitar
+   3 machop                 fighter    uncommon   FIGHTING             hp  70 atk  6 spd 43  ART  
+     machop > machoke > machamp
+   3 nacli                  fighter    uncommon   ROCK                 hp  80 atk  7 spd 36  0/3  
+     nacli > naclstack > garganacl
+   3 oddish                 fighter    special    GRASS/POISON         hp  80 atk  8 spd 41  0/3  
+     oddish > gloom > vileplume
+   3 quaxly                 fighter    uncommon   WATER/FIGHTING/FLYING hp  60 atk  6 spd 55  0/3  air
+     quaxly > quaxwell > quaquaval
+   3 roggenrola             skirmisher epic       ROCK                 hp  90 atk  4 spd 37  ART  
+     roggenrola > boldore > gigalith
+   3 rookidee               fighter    rare       STEEL/FLYING         hp  80 atk  8 spd 46  0/3  air
+     rookidee > corvisquire > corviknight
+   3 rowlet                 sniper     hatch      GRASS/FLYING/GHOST   hp  70 atk  5 spd 47  0/3  air
+     rowlet > dartix > decidueye
+   3 sandile                fighter    hatch      DARK/GROUND          hp  80 atk  6 spd 54  0/3  
+     sandile > krokorok > krookodile
+   3 snorunt                sniper     epic       GHOST/ICE            hp  90 atk  9 spd 60  0/3  
+     snorunt > glalie > froslass
+   3 solosis                skirmisher ultra      PSYCHIC              hp 100 atk  6 spd 35  0/3  
+     solosis > duosion > reuniclus
+   3 spheal                 fighter    uncommon   WATER/ICE            hp  80 atk  6 spd 46  ART  
+     spheal > sealeo > walrein
+   3 tepig                  fighter    hatch      FIRE/FIGHTING        hp  75 atk  7 spd 46  0/3  
+     tepig > pignite > emboar
+   3 torchic                fighter    rare       FIRE/FIGHTING/FLYING hp  80 atk  6 spd 51  0/3  air
+     torchic > combusken > blaziken
+   3 totodile               fighter    rare       WATER                hp  75 atk  7 spd 50  0/3  
+     totodile > croconaw > feraligatr
+   3 treecko                runner     uncommon   GRASS                hp  70 atk  4 spd 63  0/3  wincon,jumps
+     treecko > grovyle > sceptile
+   3 turtwig                fighter    rare       GRASS/GROUND         hp  80 atk  5 spd 43  0/3  
+     turtwig > grotle > torterra
+   3 tympole                fighter    hatch      WATER/GROUND         hp  80 atk  7 spd 49  0/3  
+     tympole > palpitoad > seismitoad
+   4 axew                   runner     hatch      DRAGON               hp  80 atk  9 spd 62  0/3  wincon,jumps
+     axew > fraxure > haxorus
+   4 bounsweet              bruiser    epic       GRASS/FIGHTING       hp  85 atk 10 spd 48  0/3  
+     bounsweet > steenee > tsareena
+   4 buneary                runner     rare       NORMAL/FIGHTING      hp  65 atk  7 spd 59  0/3  wincon,jumps
+     buneary > lopunny > megalopunny
+   4 corsola                bruiser    epic       ROCK/WATER           hp 125 atk  9 spd 35  0/3  
+     corsola > galarcorsola > cursola
+   4 electrike              runner     rare       ELECTRIC             hp  80 atk  6 spd 70  0/3  wincon,jumps
+     electrike > manectric > megamanectric
+   4 elekid                 tank       epic       ELECTRIC             hp 110 atk  5 spd 55  0/3  wincon
+     elekid > electabuzz > electivire
+   4 froakie                runner     hatch      WATER/DARK           hp  80 atk  6 spd 64  0/3  wincon,jumps
+     froakie > frogadier > greninja
+   4 gastly                 skirmisher ultra      GHOST/POISON         hp  90 atk 12 spd 60  ART  
+     gastly > haunter > gengar
+   4 houndour               tank       epic       FIRE/DARK            hp  90 atk  7 spd 55  0/3  wincon
+     houndour > houndoom > megahoundoom
+   4 jangmoo                tank       epic       DRAGON/FIGHTING      hp 100 atk  6 spd 52  0/3  wincon
+     jangmoo > hakamoo > kommoo
+   4 mankey                 tank       epic       FIGHTING             hp 120 atk  7 spd 54  0/3  wincon
+     mankey > primeape > annihilape
+   4 pawmi                  runner     rare       ELECTRIC/FIGHTING    hp  80 atk  6 spd 59  0/3  wincon,jumps
+     pawmi > pawmo > pawmot
+   4 shuppet                bruiser    epic       GHOST                hp 100 atk 10 spd 46  0/3  
+     shuppet > banette > megabanette
+   4 swablu                 skirmisher epic       FAIRY                hp 100 atk  9 spd 51  0/3  
+     swablu > altaria > megaaltaria
+   5 beldum                 tank       epic       PSYCHIC/STEEL        hp 110 atk  5 spd 47  ART  wincon
+     beldum > metang > metagross
+   5 dratini                tank       epic       DRAGON/FLYING/WATER  hp  90 atk  7 spd 51  0/3  wincon,air
+     dratini > dragonair > dragonite
+   5 fletchling             skirmisher ultra      FLYING/FIRE          hp 120 atk 12 spd 65  ART  air
+     fletchling > fletchinder > talonflame
+   5 gible                  runner     epic       DRAGON/GROUND        hp 100 atk  5 spd 58  0/3  wincon,jumps
+     gible > gabite > garchomp
+   5 happiny                tank       ultra      NORMAL/FAIRY         hp 150 atk  8 spd 43  0/3  wincon
+     happiny > chansey > blissey
+   5 litten                 tank       epic       FIRE/DARK            hp  95 atk  8 spd 44  0/3  wincon
+     litten > torracat > incineroar
+   5 numel                  tank       epic       FIRE/GROUND          hp 120 atk 10 spd 38  0/3  wincon
+     numel > camerupt > megacamerupt
+   5 onix                   tank       epic       ROCK/GROUND          hp 100 atk  7 spd 35  ART  wincon
+     onix > steelix > megasteelix
+   5 porygon                skirmisher ultra      NORMAL               hp 100 atk 13 spd 54  0/3  
+     porygon > porygon2 > porygonz
+   5 slakoth                tank       epic       NORMAL               hp 130 atk  5 spd 57  0/3  wincon
+     slakoth > vigoroth > slaking
+   5 snover                 tank       epic       GRASS/ICE            hp  90 atk 10 spd 44  0/3  wincon
+     snover > abomasnow > megaabomasnow
+   5 sobble                 sniper     ultra      WATER                hp 120 atk 12 spd 63  0/3  
+     sobble > drizzile > inteleon
+   5 tinkatink              tank       epic       STEEL/FAIRY          hp 100 atk 10 spd 55  0/3  wincon
+     tinkatink > tinkatuff > tinkaton
+   5 venipede               runner     ultra      BUG/POISON           hp  90 atk 12 spd 72  0/3  wincon,jumps
+     venipede > whirlipede > scolipede
+   6 frigibax               tank       ultra      DRAGON/ICE           hp 150 atk 15 spd 53  0/3  wincon
+     frigibax > arctibax > baxcalibur
+   6 grookey                runner     ultra      GRASS                hp 120 atk 17 spd 58  0/3  wincon,jumps
+     grookey > thwackey > rillaboom
+   6 pawniard               tank       ultra      DARK/STEEL           hp 130 atk 18 spd 41  0/3  wincon
+     pawniard > bisharp > kingambit
+   6 rhyhorn                tank       ultra      GROUND/ROCK          hp 120 atk 14 spd 38  0/3  wincon
+     rhyhorn > rhydon > rhyperior
+   6 shinx                  tank       ultra      ELECTRIC             hp 120 atk 13 spd 47  0/3  wincon
+     shinx > luxio > luxray
+   6 tandemaus              runner     unique     NORMAL/FAIRY         hp 160 atk 14 spd 61  0/3  wincon,jumps
+     tandemaus > mausholdthree > mausholdfour
+   6 teddiursa              tank       ultra      GROUND               hp 150 atk 13 spd 41  0/3  wincon
+     teddiursa > ursaring > ursaluna
+   6 timburr                tank       ultra      FIGHTING             hp 140 atk 15 spd 39  0/3  wincon
+     timburr > gurdurr > conkeldurr
+
+==============================================================================
+4 FORMS — 1 chains
+==============================================================================
+   3 wishiwashi             bruiser    special    WATER                hp  50 atk 11 spd 38  0/4  
+     wishiwashi > wishiwashischool > wishiwashischool > wishiwashischool

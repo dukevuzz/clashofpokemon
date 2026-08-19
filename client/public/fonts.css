@@ -1,0 +1,8 @@
+/* PokemonClassic, the pixel face pokemonAutoChess ships. Loaded by index.html
+   before Phaser boots so the first frame already has it -- a font that arrives
+   late reflows every label in the game. */
+@font-face {
+  font-family: "PokemonClassic";
+  src: url("/fonts/PokemonClassic.ttf") format("truetype");
+  font-display: block;
+}

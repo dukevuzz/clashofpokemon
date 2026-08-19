@@ -1,0 +1,381 @@
+{
+  "takenAt": null,
+  "towerHP": {
+    "side": 2000,
+    "king": 2640
+  },
+  "towerDamage": {
+    "side": 34,
+    "king": 40
+  },
+  "rules": {
+    "arenaWidth": 288,
+    "arenaHeight": 528,
+    "riverY": 264,
+    "riverHeight": 24,
+    "laneX[0]": 72,
+    "laneX[1]": 216,
+    "spriteScale": 1.5,
+    "towerSize.side": 34,
+    "towerSize.king": 46,
+    "towerBackOff.side": 132,
+    "towerBackOff.king": 40,
+    "elixirMax": 10,
+    "elixirRate": 0.4,
+    "startElixir": 5,
+    "matchSeconds": 180,
+    "suddenDeathAt": 60,
+    "towerHP.side": 2000,
+    "towerHP.king": 2640,
+    "towerDamage.side": 34,
+    "towerDamage.king": 40,
+    "towerRange": 120,
+    "towerRate": 1,
+    "kingWakeSeconds": 4,
+    "deckSize": 6,
+    "handSize": 4,
+    "skillDamage": 2.4,
+    "skillRadius": 26,
+    "deployMargin": 20,
+    "PLAYER": 1,
+    "ENEMY": 2
+  },
+  "cards": {
+    "charmander": {
+      "elixir": 1,
+      "hp": 156,
+      "damage": 16,
+      "speed": 35,
+      "range": 15,
+      "count": 1
+    },
+    "squirtle": {
+      "elixir": 1,
+      "hp": 156,
+      "damage": 21,
+      "speed": 31,
+      "range": 70,
+      "count": 1
+    },
+    "aron": {
+      "elixir": 1,
+      "hp": 156,
+      "damage": 16,
+      "speed": 25,
+      "range": 15,
+      "count": 1
+    },
+    "spearow": {
+      "elixir": 1,
+      "hp": 130,
+      "damage": 16,
+      "speed": 35,
+      "range": 15,
+      "count": 1
+    },
+    "bulbasaur": {
+      "elixir": 2,
+      "hp": 208,
+      "damage": 21,
+      "speed": 32,
+      "range": 52,
+      "count": 1
+    },
+    "zubat": {
+      "elixir": 2,
+      "hp": 130,
+      "damage": 16,
+      "speed": 42,
+      "range": 52,
+      "count": 2
+    },
+    "geodude": {
+      "elixir": 2,
+      "hp": 182,
+      "damage": 16,
+      "speed": 24,
+      "range": 15,
+      "count": 1
+    },
+    "caterpie": {
+      "elixir": 2,
+      "hp": 156,
+      "damage": 21,
+      "speed": 29,
+      "range": 52,
+      "count": 2
+    },
+    "togepi": {
+      "elixir": 2,
+      "hp": 208,
+      "damage": 21,
+      "speed": 32,
+      "range": 52,
+      "count": 1
+    },
+    "bagon": {
+      "elixir": 2,
+      "hp": 182,
+      "damage": 21,
+      "speed": 35,
+      "range": 15,
+      "count": 1
+    },
+    "clauncher": {
+      "elixir": 2,
+      "hp": 208,
+      "damage": 29,
+      "speed": 27,
+      "range": 84,
+      "count": 1
+    },
+    "chinchou": {
+      "elixir": 2,
+      "hp": 156,
+      "damage": 29,
+      "speed": 27,
+      "range": 52,
+      "count": 1
+    },
+    "pidgey": {
+      "elixir": 2,
+      "hp": 156,
+      "damage": 16,
+      "speed": 35,
+      "range": 52,
+      "count": 1
+    },
+    "hoppip": {
+      "elixir": 2,
+      "hp": 130,
+      "damage": 21,
+      "speed": 37,
+      "range": 70,
+      "count": 1
+    },
+    "koffing": {
+      "elixir": 2,
+      "hp": 169,
+      "damage": 21,
+      "speed": 27,
+      "range": 15,
+      "count": 1
+    },
+    "trapinch": {
+      "elixir": 2,
+      "hp": 182,
+      "damage": 29,
+      "speed": 35,
+      "range": 15,
+      "count": 1
+    },
+    "duskull": {
+      "elixir": 2,
+      "hp": 182,
+      "damage": 25,
+      "speed": 24,
+      "range": 52,
+      "count": 1
+    },
+    "ditto": {
+      "elixir": 2,
+      "hp": 130,
+      "damage": 21,
+      "speed": 25,
+      "range": 15,
+      "count": 1
+    },
+    "eevee": {
+      "elixir": 3,
+      "hp": 156,
+      "damage": 21,
+      "speed": 27,
+      "range": 15,
+      "count": 2
+    },
+    "pikachu": {
+      "elixir": 3,
+      "hp": 312,
+      "damage": 33,
+      "speed": 33,
+      "range": 15,
+      "count": 1
+    },
+    "machop": {
+      "elixir": 3,
+      "hp": 182,
+      "damage": 25,
+      "speed": 27,
+      "range": 15,
+      "count": 1
+    },
+    "abra": {
+      "elixir": 3,
+      "hp": 234,
+      "damage": 16,
+      "speed": 39,
+      "range": 84,
+      "count": 1
+    },
+    "spheal": {
+      "elixir": 3,
+      "hp": 208,
+      "damage": 25,
+      "speed": 29,
+      "range": 15,
+      "count": 1
+    },
+    "larvitar": {
+      "elixir": 3,
+      "hp": 195,
+      "damage": 29,
+      "speed": 24,
+      "range": 15,
+      "count": 1
+    },
+    "roggenrola": {
+      "elixir": 3,
+      "hp": 234,
+      "damage": 16,
+      "speed": 23,
+      "range": 52,
+      "count": 1
+    },
+    "yamper": {
+      "elixir": 3,
+      "hp": 234,
+      "damage": 25,
+      "speed": 69,
+      "range": 15,
+      "count": 1
+    },
+    "elgyem": {
+      "elixir": 3,
+      "hp": 182,
+      "damage": 33,
+      "speed": 24,
+      "range": 52,
+      "count": 1
+    },
+    "rattata": {
+      "elixir": 3,
+      "hp": 130,
+      "damage": 16,
+      "speed": 35,
+      "range": 15,
+      "count": 3
+    },
+    "diglett": {
+      "elixir": 3,
+      "hp": 292,
+      "damage": 21,
+      "speed": 57,
+      "range": 15,
+      "count": 1
+    },
+    "drilbur": {
+      "elixir": 3,
+      "hp": 208,
+      "damage": 33,
+      "speed": 35,
+      "range": 15,
+      "count": 1
+    },
+    "sandshrew": {
+      "elixir": 3,
+      "hp": 234,
+      "damage": 21,
+      "speed": 29,
+      "range": 15,
+      "count": 1
+    },
+    "voltorb": {
+      "elixir": 3,
+      "hp": 234,
+      "damage": 29,
+      "speed": 66,
+      "range": 15,
+      "count": 1
+    },
+    "bronzor": {
+      "elixir": 4,
+      "hp": 260,
+      "damage": 25,
+      "speed": 22,
+      "range": 15,
+      "count": 1
+    },
+    "exeggcute": {
+      "elixir": 4,
+      "hp": 286,
+      "damage": 37,
+      "speed": 24,
+      "range": 70,
+      "count": 1
+    },
+    "gastly": {
+      "elixir": 5,
+      "hp": 234,
+      "damage": 50,
+      "speed": 37,
+      "range": 52,
+      "count": 1
+    },
+    "fletchling": {
+      "elixir": 5,
+      "hp": 307,
+      "damage": 49,
+      "speed": 40,
+      "range": 52,
+      "count": 1
+    },
+    "onix": {
+      "elixir": 5,
+      "hp": 260,
+      "damage": 29,
+      "speed": 22,
+      "range": 15,
+      "count": 1
+    },
+    "beldum": {
+      "elixir": 5,
+      "hp": 286,
+      "damage": 21,
+      "speed": 29,
+      "range": 15,
+      "count": 1
+    },
+    "sudowoodo": {
+      "elixir": 6,
+      "hp": 501,
+      "damage": 71,
+      "speed": 22,
+      "range": 15,
+      "count": 1
+    },
+    "zapdos": {
+      "elixir": 7,
+      "hp": 600,
+      "damage": 87,
+      "speed": 35,
+      "range": 52,
+      "count": 1
+    },
+    "raikou": {
+      "elixir": 7,
+      "hp": 886,
+      "damage": 82,
+      "speed": 56,
+      "range": 15,
+      "count": 1
+    },
+    "entei": {
+      "elixir": 7,
+      "hp": 586,
+      "damage": 85,
+      "speed": 35,
+      "range": 15,
+      "count": 1
+    }
+  }
+}
