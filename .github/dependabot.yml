@@ -1,0 +1,55 @@
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /client
+    schedule: { interval: weekly }
+    open-pull-requests-limit: 5
+    groups:
+      # Phaser, Vite and the test runner each move on their own cadence and
+      # each breaks differently. Everything else can arrive in one PR.
+      dev-tooling:
+        patterns: ["vite", "vitest", "typescript", "tsx", "@vitest/*", "@playwright/*"]
+      minor-and-patch:
+        update-types: [minor, patch]
+        exclude-patterns: ["phaser"]
+
+  - package-ecosystem: maven
+    directory: /server
+    schedule: { interval: weekly }
+    open-pull-requests-limit: 5
+    groups:
+      spring:
+        patterns: ["org.springframework*"]
+      minor-and-patch:
+        update-types: [minor, patch]
+
+  - package-ecosystem: maven
+    directory: /api
+    schedule: { interval: weekly }
+    open-pull-requests-limit: 5
+    groups:
+      spring:
+        patterns: ["org.springframework*"]
+      minor-and-patch:
+        update-types: [minor, patch]
+
+  - package-ecosystem: maven
+    directory: /e2e
+    schedule: { interval: monthly }
+    open-pull-requests-limit: 2
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: monthly }
+
+  # postgres and caddy pins in the compose file, and the two service images.
+  - package-ecosystem: docker
+    directory: /deploy
+    schedule: { interval: monthly }
+  - package-ecosystem: docker
+    directory: /server
+    schedule: { interval: monthly }
+  - package-ecosystem: docker
+    directory: /api
+    schedule: { interval: monthly }

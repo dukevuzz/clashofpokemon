@@ -19,3 +19,8 @@ playwright-report/
 .vscode/
 *.iml
 .DS_Store
+.wrangler/
+*.before-*
+
+# Operational measurement scripts, not part of any build.
+/tools/
