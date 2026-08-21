@@ -26,7 +26,7 @@ public final class Deploy {
     if (broken == null) return false;
 
     int forward = Board.forwardFor(side);
-    double limit = broken.y - forward * Rules.towerBox("side", "up");
+    double limit = broken.y - forward * Board.boxUp(broken);
     return forward < 0 ? y >= limit : y <= limit;
   }
 
@@ -67,7 +67,7 @@ public final class Deploy {
     for (Tower t : match.towers) {
       if (t.side == side || !"side".equals(t.kind) || !t.dead) continue;
       if ((t.x < c.arenaWidth() / 2.0 ? 0 : 1) != lane) continue;
-      return t.y - forward * Rules.towerBox("side", "up");
+      return t.y - forward * Board.boxUp(t);
     }
     return ownHalf;
   }
@@ -96,8 +96,8 @@ public final class Deploy {
 
     for (Tower t : match.towers) {
       if (t.dead) continue;
-      double up = Rules.towerBox(t.kind, "up");
-      double down = Rules.towerBox(t.kind, "down");
+      double up = Board.boxUp(t);
+      double down = Board.boxDown(t);
       double clear = Rules.towerSize(t.kind) * 0.5 + c.unitSize() * 0.6;
       double m = c.unitSize() * 0.6;
       double dy = y - t.y;

@@ -182,8 +182,8 @@ public final class Movement {
     for (Tower t : towers) {
       if (t.dead) continue;
       double r = Board.radiusOf(t) + 4;
-      double up = Rules.towerBox(t.kind, "up");
-      double down = Rules.towerBox(t.kind, "down");
+      double up = Board.boxUp(t);
+      double down = Board.boxDown(t);
       double dx = u.x - t.x;
       double dy = u.y - t.y;
       if (Math.abs(dx) >= r) continue;
