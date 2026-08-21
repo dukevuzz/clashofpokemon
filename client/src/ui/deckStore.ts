@@ -18,6 +18,7 @@ export function loadDeck(): Card[] {
   // treating both as "no deck" handed six cards back to someone who had just
   // removed all six. Only the first is a new player.
   let saved = false;
+  let savedCount = 0;
   try {
     const raw = localStorage.getItem(KEY);
     if (raw !== null) {
@@ -25,6 +26,7 @@ export function loadDeck(): Card[] {
       // After the parse, not before: unreadable is not the same as empty
       // either, and a corrupt store should still launch into a playable deck.
       saved = true;
+      savedCount = Array.isArray(ids) ? ids.length : 0;
       // Unknown ids are dropped rather than trusted -- a card can be removed
       // from the roster between sessions.
       deck = ids
@@ -37,6 +39,11 @@ export function loadDeck(): Card[] {
   }
   // Only a player who has never saved anything gets cards chosen for them.
   if (!saved) return starterDeck();
+
+  // Saved ids that all resolve to nothing means the roster changed, not that
+  // the player emptied their deck. Only distinguishable here.
+  if (savedCount > 0 && deck.length === 0) return starterDeck();
+
   return deck.slice(0, config.deckSize);
 }
 
