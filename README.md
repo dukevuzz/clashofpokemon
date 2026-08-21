@@ -116,6 +116,12 @@ resources. Design inspiration from Clash Royale (Supercell) and from
 [Pokémon Auto Chess](https://github.com/keldaanCommunity/pokemonAutoChess),
 which showed that a fan project can be built in the open and done well.
 
+## Releases
+
+Versions and what changed in each are in [CHANGELOG.md](CHANGELOG.md).
+A `v*` tag builds the server images; Cloudflare Pages rebuilds the client
+from `main`.
+
 ## Credits and licence
 
 The code is MIT. The art is not, and most of it is somebody else's: creature
