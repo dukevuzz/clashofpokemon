@@ -44,6 +44,8 @@ services:
       CLASH_INTERNAL_KEY: ${INTERNAL_KEY:?set INTERNAL_KEY in .env}
     expose: ["4500"]
     logging: *logs
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
 
   server:
     image: ${REGISTRY:-ducvu123}/clashofpokemon-server:${TAG:-latest}
@@ -58,6 +60,8 @@ services:
     # default, which would cut every game in progress on every deploy.
     stop_grace_period: 250s
     logging: *logs
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
 
   caddy:
     image: caddy:2-alpine
@@ -76,6 +80,29 @@ services:
       - caddydata:/data
     logging: *logs
 
+  # Pulls new images and restarts, so nothing has to reach into this box.
+  #
+  # The alternative was an SSH job in CI holding a key to a production host.
+  # This way the pipeline only pushes to a registry and the box decides when to
+  # take it: no inbound access, no key to leak or rotate.
+  #
+  # Scoped by label, because postgres and caddy are pinned deliberately and are
+  # not something a background poller should move. Docker's stop honours
+  # stop_grace_period, so the match loop still drains before the server exits.
+  watchtower:
+    image: containrrr/watchtower
+    restart: unless-stopped
+    environment:
+      # The image's last build is November 2023 and it speaks Docker API 1.25,
+      # which this daemon refuses -- it wants 1.40 or newer. Pinning a version
+      # the daemon accepts is enough; the API it actually uses is older than
+      # either number. Worth revisiting if the image stays unmaintained.
+      DOCKER_API_VERSION: "1.44"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --label-enable --cleanup --interval 120
+
 volumes:
   pgdata:
   caddydata:
+
