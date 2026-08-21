@@ -39,15 +39,19 @@ collection.
 
 ## How it's built
 
-Server-authoritative: the client sends intents — "play slot 2 here" — and never
-state. A deploy appears when the server says it does.
+The server runs the match and decides everything in it. Your device only tells
+it what you tapped, so it can't move a creature or claim a hit that didn't
+happen. That's what keeps an online match honest.
 
-The simulation runs at 30 Hz and sends snapshots at 15. Fifteen rather than
-twenty because twenty does not divide thirty, and the uneven gap shows up as a
-stutter nobody can find.
+The match updates 30 times a second and the server sends you 15 of those; your
+device draws the frames in between. 15 divides evenly into 30, so the motion
+stays smooth.
 
-Creature stats are derived from species data rather than hand-authored, so
-nothing drifts when the roster changes.
+Card stats come from the creature data rather than a list someone maintains by
+hand, so the numbers can't drift out of step with the roster.
+
+The same rules exist twice — TypeScript for the browser, Java on the server —
+and a test replays 26 matches through both to prove they still agree.
 
 ## Layout
 
@@ -59,10 +63,9 @@ nothing drifts when the roster changes.
 | `e2e/` | Drives both services as real processes over HTTP and WebSocket |
 | `deploy/` | Compose, Caddy, and what to set |
 
-The rules live in `client/src/core/` and are ported to `server/.../game/rules/`.
-The two are held together by a differential test: 26 seeded matches covering
-every card in the roster, replayed through both engines and compared. Every
-blow struck is identical; health matches exactly.
+The rules live in `client/src/core/` and are ported to
+`server/.../game/rules/`. The differential test covers every card in the
+roster and compares both engines blow by blow.
 
 ## Where it runs
 
