@@ -60,13 +60,26 @@ Build command `npm run build`, output `client/dist`, root `client`.
 
 ## Deploying again
 
+Tag a release. CI builds both images, pushes them to Docker Hub, and deploys
+the client to Cloudflare Pages. Watchtower on this box notices the new image
+within two minutes and restarts the service itself -- nothing reaches in.
+
 ```bash
-git pull && docker compose up -d --build
+git tag v1.2.3 && git push --tags
 ```
 
-Compose waits `stop_grace_period` (250s) while the server refuses new players
-and finishes the matches it has. Measured: an idle node stops in about a
-second, a node with a live match takes as long as that match had left.
+Watchtower only touches containers carrying its label, which is `api` and
+`server`. Postgres and Caddy are pinned on purpose and stay where they are.
+
+The restart still drains: `stop_grace_period` is 250s, during which the server
+refuses new players and finishes the matches it has. Measured, an idle node
+stops in about a second and a busy one takes as long as that match had left.
+
+To deploy by hand instead:
+
+```bash
+cd /opt/clashofpokemon/deploy && docker compose pull && docker compose up -d
+```
 
 ## If something is wrong
 
