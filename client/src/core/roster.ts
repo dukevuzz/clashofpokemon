@@ -166,8 +166,11 @@ export const FLAVOUR: Record<string, Flavour> = {
   rattata: { count: 3 },
 
   /** Ditto copies whatever you played last, and costs one more than it did. */
-  /** A tree that does not move, which is the whole card. */
-  sudowoodo: { rooted: true },
+  // Rooted is off until the card works. Reach comes from the role, and a
+  // building with a fighter's 15 units cannot hit anything that is not already
+  // touching it -- so it stood still, out of range, and died having done
+  // nothing. It walks again until it has a building's reach to go with it.
+  // sudowoodo: { rooted: true },
 
   ditto: { count: 1, copies: true },
 
