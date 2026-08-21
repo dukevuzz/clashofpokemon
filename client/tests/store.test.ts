@@ -207,4 +207,16 @@ describe("settings and the win record", () => {
     localStorage.setItem("clashofpokemon.record", "]]not json[[");
     expect(loadRecord()).toEqual({ wins: 0, losses: 0, draws: 0 });
   });
+
+  it("hands back a starter deck when the whole roster moved underneath it", () => {
+    localStorage.setItem("clashofpokemon.deck", JSON.stringify([
+      "wolf", "trex", "knight", "mammoth", "zombie", "druid",
+    ]));
+    expect(loadDeck()).toHaveLength(config.deckSize);
+  });
+
+  it("still respects a deck the player emptied on purpose", () => {
+    localStorage.setItem("clashofpokemon.deck", JSON.stringify([]));
+    expect(loadDeck()).toHaveLength(0);
+  });
 });
