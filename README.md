@@ -1,9 +1,8 @@
 # Clash of Pokémon
 
-[play.clashofpokemon.online](https://play.clashofpokemon.online)
+**[www.clashofpokemon.online](https://www.clashofpokemon.online)**
 
-A lane battler in the shape of Clash Royale, played with Pokémon. Two players,
-three minutes, six cards each, and a board that never pauses.
+A lane battler played with Pokémon. Two players, three minutes, two bridges.
 
 > [!IMPORTANT]
 > **This is a non-commercial fan project.**
@@ -19,17 +18,36 @@ three minutes, six cards each, and a board that never pauses.
 > If a rights holder would prefer this did not exist, say so and it will come
 > down.
 
-## What it is
+## Playing it
 
-- **Server-authoritative.** The client sends intents — "play slot 2 here" —
-  and never state. A deploy appears when the server says so.
-- **30 Hz simulation, 15 Hz snapshots.** 15 rather than 20 because 20 does not
-  divide 30, and the uneven gap shows up as a stutter nobody can find.
-- **The match never stops.** Not for a disconnect, not for an open evolution
-  choice, not for a tab going to the background. Time passing while you decide
-  is the cost of deciding.
-- **127 creatures**, each with stats derived from species data rather than
-  hand-authored, and evolutions reached by playing a card rather than picked.
+You get six cards and elixir that fills whether you spend it or not. Drop a
+creature on your half and it walks. It picks its own fights, crosses at a
+bridge, and hits whatever is nearest — you choose what to send and when, never
+where it goes after that.
+
+Break a lane tower and that side of the board opens up. Take the king tower,
+or be ahead when the clock runs out.
+
+Play the same creature enough and it evolves mid-match. You don't pick the
+moment; it arrives because you kept playing the card.
+
+**Nothing pauses.** Not while you decide, not while you read a card, not while
+your phone rings. Three minutes means three minutes.
+
+127 creatures. Six-card decks, so a deck is a set of answers rather than a
+collection.
+
+## How it's built
+
+Server-authoritative: the client sends intents — "play slot 2 here" — and never
+state. A deploy appears when the server says it does.
+
+The simulation runs at 30 Hz and sends snapshots at 15. Fifteen rather than
+twenty because twenty does not divide thirty, and the uneven gap shows up as a
+stutter nobody can find.
+
+Creature stats are derived from species data rather than hand-authored, so
+nothing drifts when the roster changes.
 
 ## Layout
 
@@ -50,7 +68,7 @@ blow struck is identical; health matches exactly.
 
 | | |
 |---|---|
-| `play.clashofpokemon.online` | the client — Cloudflare Pages |
+| `www.clashofpokemon.online` | the client — Cloudflare Pages, built from `main` |
 | `game.clashofpokemon.online` | matches — the VPS, behind Caddy |
 | `api.clashofpokemon.online` | accounts and history — the VPS, behind Caddy |
 
