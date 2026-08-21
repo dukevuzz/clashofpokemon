@@ -34,14 +34,9 @@ function boot(): Phaser.Game {
       autoCenter: Phaser.Scale.CENTER_BOTH,
       width: DESIGN_W,
       height: DESIGN_H,
-      // Draw at the screen's real pixels, not at 620x1080 for everyone.
-      //
-      // The board must fit on any device, so framing cannot change -- which
-      // leaves resolution. Without this the canvas is 620x1080 wherever it
-      // runs, and a phone with 2532 physical pixels of height inflates it by
-      // 2.34x in the browser, on top of the 1.35x the GPU already applied.
-      // Two resamples of a 25px creature. Zoom raises the backing store so
-      // there is one.
+      // Draw at the screen's real pixels. Without this the canvas is
+      // 620x1080 everywhere and a phone stretches it 2.3x to fit, on top of
+      // the scale the GPU already applied.
       zoom: Math.min(3, Math.max(1, Math.round(window.devicePixelRatio || 1))),
     },
     // Sprites are pixel art from a 24px tile set; smoothing them turns a crisp
@@ -67,19 +62,7 @@ indexReady.then(() => {
   });
 });
 
-/**
- * How the browser should stretch the finished canvas onto the screen.
- *
- * The canvas is always 620x1080 and the browser fits it to the window, so the
- * final step is a scale nobody chose. On a 1080p desktop that lands at 0.83 --
- * shrinking, where smoothing is right. On a phone it is 2.3x, because the
- * canvas is measured in CSS pixels and the screen has three physical ones for
- * each; smoothing a 2.3x enlargement is what makes the same creature look
- * softer on mobile than on a laptop.
- *
- * So it follows the direction of the scale rather than being fixed: smooth on
- * the way down, sharp on the way up.
- */
+/** Smooth when the canvas is shrunk to fit, sharp when it is enlarged. */
 function matchCanvasToScreen(game: Phaser.Game) {
   const c = game.canvas;
   if (!c) return;
