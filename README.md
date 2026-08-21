@@ -94,3 +94,13 @@ Sprites and species data are drawn from the Pokémon games and from community
 resources. Design inspiration from Clash Royale (Supercell) and from
 [Pokémon Auto Chess](https://github.com/keldaanCommunity/pokemonAutoChess),
 which showed that a fan project can be built in the open and done well.
+
+## Credits and licence
+
+The code is MIT. The art is not, and most of it is somebody else's: creature
+sprites come from [PMD Sprite Collab](https://sprites.pmdcollab.org/) under
+CC BY-NC, and 170 of them are Spike Chunsoft's from the official games.
+
+Everyone who drew something in here is named in [CREDITS.md](CREDITS.md).
+Terms are in [LICENSE](LICENSE). Read both before reusing anything under
+`client/public/`.
