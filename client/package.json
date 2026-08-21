@@ -44,7 +44,7 @@
     "vitest": "^2.1.9"
   },
   "dependencies": {
-    "phaser": "^3.87.0",
+    "phaser": "^4.2.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   }
