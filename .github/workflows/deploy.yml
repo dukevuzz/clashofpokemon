@@ -45,25 +45,3 @@ jobs:
           platforms: linux/arm64,linux/amd64
           push: true
           tags: ${{ env.NAMESPACE }}/clashofpokemon-api:${{ github.sha }},${{ env.NAMESPACE }}/clashofpokemon-api:latest
-
-
-  # Cloudflare Pages builds and serves the client, and the sprite atlases with
-  # it -- so the box never serves a byte of art.
-  client:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: 22, cache: npm, cache-dependency-path: client/package-lock.json }
-      - run: npm ci
-        working-directory: client
-      - run: npm run build
-        working-directory: client
-        env:
-          VITE_API: ${{ vars.API_URL }}
-          VITE_GAME_SERVER: ${{ vars.GAME_URL }}
-      - uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy client/dist --project-name=clashofpokemon
