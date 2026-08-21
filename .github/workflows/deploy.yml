@@ -62,7 +62,7 @@ jobs:
         env:
           VITE_API: ${{ vars.API_URL }}
           VITE_GAME_SERVER: ${{ vars.GAME_URL }}
-      - uses: cloudflare/wrangler-action@v3
+      - uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
