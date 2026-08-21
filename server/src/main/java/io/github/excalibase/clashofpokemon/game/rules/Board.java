@@ -38,8 +38,8 @@ public final class Board {
       return Math.max(0, dist(fromX, fromY, target.x(), target.y()) - radiusOf(target));
     }
     double half = Rules.towerSize(tower.kind) * 0.5;
-    double up = Rules.towerBox(tower.kind, "up");
-    double down = Rules.towerBox(tower.kind, "down");
+    double up = boxUp(tower);
+    double down = boxDown(tower);
 
     double dx = Math.max(0, Math.abs(fromX - tower.x) - half);
     double dy = fromY < tower.y
@@ -77,5 +77,20 @@ public final class Board {
   public static int facingFor(double dx, double dy) {
     double angle = Math.atan2(dy, dx);
     return (int) ((Math.round((Math.PI / 2 - angle) / (Math.PI / 4)) % 8 + 8) % 8);
+  }
+
+  /**
+   * A tower's collision box, relative to the way it faces.
+   *
+   * Mirrors `boxOf` in the TypeScript core and must stay identical to it.
+   */
+  public static double boxUp(Tower t) {
+    boolean nearSide = t.y < Rules.config().arenaHeight() / 2.0;
+    return Rules.towerBox(t.kind, nearSide ? "up" : "down");
+  }
+
+  public static double boxDown(Tower t) {
+    boolean nearSide = t.y < Rules.config().arenaHeight() / 2.0;
+    return Rules.towerBox(t.kind, nearSide ? "down" : "up");
   }
 }

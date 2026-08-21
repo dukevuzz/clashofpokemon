@@ -13,7 +13,7 @@
  */
 
 import { describe, expect, it, test } from "vitest";
-import { Match, gapTo, type Unit } from "../src/core/match";
+import { Match, gapTo, boxOf, type Unit } from "../src/core/match";
 import { AI } from "../src/core/ai";
 import { config } from "../src/core/config";
 import * as cards from "../src/core/cards";
@@ -786,7 +786,7 @@ describe("both sides fight a tower the same way", () => {
     // collision is the same class of bug this project keeps producing.
     const m = new Match(3);
     const t = m.towers.find((x) => x.kind === "side")!;
-    const box = config.towerBox.side;
+    const box = boxOf(t);
     const half = config.towerSize.side * 0.5;
 
     // Directly against the lower face: touching, so zero gap.

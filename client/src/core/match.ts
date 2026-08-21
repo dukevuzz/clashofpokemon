@@ -152,6 +152,19 @@ export function radiusOf(thing: Thing): number {
   return thing.isTower ? config.towerSize[thing.kind] * 0.5 : 0;
 }
 
+/**
+ * A tower's collision box, relative to the way it faces.
+ *
+ * `towerBox` is asymmetric because the art is. Every tower faces the middle,
+ * so the far half's faces are reversed and both players meet the same one.
+ */
+export function boxOf(t: Tower): { up: number; down: number } {
+  const box = config.towerBox[t.kind];
+  return t.y < config.arenaHeight / 2
+    ? { up: box.up, down: box.down }
+    : { up: box.down, down: box.up };
+}
+
 /** How far something is from a thing's *surface*, not its centre. */
 export const gapTo = (from: { x: number; y: number }, target: Thing) => {
   if (!target.isTower) {
@@ -169,7 +182,7 @@ export const gapTo = (from: { x: number; y: number }, target: Thing) => {
   // Measured, that was 36 sideways and 30 vertical for the player against 0 and
   // 47 for the enemy -- an asymmetry that came from which end of the board you
   // started at. One shape for both, and the two agree.
-  const box = config.towerBox[target.kind];
+  const box = boxOf(target);
   const half = config.towerSize[target.kind] * 0.5;
   const dx = Math.max(0, Math.abs(from.x - target.x) - half);
   const dy = from.y < target.y

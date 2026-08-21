@@ -3,7 +3,7 @@
 import { config, forwardFor, type Side } from "./config";
 import { arrivesAnywhere, type Card } from "./cards";
 import * as hand from "./hand";
-import { CROWD_RADIUS, type Match, type Unit } from "./match";
+import { CROWD_RADIUS, boxOf, type Match, type Unit } from "./match";
 
 /*
  * Distances use sqrt, never Math.hypot.
@@ -43,7 +43,7 @@ function frontLine(match: Match, side: Side, x: number): number {
       (t.x < config.arenaWidth / 2 ? 0 : 1) === lane,
   );
   if (!broken) return ownHalf;
-  return broken.y - forward * config.towerBox.side.up;
+  return broken.y - forward * boxOf(broken).up;
 }
 
 export function nearestDeploy(
@@ -77,7 +77,7 @@ export function nearestDeploy(
     if (t.dead) continue;
     // Same rectangle the physics uses, or a card dropped on the steps lands
     // inside the stonework and is shoved out on its first frame.
-    const box = config.towerBox[t.kind];
+    const box = boxOf(t);
     const clear = config.towerSize[t.kind] * 0.5 + config.unitSize * 0.6;
     const m = config.unitSize * 0.6;
     const dy = y - t.y;
@@ -209,7 +209,7 @@ export function laneOpen(
   // and it is the difference between a reward and a win button: you have
   // earned their doorstep, not their throne room.
   const forward = forwardFor(side);
-  const limit = broken.y - forward * config.towerBox.side.up;
+  const limit = broken.y - forward * boxOf(broken).up;
   return forward < 0 ? y >= limit : y <= limit;
 }
 

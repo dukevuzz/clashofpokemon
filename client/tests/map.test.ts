@@ -15,7 +15,7 @@
 
 import { describe, expect, test } from "vitest";
 import { config, towerRangeOf } from "../src/core/config";
-import { Match } from "../src/core/match";
+import { Match, boxOf } from "../src/core/match";
 import terrain from "../src/data/terrain.json" with { type: "json" };
 
 const TOWER_ART = terrain.towers;
@@ -158,7 +158,7 @@ describe("deployment", () => {
       for (let y = 10; y < config.arenaHeight; y += 7) {
         const at = m.nearestDeploy(config.PLAYER, x, y, x, true, true);
         for (const t of m.towers) {
-          const box = config.towerBox[t.kind];
+          const box = boxOf(t);
           const clear = config.towerSize[t.kind] * 0.5;
           const inside =
             Math.abs(at.x - t.x) < clear && at.y > t.y - box.up && at.y < t.y + box.down;

@@ -2,7 +2,7 @@
 
 import { config, forwardFor } from "./config";
 import * as status from "./status";
-import { CROWD_RADIUS, radiusOf, gapTo, type Unit, type Tower } from "./match";
+import { CROWD_RADIUS, radiusOf, gapTo, boxOf, type Unit, type Tower } from "./match";
 import { spreadFor } from "./spread";
 
 /*
@@ -266,7 +266,7 @@ export function pushOutOfTowers(towers: Tower[], u: Unit) {
   for (const t of towers) {
     if (t.dead) continue;
     const r = radiusOf(t) + 4;
-    const box = config.towerBox[t.kind];
+    const box = boxOf(t);
     const dx = u.x - t.x, dy = u.y - t.y;
     // The shape the tower is actually drawn as: a rectangle, taller than it
     // is wide, and not centred on the tower's own position.
