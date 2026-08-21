@@ -1,0 +1,48 @@
+MIT License
+
+Copyright (c) 2026 Duc Vu
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+------------------------------------------------------------------------------
+THE ART IS NOT COVERED BY THIS LICENCE
+
+The MIT terms above apply to the source code only. This repository also
+contains artwork under different terms, and some of it may not be
+redistributable at all. Read `client/art-src/SPRITES.md` before reusing
+anything from `client/public/`.
+
+  Creature sprites (`client/public/atlas/`)
+      PMD Sprite Collab — https://sprites.pmdcollab.org/
+      CC BY-NC 4.0: attribution required, NON-COMMERCIAL only.
+      Sprites for Pokémon that appeared in the official Mystery Dungeon games
+      are credited upstream to CHUNSOFT and are their copyrighted work; the
+      collab's licence covers the community's contributions, not those.
+
+  Towers (`client/public/tiles/foozle-*`)
+      Foozle, Spire Tower Pack 1 — CC0. No conditions.
+
+  Attack and ability effects (`client/public/tiles/attacks.png`)
+      Extracted from pokemonAutoChess, itself a fan project. Provenance of the
+      individual effects has not been established and no licence has been
+      verified for them. Treat as unlicensed.
+
+Pokémon is a trademark of Nintendo / Creatures Inc. / GAME FREAK inc. This is
+a non-commercial fan project, not affiliated with or endorsed by any of them.
+No money is made from it and none is asked for.
