@@ -1,5 +1,6 @@
 {
   "name": "clashofpokemon",
+  "version": "1.2.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -19,7 +20,7 @@
     "export:events": "tsx tools/export-events.ts",
     "export:contract": "tsx tools/export-contract.ts",
     "audit": "tsx tools/audit.ts",
-    "coverage": "tsx tools/coverage.ts",
+    "coverage": "vitest run --coverage --coverage.include=src/core/** --coverage.include=src/net/** --coverage.include=src/ui/deckStore.ts",
     "candidates": "tsx tools/candidates.ts",
     "balance:snapshot": "tsx tools/balance-diff.ts snapshot",
     "balance:diff": "tsx tools/balance-diff.ts diff",
@@ -27,7 +28,6 @@
     "pick": "tsx tools/pick-roster.ts",
     "chains": "tsx tools/all-chains.ts",
     "test": "vitest run",
-    "coverage": "vitest run --coverage --coverage.include=src/core/** --coverage.include=src/net/** --coverage.include=src/ui/deckStore.ts",
     "test:e2e": "playwright test",
     "test:watch": "vitest"
   },
