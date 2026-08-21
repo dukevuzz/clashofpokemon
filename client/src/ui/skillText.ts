@@ -12,6 +12,7 @@ import type { Card } from "../core/cards";
 import * as tiers from "../core/tiers";
 import { config } from "../core/config";
 import { SPECIES } from "../core/species";
+import { MOVE_EFFECT } from "../core/skills";
 import abilityFx from "../data/abilityFx.json";
 
 export interface SkillInfo {
@@ -38,11 +39,38 @@ export interface SkillInfo {
 const pretty = (skill: string) =>
   skill.toLowerCase().split("_").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 
+/** What a move that is not damage actually does, in the same voice. */
+function effectLine(card: Card): string | undefined {
+  const e = MOVE_EFFECT[card.skill ?? ""];
+  if (!e) return undefined;
+  switch (e.kind) {
+    case "heal":
+      return `Restores ${Math.round(e.fraction * 100)}% health to itself and nearby allies.`;
+    case "elixir":
+      return `Gives you ${e.amount} elixir.`;
+    case "shield":
+      return `Puts a ${e.amount}-point shield on the strongest ally nearby, or itself if alone.`;
+    case "buff": {
+      const stat = e.stat === "speed" ? "its speed"
+        : e.stat === "def" ? "its armour" : "its special defence";
+      return `Raises ${stat} by ${Math.round((e.multiplier - 1) * 100)}% for the rest of its life.`;
+    }
+    case "blink":
+      return `Jumps ${e.distance} units forward, past whatever is in the way.`;
+  }
+}
+
 export function skillOf(card: Card): SkillInfo {
   const info = SPECIES[card.id];
   const declared = tiers.abilityOf(card.skill);
   const { amount, resist } = tiers.skillDamage(card, card.damage * config.skillDamage);
   const every = card.castEvery;
+
+  // Five roster cards cast something that is not an attack, and every one of
+  // them read "Hits its target for N" because the damage was computed before
+  // anyone asked what the move was. Eevee bought you elixir and claimed to
+  // deal 47.
+  const effect = effectLine(card);
 
   const resistWord =
     resist === "physical" ? "reduced by armour"
@@ -54,10 +82,12 @@ export function skillOf(card: Card): SkillInfo {
     // One sentence, not two glued at a full stop -- the resist clause was
     // reading as "for half. reduced by special defence." wherever the summary
     // is shown at length, which the guide now does.
-    summary:
-      `Hits its target for ${Math.round(amount)}, and everything within ` +
-      `${config.skillRadius} units for half — ${resistWord}.`,
-    amount: Math.round(amount),
+    summary: effect
+      ?? `Hits its target for ${Math.round(amount)}, and everything within ` +
+         `${config.skillRadius} units for half — ${resistWord}.`,
+    // Zero when the move deals none: this figure is shown on the card and
+    // feeds how strong it looks.
+    amount: effect ? 0 : Math.round(amount),
     resist,
     every,
     seconds: every * card.attackRate,
