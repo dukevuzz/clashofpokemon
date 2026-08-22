@@ -261,9 +261,7 @@ export class BattleScene extends Phaser.Scene {
   arenaTheme = "";
 
   preload() {
-    // Deal the arena before anything is drawn. Online, both players hash the
-    // same match id and land on the same board; offline there is nobody to
-    // agree with, so it is a straight roll.
+    // Both players hash the same match id, so they get the same board.
     this.arenaTheme = arena.pickTheme(this.net?.matchId);
 
     // Chains *and* bodies.
