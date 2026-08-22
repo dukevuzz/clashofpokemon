@@ -257,7 +257,7 @@ describe("the lane showcase", () => {
   it("honours the pose the sheet declares, not the first name on a list", () => {
     /*
      * The sheets record their own attack and shoot rows -- decided once by
-     * tools/resolve-poses.py -- and the priority lists are only a fallback.
+     * resolved ahead of time -- and the priority lists are only a fallback.
      * A first draft read the list first, which would have shown "Attack" for
      * a creature whose declared pose is "Kick" or "Shock".
      */

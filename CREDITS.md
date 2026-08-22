@@ -87,8 +87,7 @@ as the creature sprites.
 
 `public/tiles/attacks.png` was assembled from
 [pokemonAutoChess](https://github.com/keldaanCommunity/pokemonAutoChess), a
-fan project of the same kind as this one. Two of the tools here
-(`add-sprite.py`, `add-ability-fx.py`) were written against its asset layout.
+fan project of the same kind as this one.
 
 We have not been able to establish who drew these effects or under what terms,
 so they are treated as unlicensed rather than assumed safe. If you recognise

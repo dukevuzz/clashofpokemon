@@ -46,7 +46,7 @@ export function actionFor(sheetName: string, kind: "melee" | "ranged"): string |
  * The animation a creature attacks with — the stored answer first.
  *
  * Every sheet declares its own `attack` and `shoot` rows, decided once by
- * `tools/resolve-poses.py` and written into sheets.json so a human can look at
+ * resolved ahead of time and written into sheets.json so a human can look at
  * Onix and disagree. The priority lists above are the fallback for a sheet
  * that never got one, not the primary answer.
  *

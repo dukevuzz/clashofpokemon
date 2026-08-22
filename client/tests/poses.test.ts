@@ -7,7 +7,7 @@
  *   - Three creatures had no attack motion and stood in an idle pose while
  *     dealing damage. That was written down for weeks as "no attack animation",
  *     with a note that better art might exist. The art was always there:
- *     `add-sprite.py` asked for eight fixed row names, and Togepi attacks with
+ *     the importer asked for eight fixed row names, and Togepi attacks with
  *     `Appeal`, Jolteon with `Shock`, Blastoise with `Ricochet`.
  *   - Every creature cast its skill using its ordinary swing, because the cast
  *     pose PAC records separately was never imported at all.

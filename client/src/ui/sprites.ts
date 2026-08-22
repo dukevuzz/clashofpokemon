@@ -125,7 +125,7 @@ export function resolve(sheetName: string, action: string, dir: number): string 
     // shown there with the animation it actually plays.
     name = castAnim(sheetName);
   } else if (action === "Attack" || action === "Shoot") {
-    // Read, not resolved. `tools/resolve-poses.py` decided this once and wrote
+    // Read, not resolved. This was decided once ahead of time and written
     // it into sheets.json, so a human can look at Onix and disagree -- which
     // was impossible while the answer fell out of a priority list at runtime.
     //

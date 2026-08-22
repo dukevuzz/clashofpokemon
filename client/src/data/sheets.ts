@@ -17,7 +17,7 @@ export interface Sheet {
   bodyWidth: number;
   bodyHeight: number;
   feetOffset: number;
-  /** Which animation row is this creature's attack, resolved once by `tools/resolve-poses.py` rather than guessed at draw time. */
+  /** Which animation row is this creature's attack, resolved once rather than guessed at draw time. */
   attack: string | null;
   shoot: string | null;
   /** The pose for casting a skill, which PAC records separately from the attack. */
