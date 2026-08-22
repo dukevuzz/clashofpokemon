@@ -257,7 +257,15 @@ export class BattleScene extends Phaser.Scene {
   }
 
   /** The evolution chains both decks can reach, and nothing else. */
+  /** Which ground this match was dealt. */
+  arenaTheme = "";
+
   preload() {
+    // Deal the arena before anything is drawn. Online, both players hash the
+    // same match id and land on the same board; offline there is nobody to
+    // agree with, so it is a straight roll.
+    this.arenaTheme = arena.pickTheme(this.net?.matchId);
+
     // Chains *and* bodies.
     //
     // A chain is what a card evolves into; a form is a body it can be deployed

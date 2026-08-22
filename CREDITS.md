@@ -72,6 +72,21 @@ used here, is in
 and released by [Foozle](https://foozlecc.itch.io/) under CC0. CC0 asks for
 nothing; credited anyway.
 
+## Ground tilesets
+
+The arenas — forest, meadow, amp, magma — are PMD dungeon tilesets in
+[DTEF](https://github.com/audinowho/DtefTilesets) form, converted by
+`client/tools/convert-dtef.py`. Same community as the creature sprites, which
+is why they finally match the things standing on them.
+
+`ground.png`, the hand-made set the game shipped with and still available as
+`?theme=classic`, is from the [legend-of-lua](https://github.com/Challacade/legend-of-lua)
+overworld set by **Challacade LLC**, MIT.
+
+As with the effects below, we have not established every tileset's individual
+authorship. If you recognise your work, open an issue and it will be credited
+or removed, whichever you prefer.
+
 ## Attack and ability effects
 
 `public/tiles/attacks.png` was assembled from
