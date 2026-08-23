@@ -66,6 +66,26 @@ export function arrivesAnywhere(d?: Delivery): boolean {
 
 
 /** Build a card for any species. */
+/**
+ * What a card calls itself.
+ *
+ * Species keys have no spaces -- `megacharizard`, `primalkyogre` -- so simply
+ * capitalising the first letter gave "Megacharizard" on every transformation.
+ * The prefix is split off so the card reads the way the creature is named.
+ */
+function displayName(key: string): string {
+  const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+  for (const prefix of ["mega", "primal"]) {
+    const rest = key.slice(prefix.length);
+    // The remainder has to be a species in its own right. Without that check
+    // Meganium -- a real creature, no relation -- came out as "Mega Nium".
+    if (key.startsWith(prefix) && rest && SPECIES[rest]) {
+      return `${cap(prefix)} ${cap(rest)}`;
+    }
+  }
+  return cap(key);
+}
+
 export function build(name: string, from?: Card): Card | undefined {
   const info = SPECIES[name];
   if (!info) return undefined;
@@ -161,7 +181,7 @@ export function build(name: string, from?: Card): Card | undefined {
 
   return {
     id: name,
-    name: name.charAt(0).toUpperCase() + name.slice(1),
+    name: displayName(name),
     elixir,
     count,
     hp: Math.floor(info.hp * HP_SCALE * budget * (runner ? tiers.RUNNER_HP_BONUS : 1)),

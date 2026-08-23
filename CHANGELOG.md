@@ -2,9 +2,21 @@
 
 ## Unreleased
 
+## 1.3.0 — 2026-08-24
+
 ### Added
-- Spells: Thunder, Toxic Rain and Quake. Cards that hit an area instead of
-  putting a creature down. Offline only for now.
+- Mega Evolution. Put a card in the first slot of your deck, get it to its
+  final form, and a stone beside the arena fills as your elixir does. Three
+  elixir turns that creature into its Mega for the rest of its life. One per
+  match, and it keeps whatever damage it had already taken. Single player
+  only for now.
+- 24 more creatures, and the 38 Megas they lead to.
+- Drag your deck to reorder it. The collection filters down to the cards that
+  can Mega.
+- Four arenas, one dealt per match. In one of them the river is lava.
+
+### Changed
+- New board art.
 
 ## 1.2.0 — 2026-08-22
 

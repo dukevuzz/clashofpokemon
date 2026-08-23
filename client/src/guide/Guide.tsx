@@ -25,6 +25,7 @@ const SECTIONS = [
   { id: "roles", label: "Roles" },
   { id: "types", label: "Types" },
   { id: "evolution", label: "Evolution" },
+  { id: "mega", label: "Mega Evolution" },
   { id: "pokemon", label: "Every Pokémon" },
   { id: "feedback", label: "Bugs & ideas" },
 ];
@@ -352,6 +353,51 @@ export function Guide() {
             <p className="g-dim">
               Every card's chain, and how many plays it needs, is on its detail
               sheet below.
+            </p>
+          </section>
+
+          <section id="mega">
+            <h2>Mega Evolution</h2>
+            <p>
+              <b>The first slot of your deck is the Mega slot.</b> It is marked
+              in the deck screen and on the menu, and you set it by dragging a
+              card into first place. Only that card can Mega — the other five
+              never will, whatever they are.
+            </p>
+            <p>
+              In a match, once that card has reached its <i>final</i> form and
+              is standing on the board, a stone appears beside the arena and
+              fills as your elixir does. At {facts.mega.cost} elixir it lights
+              up. Press it and the creature transforms where it stands, for the
+              rest of its life.
+            </p>
+            <p>
+              <b>It keeps the damage it has already taken.</b> A Mega pressed on
+              a creature at half health arrives at half health — the button
+              rescues a push, it does not heal one
+              {facts.mega.example && (
+                <> — {facts.mega.example.grown} goes from {facts.mega.example.hp} health
+                to {facts.mega.example.megaHp} as {facts.mega.example.mega}</>
+              )}. Across every pair it is about{" "}
+              <b>×{facts.mega.gain.hp.toFixed(2)} health</b> and{" "}
+              <b>×{facts.mega.gain.damage.toFixed(2)} damage</b>.
+            </p>
+            <p>
+              Three rules decide whether the stone is lit. You need the elixir.
+              The card must have reached its final form. And exactly one of it
+              may be on the board — <b>put two out and the stone goes dark</b>,
+              because there is no way to say which one you meant. It comes back
+              when you are down to one again.
+            </p>
+            <p>
+              One Mega per side, per match. Spend it on the wrong push and that
+              is the match played without it.
+            </p>
+            <p className="g-dim">
+              {facts.mega.capable} of the {facts.mega.roster} cards can Mega.
+              Filter the collection by <i>can Mega</i> in the deck screen to see
+              them. Offline only for now — the button does not appear in online
+              matches.
             </p>
           </section>
 

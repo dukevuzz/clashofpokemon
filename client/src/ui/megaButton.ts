@@ -67,16 +67,22 @@ export class MegaButton {
 
     const has = mega.megaTarget(this.match, this.me) !== undefined;
     const paid = Math.min(1, this.match.elixir[this.me] / config.megaCost);
-    // Both, so the stone never looks ready while there is nothing on the board
-    // to spend it on. With nothing out it still charges, dimly, so the player
-    // can see the elixir is there and the unit is what is missing.
     this.ready = has && paid >= 1;
     if (this.ready) this.pulse += 0.08;
-    this.redraw(has ? paid : paid * 0.3);
+    // Cold whenever there is nothing to spend it on, rather than partly lit.
+    // Showing the elixir charge with no valid unit on the board read as
+    // "nearly ready" when the truth was "not available at all" -- and the
+    // elixir bar two rows below already says how much elixir there is.
+    this.redraw(has ? paid : 0);
   }
 
   private redraw(charge: number) {
     const half = ICON / 2;
+    // Once it is full, the cold copy is not merely covered -- it is hidden.
+    // The stone's edge pixels are semi-transparent, so leaving the drained
+    // copy underneath let it blend through the rim and the "ready" stone never
+    // looked fully lit.
+    this.cold.setVisible(charge < 1);
     this.reveal.clear();
     this.reveal.fillStyle(0xffffff, 1);
     this.reveal.fillRect(this.x - half, this.y + half - ICON * charge, ICON, ICON * charge);

@@ -15,6 +15,7 @@ import { config, towerRangeOf } from "../core/config";
 import * as cards from "../core/cards";
 import * as tiers from "../core/tiers";
 import * as evolution from "../core/evolution";
+import * as mega from "../core/mega";
 
 /** World units per board tile, for turning engine distances into something sayable. */
 const TILE = 24;
@@ -86,6 +87,39 @@ export const facts = {
     margin: config.deployMargin,
   },
 
+  mega: {
+    cost: config.megaCost,
+    /** How many deck cards reach a Mega, of how many there are. */
+    capable: cards.ALL.filter((c) => mega.canEverMega(c)).length,
+    roster: cards.ALL.length,
+    /**
+     * What a Mega is actually worth, measured rather than asserted.
+     *
+     * The raw stat lines scale by 1.75, but a card's price and health run
+     * through the same curve as everything else, so what a player sees is not
+     * that number. These are the medians of what the cards really become.
+     */
+    gain: (() => {
+      const pairs = Object.entries(mega.MEGA)
+        .map(([base, form]) => [cards.build(base), cards.build(form)] as const)
+        .filter((p): p is readonly [cards.Card, cards.Card] => Boolean(p[0] && p[1]));
+      const ratio = (pick: (c: cards.Card) => number) =>
+        median(pairs.map(([b, m]) => pick(m) / pick(b)));
+      return { hp: ratio((c) => c.hp), damage: ratio((c) => c.damage) };
+    })(),
+    /** A worked pair, picked from the roster rather than written down. */
+    example: (() => {
+      const base = cards.byId("charmander");
+      const form = base && evolution.chainOf(base.id).find((f) => f in mega.MEGA);
+      const grown = form ? cards.build(form) : undefined;
+      const megaForm = form ? cards.build(mega.MEGA[form]) : undefined;
+      return base && grown && megaForm
+        ? { base: base.name, grown: grown.name, mega: megaForm.name,
+            hp: grown.hp, megaHp: megaForm.hp }
+        : undefined;
+    })(),
+  },
+
   evolution: {
     /** Plays needed at each stage -- it gets dearer as the line goes on. */
     perStage: evolution.PLAYS_FOR_STAGE,
@@ -109,10 +143,13 @@ export const facts = {
   },
 } as const;
 
-const median = (xs: number[]): number => {
+// A function declaration rather than a const: `facts` is built at module load
+// and reads this, so an arrow assigned further down is still in the temporal
+// dead zone by the time it is called.
+function median(xs: number[]): number {
   const s = [...xs].sort((a, b) => a - b);
   return s.length ? s[Math.floor(s.length / 2)] : 0;
-};
+}
 
 /**
  * What each role actually looks like, measured off the roster.
