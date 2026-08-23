@@ -193,6 +193,8 @@ export const config = {
 
   /** You may only deploy on your own half, until you break a tower. */
   deployMargin: 40,
+  /** Elixir to Mega the deck's first card, once it is on the board. */
+  megaCost: 3,
 
   PLAYER: 1,
   ENEMY: 2,

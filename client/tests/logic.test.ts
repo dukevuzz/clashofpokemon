@@ -17,6 +17,7 @@ import { Match, gapTo, boxOf, type Unit } from "../src/core/match";
 import { AI } from "../src/core/ai";
 import { config } from "../src/core/config";
 import * as cards from "../src/core/cards";
+import { MOVE_STATUS } from "../src/core/status";
 import { byId } from "../src/core/cards";
 import { spawn, arrivalTime } from "../src/core/deploy";
 import * as hand from "../src/core/hand";
@@ -38,10 +39,12 @@ function seeded(seed: number) {
 const STEP = 1 / 30;
 
 /** Play one match to its end, handing every event to `watch`. */
-function play(seed: number, watch?: (m: Match, events: unknown[]) => void) {
+function play(seed: number, watch?: (m: Match, events: unknown[]) => void,
+              deck?: cards.Card[]) {
   const rng = seeded(seed);
   const m = new Match({
-    playerDeck: cards.newDeck(rng), enemyDeck: cards.newDeck(rng), rng,
+    playerDeck: deck ?? cards.newDeck(rng),
+    enemyDeck: deck ?? cards.newDeck(rng), rng,
   });
   const p = new AI(config.PLAYER, rng), e = new AI(config.ENEMY, rng);
   let steps = 0;
@@ -150,6 +153,11 @@ describe("status effects", () => {
   test("only a cast ever causes one", () => {
     // The load-bearing rule of the whole system. If a status ever starts
     // landing off ordinary attacks the game has quietly become another game.
+    // Both sides run a deck that can actually cause one. Random decks used to
+    // supply this by luck, and stopped once the roster grew -- only 16 of 151
+    // cards carry a status move, so five six-card draws can miss them all and
+    // the measurement silently becomes vacuous.
+    const causes = cards.ALL.filter((c) => c.skill in MOVE_STATUS).slice(0, 6);
     let hits = 0, applied = 0;
     for (const seed of SEEDS) {
       play(seed, (_m, events) => {
@@ -157,7 +165,7 @@ describe("status effects", () => {
           if (e.type === "hit") hits++;
           if (e.type === "status") applied++;
         }
-      });
+      }, causes);
     }
     expect(applied).toBeGreaterThan(0);
     expect(applied / hits).toBeLessThan(0.05);

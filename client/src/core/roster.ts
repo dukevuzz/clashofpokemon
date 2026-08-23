@@ -152,6 +152,17 @@ export const ROSTER = [
   // The three deliveries. Diglett tunnels, Voltorb is thrown, Snorlax falls --
   // see FLAVOUR for why each one arrives the way it does.
   "snorlax",
+
+  // ------------------------------------------------ transformation lines
+  //
+  // Every one of these reaches a Mega or a Primal. They are listed as their
+  // base form, not their final one -- Swablu rather than Altaria -- because a
+  // roster entry is what a deck is dealt, and a card that is also somebody
+  // else's evolution would be reachable two ways.
+  "absol", "buneary", "carbink", "drampa", "electrike", "floette",
+  "groudon", "houndour", "kyogre", "latias", "latios", "mawile",
+  "meditite", "mewtwo", "numel", "rayquaza", "sableye", "shuppet",
+  "skrelp", "swablu", "tatsugiri", "tynamo", "zeraora", "zygarde",
 ];
 
 export const FLAVOUR: Record<string, Flavour> = {

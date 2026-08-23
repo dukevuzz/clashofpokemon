@@ -68,6 +68,8 @@ export interface Unit {
   leap?: { t: number; dur: number; fromY: number; toY: number };
   /** Seconds left before this unit can act. */
   spawning: number;
+  /** Has this unit Mega Evolved? One per side at a time. */
+  mega?: boolean;
   /** Where a tunneller surfaces, and where it set off from. Diggers only. */
   digTo?: { x: number; y: number };
   digFrom?: { x: number; y: number };
@@ -130,6 +132,7 @@ export type MatchEvent =
   | { type: "ready"; unit: Unit }
   | { type: "hit"; target: Thing; amount: number; mult: number; source: Unit | Tower }
   | { type: "cast"; unit: Unit; target: Thing; skill: string }
+  | { type: "mega"; side: Side; unit: Unit; from: string }
   | { type: "status"; unit: Unit; kind: status.StatusKind; seconds: number }
   | { type: "shot"; from: Unit | Tower; to: Thing; amount: number; mult: number }
   | { type: "death"; thing: Thing }
@@ -246,6 +249,8 @@ export class Match {
 
   elixir: Record<Side, number>;
   deck: Record<Side, Card[]>;
+  /** The card each side may Mega: deck slot one, before shuffling. */
+  megaPick: Record<Side, Card | undefined>;
   hand: Record<Side, (Card | undefined)[]>;
   drawIndex: Record<Side, number>;
   /** Times each card has been played this match, for evolution. */
@@ -316,6 +321,10 @@ export class Match {
       1: opts.shuffle === false ? [...p] : shuffled(p, this.rng),
       2: opts.shuffle === false ? [...e] : shuffled(e, this.rng),
     };
+    // The Mega slot is a deck-building position, so it has to be read before
+    // the shuffle. `deck[side][0]` after this point is whichever card the
+    // shuffle happened to put first, which is not the one the player chose.
+    this.megaPick = { 1: p[0], 2: e[0] };
     this.hand = { 1: [], 2: [] };
     this.drawIndex = { 1: config.handSize, 2: config.handSize };
     this.plays = { 1: {}, 2: {} };

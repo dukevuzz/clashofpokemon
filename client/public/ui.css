@@ -383,6 +383,41 @@ a.lr-btn { display: inline-block; text-decoration: none; text-align: center; }
   cursor: pointer;
 }
 .lr-slot:hover { background: var(--panelLit); }
+
+/*
+ * The Mega slot.
+ *
+ * A glow outside the frame rather than a coloured border on it: every card
+ * already carries a rarity border, so a border here reads as one more rarity
+ * and says nothing. Off means the slot is still the Mega slot, holding a card
+ * that cannot use it.
+ */
+.lr-mega {
+  border-color: var(--lr-gold);
+  box-shadow:
+    inset -4px -4px 0 0 var(--lr-bg-tertiary),
+    0 0 0 2px rgba(240, 190, 60, 0.30),
+    0 0 14px 2px rgba(240, 190, 60, 0.28);
+  animation: lr-mega-breathe 2.4s ease-in-out infinite;
+}
+.lr-mega-off {
+  border-color: var(--lr-fg-dim);
+  box-shadow: inset -4px -4px 0 0 var(--lr-bg-tertiary);
+  animation: none;
+}
+@keyframes lr-mega-breathe {
+  0%, 100% { box-shadow:
+    inset -4px -4px 0 0 var(--lr-bg-tertiary),
+    0 0 0 2px rgba(240, 190, 60, 0.30),
+    0 0 12px 2px rgba(240, 190, 60, 0.24); }
+  50% { box-shadow:
+    inset -4px -4px 0 0 var(--lr-bg-tertiary),
+    0 0 0 3px rgba(240, 190, 60, 0.45),
+    0 0 20px 4px rgba(240, 190, 60, 0.40); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lr-mega { animation: none; }
+}
 .lr-slot .lr-face { image-rendering: pixelated; }
 .lr-slot-name { font-size: 0.68rem; color: var(--lr-fg-dim); }
 .lr-cost-pip {

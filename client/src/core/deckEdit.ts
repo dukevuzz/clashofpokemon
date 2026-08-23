@@ -69,3 +69,23 @@ export function clearSlot(deck: DeckSlots, slot: number): DeckSlots {
 export function clearAll(deck: DeckSlots): DeckSlots {
   return emptyDeck(deck.length);
 }
+
+/**
+ * Move a card from one slot to another, shuffling what is in between.
+ *
+ * Slot one is the Mega slot, so the order of a deck is now a decision rather
+ * than the order you happened to tap cards in. Reordering has to be possible
+ * without emptying and refilling.
+ *
+ * An insert-and-shift rather than a swap: dragging a card three slots left and
+ * having it trade places with whatever sat there scrambles the rest of the row,
+ * where shifting keeps every other card in the order the player put it.
+ */
+export function moveSlot(deck: DeckSlots, from: number, to: number): DeckSlots {
+  if (from === to) return deck;
+  if (from < 0 || to < 0 || from >= deck.length || to >= deck.length) return deck;
+  const out = [...deck];
+  const [card] = out.splice(from, 1);
+  out.splice(to, 0, card);
+  return out;
+}
