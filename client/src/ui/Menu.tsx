@@ -18,6 +18,7 @@ import * as cards from "../core/cards";
 import * as towerTroops from "../core/towerTroops";
 import * as portraits from "./portraits";
 import { config } from "../core/config";
+import * as mega from "../core/mega";
 import {
   loadDeck, deckIsFull, loadRecord, loadSettings, saveSettings, loadTroop, saveTroop,
 } from "./deckStore";
@@ -82,12 +83,24 @@ export function Menu({ go, online, status, rejoin, host, join, inviteCode }: Men
       <section className="lr-card">
         <h2>Your deck</h2>
         <div className="lr-deck">
-          {deck.map((c) => (
+          {deck.map((c, i) => (
             <button
               key={c.id}
-              className="lr-slot"
+              // Slot one is the Mega slot, marked here as well as in the deck
+              // editor: this row is where a player looks before pressing play,
+              // and a deck whose Mega slot holds a card that cannot Mega is
+              // worth noticing before the match rather than during it.
+              className={
+                i === 0
+                  ? `lr-slot lr-mega${mega.canEverMega(c) ? "" : " lr-mega-off"}`
+                  : "lr-slot"
+              }
               onClick={() => go("Deck")}
-              title={`${c.name} — ${c.elixir} elixir`}
+              title={
+                i === 0
+                  ? `${c.name} — ${c.elixir} elixir · Mega slot${mega.canEverMega(c) ? "" : " (this card cannot Mega)"}`
+                  : `${c.name} — ${c.elixir} elixir`
+              }
             >
               <span className="lr-cost-pip">{c.elixir}</span>
               <span className="lr-face" style={portraits.styleFor(c.sheet, 48)} />

@@ -17,6 +17,8 @@ import * as sprites from "../ui/sprites";
 import * as arena from "../ui/arena";
 import { SkillFx } from "../ui/skillFx";
 import { CardFace } from "../ui/card";
+import { MegaButton } from "../ui/megaButton";
+import * as mega from "../core/mega";
 import {
   DESIGN_W, DESIGN_H, ARENA_SCALE, ARENA_Y,
   HAND_Y, CARD_W, CARD_H, PIP_Y, ARENA_X, toScreen, toWorld, SPRITE_SCALE, FOOTPRINT,
@@ -85,6 +87,7 @@ export class BattleScene extends Phaser.Scene {
   private towerViews = new Map<number, TowerView>();
 
   private pips: Phaser.GameObjects.Rectangle[] = [];
+  private megaButton?: MegaButton;
   private elixirText!: Phaser.GameObjects.Text;
   private clockText!: Phaser.GameObjects.Text;
   private clockBox!: Phaser.GameObjects.Rectangle;
@@ -286,7 +289,21 @@ export class BattleScene extends Phaser.Scene {
     for (const side of [this.me, this.them] as const) {
       reachable.push(towerTroops.troopById(this.match.troop[side]).species);
     }
+    // Mega forms are deliberately outside the evolution chains, so `chainOf`
+    // above will never mention them and the loader would not fetch them.
+    for (const side of [this.me, this.them] as const) {
+      for (const c of this.match.deck[side]) {
+        for (const f of evolution.chainOf(c.id)) {
+          const m = mega.MEGA[f];
+          if (m) reachable.push(m);
+        }
+      }
+    }
+
     reachable.push(towerTroops.KING_SPECIES);
+    // Two frames side by side: cold, then lit.
+    this.load.spritesheet("mega-stone", "tiles/mega-stone.png",
+                          { frameWidth: 48, frameHeight: 48 });
     sprites.preload(this.load, reachable);
   }
 
@@ -414,6 +431,18 @@ export class BattleScene extends Phaser.Scene {
       this.pips.push(this.add.rectangle(x, PIP_Y, pipW, 16, C.elixir).setOrigin(0, 0.5));
     }
     this.elixirText = this.add.text(ARENA_X + 6, PIP_Y - 9, "5", px(11));
+
+    // In the empty margin beside the arena rather than over it: the board is
+    // 384 units wide in a 620 design, so there are ~80px either side doing
+    // nothing, and a button on the board covers ground units walk through.
+    //
+    // Offline only, until the server can be told about a Mega. A button that
+    // is visible, charges, lights up and then does nothing is worse than no
+    // button -- the player spends the match waiting to use it.
+    if (!this.net) {
+      this.megaButton = new MegaButton(
+        this, ARENA_X / 2, PIP_Y - 46, this.match, this.me, () => this.pressMega());
+    }
 
     // Hidden by default, the way Clash Royale plays it: counting the
     // opponent's elixir is a skill, and a readout hands it to you. Offered
@@ -609,6 +638,17 @@ export class BattleScene extends Phaser.Scene {
 
   /** Is this release a play, or a change of mind? */
   /** Put a card down -- locally, or as a request. */
+  /**
+   * Mega the slot-one unit.
+   *
+   * Offline only -- the button is not built for a networked match. Online will
+   * need a message of its own: the server owns elixir, so a client that Mega'd
+   * on its own would drift from the match the server is running.
+   */
+  private pressMega() {
+    mega.mega(this.match, this.me);
+  }
+
   private play(slot: number, x: number, y: number): boolean {
     if (!this.net) return this.match.deploy(this.me, slot, x, y);
     const held = this.match.hand[this.me][slot];
@@ -809,6 +849,18 @@ export class BattleScene extends Phaser.Scene {
       case "spawn":
         this.views.set(e.unit.id, new UnitView(this, e.unit, this.unitLayer));
         break;
+
+      case "mega": {
+        // The unit keeps its identity but not its picture. Rebuilding the view
+        // is simpler than teaching UnitView to swap sheets mid-life, and a
+        // Mega happens once per side per match.
+        this.views.get(e.unit.id)?.replace();
+        const view = new UnitView(this, e.unit, this.unitLayer);
+        this.views.set(e.unit.id, view);
+        this.fx.cast(e.unit.x, e.unit.y, "ABILITY_THUNDER", C.gold);
+        this.floatText(e.unit.x, e.unit.y - 26, "MEGA", C.gold, 13);
+        break;
+      }
 
       case "ready":
         // A small pop as it comes alive, so the moment it becomes dangerous is
@@ -1099,6 +1151,7 @@ export class BattleScene extends Phaser.Scene {
       this.pips[i].setScale(Math.max(0, Math.min(1, elixir - i)), 1);
     }
     this.elixirText.setText(elixir.toFixed(1));
+    this.megaButton?.update();
     this.enemyElixirText?.setText(
       `opponent ${this.match.elixir[this.them].toFixed(1)}`,
     );
@@ -1756,6 +1809,18 @@ class UnitView {
   flash() {
     this.sprite.setTintFill(0xffffff);
     this.scene.time.delayedCall(60, () => this.sprite.clearTint());
+  }
+
+  /** Tear down at once, leaving no death animation. Used when a Mega replaces the view. */
+  replace() {
+    this.spawnRing?.destroy();
+    this.name?.destroy();
+    for (const p of this.statusPips) p.destroy();
+    this.barBg.destroy();
+    this.bar.destroy();
+    for (const c of this.chips) c.destroy();
+    this.sprite.destroy();
+    this.shadow.destroy();
   }
 
   die() {

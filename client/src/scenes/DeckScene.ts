@@ -15,6 +15,7 @@ import { loadDeck, saveDeck, loadBranch, saveBranch, starterDeck } from "../ui/d
 import * as sprites from "../ui/sprites";
 import * as portraits from "../ui/portraits";
 import * as deckEdit from "../core/deckEdit";
+import * as mega from "../core/mega";
 
 /**
  * Travel that turns a tap into a scroll, in design pixels.
@@ -30,7 +31,9 @@ type Sort = "cost" | "name" | "rarity";
 type Filter =
   | { kind: "all" }
   | { kind: "role"; value: string }
-  | { kind: "type"; value: string };
+  | { kind: "type"; value: string }
+  /** Cards that reach a Mega. 38 of 151, and slot one wants one of them. */
+  | { kind: "mega" };
 
 const TILE_W = 92;
 const TILE_H = 108;
@@ -55,6 +58,13 @@ export class DeckScene extends Phaser.Scene {
   private branch?: string;
 
   private slots: Phaser.GameObjects.Container[] = [];
+  /** Slot being dragged, where it started on screen, and where it is now. */
+  private dragSlot?: { index: number; home: { x: number; y: number } };
+  private slotHome: { x: number; y: number }[] = [];
+  /** The glow around slot one, which is the Mega slot, and the stone on it. */
+  private megaAura?: Phaser.GameObjects.Graphics;
+  private megaStone?: Phaser.GameObjects.Image;
+  private auraPulse = 0;
   /** The live tiles, so picking a card can repaint them instead of rebuilding. */
   private tiles: Array<{
     card: Card;
@@ -91,6 +101,10 @@ export class DeckScene extends Phaser.Scene {
 
   /** The roster's sheets, for the animated preview panel. */
   preload() {
+    // The same stone the battle button uses, so the deck screen and the match
+    // are visibly talking about one thing.
+    this.load.spritesheet("mega-stone", "tiles/mega-stone.png",
+                          { frameWidth: 48, frameHeight: 48 });
     // Nothing. The grid is portraits, and Boot already has every one of them.
     //
     // This used to pull a full animation sheet for all of `cards.ALL`, which
@@ -328,10 +342,56 @@ export class DeckScene extends Phaser.Scene {
       const badge = this.add.circle(12, 12, 10, C.elixir);
       const cost = this.add.text(12, 12, "", style(12, C.text, "bold")).setOrigin(0.5);
 
+      // Slot one is the Mega slot. It gets a glow rather than a caption: the
+      // row is 88px wide and a label under it clipped into the filter bar,
+      // and a border says "this slot is special" without competing with the
+      // card's own name and role for the same space.
+      const aura = i === 0 ? this.add.graphics() : undefined;
+      if (aura) this.megaAura = aura;
+      // A stone in the corner, not a caption. It is the same picture as the
+      // button in a match, which is what makes the slot's purpose obvious
+      // without a rule needing to be read anywhere.
+      const stone = i === 0
+        ? this.add.image(w - 13, 13, "mega-stone", 1).setScale(0.46).setDepth(2)
+        : undefined;
+      if (stone) this.megaStone = stone;
+
+      // Appended, never prepended: refresh() reads these children by position,
+      // so an extra object at the front makes `box` the wrong thing entirely.
+      // The rings stroke outside the card, so drawing last costs nothing.
       const c = this.add.container(startX + i * (w + gap), 86,
-                                   [box, art, name, role, badge, cost]);
+                                   [box, art, name, role, badge, cost,
+                                    ...(aura ? [aura] : []), ...(stone ? [stone] : [])]);
+      this.slotHome.push({ x: startX + i * (w + gap), y: 86 });
       hitTopLeft(c, w, 108);
+      this.input.setDraggable(c);
+
+      c.on("dragstart", () => {
+        this.dragSlot = { index: i, home: { ...this.slotHome[i] } };
+        c.setDepth(50);
+      });
+      c.on("drag", (_p: Phaser.Input.Pointer, dx: number, dy: number) => {
+        if (this.dragSlot?.index !== i) return;
+        c.setPosition(dx, dy);
+        this.previewDrop(dx);
+      });
+      c.on("dragend", () => {
+        if (this.dragSlot?.index !== i) return;
+        const to = this.slotUnder(c.x);
+        c.setDepth(0);
+        const from = this.dragSlot.index;
+        this.dragSlot = undefined;
+        if (to !== from && to >= 0) {
+          this.deck = deckEdit.moveSlot(this.deck, from, to);
+          saveDeck(this.picked());
+        }
+        this.layoutSlots();
+        this.refresh();
+      });
+
       c.on("pointerup", () => {
+        // A drag ends with a pointerup too; only a tap should open the card.
+        if (this.dragSlot) return;
         // Removing takes the deck below six on purpose -- you cannot swap a
         // card without a free slot, and refusing the removal makes that
         // impossible.
@@ -356,6 +416,81 @@ export class DeckScene extends Phaser.Scene {
         this.refresh();
       });
       this.slots.push(c);
+    }
+  }
+
+  /**
+   * The Mega slot's glow.
+   *
+   * Bright and breathing when the card in it can actually Mega, a flat dim
+   * outline when it cannot -- the slot stays marked either way, because the
+   * slot is special whatever is sitting in it, and a player who drops a
+   * Pikachu there needs to see that the glow went out rather than that the
+   * marking vanished.
+   */
+  private drawAura(w = 88, h = 108) {
+    const g = this.megaAura;
+    if (!g) return;
+    const can = mega.canEverMega(this.deck[0]);
+    g.clear();
+
+    if (can) {
+      // A filled halo as well as rings: outline alone was quiet enough to be
+      // mistaken for the card's own rarity border, which is exactly what
+      // happened the first time somebody looked at it.
+      const beat = 0.5 + Math.sin(this.auraPulse) * 0.5;
+      g.fillStyle(C.gold, 0.10 + beat * 0.06);
+      g.fillRoundedRect(-10, -10, w + 20, h + 20, 12);
+      for (let i = 3; i >= 1; i--) {
+        const spread = i * 3 + beat * 2;
+        g.lineStyle(2, C.gold, 0.5 / i);
+        g.strokeRoundedRect(-spread, -spread, w + spread * 2, h + spread * 2, 4 + spread);
+      }
+      g.lineStyle(2, C.gold, 0.95);
+      g.strokeRoundedRect(-1, -1, w + 2, h + 2, 4);
+    } else {
+      g.lineStyle(2, C.edge, 0.7);
+      g.strokeRoundedRect(-4, -4, w + 8, h + 8, 6);
+    }
+    // Frame 1 is the lit stone, frame 0 the drained one.
+    this.megaStone?.setFrame(can ? 1 : 0).setAlpha(can ? 1 : 0.5);
+  }
+
+  override update() {
+    if (!mega.canEverMega(this.deck[0])) return;
+    this.auraPulse += 0.05;
+    this.drawAura();
+  }
+
+  /** Which slot a dragged card is currently over. */
+  private slotUnder(x: number): number {
+    let best = -1, near = Infinity;
+    for (let i = 0; i < this.slotHome.length; i++) {
+      const d = Math.abs(this.slotHome[i].x - x);
+      if (d < near) { near = d; best = i; }
+    }
+    return best;
+  }
+
+  /** Slide the other slots aside so the gap shows where the card would land. */
+  private previewDrop(x: number) {
+    if (!this.dragSlot) return;
+    const from = this.dragSlot.index;
+    const to = this.slotUnder(x);
+    for (let i = 0; i < this.slots.length; i++) {
+      if (i === from) continue;
+      let home = this.slotHome[i];
+      // Everything between the card's old and new home shifts one place.
+      if (to > from && i > from && i <= to) home = this.slotHome[i - 1];
+      else if (to < from && i >= to && i < from) home = this.slotHome[i + 1];
+      this.slots[i].setPosition(home.x, home.y);
+    }
+  }
+
+  /** Put every slot back where it belongs. */
+  private layoutSlots() {
+    for (let i = 0; i < this.slots.length; i++) {
+      this.slots[i].setPosition(this.slotHome[i].x, this.slotHome[i].y);
     }
   }
 
@@ -388,7 +523,13 @@ export class DeckScene extends Phaser.Scene {
       return x + w + 5;
     };
 
+    // The Mega filter sits with the role bar rather than the types, because
+    // it answers the same question they do -- what kind of card is this -- and
+    // because slot one is unusable without it: 38 of 151 cards qualify, which
+    // is a lot of scrolling to find by eye.
     this.add.text(26, 208, "ROLE", style(10, C.dim, "bold"));
+    const megaX = chip("can Mega", { kind: "mega" }, DESIGN_W - 110, 218);
+    void megaX;
     let x = 26;
     for (const role of ROLES) {
       if (!cards.ALL.some((c) => c.role === role)) continue;
@@ -472,6 +613,7 @@ export class DeckScene extends Phaser.Scene {
     const list = cards.ALL.filter((c) => {
       if (f.kind === "role") return c.role === f.value;
       if (f.kind === "type") return c.types.includes(f.value);
+      if (f.kind === "mega") return mega.canEverMega(c);
       return true;
     });
 
@@ -564,10 +706,13 @@ export class DeckScene extends Phaser.Scene {
       }
     }
 
+    this.drawAura();
+
     for (const c of this.chips) {
       const on = JSON.stringify(c.filter) === JSON.stringify(this.filter);
-      c.text.setColor(on ? "#ffffff" : "#9a9caa");
-      c.box.setStrokeStyle(on ? 2 : 1, on ? C.gold : C.edge);
+      const isMega = c.filter.kind === "mega";
+      c.text.setColor(on ? "#ffffff" : isMega ? hex(C.gold) : "#9a9caa");
+      c.box.setStrokeStyle(on ? 2 : isMega ? 2 : 1, on || isMega ? C.gold : C.edge);
     }
     this.refreshBranch();
     this.repaint();
