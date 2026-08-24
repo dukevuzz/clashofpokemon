@@ -38,7 +38,7 @@ type Filter =
 const TILE_W = 92;
 const TILE_H = 108;
 const COLS = 6;
-const LIST_TOP = 420;
+const LIST_TOP = 468;
 /** Room at the bottom for the inspect panel, above the buttons. */
 const DETAIL_H = 108;
 const LIST_BOTTOM = DESIGN_H - 104 - DETAIL_H;
@@ -523,13 +523,7 @@ export class DeckScene extends Phaser.Scene {
       return x + w + 5;
     };
 
-    // The Mega filter sits with the role bar rather than the types, because
-    // it answers the same question they do -- what kind of card is this -- and
-    // because slot one is unusable without it: 38 of 151 cards qualify, which
-    // is a lot of scrolling to find by eye.
     this.add.text(26, 208, "ROLE", style(10, C.dim, "bold"));
-    const megaX = chip("can Mega", { kind: "mega" }, DESIGN_W - 110, 218);
-    void megaX;
     let x = 26;
     for (const role of ROLES) {
       if (!cards.ALL.some((c) => c.role === role)) continue;
@@ -561,6 +555,11 @@ export class DeckScene extends Phaser.Scene {
       this.chips.push({ box, text: txt, filter: f });
       x += w + 5;
     }
+
+    // Its own labelled row, below the types. Hung off the end of the role bar
+    // it read as a seventh role rather than a filter in its own right.
+    this.add.text(26, 340, "MEGA", style(10, C.dim, "bold"));
+    chip("can Mega", { kind: "mega" }, 26, 362);
 
     // Sort, cycled rather than a menu: three options do not deserve a dropdown.
     this.sortText = this.add
