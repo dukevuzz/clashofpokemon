@@ -24,8 +24,16 @@ public final class Cards {
     BY_ID = frozen(cards);
 
     List<Card> deckable = new java.util.ArrayList<>();
-    for (JsonNode c : root.get("cards")) {
-      if (c.get("deckable").asBoolean()) deckable.add(BY_ID.get(c.get("id").asString()));
+    // In the order the client holds them, which is exported rather than
+    // inferred: deriving the pool from `cards[].deckable` put it in wire
+    // order, and a pool in a different order samples differently for the
+    // same seed.
+    for (JsonNode id : root.get("deckOrder")) {
+      Card card = BY_ID.get(id.asString());
+      if (card == null) {
+        throw new IllegalStateException("deckOrder names a card rules.json lacks: " + id);
+      }
+      deckable.add(card);
     }
     DECKABLE = List.copyOf(deckable);
   }
@@ -49,13 +57,23 @@ public final class Cards {
 
   /** A random legal deck, for a match nobody specified one for. */
   public static List<Card> newDeck(java.util.random.RandomGenerator rng) {
+    // Fisher-Yates over the whole pool, then the first few -- not six pulls
+    // out of the middle, which is what this used to do.
+    //
+    // Both are fair samples and they are not the same sample: one walks the
+    // generator 150 times and the other six, so the same seed dealt one deck
+    // here and a different one in the TypeScript engine. Nothing noticed,
+    // because every differential match brings its own deck and this path is
+    // only reached by bots and tests. The reference implementation is
+    // `cards.newDeck` in the client; this follows it exactly.
     List<Card> pool = new java.util.ArrayList<>(DECKABLE);
-    List<Card> out = new java.util.ArrayList<>();
-    int want = Rules.config().deckSize();
-    while (out.size() < want && !pool.isEmpty()) {
-      out.add(pool.remove((int) Math.floor(rng.nextDouble() * pool.size())));
+    for (int i = pool.size() - 1; i > 0; i--) {
+      int j = (int) Math.floor(rng.nextDouble() * (i + 1));
+      Card swap = pool.get(i);
+      pool.set(i, pool.get(j));
+      pool.set(j, swap);
     }
-    return List.copyOf(out);
+    return List.copyOf(pool.subList(0, Math.min(Rules.config().deckSize(), pool.size())));
   }
 
   /** Which roster this is. Travels in the ticket; a mismatch is refused. */

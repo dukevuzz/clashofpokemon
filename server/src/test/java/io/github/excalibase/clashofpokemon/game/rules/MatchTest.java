@@ -110,7 +110,22 @@ class MatchTest {
 
     m.elixir.put(Side.ONE, 10.0);
     double before = m.elixir.get(Side.ONE);
-    assertThat(m.deploy(Side.ONE, 0, 144, 560)).isTrue();
+
+    // Not slot zero. A copying card -- Ditto -- costs Infinity until something
+    // has been played, because what it costs is one more than the thing it
+    // copies. That is the rule working, but it makes "can this be the opening
+    // move" depend on which card the shuffle dealt into slot zero, and this
+    // test is about elixir being spent, not about the deal.
+    int slot = -1;
+    for (int i = 0; i < m.hand.get(Side.ONE).size(); i++) {
+      if (Double.isFinite(Hand.costOf(m, Side.ONE, m.hand.get(Side.ONE).get(i)))) {
+        slot = i;
+        break;
+      }
+    }
+    assertThat(slot).as("a hand with nothing playable in it").isNotNegative();
+
+    assertThat(m.deploy(Side.ONE, slot, 144, 560)).isTrue();
     assertThat(m.elixir.get(Side.ONE)).isLessThan(before);
     assertThat(m.units).isNotEmpty();
   }

@@ -7,6 +7,8 @@ public record Account(
     String id,
     String displayName,
     boolean guest,
+    /** The creature they wear. Null until they choose one. */
+    String avatar,
     OffsetDateTime createdAt,
     int wins,
     int losses,

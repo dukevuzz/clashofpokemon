@@ -18,7 +18,7 @@ class ContentServiceTest {
 
   @Test
   void loadsTheWholeRoster() {
-    assertThat(content.cards()).hasSize(127);
+    assertThat(content.cards()).hasSize(151);
     assertThat(content.troops()).hasSize(4);
   }
 

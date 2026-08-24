@@ -34,7 +34,7 @@ class EvolutionTest {
       }
     }
 
-    assertThat(checked).isEqualTo(127);
+    assertThat(checked).isEqualTo(151);
     assertThat(wrong).isEmpty();
   }
 

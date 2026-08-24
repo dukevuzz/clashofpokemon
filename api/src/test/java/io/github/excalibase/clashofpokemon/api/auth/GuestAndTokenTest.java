@@ -28,10 +28,12 @@ class GuestAndTokenTest {
 
   @Test
   void twoGuestsAreTwoPeople() {
+    // Not by name. Names are labels and two guests may be dealt the same one
+    // -- 14 stems and 9900 numbers collide well before the table is large.
+    // The id and the token are what tell them apart.
     var a = guests.create();
     var b = guests.create();
     assertThat(a.account().id()).isNotEqualTo(b.account().id());
-    assertThat(a.account().displayName()).isNotEqualTo(b.account().displayName());
     assertThat(a.refresh()).isNotEqualTo(b.refresh());
   }
 

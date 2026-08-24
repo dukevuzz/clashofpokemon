@@ -1,6 +1,6 @@
 /** The roster, as data the API can read. */
 
-import { writeFileSync, mkdirSync } from "node:fs";
+import { writeFileSync, mkdirSync, copyFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { dirname } from "node:path";
 import * as cards from "../src/core/cards.js";
@@ -20,6 +20,20 @@ const OUT = "../api/src/main/resources/content.json";
 
 /** The same roster, with the numbers the rules actually use. */
 const RULES_OUT = "../server/src/main/resources/rules.json";
+
+/*
+ * Tables the Java engine reads straight from, rather than through rules.json.
+ *
+ * They used to be copied across by hand, and by the time anybody noticed the
+ * server's species table was 29 creatures and 22 edits behind the client's --
+ * every Mega missing, and the evolution links that were deliberately cut still
+ * present. The differential tests could not see it because the fixtures they
+ * compare against were generated from the same stale copy.
+ *
+ * Copied here so the two cannot drift again: there is one source, and it is
+ * the client's.
+ */
+const SHARED = ["species.json", "typeChart.json", "abilities.json"];
 
 /** Only what the API validates against and the client draws. */
 const deckable = cards.ALL.map((c) => ({
@@ -172,6 +186,20 @@ const rules = {
   })),
   towerDamage: config.towerDamage,
   towerRate: config.towerRate,
+  /*
+   * The deckable roster, in the order this client holds it.
+   *
+   * `cards[].deckable` already says *which* cards a deck may hold, and the
+   * game server used to derive its pool from that -- which put the pool in
+   * wire order, not this one. A deck dealt at random then differed between
+   * the engines for the same seed, because the pool being sampled was
+   * ordered differently on each side.
+   *
+   * Order is a rule here, not presentation, so it is exported rather than
+   * inferred.
+   */
+  deckOrder: cards.ALL.map((c) => c.id),
+
   /** Every card that can appear, not every card a deck may hold. */
   cards: CARD_TABLE.map((id) => {
     const c = resolve(id);
@@ -201,3 +229,9 @@ const rulesJson = JSON.stringify(rules, null, 2) + "\n";
 mkdirSync(dirname(RULES_OUT), { recursive: true });
 writeFileSync(RULES_OUT, rulesJson);
 console.log(`  ${(rulesJson.length / 1024).toFixed(0)} KB -> ${RULES_OUT}`);
+
+for (const name of SHARED) {
+  const to = `../server/src/main/resources/${name}`;
+  copyFileSync(`src/data/${name}`, to);
+  console.log(`  copied ${name} -> ${to}`);
+}

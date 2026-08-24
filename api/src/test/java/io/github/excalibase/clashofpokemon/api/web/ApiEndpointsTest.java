@@ -57,8 +57,37 @@ class ApiEndpointsTest {
   void contentIsPublic() {
     // The client needs the roster before it has an account.
     var content = client().get().uri("/v1/content").retrieve().body(JsonNode.class);
-    assertThat(content.get("cards")).hasSize(127);
+    assertThat(content.get("cards")).hasSize(151);
     assertThat(content.get("version").asText()).isNotBlank();
+  }
+
+  @Test
+  void aPlayerCanEditTheirProfile() {
+    var me = asPlayer(accessFor(signUp())).patch().uri("/v1/me")
+        .body(Map.of("displayName", "Duc", "avatar", "pikachu"))
+        .retrieve().body(JsonNode.class);
+
+    assertThat(me.get("displayName").asText()).isEqualTo("Duc");
+    assertThat(me.get("avatar").asText()).isEqualTo("pikachu");
+  }
+
+  @Test
+  void editingSomebodyElsesProfileNeedsToBeSomebodyFirst() {
+    var response = client().patch().uri("/v1/me")
+        .body(Map.of("displayName", "Duc"))
+        .exchange((req, res) -> res.getStatusCode());
+    assertThat(response).isEqualTo(HttpStatus.UNAUTHORIZED);
+  }
+
+  @Test
+  void aRefusedNameSaysWhy() {
+    // 400 with the reason in the body, so the field can print it underneath
+    // rather than the screen saying "something went wrong".
+    var access = accessFor(signUp());
+    var response = asPlayer(access).patch().uri("/v1/me")
+        .body(Map.of("displayName", " "))
+        .exchange((req, res) -> res.getStatusCode());
+    assertThat(response).isEqualTo(HttpStatus.BAD_REQUEST);
   }
 
   @Test

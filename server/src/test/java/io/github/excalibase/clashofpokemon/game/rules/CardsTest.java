@@ -38,7 +38,7 @@ class CardsTest {
       }
     }
 
-    assertThat(checked).isEqualTo(127);
+    assertThat(checked).isEqualTo(151);
     // All of them at once: one wrong card and a wholly wrong derivation look
     // identical when you only ever see the first failure.
     assertThat(wrong).isEmpty();

@@ -20,7 +20,10 @@ class SchemaTest {
   @Autowired JdbcClient db;
 
   private String newAccount(String name) {
-    String id = "acct_" + name;
+    return newAccount("acct_" + name, name);
+  }
+
+  private String newAccount(String id, String name) {
     db.sql("insert into account (id, display_name) values (?, ?)")
         .params(id, name).update();
     return id;
@@ -42,10 +45,27 @@ class SchemaTest {
   }
 
   @Test
-  void aNameCanOnlyBelongToOneAccount() {
-    newAccount("Ember101");
-    assertThatThrownBy(() -> newAccount("Ember101"))
-        .isInstanceOf(DataIntegrityViolationException.class);
+  void aNameCanBelongToAsManyAccountsAsLikeIt() {
+    // display_name was `unique`, which made it the identity as well as the
+    // label. Two people could not both be called Duc, and guest sign-up had
+    // to retry on a name collision -- a retry that could never work, because
+    // the first DuplicateKeyException had already aborted the transaction.
+    newAccount("acct_ember_1", "Ember101");
+    newAccount("acct_ember_2", "Ember101");
+
+    assertThat(db.sql("select count(*) from account where display_name = ?")
+        .param("Ember101").query(Integer.class).single()).isEqualTo(2);
+  }
+
+  @Test
+  void anAccountCanWearAFace() {
+    String id = newAccount("Kindle700");
+    assertThat(db.sql("select avatar from account where id = ?")
+        .param(id).query(String.class).optional().orElse(null)).isNull();
+
+    db.sql("update account set avatar = ? where id = ?").params("pikachu", id).update();
+    assertThat(db.sql("select avatar from account where id = ?")
+        .param(id).query(String.class).single()).isEqualTo("pikachu");
   }
 
   @Test

@@ -1,5 +1,5 @@
 {
-  "version": "c0fd82fc7983",
+  "version": "3d4149ed558e",
   "cards": [
     {
       "id": "charmander",
@@ -533,6 +533,30 @@
       "sheet": "ditto"
     },
     {
+      "id": "skrelp",
+      "name": "Skrelp",
+      "elixir": 2,
+      "rarity": "uncommon",
+      "role": "sniper",
+      "types": [
+        "POISON",
+        "WATER"
+      ],
+      "sheet": "skrelp"
+    },
+    {
+      "id": "tynamo",
+      "name": "Tynamo",
+      "elixir": 2,
+      "rarity": "uncommon",
+      "role": "fighter",
+      "types": [
+        "ELECTRIC",
+        "WATER"
+      ],
+      "sheet": "tynamo"
+    },
+    {
       "id": "eevee",
       "name": "Eevee",
       "elixir": 3,
@@ -802,6 +826,29 @@
       "sheet": "staryu"
     },
     {
+      "id": "buneary",
+      "name": "Buneary",
+      "elixir": 3,
+      "rarity": "rare",
+      "role": "runner",
+      "types": [
+        "NORMAL",
+        "FIGHTING"
+      ],
+      "sheet": "buneary"
+    },
+    {
+      "id": "electrike",
+      "name": "Electrike",
+      "elixir": 3,
+      "rarity": "rare",
+      "role": "runner",
+      "types": [
+        "ELECTRIC"
+      ],
+      "sheet": "electrike"
+    },
+    {
       "id": "onix",
       "name": "Onix",
       "elixir": 4,
@@ -935,6 +982,88 @@
       "sheet": "tinkatink"
     },
     {
+      "id": "carbink",
+      "name": "Carbink",
+      "elixir": 4,
+      "rarity": "epic",
+      "role": "tank",
+      "types": [
+        "ROCK",
+        "FAIRY"
+      ],
+      "sheet": "carbink"
+    },
+    {
+      "id": "floette",
+      "name": "Floette",
+      "elixir": 4,
+      "rarity": "uncommon",
+      "role": "sniper",
+      "types": [
+        "FAIRY",
+        "GRASS"
+      ],
+      "sheet": "floette"
+    },
+    {
+      "id": "houndour",
+      "name": "Houndour",
+      "elixir": 4,
+      "rarity": "epic",
+      "role": "tank",
+      "types": [
+        "FIRE",
+        "DARK"
+      ],
+      "sheet": "houndour"
+    },
+    {
+      "id": "meditite",
+      "name": "Meditite",
+      "elixir": 4,
+      "rarity": "epic",
+      "role": "skirmisher",
+      "types": [
+        "PSYCHIC",
+        "FIGHTING"
+      ],
+      "sheet": "meditite"
+    },
+    {
+      "id": "numel",
+      "name": "Numel",
+      "elixir": 4,
+      "rarity": "epic",
+      "role": "tank",
+      "types": [
+        "FIRE",
+        "GROUND"
+      ],
+      "sheet": "numel"
+    },
+    {
+      "id": "shuppet",
+      "name": "Shuppet",
+      "elixir": 4,
+      "rarity": "epic",
+      "role": "bruiser",
+      "types": [
+        "GHOST"
+      ],
+      "sheet": "shuppet"
+    },
+    {
+      "id": "swablu",
+      "name": "Swablu",
+      "elixir": 4,
+      "rarity": "epic",
+      "role": "skirmisher",
+      "types": [
+        "FAIRY"
+      ],
+      "sheet": "swablu"
+    },
+    {
       "id": "gastly",
       "name": "Gastly",
       "elixir": 5,
@@ -1003,6 +1132,42 @@
         "FIGHTING"
       ],
       "sheet": "gallade"
+    },
+    {
+      "id": "latias",
+      "name": "Latias",
+      "elixir": 5,
+      "rarity": "unique",
+      "role": "sniper",
+      "types": [
+        "DRAGON",
+        "PSYCHIC"
+      ],
+      "sheet": "latias"
+    },
+    {
+      "id": "latios",
+      "name": "Latios",
+      "elixir": 5,
+      "rarity": "unique",
+      "role": "sniper",
+      "types": [
+        "DRAGON",
+        "PSYCHIC"
+      ],
+      "sheet": "latios"
+    },
+    {
+      "id": "tatsugiri",
+      "name": "Tatsugiri",
+      "elixir": 5,
+      "rarity": "epic",
+      "role": "sniper",
+      "types": [
+        "DRAGON",
+        "WATER"
+      ],
+      "sheet": "tatsugiri"
     },
     {
       "id": "sudowoodo",
@@ -1208,6 +1373,64 @@
         "NORMAL"
       ],
       "sheet": "snorlax"
+    },
+    {
+      "id": "absol",
+      "name": "Absol",
+      "elixir": 6,
+      "rarity": "unique",
+      "role": "tank",
+      "types": [
+        "DARK"
+      ],
+      "sheet": "absol"
+    },
+    {
+      "id": "drampa",
+      "name": "Drampa",
+      "elixir": 6,
+      "rarity": "unique",
+      "role": "sniper",
+      "types": [
+        "DRAGON",
+        "NORMAL"
+      ],
+      "sheet": "drampa"
+    },
+    {
+      "id": "mawile",
+      "name": "Mawile",
+      "elixir": 6,
+      "rarity": "unique",
+      "role": "tank",
+      "types": [
+        "STEEL",
+        "FAIRY"
+      ],
+      "sheet": "mawile"
+    },
+    {
+      "id": "sableye",
+      "name": "Sableye",
+      "elixir": 6,
+      "rarity": "unique",
+      "role": "tank",
+      "types": [
+        "DARK",
+        "GHOST"
+      ],
+      "sheet": "sableye"
+    },
+    {
+      "id": "zeraora",
+      "name": "Zeraora",
+      "elixir": 6,
+      "rarity": "unique",
+      "role": "runner",
+      "types": [
+        "ELECTRIC"
+      ],
+      "sheet": "zeraora"
     },
     {
       "id": "zapdos",
@@ -1501,6 +1724,63 @@
         "STEEL"
       ],
       "sheet": "registeel"
+    },
+    {
+      "id": "groudon",
+      "name": "Groudon",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "tank",
+      "types": [
+        "GROUND"
+      ],
+      "sheet": "groudon"
+    },
+    {
+      "id": "kyogre",
+      "name": "Kyogre",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "sniper",
+      "types": [
+        "WATER"
+      ],
+      "sheet": "kyogre"
+    },
+    {
+      "id": "mewtwo",
+      "name": "Mewtwo",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "sniper",
+      "types": [
+        "PSYCHIC"
+      ],
+      "sheet": "mewtwo"
+    },
+    {
+      "id": "rayquaza",
+      "name": "Rayquaza",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "tank",
+      "types": [
+        "DRAGON",
+        "FLYING"
+      ],
+      "sheet": "rayquaza"
+    },
+    {
+      "id": "zygarde",
+      "name": "Zygarde",
+      "elixir": 7,
+      "rarity": "legendary",
+      "role": "tank",
+      "types": [
+        "DRAGON",
+        "GROUND"
+      ],
+      "sheet": "zygarde"
     }
   ],
   "troops": [
@@ -1543,10 +1823,12 @@
   },
   "wireCards": [
     "abra",
+    "absol",
     "aegislash",
     "aerodactyl",
     "aggron",
     "alakazam",
+    "altaria",
     "araquanid",
     "arcanine",
     "archaludon",
@@ -1555,6 +1837,7 @@
     "articuno",
     "azumarill",
     "bagon",
+    "banette",
     "beheeyem",
     "beldum",
     "bisharp",
@@ -1567,8 +1850,11 @@
     "bronzong",
     "bronzor",
     "bulbasaur",
+    "buneary",
     "butterfree",
+    "camerupt",
     "capsakid",
+    "carbink",
     "caterpie",
     "celebi",
     "ceruledge",
@@ -1602,13 +1888,16 @@
     "dewgong",
     "dewpider",
     "dialga",
+    "diancie",
     "diglett",
     "ditto",
     "doublade",
+    "dragalge",
     "dragapult",
     "dragonair",
     "dragonite",
     "drakloak",
+    "drampa",
     "dratini",
     "dreepy",
     "drilbur",
@@ -1619,7 +1908,10 @@
     "dusclops",
     "dusknoir",
     "duskull",
+    "eelektrik",
+    "eelektross",
     "eevee",
+    "electrike",
     "electrode",
     "elgyem",
     "empoleon",
@@ -1635,6 +1927,7 @@
     "flareon",
     "fletchinder",
     "fletchling",
+    "floette",
     "flygon",
     "froslass",
     "gabite",
@@ -1656,6 +1949,7 @@
     "golem",
     "graveler",
     "grimer",
+    "groudon",
     "growlithe",
     "gyarados",
     "haunter",
@@ -1664,6 +1958,8 @@
     "hippopotas",
     "honedge",
     "hoppip",
+    "houndoom",
+    "houndour",
     "hydreigon",
     "hypno",
     "incineroar",
@@ -1678,18 +1974,22 @@
     "koffing",
     "krokorok",
     "krookodile",
+    "kyogre",
     "kyurem",
     "lairon",
     "lampent",
     "lanturn",
     "larvesta",
     "larvitar",
+    "latias",
+    "latios",
     "leafeon",
     "leavanny",
     "ledian",
     "ledyba",
     "litten",
     "litwick",
+    "lopunny",
     "lucario",
     "lugia",
     "machamp",
@@ -1698,18 +1998,23 @@
     "magearna",
     "magikarp",
     "mamoswine",
+    "manectric",
     "mareanie",
     "marill",
     "marshadow",
-    "megasteelix",
+    "mawile",
+    "medicham",
+    "meditite",
     "metagross",
     "metang",
     "metapod",
     "mew",
+    "mewtwo",
     "milotic",
     "mimikyu",
     "moltres",
     "muk",
+    "numel",
     "onix",
     "orthworm",
     "palafin",
@@ -1734,6 +2039,7 @@
     "raikou",
     "raticate",
     "rattata",
+    "rayquaza",
     "regice",
     "regirock",
     "registeel",
@@ -1742,6 +2048,7 @@
     "roggenrola",
     "rookidee",
     "rowlet",
+    "sableye",
     "salamence",
     "sandile",
     "sandshrew",
@@ -1754,8 +2061,10 @@
     "servine",
     "sewaddle",
     "shelgon",
+    "shuppet",
     "skarmory",
     "skiploom",
+    "skrelp",
     "sneasel",
     "snivy",
     "snorlax",
@@ -1769,10 +2078,12 @@
     "steenee",
     "sudowoodo",
     "suicune",
+    "swablu",
     "swadloon",
     "swinub",
     "sylveon",
     "talonflame",
+    "tatsugiri",
     "tinkatink",
     "tinkaton",
     "tinkatuff",
@@ -1784,6 +2095,7 @@
     "toxapex",
     "trapinch",
     "tsareena",
+    "tynamo",
     "tyranitar",
     "umbreon",
     "vaporeon",
@@ -1802,7 +2114,9 @@
     "yveltal",
     "zapdos",
     "zekrom",
+    "zeraora",
     "zubat",
-    "zweilous"
+    "zweilous",
+    "zygarde"
   ]
 }
