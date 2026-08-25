@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+## 1.3.1 — 2026-08-25
+
+### Fixed
+- The 24 newest creatures can be played online. They were in the collection
+  and in your deck, but the server had never been told about them, so bringing
+  one meant being turned away at the door.
+- The "can Mega" filter shows whether it is on. It was gold either way.
+
 ## 1.3.0 — 2026-08-24
 
 ### Added
