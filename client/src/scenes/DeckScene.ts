@@ -710,8 +710,17 @@ export class DeckScene extends Phaser.Scene {
     for (const c of this.chips) {
       const on = JSON.stringify(c.filter) === JSON.stringify(this.filter);
       const isMega = c.filter.kind === "mega";
-      c.text.setColor(on ? "#ffffff" : isMega ? hex(C.gold) : "#9a9caa");
-      c.box.setStrokeStyle(on ? 2 : isMega ? 2 : 1, on || isMega ? C.gold : C.edge);
+      // Filled when on, hollow when off.
+      //
+      // It used to be a colour change on the label alone, and MEGA was gold
+      // and 2px-stroked in *both* states to make it easier to find -- which
+      // left white-on-gold-outline versus gold-on-gold-outline as the only
+      // difference between on and off. On a phone that is not a difference.
+      // A filled chip reads at arm's length, and MEGA keeps its gold outline
+      // while off so it is still the one that catches the eye.
+      c.box.setFillStyle(on ? C.gold : C.panel);
+      c.text.setColor(on ? "#17130a" : isMega ? hex(C.gold) : "#9a9caa");
+      c.box.setStrokeStyle(on || isMega ? 2 : 1, on || isMega ? C.gold : C.edge);
     }
     this.refreshBranch();
     this.repaint();
