@@ -15,6 +15,10 @@ import * as skillRules from "../src/core/skills.js";
 import * as towerTroops from "../src/core/towerTroops.js";
 import * as tiers from "../src/core/tiers.js";
 import { SPREAD } from "../src/core/spread";
+import * as packs from "../src/core/packs";
+import * as collection from "../src/ui/collection";
+import portraitsData from "../src/data/portraits.json";
+import emotionsData from "../src/data/emotions.json";
 
 const OUT = "../api/src/main/resources/content.json";
 
@@ -67,6 +71,41 @@ const content = {
   // The wire's table, for the handshake check. Listed rather than hashed alone
   // so a mismatch can say *which* card differs instead of only that one does.
   wireCards: CARD_TABLE,
+
+  /**
+   * Everything the API needs to roll a chest itself.
+   *
+   * The roll has to happen on the server or the collection means nothing --
+   * `Math.random()` in a browser against counts in localStorage is a collection
+   * the player writes rather than earns. But the server can only roll it the
+   * same way if it is handed the same numbers, and hand-copying them into Java
+   * is how two implementations drift apart silently.
+   *
+   * So they are exported from the one place they are defined. Change a weight
+   * in `core/packs.ts`, re-run this, and the server changes with it.
+   */
+  packs: {
+    size: packs.PACK_SIZE,
+    perCardWeight: packs.PER_CARD_WEIGHT,
+    headlineRarities: packs.HEADLINE_RARITIES,
+    shinyChance: packs.SHINY_CHANCE,
+    emotionCost: packs.EMOTION_COST,
+    // The shop's two prices, exported for the same reason the odds are: the
+    // server has to charge what the client shows.
+    packPrice: collection.PACK_PRICE,
+    matchesPerPack: collection.MATCHES_PER_PACK,
+    coinsPer: collection.COINS_PER,
+    shardsPerDuplicate: packs.SHARDS_PER_DUPLICATE,
+    shardsPerShinyDuplicate: packs.SHARDS_PER_SHINY_DUPLICATE,
+    // Which sheets actually have art, so the server never rolls a variant it
+    // cannot draw. Derived from the exported sheets rather than assumed.
+    shinySheets: Object.keys(
+      (portraitsData as { shiny?: Record<string, number> }).shiny ?? {}),
+    faces: Object.fromEntries(
+      Object.entries((emotionsData as {
+        creatures: Record<string, { n: number[]; s: number[] }>;
+      }).creatures).map(([sheet, c]) => [sheet, { n: c.n, s: c.s }])),
+  },
 };
 
 const json = JSON.stringify(content, null, 2);

@@ -63,6 +63,11 @@ public class ContentService {
     return content.troops();
   }
 
+  /** The chest rules, exported from the client so both sides roll the same odds. */
+  public Content.Packs packs() {
+    return content.packs();
+  }
+
   public Content.Rules rules() {
     return content.rules();
   }

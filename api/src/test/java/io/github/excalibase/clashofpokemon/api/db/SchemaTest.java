@@ -40,8 +40,8 @@ class SchemaTest {
     // containsExactly, not contains: a table that appears without anybody
     // meaning it to is exactly what this is here to notice.
     assertThat(tables).containsExactly(
-        "account", "deck", "external_identity", "feedback",
-        "match_player", "match_result", "play", "refresh_token");
+        "account", "collection", "deck", "external_identity", "feedback",
+        "match_player", "match_result", "play", "refresh_token", "shard");
   }
 
   @Test
