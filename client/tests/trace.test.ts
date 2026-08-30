@@ -10,6 +10,7 @@
 import { describe, it, expect } from "vitest";
 import { recorder, type Action } from "../src/core/trace";
 import { Match, config } from "../src/core";
+import * as cards from "../src/core/cards";
 
 const act = (name: string, reach: Action["reach"], at = 1): Action =>
   ({ name, reach, at });
@@ -80,7 +81,16 @@ describe("a match reports its own mutations", () => {
 
   it("tags movement continuous and a spawn discrete", () => {
     const rec = recorder();
-    const m = new Match({ trace: rec.trace });
+    // A pinned deck, not a dealt one. `newDeck` draws at random, so slot 0
+    // could hold a card ten elixir cannot afford -- Ditto costs Infinity until
+    // something has been played -- and then nothing spawns and this fails for
+    // a reason that has nothing to do with tracing. It did, about once in two
+    // hundred runs, which is exactly often enough to be blamed on the wrong
+    // change.
+    const cheap = cards.ALL
+      .filter((c) => Number.isFinite(c.elixir) && c.elixir <= 3)
+      .slice(0, config.deckSize);
+    const m = new Match({ trace: rec.trace, playerDeck: cheap, enemyDeck: cheap });
     m.elixir[config.PLAYER] = 10;
     m.deploy(config.PLAYER, 0, 190, 500);
     for (let i = 0; i < 120; i++) m.update(1 / 30);
