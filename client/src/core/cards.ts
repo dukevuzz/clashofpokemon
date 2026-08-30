@@ -45,6 +45,25 @@ export interface Card {
   copies?: boolean;
   /** How this card arrives, if not by simply appearing. */
   delivery?: Delivery;
+  /**
+   * A shiny pull, or a shiny the player owns.
+   *
+   * Absent rather than false for the common case, the way `copies` and
+   * `delivery` already do it here: most cards never carry this flag at all,
+   * and giving every card in the roster an explicit `shiny: false` would
+   * make a diff of this file when the feature shipped touch every card
+   * definition instead of none of them.
+   */
+  shiny?: boolean;
+
+  /**
+   * Which face this pull wears -- an index into `EMOTIONS` in `ui/emotions.ts`.
+   *
+   * Absent means the default face, which is what every card in the roster is.
+   * Only a pull carries one, and the same creature in two different emotions is
+   * two different things to own.
+   */
+  emotion?: number;
 }
 
 
