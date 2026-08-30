@@ -57,6 +57,21 @@
 			<artifactId>nimbus-jose-jwt</artifactId>
 			<version>10.0.2</version>
 		</dependency>
+		<!--
+		  Just the crypto module, not the whole of Spring Security. Nothing here
+		  wants a filter chain or a SecurityContext; the session work is already
+		  done, and this needs exactly one thing: a password hash with a cost
+		  factor and a salt baked into the output.
+
+		  The same argument as above applies more strongly. A password hash is
+		  the one place where "we wrote our own" is never the right answer, and
+		  BCrypt's encoding carries its own cost, so the factor can be raised
+		  later without invalidating a single existing password.
+		-->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-crypto</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webmvc</artifactId>

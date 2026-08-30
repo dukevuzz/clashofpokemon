@@ -12,7 +12,12 @@ class WebConfig implements WebMvcConfigurer {
   public void addCorsMappings(CorsRegistry registry) {
     registry.addMapping("/**")
         .allowedOriginPatterns("*")
-        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+        // PATCH belongs here as much as the rest. It was missing, and because a
+        // cross-origin PATCH is preflighted, the browser got a 403 on the
+        // OPTIONS and reported "Failed to fetch" -- renaming and changing an
+        // avatar were dead in the client while every server-side test that
+        // called the endpoint directly passed.
+        .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
         .allowedHeaders("*")
         // A browser can only read the CORS-safelisted response headers unless
         // they are named here, and Retry-After is not one of them. Without

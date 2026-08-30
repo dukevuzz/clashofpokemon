@@ -21,20 +21,26 @@ import { apiBase, authorized, signIn } from "./identity";
 
 export type Mode = "offline" | "tutorial";
 
+/** How it ended, from this player's side. Absent for the tutorial. */
+export type Result = "win" | "loss" | "draw";
+
 /**
  * Report a finished match, and never make it the player's problem.
  *
  * Not awaited by callers: this is fired at the moment a result screen goes up,
  * and the result screen must not wait for a network round trip to appear.
  */
-export function record(mode: Mode): void {
+export function record(mode: Mode, result?: Result): void {
   void (async () => {
     try {
       await signIn();
       await authorized(`${apiBase()}/v1/played`, {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ mode }),
+        // The result travels with it so the account's record counts every
+        // match, not only the online ones. Without that a player's record
+        // lived in one browser and vanished on the next device.
+        body: JSON.stringify({ mode, result }),
       });
     } catch {
       // Offline in the literal sense, an old build, a server being restarted.

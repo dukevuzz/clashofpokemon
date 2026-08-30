@@ -20,8 +20,13 @@ KEY=browser-run
 PG_PORT=55432
 
 stop() {
-  pkill -f 'gameserver-.*\.jar' 2>/dev/null || true
-  pkill -f 'api-.*\.jar' 2>/dev/null || true
+  # Matched against the jar names that are actually produced. The old patterns
+  # were 'gameserver-.*\.jar' and 'api-.*\.jar': the first never matched
+  # anything, because the artifact is clashofpokemon-server-VERSION.jar, so
+  # `stop` left the game server running and the next `start` refused on a busy
+  # port 4400. The second matched only by accident, as a substring.
+  pkill -f 'clashofpokemon-server-.*\.jar' 2>/dev/null || true
+  pkill -f 'clashofpokemon-api-.*\.jar' 2>/dev/null || true
   docker rm -f lr-pg >/dev/null 2>&1 || true
   echo "stopped"
 }
@@ -46,6 +51,15 @@ free() {
 if [ "${1:-start}" = stop ]; then stop; exit 0; fi
 
 for module in api server; do
+  # Newest jar only, and say how old it is. `ls target/*.jar` globs whatever is
+  # there: a stale artifact from a previous version sorts first and gets run,
+  # which is how this stack served a roster three weeks out of date while every
+  # test on disk passed.
+  jar=$(ls -t "$module"/target/*.jar 2>/dev/null | head -1)
+  if [ -n "$jar" ]; then
+    age=$(( ( $(date +%s) - $(stat -c %Y "$jar") ) / 60 ))
+    [ "$age" -gt 60 ] && echo "  note: $(basename "$jar") was built ${age}m ago" >&2
+  fi
   if ! ls "$module"/target/*.jar >/dev/null 2>&1; then
     echo "no jar in $module/target -- run: (cd $module && ./mvnw package -DskipTests)" >&2
     exit 1

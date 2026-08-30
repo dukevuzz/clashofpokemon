@@ -9,6 +9,8 @@ public record Account(
     boolean guest,
     /** The creature they wear. Null until they choose one. */
     String avatar,
+    /** How they log in. Null for a guest, who has no way back in but a token. */
+    String username,
     OffsetDateTime createdAt,
     int wins,
     int losses,

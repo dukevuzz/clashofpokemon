@@ -21,9 +21,22 @@ public class PlayService {
     this.db = db;
   }
 
-  public void record(String accountId, Mode mode) {
-    db.sql("insert into play (account_id, mode) values (?, ?)")
-        .params(accountId, mode.wire())
+  public void record(String accountId, Mode mode, Result result) {
+    // The account's counters are the record the player sees, and they have to
+    // count every match -- bot matches included -- or a record vanishes the
+    // moment somebody plays on a second device. Online results are bumped
+    // elsewhere, by the game server, so nothing is counted twice.
+    if (result != null) {
+      String column = switch (result) {
+        case WIN -> "wins";
+        case LOSS -> "losses";
+        case DRAW -> "draws";
+      };
+      db.sql("update account set " + column + " = " + column + " + 1 where id = ?")
+          .param(accountId).update();
+    }
+    db.sql("insert into play (account_id, mode, result) values (?, ?, ?)")
+        .params(accountId, mode.wire(), result == null ? null : result.wire())
         .update();
   }
 }

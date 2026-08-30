@@ -91,6 +91,111 @@ class ApiEndpointsTest {
   }
 
   @Test
+  void aGuestCanSignUpAndComeBackOnAnotherDevice() {
+    var guest = signUp();
+    var access = accessFor(guest);
+    String name = "web" + System.nanoTime();
+
+    var registered = asPlayer(access).post().uri("/v1/auth/register")
+        .body(Map.of("username", name, "password", "correct horse battery"))
+        .retrieve().body(JsonNode.class);
+    assertThat(registered.get("guest").asBoolean()).isFalse();
+    assertThat(registered.get("username").asText()).isEqualTo(name);
+    // Same account, not a new one.
+    assertThat(registered.get("id").asText())
+        .isEqualTo(guest.get("account").get("id").asText());
+
+    // A second device: no token, only what the player can remember.
+    var back = client().post().uri("/v1/auth/login")
+        .body(Map.of("username", name, "password", "correct horse battery"))
+        .retrieve().body(JsonNode.class);
+    assertThat(back.get("account").get("id").asText())
+        .isEqualTo(guest.get("account").get("id").asText());
+    assertThat(back.get("refresh").asText()).isNotBlank();
+  }
+
+  @Test
+  void registeringNeedsTheAccountItIsRegistering() {
+    // No token, no sign-up. There is no form of this that names an account.
+    var response = client().post().uri("/v1/auth/register")
+        .body(Map.of("username", "somebody", "password", "correct horse battery"))
+        .exchange((req, res) -> res.getStatusCode());
+    assertThat(response).isEqualTo(HttpStatus.UNAUTHORIZED);
+  }
+
+  @Test
+  void aTakenNameIsAConflictRatherThanABadRequest() {
+    String name = "twice" + System.nanoTime();
+    asPlayer(accessFor(signUp())).post().uri("/v1/auth/register")
+        .body(Map.of("username", name, "password", "correct horse battery"))
+        .retrieve().toBodilessEntity();
+
+    var response = asPlayer(accessFor(signUp())).post().uri("/v1/auth/register")
+        .body(Map.of("username", name, "password", "correct horse battery"))
+        .exchange((req, res) -> res.getStatusCode());
+    // 409, so the form can say "that one is gone" rather than "check what you
+    // typed" -- there is nothing wrong with what they typed.
+    assertThat(response).isEqualTo(HttpStatus.CONFLICT);
+  }
+
+  @Test
+  void aBadPasswordSaysSoRatherThanFailingQuietly() {
+    var response = asPlayer(accessFor(signUp())).post().uri("/v1/auth/register")
+        .body(Map.of("username", "short" + System.nanoTime(), "password", "short"))
+        .exchange((req, res) -> res.getStatusCode());
+    assertThat(response).isEqualTo(HttpStatus.BAD_REQUEST);
+  }
+
+  @Test
+  void aWrongLoginIsRefusedWithoutSayingWhich() {
+    var response = client().post().uri("/v1/auth/login")
+        .body(Map.of("username", "nobody-at-all", "password", "correct horse battery"))
+        .exchange((req, res) -> res.getStatusCode());
+    assertThat(response).isEqualTo(HttpStatus.UNAUTHORIZED);
+  }
+
+  @Test
+  void aPasswordHashNeverLeavesTheServer() {
+    // The one field that must never be serialised anywhere. Checked on the
+    // three responses that carry an account.
+    var guest = signUp();
+    var access = accessFor(guest);
+    String name = "leak" + System.nanoTime();
+
+    var registered = asPlayer(access).post().uri("/v1/auth/register")
+        .body(Map.of("username", name, "password", "correct horse battery"))
+        .retrieve().body(JsonNode.class);
+    var me = asPlayer(access).get().uri("/v1/me").retrieve().body(JsonNode.class);
+    var login = client().post().uri("/v1/auth/login")
+        .body(Map.of("username", name, "password", "correct horse battery"))
+        .retrieve().body(JsonNode.class);
+
+    for (var body : List.of(registered, me, login)) {
+      assertThat(body.toString()).doesNotContain("password").doesNotContain("$2a$");
+    }
+  }
+
+  @Test
+  void everyMethodTheApiAnswersIsAllowedAcrossOrigins() {
+    // The client is served from a different origin, so every non-simple
+    // request is preflighted. A method missing from the CORS list fails at
+    // the OPTIONS with a 403 and the browser reports only "Failed to fetch"
+    // -- the endpoint itself is never reached and looks fine in every test
+    // that calls it directly.
+    //
+    // That is exactly what happened when PATCH /v1/me was added: renaming and
+    // changing an avatar were dead in a browser while passing here.
+    for (String method : List.of("GET", "POST", "PUT", "PATCH", "DELETE")) {
+      var status = client().method(HttpMethod.OPTIONS).uri("/v1/me")
+          .header("Origin", "http://example.test:5173")
+          .header("Access-Control-Request-Method", method)
+          .header("Access-Control-Request-Headers", "content-type")
+          .exchange((req, res) -> res.getStatusCode());
+      assertThat(status).as("preflight for %s", method).isEqualTo(HttpStatus.OK);
+    }
+  }
+
+  @Test
   void meNeedsAToken() {
     var response = client().get().uri("/v1/me")
         .exchange((req, res) -> res.getStatusCode());

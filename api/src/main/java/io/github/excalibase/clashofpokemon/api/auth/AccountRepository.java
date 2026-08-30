@@ -21,7 +21,8 @@ public class AccountRepository {
 
   public Optional<Account> find(String id) {
     return db.sql("""
-        select id, display_name, guest, avatar, created_at, wins, losses, draws
+        select id, display_name, guest, avatar, username,
+               created_at, wins, losses, draws
         from account where id = ?
         """).param(id).query(Account.class).optional();
   }
@@ -43,6 +44,48 @@ public class AccountRepository {
          where id = ?
         """).params(displayName, avatarSent, avatar, id).update();
   }
+
+  /**
+   * Bind a username and a password to an account that already exists.
+   *
+   * `guest` goes false here and nowhere else: it is the one thing that
+   * distinguishes an account somebody can get back into from one that lives
+   * or dies with a token in a browser.
+   */
+  public void registerCredentials(String id, String username, String passwordHash) {
+    db.sql("""
+        update account
+           set username = ?, password_hash = ?, guest = false
+         where id = ?
+        """).params(username, passwordHash, id).update();
+  }
+
+  /**
+   * An account and its password hash, found by name without regard to case.
+   *
+   * The hash is deliberately not on `Account`: that record is returned from
+   * `/v1/me`, handed to the menu and serialised into a public profile, and a
+   * field that must never be sent anywhere has no business travelling with
+   * the one that is sent everywhere.
+   */
+  public Optional<WithSecret> findByUsername(String username) {
+    return db.sql("""
+        select id, display_name, guest, avatar, username,
+               created_at, wins, losses, draws, password_hash
+        from account where lower(username) = lower(?)
+        """).param(username).query((rs, n) -> new WithSecret(
+            new Account(
+                rs.getString("id"), rs.getString("display_name"),
+                rs.getBoolean("guest"), rs.getString("avatar"),
+                rs.getString("username"),
+                rs.getObject("created_at", java.time.OffsetDateTime.class),
+                rs.getInt("wins"), rs.getInt("losses"), rs.getInt("draws")),
+            rs.getString("password_hash")))
+        .optional();
+  }
+
+  /** Only ever built inside this class, and never returned past the service. */
+  public record WithSecret(Account account, String passwordHash) {}
 
   public void touch(String id) {
     db.sql("update account set last_seen_at = now() where id = ?").param(id).update();

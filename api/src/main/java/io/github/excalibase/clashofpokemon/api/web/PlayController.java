@@ -1,6 +1,7 @@
 package io.github.excalibase.clashofpokemon.api.web;
 
 import io.github.excalibase.clashofpokemon.api.play.Mode;
+import io.github.excalibase.clashofpokemon.api.play.Result;
 import io.github.excalibase.clashofpokemon.api.play.PlayService;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -28,9 +29,12 @@ class PlayController {
    */
   @PostMapping("/v1/played")
   Map<String, Object> played(HttpServletRequest request, @RequestBody Body body) {
-    plays.record(current.require(request), Mode.of(body.mode()));
+    plays.record(current.require(request), Mode.of(body.mode()), Result.of(body.result()));
     return Map.of("ok", true);
   }
 
-  record Body(String mode) {}
+  // `result` is optional: the tutorial has no winner, and a client built
+  // before this existed sends only a mode. Both are recorded and neither
+  // moves the account's counters.
+  record Body(String mode, String result) {}
 }

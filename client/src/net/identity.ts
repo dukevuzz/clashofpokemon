@@ -7,6 +7,17 @@ export interface Account {
   id: string;
   displayName: string;
   guest: boolean;
+  /** The creature they wear. Absent until they pick one. */
+  avatar?: string;
+  /** How they log in. Absent for a guest, whose only proof is a token. */
+  username?: string;
+  /*
+   * The record the server holds, which counts every match including the
+   * offline ones. Optional because an older stored account predates them.
+   */
+  wins?: number;
+  losses?: number;
+  draws?: number;
 }
 
 /** Where the meta tier lives. Same host in production, a port away in dev. */
@@ -111,9 +122,26 @@ export async function authorized(url: string, init: RequestInit = {}): Promise<R
   let res = await withToken();
   if (res.status !== 401) return res;
 
+  /*
+   * Nothing signed in yet: become a guest and carry on.
+   *
+   * `signIn` is called lazily -- by feedback, by match-join, by play
+   * reporting -- so a player who opened the menu and went straight to their
+   * profile had no account at all. Creating one answered "not signed in",
+   * which is an error about a precondition the player has no way to satisfy,
+   * on the one screen whose whole purpose is to give them an account.
+   *
+   * Becoming a guest here is not a workaround. It is what the design says
+   * happens: a guest and a registered player are the same row, and
+   * registering fills credentials in on a row that already exists. This just
+   * makes sure the row exists at the moment somebody asks for one.
+   */
   const refresh = read<string>(REFRESH_KEY);
-  if (!refresh) throw new Error("not signed in");
-  await spend(refresh);
+  if (!refresh) {
+    await signIn();
+  } else {
+    await spend(refresh);
+  }
   res = await withToken();
   return res;
 }
@@ -130,4 +158,105 @@ export async function apiReachable(timeoutMs = 1500): Promise<boolean> {
   } finally {
     clearTimeout(timer);
   }
+}
+
+/**
+ * Change the name, the face, or both.
+ *
+ * Only the fields given are sent. A rename and a change of face happen on
+ * different screens, and sending both every time means whichever saved last
+ * silently overwrites the other.
+ *
+ * The reply is the account as the server now has it, and it is stored: without
+ * that the menu keeps drawing the old name until something else reloads.
+ */
+export async function saveProfile(
+  edit: { displayName?: string; avatar?: string },
+): Promise<Account> {
+  const res = await authorized(`${apiBase()}/v1/me`, {
+    method: "PATCH",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(edit),
+  });
+  if (!res.ok) {
+    // The server says why -- too long, empty, a character it will not take --
+    // and the form prints it under the box. A generic failure here would
+    // throw that away.
+    const said = (await res.json().catch(() => ({}))) as { error?: string };
+    throw new Error(said.error ?? `could not save: ${res.status}`);
+  }
+  const account = (await res.json()) as Account;
+  localStorage.setItem(ACCOUNT_KEY, JSON.stringify(account));
+  return account;
+}
+
+/** Read a refusal the way the server meant it, or fall back to the status. */
+async function reason(res: Response, fallback: string): Promise<string> {
+  const said = (await res.json().catch(() => ({}))) as { error?: string };
+  return said.error ?? `${fallback}: ${res.status}`;
+}
+
+/**
+ * Put a username and a password on the account already being played.
+ *
+ * Authenticated, and there is no form of it that names an account: it can only
+ * ever register the caller's own. The refresh token is untouched, because
+ * signing up must not log somebody out of the account they are signing up --
+ * the server binds credentials to the row rather than making a new one.
+ */
+export async function register(username: string, password: string): Promise<Account> {
+  const res = await authorized(`${apiBase()}/v1/auth/register`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ username, password }),
+  });
+  if (!res.ok) {
+    // Passed through rather than flattened. "That username is taken" and
+    // "your password is too short" are different things for a form to say,
+    // and only the server knows which one this is.
+    throw new Error(await reason(res, "could not create the account"));
+  }
+  const account = (await res.json()) as Account;
+  localStorage.setItem(ACCOUNT_KEY, JSON.stringify(account));
+  return account;
+}
+
+/**
+ * Come back to an account on a device that has never seen it.
+ *
+ * The one call here that hands a session to somebody who cannot already prove
+ * who they are, so it is the one that must not leak whether a username exists:
+ * a wrong name and a wrong password both come back as the same refusal.
+ *
+ * Whoever was signed in on this device is replaced. A guest with no history is
+ * no loss; one with a record is, and the screen asks before calling this.
+ */
+export async function logIn(username: string, password: string): Promise<Account> {
+  const res = await fetch(`${apiBase()}/v1/auth/login`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ username, password }),
+  });
+  if (!res.ok) throw new Error("wrong username or password");
+
+  const body = (await res.json()) as { account: Account; refresh: string };
+  localStorage.setItem(ACCOUNT_KEY, JSON.stringify(body.account));
+  localStorage.setItem(REFRESH_KEY, JSON.stringify(body.refresh));
+  // Spent immediately: without this the next request has no access token, and
+  // `signIn` would quietly mint a new guest over the account just recovered.
+  await spend(body.refresh);
+  return body.account;
+}
+
+/**
+ * Forget this device's account.
+ *
+ * Local only, deliberately. Revoking the refresh token server-side is the
+ * right thing for a shared computer and the wrong thing for the common case
+ * here -- a guest signing out has no way back in, so the token is the account.
+ */
+export function signOut() {
+  access = undefined;
+  localStorage.removeItem(ACCOUNT_KEY);
+  localStorage.removeItem(REFRESH_KEY);
 }

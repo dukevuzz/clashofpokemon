@@ -1,6 +1,7 @@
 package io.github.excalibase.clashofpokemon.api.web;
 
 import io.github.excalibase.clashofpokemon.api.auth.AuthFailed;
+import io.github.excalibase.clashofpokemon.api.auth.NameTaken;
 import io.github.excalibase.clashofpokemon.api.deck.InvalidDeck;
 import io.github.excalibase.clashofpokemon.api.feedback.TooMuchFeedback;
 import java.util.Map;
@@ -24,6 +25,18 @@ class ApiExceptions {
   @ExceptionHandler(IllegalArgumentException.class)
   ResponseEntity<ApiError> badRequest(IllegalArgumentException e) {
     return ResponseEntity.badRequest().body(ApiError.of(e.getMessage()));
+  }
+
+  /**
+   * 409, not 400.
+   *
+   * Every other rejection from a sign-up form means "fix what you typed". This
+   * one means "that name is gone", which is a different thing for the form to
+   * say and a different thing for it to do about it.
+   */
+  @ExceptionHandler(NameTaken.class)
+  ResponseEntity<ApiError> nameTaken(NameTaken e) {
+    return ResponseEntity.status(HttpStatus.CONFLICT).body(ApiError.of(e.getMessage()));
   }
 
   /**

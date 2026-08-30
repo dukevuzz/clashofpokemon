@@ -30,7 +30,10 @@ const store = new MemoryStorage();
   location: { protocol: "http:", hostname: "localhost" },
 };
 
-const { signIn, ticket, savedAccount, apiBase, apiReachable } =
+const {
+  signIn, ticket, savedAccount, apiBase, apiReachable, saveProfile,
+  register, logIn, signOut,
+} =
   await import("../src/net/identity");
 
 const ACCOUNT = { id: "acct_abc123", displayName: "Ember101", guest: true };
@@ -40,10 +43,15 @@ function api(opts: { failRefresh?: boolean; failTicket?: number } = {}) {
   const calls: string[] = [];
   let issued = 0;
   let ticketAttempts = 0;
+  let lastBody: string | undefined;
 
-  const fetchMock = vi.fn(async (url: string, init?: { body?: string }) => {
+  const fetchMock = vi.fn(async (
+    url: string,
+    init?: { body?: string; headers?: Record<string, string> },
+  ) => {
     const path = String(url).replace(apiBase(), "");
     calls.push(path);
+    if (init?.body) lastBody = init.body;
 
     if (path === "/v1/auth/guest") {
       return json({ account: ACCOUNT, refresh: "rt_first" });
@@ -61,17 +69,54 @@ function api(opts: { failRefresh?: boolean; failTicket?: number } = {}) {
       return json({ ticket: `tkt_${ticketAttempts}`, expiresIn: 60 });
     }
     if (path === "/v1/content") return json({ version: "v1" });
+    if (path === "/v1/auth/register") {
+      // The real endpoint is authenticated: it registers *the caller's*
+      // account and has no form that names one. A fake that skipped this
+      // could not reproduce the failure a player actually hit.
+      if (!bearer(init)) return fail(401);
+      const sent = JSON.parse(init?.body ?? "{}") as Record<string, string>;
+      if (sent.username === "taken") return fail(409, "that username is taken");
+      if ((sent.password ?? "").length < 12) {
+        return fail(400, "a password needs at least 12 characters");
+      }
+      return json({ ...ACCOUNT, guest: false, username: sent.username });
+    }
+    if (path === "/v1/auth/login") {
+      const sent = JSON.parse(init?.body ?? "{}") as Record<string, string>;
+      if (sent.password !== "correct horse battery") return fail(401);
+      return json({
+        account: { ...ACCOUNT, id: "acct_other", guest: false, username: sent.username },
+        refresh: "rt_from_login",
+      });
+    }
+    if (path === "/v1/me") {
+      if (!bearer(init)) return fail(401);
+      const sent = JSON.parse(init?.body ?? "{}") as Record<string, string>;
+      // Absent is not blank: a body with no displayName is a face change.
+      if (sent.displayName !== undefined && sent.displayName.trim() === "") {
+        return fail(400);
+      }
+      return json({ ...ACCOUNT, ...sent });
+    }
     return fail(404);
   });
 
   (globalThis as { fetch?: unknown }).fetch = fetchMock;
-  return { calls, get ticketAttempts() { return ticketAttempts; } };
+  return {
+    calls,
+    get ticketAttempts() { return ticketAttempts; },
+    get lastBody() { return lastBody; },
+  };
 }
 
 const json = (body: unknown) =>
   ({ ok: true, status: 200, json: async () => body }) as unknown as Response;
-const fail = (status: number) =>
-  ({ ok: false, status, json: async () => ({}) }) as unknown as Response;
+/** Did the request carry a session? */
+const bearer = (init?: { headers?: Record<string, string> }) =>
+  Boolean(init?.headers?.authorization ?? init?.headers?.Authorization);
+
+const fail = (status: number, error?: string) =>
+  ({ ok: false, status, json: async () => (error ? { error } : {}) }) as unknown as Response;
 
 beforeEach(() => store.clear());
 
@@ -164,5 +209,134 @@ describe("is the meta tier even there", () => {
       throw new Error("connection refused");
     });
     expect(await apiReachable(50)).toBe(false);
+  });
+});
+
+describe("changing a name or a face", () => {
+  it("sends the edit and keeps what came back", async () => {
+    api();
+    await signIn();
+
+    const after = await saveProfile({ displayName: "Duc", avatar: "pikachu" });
+    expect(after.displayName).toBe("Duc");
+    expect(after.avatar).toBe("pikachu");
+    // Stored, or the menu redraws with the old name until the next reload.
+    expect(savedAccount()?.displayName).toBe("Duc");
+  });
+
+  it("sends only what changed", async () => {
+    const fake = api();
+    await signIn();
+    await saveProfile({ avatar: "pikachu" });
+
+    const body = JSON.parse(fake.lastBody ?? "{}") as Record<string, unknown>;
+    // A rename and a face change are separate actions on separate screens;
+    // sending both every time means whichever saved last wins.
+    expect(body).not.toHaveProperty("displayName");
+    expect(body.avatar).toBe("pikachu");
+  });
+
+  it("leaves the stored account alone when the server refuses", async () => {
+    api();
+    await signIn();
+
+    await expect(saveProfile({ displayName: "  " })).rejects.toThrow();
+    expect(savedAccount()?.displayName).toBe(ACCOUNT.displayName);
+  });
+});
+
+describe("turning a guest into an account", () => {
+  it("keeps the account and stops being a guest", async () => {
+    api();
+    const guest = await signIn();
+
+    const after = await register("duc", "correct horse battery");
+    expect(after.id).toBe(guest.id);          // the same account, not a new one
+    expect(after.guest).toBe(false);
+    expect(after.username).toBe("duc");
+    expect(savedAccount()?.guest).toBe(false);
+  });
+
+  it("does not spend the session", async () => {
+    // Signing up must not log you out of the account you are signing up.
+    const fake = api();
+    await signIn();
+    const before = fake.calls.length;
+    await register("duc", "correct horse battery");
+
+    expect(fake.calls.slice(before)).toEqual(["/v1/auth/register"]);
+  });
+
+  it("passes the server's refusal through, not a generic one", async () => {
+    // "that username is taken" and "check what you typed" are different
+    // things for a form to say, and only the server knows which it is.
+    api();
+    await signIn();
+    await expect(register("taken", "correct horse battery"))
+      .rejects.toThrow(/taken/);
+    await expect(register("duc", "short"))
+      .rejects.toThrow(/12 characters/);
+  });
+});
+
+describe("coming back on another device", () => {
+  it("stores the account and the token it was given", async () => {
+    api();
+    const back = await logIn("duc", "correct horse battery");
+
+    expect(back.id).toBe("acct_other");
+    expect(savedAccount()?.id).toBe("acct_other");
+    // The refresh token has to be stored *and* spent, or the very next
+    // request has no session and quietly makes a fresh guest.
+    expect(localStorage.getItem("clashofpokemon.refresh")).toBeTruthy();
+  });
+
+  it("replaces whoever was signed in before", async () => {
+    api();
+    await signIn();
+    await logIn("duc", "correct horse battery");
+    expect(savedAccount()?.id).toBe("acct_other");
+  });
+
+  it("leaves the stored account alone when the password is wrong", async () => {
+    api();
+    const guest = await signIn();
+    await expect(logIn("duc", "wrong")).rejects.toThrow();
+    expect(savedAccount()?.id).toBe(guest.id);
+  });
+});
+
+describe("signing out", () => {
+  it("forgets the account and the token", async () => {
+    api();
+    await signIn();
+    signOut();
+
+    expect(savedAccount()).toBeUndefined();
+    expect(localStorage.getItem("clashofpokemon.refresh")).toBeNull();
+  });
+});
+
+describe("registering before anything has signed in", () => {
+  it("becomes a guest first rather than refusing", async () => {
+    // The whole design is that registering upgrades the account you are
+    // already playing. Nothing forces you to have one: `signIn` is called
+    // lazily by feedback, match-join and play reporting, so a player who
+    // opened the menu and went straight to the profile had no account, and
+    // "create an account" answered "not signed in" -- an error about a
+    // precondition the player has no way to satisfy.
+    api();
+    expect(savedAccount()).toBeUndefined();
+
+    const after = await register("duc", "correct horse battery");
+    expect(after.username).toBe("duc");
+    expect(after.guest).toBe(false);
+    expect(savedAccount()?.id).toBe(after.id);
+  });
+
+  it("does the same for a profile edit", async () => {
+    api();
+    const after = await saveProfile({ avatar: "pikachu" });
+    expect(after.avatar).toBe("pikachu");
   });
 });
