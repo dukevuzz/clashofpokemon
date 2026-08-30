@@ -136,19 +136,33 @@ export function saveTroop(id: string) {
 const RECORD_KEY = "clashofpokemon.record";
 const SETTINGS_KEY = "clashofpokemon.settings";
 
-export interface Record { wins: number; losses: number; draws: number }
+export interface Record {
+  wins: number;
+  losses: number;
+  draws: number;
+  /** Consecutive wins right now. A loss or a draw ends it. */
+  streak: number;
+  /** The longest run of wins this device has seen. */
+  bestStreak: number;
+}
 
 export function loadRecord(): Record {
   try {
     const raw = localStorage.getItem(RECORD_KEY);
     if (raw) {
       const r = JSON.parse(raw) as Partial<Record>;
-      return { wins: r.wins ?? 0, losses: r.losses ?? 0, draws: r.draws ?? 0 };
+      // Defaulted one field at a time rather than spread over a template:
+      // every record already on a live device predates the streak fields and
+      // has to keep its wins.
+      return {
+        wins: r.wins ?? 0, losses: r.losses ?? 0, draws: r.draws ?? 0,
+        streak: r.streak ?? 0, bestStreak: r.bestStreak ?? 0,
+      };
     }
   } catch {
     // Unreadable store: start from zero rather than fail a launch.
   }
-  return { wins: 0, losses: 0, draws: 0 };
+  return { wins: 0, losses: 0, draws: 0, streak: 0, bestStreak: 0 };
 }
 
 export function recordResult(result: "player" | "enemy" | "draw") {
@@ -156,10 +170,48 @@ export function recordResult(result: "player" | "enemy" | "draw") {
   if (result === "player") r.wins += 1;
   else if (result === "enemy") r.losses += 1;
   else r.draws += 1;
+
+  // A draw ends a streak. It is not a loss, but it is certainly not a win,
+  // and a "streak" that survives one is not a run of wins.
+  r.streak = result === "player" ? r.streak + 1 : 0;
+  r.bestStreak = Math.max(r.bestStreak, r.streak);
+
   try {
     localStorage.setItem(RECORD_KEY, JSON.stringify(r));
   } catch {
     // Private browsing refuses writes; the record just does not persist.
+  }
+}
+
+/**
+ * Forget this device's record.
+ *
+ * The record is kept here rather than on the account because offline matches
+ * are never reported anywhere -- the server only counts online results. That
+ * makes it a property of the device, and a device's record has to stop when
+ * the player using it does.
+ */
+export function forgetRecord() {
+  try {
+    localStorage.removeItem(RECORD_KEY);
+  } catch {
+    // Private browsing refuses writes; there was nothing stored to forget.
+  }
+}
+
+/**
+ * Replace the record wholesale, with what an account arrived carrying.
+ *
+ * Streaks are not seeded: they are a property of a sitting, and inheriting
+ * "best streak 9" from another device on the first match here would be a
+ * number the player cannot connect to anything they did.
+ */
+export function seedRecord(r: { wins: number; losses: number; draws: number }) {
+  try {
+    localStorage.setItem(RECORD_KEY, JSON.stringify(
+      { ...r, streak: 0, bestStreak: 0 }));
+  } catch {
+    // Private browsing refuses writes; the record just stays empty.
   }
 }
 

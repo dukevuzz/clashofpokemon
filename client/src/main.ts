@@ -7,8 +7,6 @@ import { DESIGN_W, DESIGN_H } from "./ui/layout";
 import { BootScene } from "./scenes/BootScene";
 import { MenuScene } from "./scenes/MenuScene";
 import { BattleScene } from "./scenes/BattleScene";
-import { DeckScene } from "./scenes/DeckScene";
-import { DexScene } from "./scenes/DexScene";
 
 /** The sprite frame tables, fetched before the game exists. */
 const indexReady = fetch("atlas/index.json")
@@ -43,7 +41,7 @@ function boot(): Phaser.Game {
     // creature into a smear at the 1.7x the arena is drawn at.
     pixelArt: true,
     roundPixels: true,
-    scene: [BootScene, MenuScene, DeckScene, BattleScene, DexScene],
+    scene: [BootScene, MenuScene, BattleScene],
   });
 }
 

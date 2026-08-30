@@ -452,7 +452,7 @@ a.lr-btn { display: inline-block; text-decoration: none; text-align: center; }
 
 .lr-play {
   display: block;
-  width: min(340px, 92%);
+  width: var(--lr-col);
   margin: 6px auto 12px;
   padding: 14px;
   border-radius: 14px;
@@ -581,7 +581,7 @@ a.lr-btn { display: inline-block; text-decoration: none; text-align: center; }
  */
 .lr-guide {
   display: block;
-  width: min(340px, 92%);
+  width: var(--lr-col);
   margin: 0 auto;
   padding: 7px;
   color: var(--gold);
@@ -624,3 +624,1232 @@ a.lr-btn { display: inline-block; text-decoration: none; text-align: center; }
   text-decoration: none;
 }
 .lr-play-guide:hover { background: #4bb463; }
+
+/* ═══════════════════════════════════════════ the home screen, rebuilt
+ *
+ * The menu was one scroll of fourteen things ending in three paragraphs of
+ * licence text, and the player appeared nowhere on it. Everything below is
+ * the same content, arranged around the one question the screen exists to
+ * ask: start a match.
+ */
+
+/*
+ * One column, sized to the screen.
+ *
+ * Every panel below was pinned at 340px, which is right on a phone and leaves
+ * a desktop showing a narrow strip down the middle of an empty box. The column
+ * grows with the viewport instead, and the content sits in the middle of
+ * whatever height is going rather than hugging the top.
+ */
+:root { --lr-col: min(340px, 92%); }
+@media (min-width: 620px) { :root { --lr-col: min(460px, 88%); } }
+@media (min-width: 900px) { :root { --lr-col: min(560px, 84%); } }
+
+/* Border-box for this screen only.
+ *
+ * The file has no global reset -- `.lr-modal` sets its own -- so a panel given
+ * both `width: var(--lr-col)` and padding came out wider than the column by
+ * exactly its padding. The at-risk warning sat 28px proud of the rows under
+ * it, which reads as a mistake rather than as emphasis. */
+.lr-menu, .lr-menu *,
+.lr-sheet, .lr-sheet * { box-sizing: border-box; }
+
+.lr-menu,
+.lr-sheet {
+  display: grid;
+  justify-items: center;
+  /* `safe` matters: with plain `center` a screen too short for the content
+     centres it and clips the top rows, which cannot be scrolled back to. */
+  align-content: safe center;
+  gap: 0;
+}
+
+/* ─────────────────────────────────────────── the profile bar
+ * A handle, not a dashboard: face, name, chevron, two lines tall.
+ */
+.lr-whoami {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: var(--lr-col);
+  margin: 0 auto 12px;
+  padding: 7px 10px;
+  border-radius: 10px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-tertiary);
+  color: var(--lr-fg);
+  cursor: pointer;
+  text-align: left;
+}
+.lr-whoami:hover { background: var(--panel); }
+.lr-whoami-face { position: relative; flex: 0 0 auto; line-height: 0; }
+/* Blockified deliberately. `styleFor` sizes a portrait with width and height,
+   and both are ignored on an inline box -- which is why this rendered as an
+   empty gap next to the name while the deck strip below it was fine: those
+   slots sit in a grid, which blockifies their children for free. */
+.lr-whoami-face .lr-face { display: block; image-rendering: pixelated; }
+/* The guest warning, as a dot. A sentence here would cost a line of height on
+   the screen least able to spare one; the full warning is one tap away. */
+.lr-dot {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: var(--lr-border-thin);
+  background: var(--red);
+}
+.lr-whoami-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.lr-chev { color: var(--lr-fg-dim); font-size: 1.3rem; line-height: 1; }
+
+/* ─────────────────────────────────────────── standing
+ * Clash Royale's arena slot, at Clash Royale's size, because trophies and
+ * ranking are coming and belong here. It must not claim an arena: the map is
+ * dealt per match, so there is no such thing as yours.
+ */
+.lr-standing {
+  width: var(--lr-col);
+  margin: 0 auto 12px;
+  padding: 14px 12px;
+  border-radius: 12px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-tertiary);
+  box-shadow: inset 0 0 0 1px rgba(255, 193, 7, 0.22);
+}
+/* The arena picture: the one element on this screen with any size to it.
+   Cropped to a window rather than shown whole -- the board is 384x672, and
+   at column width that is a thousand pixels of grass. The middle band is the
+   part worth looking at: the river, the bridges and both sets of towers. */
+.lr-arena {
+  margin: 0 0 10px;
+  width: 100%;
+  border-radius: 10px;
+  border: var(--lr-border-thin);
+  overflow: hidden;
+  background: var(--edge);
+  position: relative;
+  line-height: 0;
+}
+.lr-arena img {
+  display: block;
+  width: 100%;
+  height: clamp(150px, 30vh, 300px);
+  object-fit: cover;
+  object-position: center;
+  image-rendering: pixelated;
+}
+.lr-arena figcaption {
+  padding: 5px 8px;
+  font-size: 0.62rem;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  color: var(--lr-fg-dim);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.lr-crest {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 5px;
+  border-radius: 50%;
+  border: var(--lr-border-thin);
+  background: radial-gradient(circle at 40% 32%, #6c6a7d, #3b3949 72%);
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+  /* Grey until it means something. */
+  filter: grayscale(0.55);
+}
+.lr-rank {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--lr-fg-dim);
+}
+.lr-streak { margin: 2px 0 0; font-size: 0.72rem; color: var(--lr-gold); }
+
+.lr-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-top: 10px;
+}
+.lr-stats span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 2px;
+  border-radius: 8px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-secondary);
+  font-size: 0.6rem;
+  color: var(--lr-fg-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.lr-stats b {
+  font-size: 1.15rem;
+  color: var(--lr-fg);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─────────────────────────────────────────── the deck, in one strip */
+.lr-deck-strip {
+  display: flex;
+  gap: 5px;
+  width: var(--lr-col);
+  margin: 0 auto;
+}
+.lr-deck-strip .lr-slot { flex: 1; padding: 5px 2px; }
+.lr-deckmeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: var(--lr-col);
+  margin: 6px auto 14px;
+  font-size: 0.72rem;
+  color: var(--lr-fg-dim);
+}
+
+/* ─────────────────────────────────────────── BATTLE and its drawer */
+.lr-battlebar {
+  display: flex;
+  gap: 6px;
+  width: var(--lr-col);
+  margin: 0 auto 8px;
+  align-items: stretch;
+}
+.lr-battlebar .lr-play { width: auto; flex: 1; margin: 0; }
+.lr-drawer {
+  flex: 0 0 52px;
+  border-radius: 14px;
+  border: var(--lr-border-thick);
+  background: var(--elixir);
+  color: var(--lr-fg);
+  font-size: 1.3rem;
+  cursor: pointer;
+  box-shadow: inset -7px -7px 0 0 #8d3ba3, var(--lr-shadow-clickable);
+}
+.lr-drawer:hover { background: #d97cf2; }
+.lr-drawer[aria-expanded="true"] { transform: rotate(180deg); }
+
+.lr-modes {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: var(--lr-col);
+  margin: 0 auto 14px;
+  padding: 6px;
+  border-radius: 10px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-tertiary);
+}
+.lr-mode {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-secondary);
+  color: var(--lr-fg);
+  font: 700 0.82rem/1.2 system-ui, sans-serif;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  text-align: left;
+}
+.lr-mode:hover { background: var(--panelLit); }
+.lr-mode[aria-pressed="true"] { border-color: var(--lr-gold); background: var(--panelLit); }
+.lr-mode small { font-weight: 400; color: var(--lr-fg-dim); font-size: 0.68rem; }
+/* Dim, not gone. The menu used to change shape when a server stopped
+   answering, which moved the buttons under whoever was reading them. */
+.lr-mode:disabled { opacity: 0.45; cursor: not-allowed; }
+.lr-mode-rejoin { border-color: var(--lr-gold); }
+
+/* ─────────────────────────────────────────── tabs */
+.lr-tabs {
+  display: flex;
+  gap: 5px;
+  width: var(--lr-col);
+  margin: 4px auto 14px;
+}
+.lr-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 2px;
+  border-radius: 8px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-tertiary);
+  color: var(--lr-fg);
+  font-size: 1.05rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+.lr-tab span {
+  font-size: 0.56rem;
+  color: var(--lr-fg-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.lr-tab:hover { background: var(--panel); }
+.lr-tab-on { background: var(--lr-bg-secondary); border-color: var(--accent); }
+.lr-tab-on span { color: var(--accent); }
+.lr-tab:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ─────────────────────────────────────────── the profile screen */
+.lr-sheet {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  /*
+   * Required, not decorative.
+   *
+   * `#react-root` is `pointer-events: none` so that an unmounted overlay does
+   * not swallow taps meant for the board, and every screen has to switch it
+   * back on for itself. This one did not, so the whole profile screen drew
+   * perfectly and ignored every click. It survived testing because a
+   * scripted `.click()` dispatches straight at the element and never consults
+   * pointer-events -- only a real pointer finds this.
+   */
+  pointer-events: auto;
+  overflow-y: auto;
+  padding: 18px;
+  box-sizing: border-box;
+  background: var(--bg);
+  color: var(--lr-fg);
+  font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+  text-align: center;
+}
+.lr-sheet-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: var(--lr-col);
+  margin: 0 auto 14px;
+  font-size: 0.72rem;
+  color: var(--lr-fg-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.lr-sheet .lr-stats { width: var(--lr-col); margin: 12px auto; }
+
+.lr-bigface {
+  display: block;
+  margin: 0 auto;
+  padding: 8px;
+  border-radius: 14px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-tertiary);
+  cursor: pointer;
+  line-height: 0;
+}
+.lr-bigface .lr-face { display: block; margin: 0 auto; image-rendering: pixelated; }
+.lr-bigface-pen {
+  display: block;
+  margin-top: 4px;
+  font: 0.6rem/1 system-ui, sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.lr-bigname {
+  display: block;
+  margin: 10px auto 0;
+  background: none;
+  border: 0;
+  color: var(--lr-fg);
+  font: 700 1.15rem/1.2 system-ui, sans-serif;
+  cursor: pointer;
+}
+.lr-bigname small {
+  display: block;
+  margin-top: 3px;
+  font: 0.6rem/1 system-ui, sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.lr-rename {
+  display: flex;
+  gap: 6px;
+  width: var(--lr-col);
+  margin: 12px auto 0;
+}
+.lr-rename .lr-search { flex: 1; }
+.lr-problem { color: var(--red); font-size: 0.78rem; margin: 6px 0 0; }
+
+/* The guest warning in full, where the dot on the menu leads. */
+.lr-atrisk {
+  width: var(--lr-col);
+  margin: 0 auto 14px;
+  padding: 12px;
+  border-radius: 10px;
+  border: var(--lr-border-thin);
+  background: rgba(247, 79, 79, 0.14);
+  border-color: var(--red);
+  text-align: left;
+}
+.lr-atrisk b { color: var(--red); letter-spacing: 0.06em; }
+.lr-atrisk p { margin: 5px 0 9px; font-size: 0.78rem; color: var(--lr-fg-dim); }
+.lr-atrisk .lr-btn { width: 100%; }
+
+.lr-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: var(--lr-col);
+  margin: 0 auto;
+}
+.lr-setting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-secondary);
+  color: var(--lr-fg);
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+}
+.lr-setting:hover { background: var(--panelLit); }
+.lr-setting span { color: var(--lr-fg-dim); font-size: 0.78rem; }
+
+/* ─────────────────────────────────────────── the face picker */
+.lr-faces {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+  gap: 5px;
+  width: min(560px, 96%);
+  margin: 0 auto 12px;
+}
+.lr-face-pick {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-secondary);
+  cursor: pointer;
+  padding: 0;
+}
+.lr-face-pick:hover { background: var(--panelLit); }
+.lr-face-pick .lr-face { display: block; image-rendering: pixelated; }
+.lr-face-on { border-color: var(--lr-gold); box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.4); }
+
+.lr-credits {
+  width: var(--lr-col);
+  margin: 8px auto 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-tertiary);
+  text-align: left;
+}
+.lr-credits p { margin: 0 0 8px; font-size: 0.7rem; color: var(--lr-fg-dim); }
+.lr-credits p:last-child { margin-bottom: 0; }
+.lr-credits a { color: var(--accent); }
+
+/* Drawn, and plainly not ready. The account flow is designed and not built,
+   and a button that looks live and does nothing is worse than an absent one. */
+.lr-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ─────────────────────────────────────────── the tower creature */
+.lr-troop-pick {
+  display: grid;
+  gap: 5px;
+  width: var(--lr-col);
+  margin: 0 auto 12px;
+  padding: 6px;
+  border-radius: 10px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-tertiary);
+}
+.lr-troop-opt {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 9px;
+  border-radius: 8px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-secondary);
+  color: var(--lr-fg);
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+}
+.lr-troop-opt:hover { background: var(--panelLit); }
+.lr-troop-opt[aria-pressed="true"] { border-color: var(--lr-gold); background: var(--panelLit); }
+.lr-troop-opt .lr-face { display: block; flex: 0 0 auto; image-rendering: pixelated; }
+.lr-troop-text { display: flex; flex-direction: column; min-width: 0; }
+.lr-troop-text b { font-size: 0.85rem; }
+.lr-troop-text small { color: var(--lr-fg-dim); font-size: 0.7rem; }
+
+/* Portraits scale with the column, so a desktop is not shown phone-sized art. */
+@media (min-width: 700px) {
+  .lr-deck-strip .lr-slot { padding: 8px 4px; }
+  .lr-crest { width: 48px; height: 48px; font-size: 1.4rem; }
+  .lr-stats b { font-size: 1.4rem; }
+  .lr-tab { font-size: 1.3rem; padding: 9px 2px; }
+  .lr-tab span { font-size: 0.62rem; }
+}
+
+/* ─────────────────────────────────────────── creating an account */
+.lr-account {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: var(--lr-col);
+  margin: 0 auto 14px;
+  padding: 14px;
+  border-radius: 10px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-tertiary);
+  text-align: left;
+}
+.lr-account b { letter-spacing: 0.06em; }
+.lr-account p { margin: 0; font-size: 0.78rem; color: var(--lr-fg-dim); }
+.lr-account .lr-search { flex: 0 0 auto; }
+.lr-account-row { display: flex; gap: 6px; margin-top: 4px; }
+.lr-account-row .lr-btn { flex: 1; }
+.lr-btn-go { background: var(--elixir); }
+.lr-btn-go:hover:not(:disabled) { background: #d97cf2; }
+/* Declared after the variant, or the variant's background wins and a dead
+   button stays bright purple -- which is worse than no button, because it
+   invites a press that does nothing. */
+.lr-btn:disabled,
+.lr-btn-go:disabled {
+  background: var(--lr-bg-tertiary);
+  color: #8b93a6;
+  opacity: 1;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* The thing a player has to read before the account exists, not after. */
+.lr-warn {
+  font-size: 0.74rem !important;
+  color: var(--red) !important;
+  line-height: 1.45;
+}
+
+.lr-signedin {
+  width: var(--lr-col);
+  margin: 0 auto 14px;
+  padding: 12px;
+  border-radius: 10px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-tertiary);
+  text-align: left;
+}
+.lr-signedin p { margin: 0 0 6px; font-size: 0.78rem; color: var(--lr-fg-dim); }
+.lr-signedin b { color: var(--lr-fg); }
+
+/* One family for the whole tab bar, drawn for this game.
+   18x16 art at exactly 2x: a fractional scale resamples pixel art and softens
+   every edge. `pixelated` keeps the upscale hard. */
+.lr-ico {
+  display: block;
+  width: 36px;
+  height: 32px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  image-rendering: pixelated;
+  flex: 0 0 auto;
+}
+.lr-ico-packs  { background-image: url(/tiles/icons/packs.png); }
+.lr-ico-deck   { background-image: url(/tiles/icons/deck.png); }
+.lr-ico-battle { background-image: url(/tiles/icons/battle.png); }
+.lr-ico-dex    { background-image: url(/tiles/icons/dex.png); }
+.lr-ico-guide  { background-image: url(/tiles/icons/guide.png); }
+
+/* Colour icons cannot take `currentColor`, so state is carried by brightness
+   instead -- an inactive tab reads as recessed without changing the artwork. */
+.lr-tab .lr-ico { opacity: 0.62; filter: saturate(0.75); }
+.lr-tab:hover .lr-ico,
+.lr-tab-on .lr-ico { opacity: 1; filter: none; }
+
+/* ─────────────────────────────────────────── packs */
+.lr-packs { gap: 10px; align-content: start; padding-top: 14px; }
+
+.lr-wallet {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  width: var(--lr-col);
+  margin: 0 auto;
+}
+.lr-wallet span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 7px 2px;
+  border-radius: 8px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-tertiary);
+  font-size: 0.58rem;
+  color: var(--lr-fg-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+.lr-wallet b {
+  font-size: 1.1rem;
+  color: var(--lr-fg);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The pack itself. The sheet is eight frames wide, so a frame is 12.5% and
+   the step comes from `background-position` in percent -- which for a
+   background sized to 800% means one frame per 100%. */
+.lr-packart {
+  display: block;
+  margin: 6px auto 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  line-height: 0;
+}
+.lr-packart i {
+  display: block;
+  width: 128px;
+  height: 128px;
+  background-image: url(/tiles/chest.png);
+  /* Four 32px frames drawn at 4x. Sized and stepped in PIXELS, never
+     percentages: a percentage offset is (container - image) * P/100, so an
+     N-frame sheet steps by 100/(N-1) and getting it wrong renders frame 0 by
+     coincidence and nothing after it. That bug is why the old pack sheet sat
+     unused. */
+  background-size: 512px 128px;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+}
+
+/* `jump-none` visits exactly four positions -- 0, -128, -256, -384 -- and
+   holds on the last. Plain `steps(4)` would end at -512px, off the end of the
+   strip, and the chest would finish invisible. */
+.lr-packart-opening i {
+  animation: lr-chest-open 440ms steps(4, jump-none) forwards;
+}
+@keyframes lr-chest-open {
+  from { background-position: 0 0; }
+  to   { background-position: -384px 0; }
+}
+.lr-packart { position: relative; }
+/* Dimmed, not killed. `grayscale(0.7) brightness(0.7)` read as broken art
+   rather than as a pack you do not have yet. */
+.lr-packart:disabled { cursor: not-allowed; opacity: 0.5; }
+.lr-packcount {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 22px;
+  padding: 2px 5px;
+  border-radius: 11px;
+  border: var(--lr-border-thin);
+  background: var(--lr-gold);
+  color: #17130a;
+  font: 700 0.72rem/1.3 system-ui, sans-serif;
+  font-style: normal;
+}
+.lr-packart-ready:not(.lr-packart-opening) i { animation: lr-pack-breathe 2.4s ease-in-out infinite; }
+
+/* Barely there on purpose: it says "openable" without becoming the thing you
+   are looking at. */
+@keyframes lr-pack-breathe {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-3px) scale(1.02); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lr-packart-ready i { animation: none; }
+}
+
+.lr-packsay {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--lr-fg-dim);
+  max-width: var(--lr-col);
+}
+
+/* ── the reveal ── */
+.lr-pulls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  width: var(--lr-col);
+  margin: 8px auto 0;
+}
+.lr-pull {
+  aspect-ratio: 3 / 4;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--lr-fg);
+  cursor: pointer;
+  /* The 3D depth the flip rotates through. Without it rotateY looks like a
+     horizontal squash rather than a card turning over. */
+  perspective: 800px;
+}
+
+/* `display: block` is load-bearing. This is a <span>, and width, height and
+   transform are all ignored on an inline box -- the flip silently does
+   nothing and the card just swaps its contents. */
+.lr-pull-inner {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 460ms cubic-bezier(0.3, 0.9, 0.35, 1.15);
+}
+.lr-pull-up .lr-pull-inner { transform: rotateY(180deg); }
+
+.lr-pull-side {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 10px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-tertiary);
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+.lr-pull-face { transform: rotateY(180deg); }
+.lr-pull .lr-face { image-rendering: pixelated; display: block; }
+.lr-pull b { font-size: 0.68rem; line-height: 1.1; text-align: center; }
+.lr-pull small {
+  font-size: 0.52rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--rarity, var(--lr-fg-dim));
+}
+.lr-pull em {
+  font-style: normal;
+  font-size: 0.6rem;
+  color: var(--lr-gold);
+}
+.lr-pull-up .lr-pull-face { border-color: var(--rarity, #000); box-shadow: 0 0 10px -2px var(--rarity); }
+
+@keyframes lr-flip {
+  0%   { transform: rotateY(0) scale(1); }
+  50%  { transform: rotateY(90deg) rotateZ(-8deg) scale(1.18); }
+  100% { transform: rotateY(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lr-pull { animation: none; }
+}
+
+/* Face down. The rarity glows through the back before the flip -- the one
+   convention every implementation of this shares. */
+.lr-pull-back {
+  border-color: var(--rarity, #000);
+  box-shadow: 0 0 12px -3px var(--rarity);
+  background:
+    radial-gradient(circle at 50% 42%, var(--rarity) 0 18%, transparent 60%),
+    repeating-linear-gradient(45deg, var(--panel) 0 6px, var(--panelDim) 6px 12px);
+  opacity: 0.9;
+}
+/* Every face-down card is clickable now, not just the last one -- PAC turns
+   nothing over for you. The back glows in the card's rarity, which is what
+   makes hovering one worth doing. */
+.lr-pull:not(.lr-pull-up) { cursor: pointer; }
+.lr-pull:not(.lr-pull-up):hover {
+  box-shadow: 0 0 0 2px var(--rarity), 0 0 18px -4px var(--rarity);
+}
+.lr-new {
+  color: var(--green) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Entry. PAC fans the cards up from where the button was; ours rise into the
+   grid with a stagger so the eye has somewhere to start. */
+.lr-pulls .lr-pull {
+  animation: lr-deal 320ms ease-out backwards;
+}
+@keyframes lr-deal {
+  from { transform: translateY(26px) scale(0.94); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
+/* superseded by the real rotateY flip on .lr-pull-inner */
+@media (prefers-reduced-motion: reduce) {
+  .lr-pulls .lr-pull, .lr-pull-up { animation: none; }
+}
+
+/* The pack and what to do with it, side by side. Stacked, the pack floated
+   in the middle of an empty screen with its instructions a long way below. */
+.lr-openbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: var(--lr-col);
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 12px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-tertiary);
+}
+/* The chest is square, and it must stay a whole multiple of its 32px source
+   or the pixels resample and the lid edge goes soft. 96px = 3x. */
+.lr-openbar .lr-packart i {
+  width: 96px;
+  height: 96px;
+  background-size: 384px 96px;
+}
+.lr-openbar .lr-packart-opening i { animation-name: lr-chest-open-sm; }
+@keyframes lr-chest-open-sm {
+  from { background-position: 0 0; }
+  to   { background-position: -288px 0; }
+}
+.lr-opensay { display: flex; flex-direction: column; gap: 3px; text-align: left; flex: 1; }
+.lr-opensay b { font-size: 0.9rem; }
+.lr-opensay p { margin: 0 0 4px; font-size: 0.72rem; color: var(--lr-fg-dim); }
+
+/* The collection. The point of the screen, and what was missing from it. */
+.lr-collection {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(34px, 1fr));
+  gap: 3px;
+  width: var(--lr-col);
+  margin: 0 auto;
+  max-height: 38vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 6px;
+  border-radius: 10px;
+  border: var(--lr-border-thin);
+  background: var(--lr-bg-tertiary);
+}
+.lr-slotmini {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 5px;
+  background: var(--lr-bg-secondary);
+  box-shadow: inset 0 0 0 1px var(--rarity, transparent);
+}
+.lr-slotmini .lr-face { display: block; image-rendering: pixelated; }
+/* Not collected.
+ *
+ * Greyed and dimmed, not silhouetted. A silhouette was the first idea and it
+ * cannot work with this art: the portraits carry an opaque backdrop rather
+ * than transparency, so knocking them to a single value fills the whole tile
+ * and every uncollected slot came out as a plain square. 145 plain squares.
+ *
+ * Showing the creature dimmed is better anyway. A shape you cannot identify
+ * is not a wish list; seeing exactly which one is missing is the pull.
+ */
+.lr-slotmini-off { background: var(--edge); }
+.lr-slotmini-off .lr-face { filter: grayscale(1) brightness(0.42) contrast(0.9); }
+.lr-slotmini-off:hover .lr-face { filter: grayscale(0.4) brightness(0.75); }
+
+
+/* ---- the burst when a chest opens -------------------------------------
+   No asset: a handful of spans on one keyframe, each given its own angle and
+   distance by the caller. Cheap enough that the count is a taste decision
+   rather than a performance one. */
+.lr-spark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+@keyframes lr-spark-fly {
+  0%   { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  70%  { opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.15); opacity: 0; }
+}
+.lr-flash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle at 50% 45%, #fff8d9 0%, #ffd75e33 22%, transparent 55%);
+}
+.lr-flash-on { animation: lr-flash-out 500ms ease-out; }
+@keyframes lr-flash-out {
+  0%   { opacity: 0; }
+  18%  { opacity: 0.95; }
+  100% { opacity: 0; }
+}
+.lr-openbar { position: relative; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lr-spark, .lr-flash { display: none; }
+  .lr-packart-opening i { animation-duration: 1ms; }
+  .lr-pull-inner { transition: none; }
+}
+
+
+/* ==== painted chrome =====================================================
+   Two 24x24 PNGs, 380 bytes together, stretched round any box by CSS
+   9-slice. `border-width: 8px` matches the 8px slice exactly, so the bevel
+   maps one source pixel to one screen pixel -- scaling it would resample the
+   pixel art and turn a crisp edge into mush.
+
+   This replaces `border: Npx solid black` on the panels. A flat fill inside a
+   black rectangle is the single thing that made these screens read as a web
+   page rather than a game. */
+:root {
+  --lr-panel-frame: 8px solid transparent;
+  --lr-panel-image: url(/tiles/panel.png) 8 fill repeat;
+}
+
+.lr-card,
+.lr-standing,
+.lr-account,
+.lr-openbar,
+.lr-wallet,
+.lr-drawer,
+.lr-troop-pick {
+  border: var(--lr-panel-frame);
+  border-image: var(--lr-panel-image);
+  border-radius: 0;          /* the frame draws its own corners */
+  background: none;          /* `fill` paints the centre */
+  box-shadow: 2px 2px 0 var(--lr-shadow);
+}
+
+.lr-btn-go {
+  border: 8px solid transparent;
+  border-image: url(/tiles/btn-gold.png) 8 fill repeat;
+  border-radius: 0;
+  background: none;
+  color: #3d2f00;
+  text-shadow: 0 1px 0 #ffffff55;
+}
+
+/* ---- the ground ---------------------------------------------------------
+   A 45-degree check at very low contrast. No asset, no request. The
+   difference between a surface and a void, which is what the large empty
+   areas on desktop were reading as.
+
+   On the screen containers, NOT on `body`: the body sits behind the Phaser
+   canvas and is never seen, and index.html's inline `html, body` rule would
+   win the cascade anyway. These three are the DOM screens that actually
+   paint `--bg`, and putting it here keeps the battle canvas untouched. */
+.lr-screen,
+.lr-menu,
+.lr-sheet {
+  background-image:
+    linear-gradient(45deg, #00000014 25%, transparent 25%, transparent 75%, #00000014 75%, #00000014),
+    linear-gradient(45deg, #00000014 25%, transparent 25%, transparent 75%, #00000014 75%, #00000014);
+  background-size: 24px 24px;
+  background-position: 0 0, 12px 12px;
+}
+
+/* ---- one creature's faces ------------------------------------------------
+   Opened from a collection tile. The tile used to be a dead <span>: it said
+   you owned a creature and stopped there, when what you own is a set of faces
+   and the count is the interesting part. */
+.lr-faces-sheet {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: #0b0b0ecc;
+  pointer-events: auto;
+}
+.lr-faces-box {
+  width: min(560px, 100%);
+  max-height: 84%;
+  overflow-y: auto;
+  padding: 14px;
+  border: var(--lr-panel-frame);
+  border-image: var(--lr-panel-image);
+  box-shadow: 3px 3px 0 var(--lr-shadow);
+}
+.lr-faces-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0 0 10px;
+}
+.lr-faces-head b { font-size: 1rem; }
+.lr-faces-head span { font-size: 0.74rem; color: var(--lr-fg-dim); flex: 1; }
+.lr-faces-label {
+  display: block;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lr-fg-dim);
+  margin: 8px 0 5px;
+}
+.lr-faces-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+  gap: 6px;
+}
+.lr-faceslot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 2px;
+  border: var(--lr-border-thin);
+  border-radius: 6px;
+  background: var(--lr-bg-primary);
+  box-shadow: var(--lr-shadow-clickable);
+}
+.lr-faceslot > span { display: block; image-rendering: pixelated; }
+.lr-faceslot em {
+  font-style: normal;
+  font-size: 0.56rem;
+  color: var(--lr-fg-dim);
+  text-align: center;
+  line-height: 1.1;
+}
+/* Dimmed rather than hidden: the ones you have not got are the reason to
+   keep opening chests, so they have to be visible to want. */
+.lr-faceslot-off { filter: grayscale(1) brightness(0.42); }
+.lr-pull-face-name { color: var(--lr-gold); font-size: 0.6rem; }
+.lr-shards { color: var(--lr-gold); font-size: 0.74rem; }
+/* Affordable and unowned: lit gold so the thing you can actually buy is the
+   thing your eye lands on, without un-dimming the ones you cannot. */
+.lr-faceslot-buy {
+  filter: none;
+  border-color: var(--lr-gold);
+  cursor: pointer;
+}
+.lr-faceslot-buy > span { filter: grayscale(1) brightness(0.55); }
+.lr-facecost {
+  font-style: normal;
+  font-size: 0.56rem;
+  color: var(--lr-gold);
+}
+.lr-faceslot:disabled { cursor: default; }
+
+/* ==== the deck builder ===================================================
+   Ported from `DeckScene`, which computed every one of these positions in
+   design pixels and re-derived them on each rebuild. The layout below is the
+   same shape, expressed once: slots pinned, roster scrolling under them,
+   detail and actions pinned to the foot.
+
+   `min-height: 0` appears twice on purpose. A flex child defaults to
+   `min-height: auto`, which is its content height, so the scrolling region
+   refuses to shrink and pushes the detail panel and the buttons off the
+   bottom of the screen instead of scrolling. */
+.lr-deckscreen { min-height: 0; }
+
+.lr-deckscreen header .lr-sub { color: var(--lr-fg-dim); font-size: 0.78rem; }
+.lr-deckavg { color: #d98cff; font-weight: 700; font-size: 0.8rem; }
+
+/* The count turns into a warning and back. Colour alone, because the text
+   already changed -- an icon here would be a third thing to read. */
+.lr-shout { color: var(--red) !important; font-weight: 700; }
+
+.lr-deckslots {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+  padding: 10px 10px 12px;
+  background: var(--lr-bg-secondary);
+  border-bottom: var(--lr-border-thick);
+}
+
+/* The gesture is the reorder, so the browser must not claim it as a scroll
+   first. Without this the second pointermove never arrives on a phone. */
+.lr-deckslot {
+  touch-action: none;
+  user-select: none;
+  min-width: 0;
+  padding: 8px 2px 6px;
+  transition: transform 120ms ease;
+}
+.lr-slot-title {
+  font-size: 0.68rem;
+  line-height: 1.1;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+.lr-slot-armed { border-color: var(--accent); background: var(--panelLit); }
+/* Lifted out of the row while it is being carried, and not animated back to
+   where it is being dragged from -- the transition is for the cards making
+   room, not for the one under the finger. */
+.lr-slot-lifted { transition: none; opacity: 0.92; }
+.lr-face-empty {
+  width: 44px; height: 44px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.22);
+}
+
+/* The mega stone, sliced out of the same two-frame sheet the battle button
+   uses: 96x48, frame 1 lit and frame 0 drained. */
+.lr-stone {
+  position: absolute;
+  top: -6px; right: -6px;
+  width: 20px; height: 20px;
+  background: url(/tiles/mega-stone.png) no-repeat -20px 0;
+  background-size: 40px 20px;
+  image-rendering: pixelated;
+}
+.lr-stone-off { background-position: 0 0; opacity: 0.5; }
+
+.lr-deckbody {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.lr-filters { padding: 8px 10px 4px; }
+.lr-chiprow { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+.lr-chiplabel {
+  flex: 0 0 auto;
+  width: 5.5em;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--lr-fg-dim);
+}
+.lr-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.lr-sortrow { justify-content: space-between; }
+.lr-sortrow .lr-chiplabel { width: auto; }
+
+/* Filled when on, hollow when off. It used to be a colour change on the label
+   alone, and on a phone that is not a difference. */
+.lr-chip {
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--tint, var(--edge));
+  background: var(--tint, var(--lr-bg-primary));
+  color: var(--lr-fg);
+  font: inherit;
+  font-size: 0.68rem;
+  cursor: pointer;
+  filter: saturate(0.5) brightness(0.62);
+}
+.lr-chip[aria-pressed="true"] {
+  background: var(--lr-gold);
+  border-color: var(--lr-gold);
+  color: #17130a;
+  font-weight: 700;
+  filter: none;
+}
+/* MEGA keeps its gold outline while off, so it is still the one that catches
+   the eye without being indistinguishable from the on state. */
+.lr-chip-mega { border-color: var(--lr-gold); color: var(--lr-gold); filter: none; }
+
+.lr-cardgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));
+  gap: 6px;
+  padding: 4px 10px 12px;
+}
+.lr-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 8px 2px 6px;
+  min-width: 0;
+  border-radius: 10px;
+  /* The rarity is the border, as it was on the canvas tile. */
+  border: 1px solid var(--rarity, var(--edge));
+  background: var(--lr-bg-primary);
+  color: var(--lr-fg);
+  font: inherit;
+  cursor: pointer;
+}
+.lr-tile .lr-face { image-rendering: pixelated; }
+.lr-tile-in { background: var(--panelLit); border-width: 2px; }
+.lr-tile[aria-current="true"] { box-shadow: 0 0 0 2px var(--lr-gold); }
+.lr-tick {
+  position: absolute;
+  top: 2px; right: 4px;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--hp, #6fd47a);
+}
+
+.lr-detailrow { display: flex; align-items: flex-start; gap: 10px; }
+.lr-detailface { flex: 0 0 auto; image-rendering: pixelated; }
+.lr-detailtext { min-width: 0; flex: 1 1 auto; }
+.lr-detailtext h2 { margin: 0; font-size: 1rem; }
+.lr-how { margin: 4px 0 0; font-size: 0.78rem; color: var(--lr-gold); }
+.lr-hintok, .lr-hintno { flex: 0 0 auto; font-size: 0.72rem; }
+.lr-hintok { color: var(--hp, #6fd47a); }
+.lr-hintno { color: var(--red); }
+
+.lr-deckbar {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  background: var(--lr-bg-secondary);
+  border-top: var(--lr-border-thick);
+}
+.lr-deckbar .lr-btn { flex: 1; font-weight: 700; letter-spacing: 0.06em; }
+
+/* A shove rather than a dialog: the message is already in the header, and the
+   shake says which part of the screen it is about. */
+@keyframes lr-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+.lr-shake { animation: lr-shake 140ms ease-in-out 2; }
+@media (prefers-reduced-motion: reduce) {
+  .lr-shake, .lr-deckslot { animation: none; transition: none; }
+}
+
+/* ---- the deck detail's attack preview -----------------------------------
+   `Showcase` comes from the guide, and its own styling lives in `guide.css`,
+   which this page does not load. Rather than pull a whole second stylesheet
+   in for one component, the few rules it needs are restated here at the size
+   this panel wants. The canvas is authored against a fixed 176x248 stage, so
+   only the box changes -- the drawing does not know or care. */
+.lr-detailrow .g-showcase {
+  flex: 0 0 auto;
+  margin: 0;
+  align-self: center;
+}
+.lr-detailrow .g-showcase-canvas {
+  display: block;
+  width: 88px;
+  aspect-ratio: 176 / 248;
+  border-radius: 6px;
+  background: #2c3a26;
+  image-rendering: pixelated;
+  border: var(--lr-border-thin);
+}
+/* The guide's paragraph explains the preview to a reader who came to read.
+   In a deck panel it is a wall of text beside the thing it describes. */
+.lr-detailrow .g-showcase-note { display: none; }

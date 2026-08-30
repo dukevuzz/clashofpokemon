@@ -33,8 +33,9 @@ export class BootScene extends Phaser.Scene {
     // fifty-four animation sheets.
     //
     // BattleScene already loads exactly the chains its two decks can reach, and
-    // DeckScene loads the roster for its animated previews. Both are screens
-    // you choose to open. The first screen should not pay for them.
+    // the deck builder's attack preview fetches a sheet when you open a card.
+    // Both are things you choose to look at. The first screen should not pay
+    // for them.
     arena.preload(this.load);
     portraits.preload(this.load);
     skillFx.preload(this.load);

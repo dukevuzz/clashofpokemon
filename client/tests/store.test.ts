@@ -183,7 +183,8 @@ describe("settings and the win record", () => {
   });
 
   it("starts a record at zero", () => {
-    expect(loadRecord()).toEqual({ wins: 0, losses: 0, draws: 0 });
+    expect(loadRecord()).toEqual(
+      { wins: 0, losses: 0, draws: 0, streak: 0, bestStreak: 0 });
   });
 
   it("counts each result in its own column", () => {
@@ -191,21 +192,25 @@ describe("settings and the win record", () => {
     recordResult("player");
     recordResult("enemy");
     recordResult("draw");
-    expect(loadRecord()).toEqual({ wins: 2, losses: 1, draws: 1 });
+    expect(loadRecord()).toEqual(
+      { wins: 2, losses: 1, draws: 1, streak: 0, bestStreak: 2 });
   });
 
   it("fills in a missing column rather than producing NaN", () => {
     // A record written before draws existed must not make every later count
     // undefined + 1.
     localStorage.setItem("clashofpokemon.record", JSON.stringify({ wins: 3 }));
-    expect(loadRecord()).toEqual({ wins: 3, losses: 0, draws: 0 });
+    expect(loadRecord()).toEqual(
+      { wins: 3, losses: 0, draws: 0, streak: 0, bestStreak: 0 });
     recordResult("draw");
-    expect(loadRecord()).toEqual({ wins: 3, losses: 0, draws: 1 });
+    expect(loadRecord()).toEqual(
+      { wins: 3, losses: 0, draws: 1, streak: 0, bestStreak: 0 });
   });
 
   it("survives an unreadable record", () => {
     localStorage.setItem("clashofpokemon.record", "]]not json[[");
-    expect(loadRecord()).toEqual({ wins: 0, losses: 0, draws: 0 });
+    expect(loadRecord()).toEqual(
+      { wins: 0, losses: 0, draws: 0, streak: 0, bestStreak: 0 });
   });
 
   it("hands back a starter deck when the whole roster moved underneath it", () => {
