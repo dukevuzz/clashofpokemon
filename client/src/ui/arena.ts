@@ -43,7 +43,16 @@ const THEMES: Record<string, { sheet: GroundSheet; file: string }> = {
 };
 
 /** The ones a match may be dealt. `classic` is kept for comparison, not play. */
-const IN_ROTATION = ["forest", "meadow", "amp", "magma"];
+export const IN_ROTATION = ["forest", "meadow", "amp", "magma"];
+
+/** What to call an arena in front of a player. */
+export const ARENA_NAMES: Readonly<Record<string, string>> = {
+  forest: "Verdant Wood",
+  meadow: "Open Meadow",
+  amp: "Amp Plains",
+  magma: "Magma Cavern",
+  classic: "Classic",
+};
 
 let THEME = "forest";
 const sheetOf = () => THEMES[THEME].sheet;
@@ -161,6 +170,48 @@ export function buildGround(scene: Phaser.Scene): Phaser.GameObjects.RenderTextu
 }
 
 /** Where two surfaces meet a hard tile edge looks like a seam, so a soft line along the boundary reads as a transition instead. */
+/**
+ * A picture of an arena, for the menu to show.
+ *
+ * Drawn by the same code that draws the real board and captured off the
+ * canvas, rather than shipped as four screenshots: the arenas were redrawn
+ * once already, and a stale picture of a board is exactly the sort of thing
+ * nobody notices for a month.
+ *
+ * The whole composition is captured, not just the ground texture -- the
+ * bridges and lane edges are separate objects drawn over it, and a river with
+ * no crossings is a picture of a board this game does not have.
+ *
+ * Everything drawn for the capture is destroyed again. Nothing shows in the
+ * meantime because the menu is an opaque DOM layer over the canvas.
+ */
+export function preview(
+  scene: Phaser.Scene,
+  theme: string,
+): Promise<{ theme: string; src: string }> {
+  const was = THEME;
+  if (theme in THEMES) THEME = theme;
+
+  const before = new Set(scene.children.list);
+  drawSurround(scene);
+  buildGround(scene);
+  drawEdgesAndBridges(scene);
+  const made = scene.children.list.filter((o) => !before.has(o));
+
+  return new Promise((resolve) => {
+    const w = config.arenaWidth * ARENA_SCALE;
+    const h = config.arenaHeight * ARENA_SCALE;
+    // On the frame *after* this one: the objects above have been added but
+    // not yet rendered, and capturing now would photograph the frame before
+    // they existed.
+    scene.game.renderer.snapshotArea(ARENA_X, ARENA_Y, w, h, (image) => {
+      for (const o of made) o.destroy();
+      THEME = was;
+      resolve({ theme, src: (image as HTMLImageElement).src });
+    });
+  });
+}
+
 export function drawEdgesAndBridges(scene: Phaser.Scene) {
   const g = scene.add.graphics().setDepth(-9);
   const toX = (x: number) => ARENA_X + x * ARENA_SCALE;

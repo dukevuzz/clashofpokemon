@@ -1,0 +1,28 @@
+# Cloudflare Pages cache rules.
+#
+# Everything was being served `max-age=0, must-revalidate`, so every sprite
+# sheet, atlas and tile made a conditional request on every single load. The
+# CDN was already there -- it just was not allowed to keep anything.
+#
+# Two tiers, split by whether the filename changes when the bytes change.
+
+# Vite build output carries a content hash in the name, so a changed file is a
+# changed URL. Safe to cache forever.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# public/ is copied verbatim and the names are stable, so these CAN go stale.
+# A day at the edge with a week of stale-while-revalidate: art updates reach
+# players within a day, and nobody ever waits on a revalidation.
+/atlas/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/tiles/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/fonts/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=604800
+
+# The shell must never be cached, or a deploy cannot reach anyone.
+/
+  Cache-Control: public, max-age=0, must-revalidate
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate

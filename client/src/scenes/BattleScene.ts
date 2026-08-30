@@ -25,6 +25,7 @@ import {
   setViewSide, viewingFrom, viewFacing,
 } from "../ui/layout";
 import { loadDeck, loadBranch, loadTroop, loadSettings, recordResult } from "../ui/deckStore";
+import * as collection from "../ui/collection";
 import { openModal, choiceButton } from "../ui/modal";
 import * as portraits from "../ui/portraits";
 import { NetMatch } from "../net/client";
@@ -1102,7 +1103,7 @@ export class BattleScene extends Phaser.Scene {
   private finishTutorial() {
     this.teaching = false;
     this.drawCoach(undefined);
-    this.add.rectangle(DESIGN_W / 2, DESIGN_H / 2, DESIGN_W, DESIGN_H, C.bg, 0.72).setDepth(50);
+    this.add.rectangle(DESIGN_W / 2, DESIGN_H / 2, DESIGN_W, DESIGN_H, C.scrim, 0.72).setDepth(50);
     this.add.text(DESIGN_W / 2, DESIGN_H / 2 - 20, "THAT IS ALL OF IT", px(30, C.gold))
       .setOrigin(0.5).setDepth(51);
     this.add.text(DESIGN_W / 2, DESIGN_H / 2 + 30,
@@ -1367,7 +1368,7 @@ export class BattleScene extends Phaser.Scene {
   /** The match is unfinished and unreachable. Do not pretend to know a result. */
   private abandonScreen() {
     this.over = true;
-    this.add.rectangle(DESIGN_W / 2, DESIGN_H / 2, DESIGN_W, DESIGN_H, C.bg, 0.72).setDepth(50);
+    this.add.rectangle(DESIGN_W / 2, DESIGN_H / 2, DESIGN_W, DESIGN_H, C.scrim, 0.72).setDepth(50);
     this.add.text(DESIGN_W / 2, DESIGN_H / 2 - 16, "CONNECTION LOST", px(30, C.dim))
       .setOrigin(0.5).setDepth(51);
     this.add.text(DESIGN_W / 2, DESIGN_H / 2 + 22, "tap to go back", px(16, C.dim))
@@ -1411,14 +1412,54 @@ export class BattleScene extends Phaser.Scene {
      * already counted. Not awaited -- the result screen is drawn below and
      * must not wait for a network round trip to appear.
      */
-    if (!this.net) played.record(this.teaching ? "tutorial" : "offline");
+    const outcome = mine === "player" ? "win" : mine === "enemy" ? "loss" : "draw";
+    if (!this.net) {
+      // The result goes with it. A tutorial has no winner, so it sends none
+      // and the account's counters do not move.
+      played.record(
+        this.teaching ? "tutorial" : "offline",
+        this.teaching ? undefined : outcome,
+      );
+    }
+
+    /*
+     * What the match was worth.
+     *
+     * Not the tutorial: paying for a scripted match makes the tutorial the
+     * cheapest way to farm, which is a thing people will find within a day.
+     */
+    const earned = this.teaching ? undefined : collection.reward(outcome);
     const label = mine === "player" ? "YOU WIN" : mine === "enemy" ? "YOU LOSE" : "DRAW";
     const colour = mine === "player" ? C.hp : mine === "enemy" ? C.enemy : C.dim;
 
-    this.add.rectangle(DESIGN_W / 2, DESIGN_H / 2, DESIGN_W, DESIGN_H, C.bg, 0.72).setDepth(50);
+    this.add.rectangle(DESIGN_W / 2, DESIGN_H / 2, DESIGN_W, DESIGN_H, C.scrim, 0.72).setDepth(50);
     this.add.text(DESIGN_W / 2, DESIGN_H / 2 - 20, label, px(42, colour))
       .setOrigin(0.5).setDepth(51);
-    this.add.text(DESIGN_W / 2, DESIGN_H / 2 + 40, "tap to continue", style(18, C.dim))
+    /*
+     * What the match paid, said here.
+     *
+     * A reward the player is not told about may as well not have happened --
+     * and this is the only moment they are looking. A pack earned is the
+     * loud line; the coins and the countdown are the quiet one that makes
+     * the next match feel like it is going somewhere.
+     */
+    if (earned) {
+      this.add
+        .text(DESIGN_W / 2, DESIGN_H / 2 + 34, `+${earned.coins} coins`, px(20, C.gold))
+        .setOrigin(0.5)
+        .setDepth(51);
+
+      const note = earned.pack
+        ? "A PACK! open it from the menu"
+        : `${earned.toNextPack} more ${earned.toNextPack === 1 ? "match" : "matches"} for a free pack`;
+      this.add
+        .text(DESIGN_W / 2, DESIGN_H / 2 + 66, note,
+          style(16, earned.pack ? C.gold : C.dim))
+        .setOrigin(0.5)
+        .setDepth(51);
+    }
+
+    this.add.text(DESIGN_W / 2, DESIGN_H / 2 + 104, "tap to continue", style(18, C.dim))
       .setOrigin(0.5).setDepth(51);
 
     this.input.once("pointerdown", () => this.scene.start("Menu"));

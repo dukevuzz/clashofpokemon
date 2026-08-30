@@ -3,6 +3,7 @@
 import Phaser from "phaser";
 import { createElement } from "react";
 import { C } from "../ui/theme";
+import * as arena from "../ui/arena";
 import { joinQueue, serverReachable, matchInProgress } from "../net/session";
 import { loadDeck, loadTroop, loadBranch } from "../ui/deckStore";
 import { Menu } from "../ui/Menu";
@@ -25,6 +26,8 @@ export class MenuScene extends Phaser.Scene {
     // The online button is only offered once a server has answered, so the
     // public build -- which has none yet -- shows exactly what it can do.
     let canPlayOnline = false;
+    /** The arena picture, once it has been rendered. */
+    let arenaShot: { theme: string; src: string } | undefined;
 
     /** Open the connection and go wherever it puts us. */
     /** The code for a room this player opened, once the server names it. */
@@ -68,12 +71,31 @@ export class MenuScene extends Phaser.Scene {
        * broken tutorial teaches worse than none. The guide, which is finished,
        * takes the slot it was going to have.
        */
+      arena: arenaShot,
       online: canPlayOnline ? () => startOnline() : undefined,
       host: canPlayOnline ? () => startOnline({ create: true }) : undefined,
       join: canPlayOnline ? (code: string) => startOnline({ code }) : undefined,
     }));
 
     draw();
+
+    /*
+     * A picture of one of the arenas, for the panel that will one day hold a
+     * rank. Rendered rather than shipped as art, so it cannot fall behind the
+     * tiles; captured once and handed to the DOM as a PNG.
+     *
+     * Which one is arbitrary -- a match deals its own from the match id -- so
+     * the menu says as much rather than implying this is the board you are
+     * about to play, or one you have earned.
+     */
+    const theme = arena.IN_ROTATION[Math.floor(Math.random() * arena.IN_ROTATION.length)];
+    void arena.preview(this, theme).then((shot) => {
+      // The scene may have been left before the snapshot came back.
+      if (!this.scene.isActive()) return;
+      arenaShot = shot;
+      draw();
+    });
+
     void serverReachable().then(async (up) => {
       if (!up) return;
       canPlayOnline = true;
@@ -88,4 +110,5 @@ export class MenuScene extends Phaser.Scene {
     // Unmount on the way out, or the menu stays over the battle.
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, unmount);
   }
+
 }

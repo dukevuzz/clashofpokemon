@@ -7,7 +7,17 @@ export const C = {
   // rather than rectangles beside it, and the four values are far enough
   // apart in lightness to separate -- they used to sit within 21 points of
   // each other, which is why everything looked like one grey mass.
-  bg: 0x1e2432,
+  // Lifted from 0x1e2432, which was 9.4x darker than the ramp above it was
+  // built for. PMD sprites carry a black outline and that outline IS the
+  // silhouette: against the old ground it sat at 1.35:1, below the point where
+  // an edge is visible at all, so every creature bled into the background.
+  // Here it is 3.9:1 and the art separates without needing a border drawn
+  // round it.
+  bg: 0x4a5568,
+  // The battle scrim used to be `bg` at 0.72 alpha. Now that the ground is
+  // light, a scrim made from it would barely dim anything -- it needs its own
+  // dark value or modals stop reading as modal.
+  scrim: 0x141926,
   panel: 0x5a5768,
   panelLit: 0x736d84,
   panelDim: 0x3d3a4c,

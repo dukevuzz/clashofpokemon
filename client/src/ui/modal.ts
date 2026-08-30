@@ -63,40 +63,6 @@ export function openModal(opts: ModalOptions = {}): ModalHandle {
   return { close, body };
 }
 
-/** A full-screen panel over the canvas, for the parts of the game that are documents rather than boards. */
-export function openScreen(title: string, onBack: () => void): {
-  header: HTMLElement; body: HTMLElement; close(): void;
-} {
-  const el = document.createElement("div");
-  el.className = "lr-screen";
-
-  const header = document.createElement("header");
-  const h = document.createElement("h1");
-  h.textContent = title;
-  header.append(h);
-  el.append(header);
-
-  const body = document.createElement("div");
-  body.style.cssText = "flex:1 1 auto; display:flex; flex-direction:column; min-height:0";
-  el.append(body);
-  overlayHost().append(el);
-
-  let closed = false;
-  const close = () => {
-    if (closed) return;
-    closed = true;
-    el.remove();
-  };
-
-  const back = document.createElement("button");
-  back.className = "lr-btn";
-  back.textContent = "Back";
-  back.addEventListener("click", () => { close(); onBack(); });
-  header.append(back);
-
-  return { header, body, close };
-}
-
 /** A picker: portrait, name, one line under it. Returns nothing; buttons act. */
 export function choiceButton(
   opts: {

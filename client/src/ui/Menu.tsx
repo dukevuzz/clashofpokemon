@@ -11,21 +11,33 @@
  * 30 steps a second. A menu is a document. This is the split pokemonAutoChess
  * made from the start: Phaser draws the game, React and CSS draw everything
  * around it.
+ *
+ * The screen is built around one question -- start a match -- with everything
+ * else behind the profile bar or a tab. It used to be a single scroll of
+ * fourteen things ending in three paragraphs of licence text, with the player
+ * appearing nowhere on it at all.
  */
 
 import { useState } from "react";
 import * as cards from "../core/cards";
-import * as towerTroops from "../core/towerTroops";
 import * as portraits from "./portraits";
+import { Icon } from "./icons";
 import { config } from "../core/config";
 import * as mega from "../core/mega";
-import {
-  loadDeck, deckIsFull, loadRecord, loadSettings, saveSettings, loadTroop, saveTroop,
-} from "./deckStore";
+import * as profileStore from "./profile";
+import * as collection from "./collection";
+import { useSwipe } from "./useSwipe";
+import { ProfileScreen } from "./Profile";
+import { PacksScreen } from "./Packs";
+import { DexScreen } from "./Dex";
+import { DeckScreen } from "./Deck";
+import { loadDeck, deckIsFull, loadTroop, saveTroop } from "./deckStore";
+import * as towerTroops from "../core/towerTroops";
+import { ARENA_NAMES, IN_ROTATION } from "./arena";
 
 export interface MenuProps {
   /** Hand control back to Phaser for a scene that genuinely needs it. */
-  go(scene: "Battle" | "Deck" | "Dex"): void;
+  go(scene: "Battle"): void;
   /** Queue for a real opponent. Absent until a game server is reachable. */
   online?(): void;
   /** Open a private room and get a code to read to somebody. */
@@ -45,169 +57,279 @@ export interface MenuProps {
   status?: string;
   /** A match this account is already in, left behind by a refresh. */
   rejoin?(): void;
+  /**
+   * A picture of one of the arenas, once the scene has rendered one.
+   *
+   * Rendered rather than shipped as art, so it cannot fall behind the tiles.
+   * Absent for the first frame or two, and the panel simply has no picture
+   * until it arrives -- no spinner, no reserved grey box that flashes.
+   */
+  arena?: { theme: string; src: string };
 }
 
-export function Menu({ go, online, status, rejoin, host, join, inviteCode }: MenuProps) {
+/** What BATTLE does when pressed. Remembered, so the drawer is rarely opened. */
+type Mode = "bot" | "online" | "friend";
+const MODE_KEY = "clashofpokemon.mode";
+
+export function Menu(props: MenuProps) {
+  const [screen, setScreen] = useState<"menu" | "profile" | "packs" | "dex" | "deck">("menu");
+  if (screen === "profile") return <ProfileScreen back={() => setScreen("menu")} />;
+  if (screen === "packs") return <PacksScreen back={() => setScreen("menu")} />;
+  if (screen === "dex") return <DexScreen back={() => setScreen("menu")} />;
+  if (screen === "deck") {
+    return (
+      <DeckScreen back={() => setScreen("menu")} play={() => props.go("Battle")} />
+    );
+  }
+  return (
+    <Home
+      {...props}
+      openProfile={() => setScreen("profile")}
+      openPacks={() => setScreen("packs")}
+      openDex={() => setScreen("dex")}
+      openDeck={() => setScreen("deck")}
+    />
+  );
+}
+
+function Home({
+  go, online, status, rejoin, host, join, inviteCode, arena,
+  openProfile, openPacks, openDex, openDeck,
+}: MenuProps & {
+  openProfile(): void; openPacks(): void; openDex(): void; openDeck(): void;
+}) {
   const [code, setCode] = useState("");
+  const [drawer, setDrawer] = useState(false);
+  const [mode, setMode] = useState<Mode>(rememberedMode());
   const [troop, setTroop] = useState(loadTroop());
-  const [settings, setSettings] = useState(loadSettings());
+  const [pickingTroop, setPickingTroop] = useState(false);
+
+  const me = profileStore.current();
   const deck = loadDeck();
-  const record = loadRecord();
-
+  const full = deckIsFull(deck);
   const avg = deck.reduce((a, c) => a + c.elixir, 0) / Math.max(1, deck.length);
-  const played = record.wins + record.losses + record.draws;
+  const face = profileStore.faceOf(me, deck);
+  const troopName = towerTroops.TROOPS.find((t) => t.id === troop)?.name ?? troop;
 
-  const pickTroop = (id: string) => {
-    setTroop(id);
-    saveTroop(id);
+  // A mode the server cannot serve is shown and disabled rather than removed.
+  // ONLINE used to hide itself when nothing answered and REJOIN appeared only
+  // after an abandoned match, so the menu physically changed shape underneath
+  // whoever was reading it.
+  const available: Record<Mode, boolean> = {
+    bot: full,
+    online: full && online !== undefined && !status,
+    friend: full && host !== undefined,
   };
 
-  const toggleElixir = () => {
-    const next = { ...settings, showEnemyElixir: !settings.showEnemyElixir };
-    setSettings(next);
-    saveSettings(next);
+  const choose = (next: Mode) => {
+    setMode(next);
+    setDrawer(false);
+    try {
+      localStorage.setItem(MODE_KEY, next);
+    } catch {
+      // Private browsing refuses writes; the choice just does not persist.
+    }
   };
+
+  const start = () => {
+    if (!available[mode]) return;
+    if (mode === "bot") go("Battle");
+    else if (mode === "online") online?.();
+    else host?.();
+  };
+
+  // The tab bar reads packs / deck / battle / dex, and BATTLE is where you
+  // start. Swiping moves to whichever neighbour the finger points at, so the
+  // row behaves like the row it looks like.
+  const swipe = useSwipe(openDex, openDeck);
 
   return (
-    <div className="lr-menu">
-      <h1>CLASH OF POKÉMON</h1>
-      <p className="lr-tagline">
-        {cards.ALL.length} creatures · {deck.length} card decks
-      </p>
-      <p className="lr-record">
-        {played === 0
-          ? "no matches played yet"
-          : `${record.wins}W · ${record.losses}L · ${record.draws}D`}
+    <div className="lr-menu" {...swipe}>
+      {/*
+        The profile bar: a handle, not a dashboard.
+
+        Face, name, chevron. The record and the account state are one tap away
+        -- everything on this screen that is not "start a match" competes with
+        the thing the screen is for. The red dot is the single exception, and
+        it is a dot rather than a sentence because it costs no height.
+      */}
+      <button className="lr-whoami" onClick={openProfile}>
+        <span className="lr-whoami-face">
+          <span
+            className="lr-face"
+            style={portraits.styleFor(sheetOf(face), 34, face !== undefined && collection.isShiny(face))}
+          />
+          {profileStore.atRisk(me) && <i className="lr-dot" title="not saved anywhere" />}
+        </span>
+        <span className="lr-whoami-name">{me.name}</span>
+        <span className="lr-chev">›</span>
+      </button>
+
+      {/*
+        Your standing.
+
+        This is the slot Clash Royale gives its arena render, and it is kept at
+        that size because trophies and ranking are coming and will live here.
+        What it must not do is claim an arena: `pickTheme()` deals the map from
+        the match id, so "your arena" is a map you have no claim to.
+
+        Unranked stays unranked until ranked play exists. No placeholder trophy
+        count -- a home screen that advertises is one where the real numbers
+        stop being believed.
+      */}
+      <section className="lr-standing">
+        {/*
+          The arena, as a picture of the actual board.
+
+          This is the slot Clash Royale gives its arena, and it does the same
+          job here: it is the one thing on the screen with any size to it, and
+          without it a portrait layout on a desktop is a strip of panels in an
+          empty box.
+
+          Captioned as one of four, never as yours -- `pickTheme` deals a map
+          from the match id, so no arena belongs to anybody.
+        */}
+        {arena && (
+          <figure className="lr-arena">
+            <img src={arena.src} alt="" />
+            <figcaption>
+              {arenaName(arena.theme)} · one of {ARENAS} arenas, dealt each match
+            </figcaption>
+          </figure>
+        )}
+        <div className="lr-crest" aria-hidden="true">🏆</div>
+        <p className="lr-rank">UNRANKED</p>
+        {me.bestStreak > 1 && (
+          <p className="lr-streak">best streak {me.bestStreak}</p>
+        )}
+        <div className="lr-stats">
+          <span><b>{me.wins}</b>won</span>
+          <span><b>{me.losses}</b>lost</span>
+          <span>
+            <b>{me.winRate === undefined ? "—" : `${me.winRate}%`}</b>
+            {me.played === 0 ? "no matches yet" : "win rate"}
+          </span>
+        </div>
+      </section>
+
+      <div className="lr-deck-strip">
+        {deck.map((c, i) => (
+          <button
+            key={c.id}
+            // Slot one is the Mega slot, marked here as well as in the deck
+            // editor: this row is where a player looks before pressing play,
+            // and a deck whose Mega slot holds a card that cannot Mega is
+            // worth noticing before the match rather than during it.
+            className={
+              i === 0
+                ? `lr-slot lr-mega${mega.canEverMega(c) ? "" : " lr-mega-off"}`
+                : "lr-slot"
+            }
+            onClick={openDeck}
+            title={
+              i === 0
+                ? `${c.name} — ${c.elixir} elixir · Mega slot${mega.canEverMega(c) ? "" : " (this card cannot Mega)"}`
+                : `${c.name} — ${c.elixir} elixir`
+            }
+          >
+            <span className="lr-cost-pip">{c.elixir}</span>
+            <span className="lr-face" style={portraits.styleFor(c.sheet, 40, collection.isShiny(c.id))} />
+          </button>
+        ))}
+      </div>
+      {/*
+        The tower creature, chosen here.
+
+        It had a whole panel on the old menu and this line replaced it -- which
+        quietly removed the only way to change it, because the deck editor
+        never grew a picker to move it to. A line that opens four options costs
+        one row and keeps the choice reachable.
+      */}
+      <p className="lr-deckmeta">
+        <button
+          className="lr-link"
+          aria-expanded={pickingTroop}
+          onClick={() => setPickingTroop(!pickingTroop)}
+        >
+          tower: {troopName} {pickingTroop ? "▴" : "▾"}
+        </button>
+        <span>{avg.toFixed(1)} avg elixir</span>
       </p>
 
-      <section className="lr-card">
-        <h2>Your deck</h2>
-        <div className="lr-deck">
-          {deck.map((c, i) => (
+      {pickingTroop && (
+        <div className="lr-troop-pick">
+          {towerTroops.TROOPS.map((t) => (
             <button
-              key={c.id}
-              // Slot one is the Mega slot, marked here as well as in the deck
-              // editor: this row is where a player looks before pressing play,
-              // and a deck whose Mega slot holds a card that cannot Mega is
-              // worth noticing before the match rather than during it.
-              className={
-                i === 0
-                  ? `lr-slot lr-mega${mega.canEverMega(c) ? "" : " lr-mega-off"}`
-                  : "lr-slot"
-              }
-              onClick={() => go("Deck")}
-              title={
-                i === 0
-                  ? `${c.name} — ${c.elixir} elixir · Mega slot${mega.canEverMega(c) ? "" : " (this card cannot Mega)"}`
-                  : `${c.name} — ${c.elixir} elixir`
-              }
+              key={t.id}
+              className="lr-troop-opt"
+              aria-pressed={t.id === troop}
+              onClick={() => {
+                setTroop(t.id);
+                saveTroop(t.id);
+                setPickingTroop(false);
+              }}
             >
-              <span className="lr-cost-pip">{c.elixir}</span>
-              <span className="lr-face" style={portraits.styleFor(c.sheet, 48)} />
-              <span className="lr-slot-name">{c.name}</span>
+              <span className="lr-face" style={portraits.styleFor(t.species, 34)} />
+              <span className="lr-troop-text">
+                <b>{t.name}</b>
+                <small>{t.blurb}</small>
+              </span>
             </button>
           ))}
         </div>
-        <p className="lr-avg">
-          <b>{avg.toFixed(1)}</b> average cost
-        </p>
-      </section>
-
-      <section className="lr-card">
-        <h2>Tower creature</h2>
-        <div className="lr-troops">
-          {towerTroops.TROOPS.map((t) => {
-            const dps = towerTroops.sustainedDps(t);
-            return (
-              <button
-                key={t.id}
-                className="lr-troop"
-                aria-pressed={t.id === troop}
-                onClick={() => pickTroop(t.id)}
-              >
-                <span className="lr-face" style={portraits.styleFor(t.species, 40)} />
-                <span className="lr-troop-body">
-                  <b>{t.name}</b>
-                  <small>{t.blurb}</small>
-                  <small className="lr-troop-nums">
-                    {dps.toFixed(0)} dps · {t.reach} reach
-                    {t.volley
-                      ? ` · ${towerTroops.burstDps(t).toFixed(0)} burst`
-                      : ""}
-                  </small>
-                </span>
-              </button>
-            );
-          })}
-        </div>
-      </section>
-
-      {/*
-        A short deck cannot start a match. It used to be impossible to have one
-        here -- the loader quietly refilled any gap -- which is precisely how a
-        removed card came back as a different card. Now the gap is real, so this
-        is where it has to be caught, and it says which rather than going dead.
-      */}
-      {/*
-        The guide, above the play buttons rather than beside DECK and DEX.
-        It was the third of three identical grey buttons down there, which read
-        as a utility rather than as help, and players said they never noticed
-        it. Same page, same link, given the weight of the thing it actually is.
-
-        A link and not a scene: the guide is its own page and the new tab is
-        the point -- it is read *while* playing, so a match in progress is
-        still there on the way back.
-      */}
-      <a
-        className="lr-play lr-play-guide"
-        href="./guide.html"
-        target="_blank"
-        rel="noopener"
-      >
-        HOW TO PLAY
-        <small>every card and every rule, in two minutes of reading</small>
-      </a>
-
-      <button
-        className="lr-play"
-        disabled={!deckIsFull(deck)}
-        onClick={() => deckIsFull(deck) && go("Battle")}
-      >
-        PLAY OFFLINE
-        <small>
-          {deckIsFull(deck)
-            ? `against a bot — 3 minutes, ${deck.length} cards`
-            : `deck needs ${config.deckSize} cards — you have ${deck.length}`}
-        </small>
-      </button>
-
-      {rejoin && (
-        <button className="lr-play lr-play-rejoin" onClick={rejoin}>
-          REJOIN MATCH
-          <small>you left one running</small>
-        </button>
       )}
 
-      {online && (
-        <button
-          className="lr-play lr-play-online"
-          disabled={!deckIsFull(deck) || Boolean(status)}
-          onClick={() => deckIsFull(deck) && online()}
-        >
-          {status ? "SEARCHING…" : "PLAY ONLINE"}
-          <small>{status ?? "find a real opponent"}</small>
+      {/*
+        BATTLE, with the modes in a drawer on its shoulder.
+
+        Five buttons at equal weight is five decisions before a match and the
+        answer is nearly always the same one, so the last choice is remembered
+        and the arrow opens the rest.
+      */}
+      <div className="lr-battlebar">
+        <button className="lr-play" disabled={!available[mode]} onClick={start}>
+          {status ? "SEARCHING…" : "BATTLE"}
+          <small>{status ?? describe(mode, deck.length, full)}</small>
         </button>
+        <button
+          className="lr-drawer"
+          aria-expanded={drawer}
+          title="choose a mode"
+          onClick={() => setDrawer(!drawer)}
+        >
+          ▾
+        </button>
+      </div>
+
+      {drawer && (
+        <div className="lr-modes">
+          {(["bot", "online", "friend"] as Mode[]).map((m) => (
+            <button
+              key={m}
+              className="lr-mode"
+              aria-pressed={m === mode}
+              disabled={!available[m]}
+              onClick={() => choose(m)}
+            >
+              {label(m)}
+              <small>{why(m, available[m], status)}</small>
+            </button>
+          ))}
+          {rejoin && (
+            <button className="lr-mode lr-mode-rejoin" onClick={rejoin}>
+              REJOIN <small>you left one running</small>
+            </button>
+          )}
+        </div>
       )}
 
       {/*
         Playing somebody you chose.
 
         A code rather than a friends list: it works over Discord, over a phone
-        and across a room, and nobody has to have added anybody first. The
-        friends list can come later and this will still be the fastest way to
-        start a game with the person sitting next to you.
+        and across a room, and nobody has to have added anybody first.
       */}
-      {host && join && (
+      {mode === "friend" && host && join && (
         <section className="lr-invite">
           {inviteCode ? (
             <p className="lr-invite-code">
@@ -216,16 +338,9 @@ export function Menu({ go, online, status, rejoin, host, join, inviteCode }: Men
             </p>
           ) : (
             <div className="lr-invite-row">
-              <button
-                className="lr-btn"
-                disabled={!deckIsFull(deck) || Boolean(status)}
-                onClick={() => deckIsFull(deck) && host()}
-              >
-                HOST
-              </button>
               <input
                 className="lr-search"
-                placeholder="or enter a code"
+                placeholder="enter a code to join"
                 value={code}
                 maxLength={5}
                 onChange={(e) => setCode(e.target.value.toUpperCase())}
@@ -235,7 +350,7 @@ export function Menu({ go, online, status, rejoin, host, join, inviteCode }: Men
               />
               <button
                 className="lr-btn"
-                disabled={code.length !== 5 || !deckIsFull(deck)}
+                disabled={code.length !== 5 || !full}
                 onClick={() => join(code)}
               >
                 JOIN
@@ -245,59 +360,102 @@ export function Menu({ go, online, status, rejoin, host, join, inviteCode }: Men
         </section>
       )}
 
-      <div className="lr-menu-row">
-        <button className="lr-btn" onClick={() => go("Deck")}>DECK</button>
-        <button className="lr-btn" onClick={() => go("Dex")}>DEX</button>
-      </div>
+      {/*
+        The tabs take the scroll.
 
-      <div className="lr-menu-row">
-        <a className="lr-link" href="./guide.html#feedback" target="_blank" rel="noopener">
-          report a bug or suggest something
+        Five: packs, deck, battle, dex, guide. There is no settings tab --
+        the profile is the settings screen and the bar already reaches it.
+        PACKS is drawn and disabled -- it needs a collection the
+        server keeps and accounts that survive a cleared browser, so it is a
+        placeholder rather than a promise.
+      */}
+      <nav className="lr-tabs">
+        <button className="lr-tab" onClick={openPacks}>
+          <Icon name="packs" />
+          <span>packs</span>
+        </button>
+        <button className="lr-tab" onClick={openDeck}>
+          <Icon name="deck" /><span>deck</span>
+        </button>
+        <button className="lr-tab lr-tab-on" aria-current="page">
+          <Icon name="battle" /><span>battle</span>
+        </button>
+        {/*
+          The Pokedex. It was left unreachable when the old menu's DECK/DEX
+          row became this tab bar -- the scene was still registered and still
+          worked, and nothing in the game navigated to it.
+        */}
+        <button className="lr-tab" onClick={openDex}>
+          <Icon name="dex" /><span>dex</span>
+        </button>
+        <a className="lr-tab" href="./guide.html" target="_blank" rel="noopener">
+          <Icon name="guide" /><span>guide</span>
         </a>
-      </div>
+      </nav>
 
-      <button className="lr-link" onClick={toggleElixir}>
-        show opponent elixir: {settings.showEnemyElixir ? "on" : "off"}
-      </button>
       <p className="lr-hint">
-        Drag a card onto your half, or tap the card then tap the board.
+        {cards.ALL.length} creatures · drag a card onto your half, or tap the
+        card then tap the board.
       </p>
 
       {/*
         Said plainly, on the first screen, rather than buried in a menu. This
         is a fan project built on somebody else's characters -- the honest
-        thing is to say so where everybody sees it, not where it is technically
-        findable.
+        thing is to say so where everybody sees it. The full credits, which
+        nobody reads twice, moved to the guide.
       */}
       <p className="lr-legal">
-        Pokémon © 1995–2026 Nintendo / Creatures Inc. / GAME FREAK inc.
-        Pokémon and Pokémon character names are trademarks of Nintendo.
-      </p>
-      <p className="lr-legal">
-        A non-commercial fan project, not affiliated with, endorsed by or
-        associated with Nintendo, The Pokémon Company, Creatures Inc. or GAME
-        FREAK inc. No money is made from this game and none is asked for.
-      </p>
-      {/*
-        The sprite licence asks for credit, and a credit buried in a file in
-        the repository is not one. CC BY-NC also asks that changes be noted:
-        the frames were repacked into atlases, nothing was redrawn.
-      */}
-      <p className="lr-legal">
-        Creature sprites by{" "}
+        Pokémon © 1995–2026 Nintendo / Creatures Inc. / GAME FREAK inc. A
+        non-commercial fan project, not affiliated with or endorsed by them.
+        Sprites by{" "}
         <a href="https://sprites.pmdcollab.org/" target="_blank" rel="noopener">
           PMD Sprite Collab
-        </a>
-        , used under{" "}
-        <a
-          href="https://creativecommons.org/licenses/by-nc/4.0/"
-          target="_blank"
-          rel="noopener"
-        >
-          CC BY-NC 4.0
         </a>{" "}
-        and repacked into atlases. Towers by Foozle (CC0).
+        under CC BY-NC 4.0. Full credits are in your profile.
       </p>
     </div>
   );
 }
+
+function rememberedMode(): Mode {
+  try {
+    const saved = localStorage.getItem(MODE_KEY);
+    if (saved === "bot" || saved === "online" || saved === "friend") return saved;
+  } catch {
+    // Unreadable store: the default is the one that always works.
+  }
+  return "bot";
+}
+
+const label = (m: Mode) =>
+  m === "bot" ? "VS A BOT" : m === "online" ? "ONLINE" : "FRIEND";
+
+function why(m: Mode, ok: boolean, status?: string): string {
+  if (ok) {
+    return m === "bot"
+      ? "3 minutes, offline"
+      : m === "online"
+        ? "find a real opponent"
+        : "host or enter a code";
+  }
+  if (m === "online") return status ? "already searching" : "no server answering";
+  if (m === "friend") return "no server answering";
+  return "your deck is not ready";
+}
+
+function describe(mode: Mode, size: number, full: boolean): string {
+  if (!full) return `deck needs ${config.deckSize} cards — you have ${size}`;
+  return mode === "bot"
+    ? "vs a bot — 3 minutes"
+    : mode === "online"
+      ? "vs a real opponent"
+      : "vs a friend";
+}
+
+/** A card id is not always its sheet name, so resolve it rather than assume. */
+function sheetOf(id: string | undefined): string {
+  return (id ? cards.byId(id)?.sheet : undefined) ?? "pikachu";
+}
+
+const ARENAS = IN_ROTATION.length;
+const arenaName = (theme: string) => ARENA_NAMES[theme] ?? theme;
