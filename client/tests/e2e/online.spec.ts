@@ -39,9 +39,35 @@ async function player(browser: Browser) {
   return { context, page };
 }
 
-/** Queue for a match from the menu, exactly as the button does. */
+/**
+ * Switch the menu to a mode, then press BATTLE.
+ *
+ * The three modes used to be three buttons. They are now one BATTLE button and
+ * a drawer that decides what it means, and the choice is remembered -- so
+ * hosting a room is "pick FRIEND, press BATTLE" rather than a HOST button that
+ * no longer exists.
+ */
+async function pick(page: Page, mode: RegExp) {
+  await page.getByRole("button", { name: "choose a mode" }).click();
+  await page.getByRole("button", { name: mode }).click();
+}
+
+async function pressBattle(page: Page) {
+  await page.getByRole("button", { name: /BATTLE|SEARCHING/ }).click();
+}
+
+/**
+ * Queue for a match from the menu, exactly as a player does.
+ *
+ * There is no PLAY ONLINE button any more. The menu has one BATTLE button and
+ * a drawer beside it that chooses what BATTLE means, with the choice
+ * remembered -- so queueing online is two clicks: open the drawer, pick
+ * ONLINE, then press BATTLE.
+ */
 async function queue(page: Page) {
-  await page.getByRole("button", { name: /PLAY ONLINE/ }).click();
+  await page.getByRole("button", { name: "choose a mode" }).click();
+  await page.getByRole("button", { name: /^ONLINE/ }).click();
+  await page.getByRole("button", { name: /BATTLE|SEARCHING/ }).click();
 }
 
 /** Wait for the battle scene, then for the server to have started the match. */
@@ -207,14 +233,14 @@ test("a second tab in the same profile is turned away", async ({ browser }) => {
     );
   }
 
-  await first.getByRole("button", { name: /PLAY ONLINE/ }).click();
+  await queue(first);
   await first.waitForTimeout(1200);
-  await second.getByRole("button", { name: /PLAY ONLINE/ }).click();
+  await queue(second);
 
   // The refusal is shown on screen, not just logged to a socket. Read from the
   // DOM: the menu is a document overlay *over* the canvas, and a status drawn
   // underneath by Phaser would be invisible -- which is exactly the bug that
-  // made PLAY ONLINE look like it did nothing.
+  // made queueing look like it did nothing.
   await expect(second.locator("body")).toContainText(/another tab/i, { timeout: 15_000 });
 
   // And the first tab is untouched: still queueing, still its own session.
@@ -267,8 +293,13 @@ test("a refresh mid-match rejoins a board that is still alive", async ({ browser
     () => (window as any).lr?.scene.getScene("Menu")?.sys.settings.status === 5,
   );
 
-  // The menu must offer the way back rather than stranding the player.
-  const rejoin = one.page.getByRole("button", { name: /REJOIN MATCH/ });
+  // The menu must offer the way back rather than stranding the player. The
+  // offer now lives in the mode drawer beside BATTLE rather than as its own
+  // button on the menu, so it has to be opened to be seen -- which is the
+  // thing worth asserting: a player who reloads mid-match can still find the
+  // way back in two taps.
+  await one.page.getByRole("button", { name: "choose a mode" }).click();
+  const rejoin = one.page.getByRole("button", { name: /REJOIN/ });
   await expect(rejoin).toBeVisible({ timeout: 20_000 });
   await rejoin.click();
   await inMatch(one.page);
@@ -331,7 +362,7 @@ test("one browser is one guest, across reloads", async ({ browser }) => {
   expect(await stored()).toBeNull();
 
   // Queueing is what makes you somebody.
-  await page.getByRole("button", { name: /PLAY ONLINE/ }).click();
+  await queue(page);
   await expect.poll(stored, { timeout: 20_000 }).not.toBeNull();
   const first = JSON.parse((await stored())!) as { id: string; name: string };
   expect(first.id).toMatch(/^acct_/);
@@ -434,7 +465,8 @@ test("two friends play through a room code", async ({ browser }) => {
   const host = await player(browser);
   const guest = await player(browser);
 
-  await host.page.getByRole("button", { name: /^HOST$/ }).click();
+  await pick(host.page, /^FRIEND/);
+  await pressBattle(host.page);
 
   // The code is the largest thing on screen while it is up, because somebody
   // is about to read it out loud.
@@ -444,7 +476,9 @@ test("two friends play through a room code", async ({ browser }) => {
   expect(code).toHaveLength(5);
   expect(code).toMatch(/^[A-HJ-NP-Z2-9]+$/);   // no O, I, 0 or 1
 
-  // The friend types it in.
+  // The friend types it in -- after choosing the same mode, since the code
+  // box only exists once FRIEND is what BATTLE means.
+  await pick(guest.page, /^FRIEND/);
   await guest.page.getByPlaceholder(/enter a code/i).fill(code);
   await guest.page.getByRole("button", { name: /^JOIN$/ }).click();
 
@@ -468,6 +502,7 @@ test("a code nobody opened is refused", async ({ browser }) => {
   test.setTimeout(120_000);
 
   const lonely = await player(browser);
+  await pick(lonely.page, /^FRIEND/);
   await lonely.page.getByPlaceholder(/enter a code/i).fill("ZZZZZ");
   await lonely.page.getByRole("button", { name: /^JOIN$/ }).click();
 

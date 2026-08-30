@@ -91,6 +91,9 @@ export function preload(load: Phaser.Loader.LoaderPlugin) {
       load.image(`tower-${info.sheet}-${side}`, `tiles/${info.sheet}_${side}.png`);
     }
   }
+  // One wreck for both sides and both sizes: a fallen tower has no banner left
+  // to say whose it was, and the ring under it already says that.
+  load.image("tower-ruin", "tiles/tower_ruin.png");
 }
 
 type Surface = "grass" | "sand" | "road" | "water";

@@ -2078,31 +2078,24 @@ class TowerView {
       this.ring.setAlpha(0.22);
 
       const w = config.towerSize[t.kind] * ARENA_SCALE;
-      const p2 = toScreen(t.x, t.y);
       this.body.setVisible(false);
 
-      const g = this.scene.add.graphics().setDepth(4);
-      // A sunken slab, so the ground reads as lower than it was.
-      g.fillStyle(0x3f3a35, 1);
-      g.fillEllipse(p2.x, p2.y + w * 0.1, w * 1.05, w * 0.62);
-      g.fillStyle(0x55504a, 1);
-      g.fillEllipse(p2.x, p2.y + w * 0.06, w * 0.92, w * 0.52);
-
-      // Broken blocks, deterministic from the tower id so both sides of a
-      // future network game draw the same wreck.
-      let seed = t.id * 2654435761;
-      const rnd = () => {
-        seed ^= seed << 13; seed ^= seed >>> 17; seed ^= seed << 5;
-        return ((seed >>> 0) % 10000) / 10000;
-      };
-      for (let i = 0; i < 11; i++) {
-        const a = rnd() * Math.PI * 2;
-        const r = w * 0.36 * Math.sqrt(rnd());
-        const s = w * (0.10 + rnd() * 0.11);
-        g.fillStyle(i % 3 === 0 ? 0x8b8680 : 0x6e6a66, 1);
-        g.fillRect(p2.x + Math.cos(a) * r - s / 2,
-                   p2.y + Math.sin(a) * r * 0.55 - s / 2, s, s * 0.8);
-      }
+      // Drawn art, not shapes. It was a Phaser graphics call -- smooth
+      // ellipses and flat rectangles in #3f3a35/#8b8680, a warm brown-grey
+      // that appears nowhere in the tower's cool #68717a stone and carries
+      // none of the #1f1833 outline every other piece of art here has. Next
+      // to 24px hand-drawn tiles it read as a rock dropped on the ground
+      // rather than as this building fallen down.
+      //
+      // Placed on the ring, not on `toScreen(t.x, t.y)`. A tower is anchored by
+      // its MOUNT -- the seat the creature occupies -- which sits well up the
+      // building, so the logical position is nowhere near the ground. Drawing
+      // the wreck there left it hanging at seat height, above where the tower
+      // had been standing. The ring is the tower's own ground shadow and has
+      // always known where the base is.
+      const ruin = this.scene.add.image(this.ring.x, this.ring.y, "tower-ruin")
+        .setOrigin(0.5, 0.5).setDepth(4);
+      ruin.setDisplaySize(w * 1.15, w * 1.15 * (ruin.height / ruin.width));
     }
   }
 

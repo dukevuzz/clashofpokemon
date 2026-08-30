@@ -2,6 +2,38 @@
 
 ## Unreleased
 
+## 1.4.0 — 2026-08-31
+
+### Added
+- Accounts you can sign back into. A username and a password bind to the guest
+  you already are, so nothing is left behind at the moment you decide to keep
+  it. Guests still work and are still the default.
+- A profile: your face, your name, your record, and the settings that used to
+  have nowhere to live.
+- Chests. Playing earns them, coins buy them, and each one holds six cards with
+  the last always worth ending on.
+- Shiny creatures — roughly one card in twenty, for the 338 species that have
+  the art. A shiny is its own thing to own, so pulling one still counts as new.
+- Twenty faces per creature. Repeated pulls pay shards for that creature, and
+  shards buy its other faces. Tap anything in the collection to see what you
+  have and what it would cost.
+
+### Changed
+- The menu, deck builder and Pokédex are pages now rather than drawings on a
+  canvas: text at native resolution, real scrolling, and the same look
+  throughout. One BATTLE button with a drawer beside it replaces the three
+  separate mode buttons.
+- The board sits on a lighter ground. Creature outlines were at 1.35:1 against
+  the old one, which is below the point where an edge can be seen at all.
+- Panels are painted rather than outlined rectangles, and the tab icons are
+  drawn for this game.
+
+### Fixed
+- A destroyed tower now sits where it fell. It was drawn at the seat height of
+  the creature that manned it, hanging up to 88px above its own footprint.
+- Assets are cached properly. Everything shipped with `max-age=0`, so the CDN
+  was never allowed to keep anything it was already storing.
+
 ## 1.3.1 — 2026-08-25
 
 ### Fixed

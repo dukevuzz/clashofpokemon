@@ -50,7 +50,10 @@ const DECK_KEY = "clashofpokemon.deck";
 /** Phaser is up and the menu is on screen. */
 async function boot(page: Page) {
   await page.goto("/");
-  await expect(page.getByRole("button", { name: /^DECK$/ })).toBeVisible();
+  // The tab is labelled in lower case now, so the match has to be too. It was
+  // /^DECK$/ against a tab that renders "deck", which fails on a screen that
+  // is otherwise perfectly fine.
+  await expect(page.getByRole("button", { name: /^deck$/i })).toBeVisible();
   await page.waitForFunction(() => {
     const g = (window as any).lr;
     return !!g && g.scene.getScene("Menu")?.sys.settings.status === 5;

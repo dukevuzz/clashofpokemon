@@ -34,10 +34,16 @@ test("with the meta tier down, single player is unaffected", async ({ page }) =>
   // The reachability probe has its own budget; give it room to have failed.
   await page.waitForTimeout(4000);
 
-  // Offered: the game.
-  await expect(page.getByRole("button", { name: /PLAY OFFLINE/ })).toBeVisible();
-  // Not offered: the half of it that cannot work.
-  await expect(page.getByRole("button", { name: /PLAY ONLINE/ })).toHaveCount(0);
+  // Offered: the game. One BATTLE button now, with a drawer choosing what it
+  // means, so what to assert changed shape -- the button is always there and
+  // it is the MODE that is or is not available.
+  await expect(page.getByRole("button", { name: /BATTLE/ })).toBeVisible();
+
+  // Not offered: the half of it that cannot work. Open the drawer and the
+  // online mode is present but disabled, which is a better guarantee than it
+  // being absent -- a missing button could mean the menu failed to render.
+  await page.getByRole("button", { name: "choose a mode" }).click();
+  await expect(page.getByRole("button", { name: /^ONLINE/ })).toBeDisabled();
 
   // And it actually plays.
   await page.evaluate(() =>

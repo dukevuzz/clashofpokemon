@@ -294,6 +294,10 @@ function Home({
         <button
           className="lr-drawer"
           aria-expanded={drawer}
+          // `title` is not an accessible name when a button has text: the
+          // chevron wins, and a screen reader announces "down triangle". The
+          // label is what names it, for a reader and for a test alike.
+          aria-label="choose a mode"
           title="choose a mode"
           onClick={() => setDrawer(!drawer)}
         >
@@ -365,9 +369,6 @@ function Home({
 
         Five: packs, deck, battle, dex, guide. There is no settings tab --
         the profile is the settings screen and the bar already reaches it.
-        PACKS is drawn and disabled -- it needs a collection the
-        server keeps and accounts that survive a cleared browser, so it is a
-        placeholder rather than a promise.
       */}
       <nav className="lr-tabs">
         <button className="lr-tab" onClick={openPacks}>
@@ -411,7 +412,17 @@ function Home({
         <a href="https://sprites.pmdcollab.org/" target="_blank" rel="noopener">
           PMD Sprite Collab
         </a>{" "}
-        under CC BY-NC 4.0. Full credits are in your profile.
+        under CC BY-NC 4.0. Full credits are in your profile.{" "}
+        {/*
+          The way to report something, which the menu rebuild dropped. A player
+          who has just watched a bug happen is the only person who can describe
+          it, and they will not go looking for a form -- so it lives where they
+          already are rather than behind the guide.
+        */}
+        <a href="./guide.html#feedback" target="_blank" rel="noopener">
+          Report a bug
+        </a>
+        .
       </p>
     </div>
   );
