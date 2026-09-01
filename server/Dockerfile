@@ -2,7 +2,7 @@
 #
 # Two stages: dependencies resolve in their own layer, keyed on the pom alone,
 # so editing code does not re-download Maven Central.
-FROM maven:3.9-eclipse-temurin-25 AS build
+FROM maven:3-eclipse-temurin-26 AS build
 WORKDIR /src
 COPY pom.xml .
 RUN mvn -B -q dependency:go-offline
