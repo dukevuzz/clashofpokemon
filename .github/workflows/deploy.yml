@@ -16,7 +16,7 @@ jobs:
     permissions: { contents: read }
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v6
         with: { distribution: temurin, java-version: 25, cache: maven }
 
       # The jar is bytecode, so it is built once here and the arm64 image is
