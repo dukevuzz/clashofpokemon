@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.0.0</version>
+		<version>4.1.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>io.github.excalibase</groupId>
@@ -55,7 +55,7 @@
 		<dependency>
 			<groupId>com.nimbusds</groupId>
 			<artifactId>nimbus-jose-jwt</artifactId>
-			<version>10.0.2</version>
+			<version>10.9.1</version>
 		</dependency>
 		<!--
 		  Just the crypto module, not the whole of Spring Security. Nothing here
@@ -133,7 +133,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.13</version>
+				<version>0.8.15</version>
 				<executions>
 					<execution>
 						<goals><goal>prepare-agent</goal></goals>
