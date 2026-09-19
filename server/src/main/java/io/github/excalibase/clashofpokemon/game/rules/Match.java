@@ -22,6 +22,16 @@ public final class Match {
 
   public final Map<Side, Double> elixir = new EnumMap<>(Side.class);
   public final Map<Side, List<Card>> deck = new EnumMap<>(Side.class);
+
+  /**
+   * The sky, read from both decks and then left alone.
+   *
+   * <p>Fixed at construction on purpose. A weather that changed mid-match would
+   * be match-wide state to keep in step across a connection; one that does not
+   * is a parameter, like the decks it came from -- so the server, the client
+   * and a replay all derive the same answer without anybody sending it.
+   */
+  public final Weather.Kind weather;
   public final Map<Side, List<Card>> hand = new EnumMap<>(Side.class);
   public final Map<Side, Integer> drawIndex = new EnumMap<>(Side.class);
   public final Map<Side, Map<String, Integer>> plays = new EnumMap<>(Side.class);
@@ -82,6 +92,9 @@ public final class Match {
 
     List<Card> one = opts.deckOne != null ? opts.deckOne : Cards.newDeck(rng);
     List<Card> two = opts.deckTwo != null ? opts.deckTwo : Cards.newDeck(rng);
+    // Both decks, one arena, one answer -- and read from `one` and `two`
+    // rather than the dealt decks, so the shuffle cannot change the weather.
+    weather = Weather.forMatch(one, two);
     deck.put(Side.ONE, opts.shuffle ? shuffled(one, rng) : new ArrayList<>(one));
     deck.put(Side.TWO, opts.shuffle ? shuffled(two, rng) : new ArrayList<>(two));
 

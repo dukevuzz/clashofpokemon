@@ -38,7 +38,7 @@ public final class Tick {
         for (Unit o : List.copyOf(match.units)) {
           if (o == u || o.dead || o.side == u.side) continue;
           if (Board.dist(u.x, u.y, o.x, o.y) > c.dropRadius()) continue;
-          Combat.applyHit(match, o, u.damage * c.dropDamage(), Combat.matchup(u, o), u);
+          Combat.applyHit(match, o, u.damage * c.dropDamage(), Combat.matchup(match, u, o), u);
         }
       }
     }
@@ -118,7 +118,7 @@ public final class Tick {
 
         if (u.cooldown <= 0) {
           u.cooldown = u.attackRate;
-          double mult = Combat.matchup(u, u.target);
+          double mult = Combat.matchup(match, u, u.target);
           u.charge += 1;
 
           if (u.charge >= u.castEvery && Statuses.has(u.statuses, StatusKind.SILENCE)) {

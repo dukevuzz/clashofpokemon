@@ -63,7 +63,7 @@ export function updateUnit(
       for (const o of match.units) {
         if (o === u || o.dead || o.side === u.side) continue;
         if (dist(u.x, u.y, o.x, o.y) > radius) continue;
-        combat.applyHit(match, o, u.damage * damage, combat.matchup(u, o), u);
+        combat.applyHit(match, o, u.damage * damage, combat.matchup(match, u, o), u);
       }
     }
   }
@@ -158,7 +158,7 @@ export function updateUnit(
       if (status.has(u.statuses, "flinch")) return;
       if (u.cooldown <= 0) {
         u.cooldown = u.attackRate;
-        const mult = combat.matchup(u, u.target);
+        const mult = combat.matchup(match, u, u.target);
 
         // Charged up: cast the signature ability instead of swinging.
         u.charge += 1;

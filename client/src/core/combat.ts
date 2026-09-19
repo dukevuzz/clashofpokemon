@@ -1,7 +1,8 @@
 /** Landing a hit: who gets picked, how much it takes off, and what it leaves behind. */
 
 import { config, forwardFor } from "./config";
-import { typeMultiplier } from "./species";
+import { typeMultiplier, typesOf } from "./species";
+import { weatherBoost } from "./weather";
 import * as tiers from "./tiers";
 import * as status from "./status";
 import * as skills from "./skills";
@@ -48,11 +49,22 @@ export const ARRIVING = 1e-9;
 
 export const arriving = (u: { spawning: number }): boolean => u.spawning > ARRIVING;
 
-export function matchup(attacker: Thing, target: Thing): number {
+/**
+ * How hard `attacker` hits `target`, all in one place.
+ *
+ * Every damage path in the game reads its multiplier here -- ordinary attacks,
+ * signature abilities, and the splash around them -- which is why weather can
+ * reach all three by changing this function and nothing else.
+ *
+ * A structure has no typing, so it has no weather either. Towers must stay
+ * outside the system: a sky that moved tower damage would decide the tower
+ * race, rather than the unit fights that are supposed to.
+ */
+export function matchup(match: Match, attacker: Thing, target: Thing): number {
   const a = "card" in attacker ? attacker.card.sheet : undefined;
   const d = "card" in target ? target.card.sheet : undefined;
   if (!a || !d) return 1;
-  return typeMultiplier(a, d);
+  return typeMultiplier(a, d) * weatherBoost(match.weather, typesOf(a));
 }
 
 /** Closest enemy thing worth hitting. */
@@ -311,7 +323,7 @@ export function castSkill(
   for (const o of match.units) {
     if (o.side === u.side || o.dead || o === target || arriving(o)) continue;
     if (dist(target.x, target.y, o.x, o.y) <= config.skillRadius) {
-      applyHit(match, o, amount * 0.5, matchup(u, o), u, resist);
+      applyHit(match, o, amount * 0.5, matchup(match, u, o), u, resist);
       // Everything the splash touches, not only what was aimed at. A move
       // that paralyses paralyses the crowd it lands in, which is most of what
       // makes an area move worth casting into one.

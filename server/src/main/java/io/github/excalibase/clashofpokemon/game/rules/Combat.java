@@ -29,11 +29,22 @@ public final class Combat {
     return u.spawning > ARRIVING;
   }
 
-  public static double matchup(Thing attacker, Thing target) {
+  /**
+   * How hard {@code attacker} hits {@code target}, all in one place.
+   *
+   * <p>Every damage path reads its multiplier here -- ordinary attacks,
+   * signature abilities, and the splash around them -- which is why weather
+   * reaches all three by changing this method and nothing else.
+   *
+   * <p>A structure has no typing, so it has no weather either. Towers stay
+   * outside the system: a sky that moved tower damage would decide the tower
+   * race rather than the unit fights that are supposed to.
+   */
+  public static double matchup(Match match, Thing attacker, Thing target) {
     String a = attacker instanceof Unit u ? u.card.sheet() : null;
     String d = target instanceof Unit u ? u.card.sheet() : null;
     if (a == null || d == null) return 1;
-    return TypeChart.multiplier(a, d);
+    return TypeChart.multiplier(a, d) * Weather.boost(match.weather, TypeChart.typesOf(a));
   }
 
   /** What this creature should attack, within a radius. */
@@ -224,7 +235,7 @@ public final class Combat {
     for (Unit o : List.copyOf(match.units)) {
       if (o.side == u.side || o.dead || o == target || arriving(o)) continue;
       if (Board.dist(target.x(), target.y(), o.x, o.y) <= Skills.RADIUS) {
-        applyHit(match, o, amount * 0.5, matchup(u, o), u, resist);
+        applyHit(match, o, amount * 0.5, matchup(match, u, o), u, resist);
         afflict(match, o, u.card.skill(), u);
       }
     }

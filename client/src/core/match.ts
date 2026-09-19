@@ -1,6 +1,7 @@
 /** A whole match, in one headless object. */
 
 import { config, towerRangeOf, type Side } from "./config";
+import { weatherForMatch, type Weather } from "./weather";
 import * as status from "./status";
 import * as combat from "./combat";
 import * as hand from "./hand";
@@ -249,6 +250,19 @@ export class Match {
 
   elixir: Record<Side, number>;
   deck: Record<Side, Card[]>;
+  /**
+   * The sky, read from both decks and then left alone.
+   *
+   * Fixed for the match on purpose. A weather that changed mid-match would be
+   * match-wide state to keep in step across a connection; one that does not is
+   * a parameter, like the decks it came from -- so the server, the client and
+   * a replay all derive the same answer without anybody sending it.
+   *
+   * Set at construction, with one exception: an online client builds its
+   * match before it knows the decks and reads the sky in the handshake. Not
+   * `readonly` for that reason alone -- nothing else should assign it.
+   */
+  weather: Weather | null;
   /** The card each side may Mega: deck slot one, before shuffling. */
   megaPick: Record<Side, Card | undefined>;
   hand: Record<Side, (Card | undefined)[]>;
@@ -310,6 +324,10 @@ export class Match {
     };
     const p = opts.playerDeck ?? newDeck(this.rng);
     const e = opts.enemyDeck ?? newDeck(this.rng);
+
+    // Both decks, one arena, one answer -- and read from `p` and `e` rather
+    // than `this.deck`, so the shuffle cannot change the weather.
+    this.weather = weatherForMatch(p, e);
 
     this.elixir = { 1: config.startElixir, 2: config.startElixir };
     // Copied even when not shuffled. A match rewrites its own deck as cards
