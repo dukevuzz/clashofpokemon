@@ -96,6 +96,31 @@ beforeEach(() => {
 });
 
 describe("the handshake", () => {
+  it("reads the sky from both decks once the handshake delivers them", () => {
+    // The local match is built before the decks are known and filled in here,
+    // so weather cannot be read at construction the way it is offline. Left
+    // unread, every online match drew a clear sky no matter what was brought
+    // -- the server still applied the weather to damage, so the fight and the
+    // picture of the fight would silently disagree.
+    const net = new NetMatch("ws://test", {
+      onSeat: () => {}, onStart: () => {}, onEvents: () => {},
+      onOver: () => {}, onReject: () => {}, onPeer: () => {},
+      onError: () => {}, onNote: () => {},
+    });
+    const fire = ["charmander", "fennekin", "litwick", "growlithe", "capsakid", "larvesta"];
+    const quiet = ["aron", "honedge", "riolu", "bronzor", "beldum", "drilbur"];
+    net.connect("tkt", fire, "togekiss");
+    FakeSocket.last.onopen?.();
+    FakeSocket.last.deliver({ ...HELLO, me: { deck: fire, troop: "togekiss" },
+                              them: { ...HELLO.them, deck: quiet } });
+    expect(net.match.weather).toBe("DROUGHT");
+  });
+
+  it("reads a clear sky when the decks bring none", () => {
+    const { net } = connected();
+    expect(net.match.weather).toBeNull();
+  });
+
   it("takes the seat the server dealt", () => {
     const { net } = connected();
     expect(net.seat).toBe(config.ENEMY);
