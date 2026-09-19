@@ -75,7 +75,7 @@ nothing; credited anyway.
 ## Ground tilesets
 
 The arenas — forest, meadow, amp, magma — are PMD dungeon tilesets in
-[DTEF](https://github.com/audinowho/DtefTilesets) form, from the same community
+[DTEF](https://github.com/SkyTemple/skytemple-dtef) form, from the same community
 as the creature sprites.
 
 `ground.png`, the set the game shipped with and still available as
