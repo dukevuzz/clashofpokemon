@@ -933,12 +933,17 @@ a.lr-btn { display: inline-block; text-decoration: none; text-align: center; }
   font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
   text-align: center;
 }
+/* Full-bleed, unlike the column the sheet's body sits in. Constraining this bar
+   to --lr-col left the back button floating mid-screen on anything wider than
+   the column, because it was anchored to the strip's edge rather than the
+   screen's. Every other screen pins its back button to the screen edge. */
 .lr-sheet-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: var(--lr-col);
-  margin: 0 auto 14px;
+  width: 100%;
+  padding: 0 12px;
+  margin: 0 0 14px;
   font-size: 0.72rem;
   color: var(--lr-fg-dim);
   text-transform: uppercase;

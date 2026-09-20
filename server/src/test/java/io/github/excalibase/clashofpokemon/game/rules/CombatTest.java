@@ -243,10 +243,10 @@ class CombatTest {
     Unit fire = unit(m, "charmander", Side.ONE, 100, 500);
     Unit grass = unit(m, "bulbasaur", Side.TWO, 100, 300);
 
-    assertThat(Combat.matchup(fire, grass)).isGreaterThan(1);
+    assertThat(Combat.matchup(m, fire, grass)).isGreaterThan(1);
     // A tower has no typing, so nothing is strong or weak against it.
-    assertThat(Combat.matchup(fire, theirTower(m))).isEqualTo(1);
-    assertThat(Combat.matchup(theirTower(m), fire)).isEqualTo(1);
+    assertThat(Combat.matchup(m, fire, theirTower(m))).isEqualTo(1);
+    assertThat(Combat.matchup(m, theirTower(m), fire)).isEqualTo(1);
   }
 
   // ---------------------------------------------------------------- casting

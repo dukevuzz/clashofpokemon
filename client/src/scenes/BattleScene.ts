@@ -13,6 +13,7 @@ import * as evolution from "../core/evolution";
 import * as played from "../net/played";
 import { effectivenessLabel, TYPE_COLORS, typesOf } from "../core/species";
 import { C, style, px, hex, rarityColor } from "../ui/theme";
+import { showWeather } from "../ui/weatherFx";
 import * as sprites from "../ui/sprites";
 import * as arena from "../ui/arena";
 import { SkillFx } from "../ui/skillFx";
@@ -329,6 +330,10 @@ export class BattleScene extends Phaser.Scene {
     arena.buildGround(this);
     arena.drawEdgesAndBridges(this);
     this.water = new arena.WaterShimmer(this);
+    // Read off the match rather than recomputed: offline it was set at
+    // construction, online in the handshake -- which lands before create(),
+    // because preload needs the same decks to know which sprites to fetch.
+    showWeather(this, this.match.weather);
 
     this.fx = new SkillFx(this);
     this.unitLayer = this.add.container(0, 0).setDepth(10);

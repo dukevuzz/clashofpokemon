@@ -3,6 +3,7 @@
 import { Match, config, type Side, type Unit } from "../core";
 import * as cards from "../core/cards";
 import { spawn as spawnUnit } from "../core/deploy";
+import { weatherForMatch } from "../core/weather";
 import { decodeSnap } from "./binary";
 import {
   ACTIONS, bitsToStatus,
@@ -165,6 +166,10 @@ export class NetMatch {
         this.match.deck[this.them] = deckOf(m.them.deck);
         this.match.troop[this.seat] = m.me.troop;
         this.match.troop[this.them] = m.them.troop;
+        // Read now, from the decks as sent -- the same function the server
+        // ran, so both ends agree on the sky without it being sent at all.
+        this.match.weather = weatherForMatch(
+          this.match.deck[this.seat], this.match.deck[this.them]);
 
         // The opponent's elixir is never sent, so the local Match's starting
         // value must not be left standing: five is a plausible number, and a

@@ -18,6 +18,11 @@ public final class TypeChart {
 
   private TypeChart() {}
 
+  /** What types a species has. Weather reads this; the chart itself is private. */
+  public static List<String> typesOf(String species) {
+    return TYPES.getOrDefault(species, List.of());
+  }
+
   /** How hard {@code attacker} hits {@code defender}, by species name. */
   public static double multiplier(String attacker, String defender) {
     List<String> defending = TYPES.getOrDefault(defender, List.of());
