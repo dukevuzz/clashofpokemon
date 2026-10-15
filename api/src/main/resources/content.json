@@ -1,5 +1,5 @@
 {
-  "version": "8e2738965b26",
+  "version": "e58724e90650",
   "cards": [
     {
       "id": "charmander",
@@ -1919,6 +1919,7 @@
     "espeon",
     "excadrill",
     "exeggcute",
+    "exeggutor",
     "farigiraf",
     "fearow",
     "feebas",
@@ -2107,6 +2108,7 @@
     "walrein",
     "wartortle",
     "weavile",
+    "weezing",
     "whimsicott",
     "wingull",
     "xerneas",

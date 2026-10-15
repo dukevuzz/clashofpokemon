@@ -8,9 +8,20 @@ export const PLAYS_FOR_STAGE: Record<number, number> = { 1: 2, 2: 3, 3: 4 };
 /** The source writes some evolutions with an underscore; the key has none. */
 const normalise = (name?: string) => name?.replace(/_/g, "");
 
-/** A few chains the source leaves open. */
+/**
+ * A few chains the source leaves open.
+ *
+ * Both forms are in `species.json` and both have sheets; only the link
+ * between them is missing, so without these entries the base form is
+ * terminal and never changes however many times it is played. Checked
+ * against @pkmn/sim: these are the only such gaps in the roster that we
+ * can actually draw. Dudunsparce and Florges are left alone -- the first
+ * is not in the data at all, the second has no sheet.
+ */
 const EXTRA_EVOLUTION: Record<string, string> = {
   pikachu: "raichu",
+  koffing: "weezing",
+  exeggcute: "exeggutor",
 };
 
 /** Branching evolution. */
