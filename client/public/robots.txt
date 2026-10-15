@@ -1,0 +1,13 @@
+# Everything here is meant to be found. The game is a canvas and says nothing
+# to a crawler; the pages that do the talking are / and /guide.
+
+User-agent: *
+Allow: /
+
+# The atlases are 19 MB of sprite sheets and the tiles are ground textures.
+# Nothing to index, and crawling them is bandwidth neither side wants to spend.
+Disallow: /atlas/
+Disallow: /tiles/
+Disallow: /assets/
+
+Sitemap: https://www.clashofpokemon.online/sitemap.xml

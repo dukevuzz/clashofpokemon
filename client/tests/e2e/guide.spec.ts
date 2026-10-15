@@ -230,7 +230,7 @@ test("the type chart answers one type at a time", async ({ page }) => {
 });
 
 test("the guide is reachable from the menu and leads back", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/play.html");
   const link = page.getByRole("link", { name: "GUIDE" });
   await expect(link).toBeVisible();
   // Opens a new tab deliberately, so a match in progress survives being curious.
@@ -251,7 +251,7 @@ test("the guide is reachable from the menu and leads back", async ({ page }) => 
  * saying no money changes hands is the part that matters most.
  */
 test("the menu carries the copyright notice", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/play.html");
   const legal = page.locator(".lr-legal");
   await expect(legal.first()).toBeVisible();
   const text = (await legal.allTextContents()).join(" ");
@@ -279,7 +279,7 @@ test("the guide carries the copyright notice too", async ({ page }) => {
 
 test("the copyright is in the page source, not only the rendering", async ({ page }) => {
   // Where somebody checking the site — rather than playing it — would look.
-  for (const url of ["/", "/guide.html"]) {
+  for (const url of ["/", "/play.html", "/guide.html"]) {
     await page.goto(url);
     const meta = await page.locator('meta[name="copyright"]').getAttribute("content");
     expect(meta, `${url} declares it`).toContain("Nintendo");

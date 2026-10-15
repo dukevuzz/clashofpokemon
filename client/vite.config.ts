@@ -18,7 +18,8 @@ export default defineConfig({
     // them look something up rather than play.
     rollupOptions: {
       input: {
-        main: fileURLToPath(new URL("./index.html", import.meta.url)),
+        landing: fileURLToPath(new URL("./index.html", import.meta.url)),
+        play: fileURLToPath(new URL("./play.html", import.meta.url)),
         guide: fileURLToPath(new URL("./guide.html", import.meta.url)),
       },
     },

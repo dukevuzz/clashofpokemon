@@ -143,14 +143,14 @@ test("an API without the endpoint says so, rather than showing a 404", async ({ 
 });
 
 test("the menu offers somewhere to report", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/play.html");
   const link = page.getByRole("link", { name: /report a bug/i });
   await expect(link).toBeVisible();
   await expect(link).toHaveAttribute("href", /guide\.html#feedback/);
 });
 
 test("the fan-project notice is on the first screen", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/play.html");
   const legal = page.locator(".lr-legal");
   await expect(legal).toBeVisible();
   await expect(legal).toContainText("not affiliated");

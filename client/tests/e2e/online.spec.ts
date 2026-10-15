@@ -32,7 +32,7 @@ async function serverUp(): Promise<boolean> {
 async function player(browser: Browser) {
   const context = await browser.newContext();
   const page = await context.newPage();
-  await page.goto("/");
+  await page.goto("/play.html");
   await page.waitForFunction(
     () => (window as any).lr?.scene.getScene("Menu")?.sys.settings.status === 5,
   );
@@ -227,7 +227,7 @@ test("a second tab in the same profile is turned away", async ({ browser }) => {
   const first = await context.newPage();
   const second = await context.newPage();
   for (const p of [first, second]) {
-    await p.goto("/");
+    await p.goto("/play.html");
     await p.waitForFunction(
       () => (window as any).lr?.scene.getScene("Menu")?.sys.settings.status === 5,
     );
@@ -354,7 +354,7 @@ test("one browser is one guest, across reloads", async ({ browser }) => {
   const stored = () => page.evaluate(() =>
     localStorage.getItem("clashofpokemon.account"));
 
-  await page.goto("/");
+  await page.goto("/play.html");
   await page.waitForFunction(
     () => (window as any).lr?.scene.getScene("Menu")?.sys.settings.status === 5);
 
@@ -377,7 +377,7 @@ test("one browser is one guest, across reloads", async ({ browser }) => {
   // A brand new tab in the same profile: still the same person, because the
   // token belongs to the browser rather than to the page.
   const second = await context.newPage();
-  await second.goto("/");
+  await second.goto("/play.html");
   await second.waitForFunction(
     () => (window as any).lr?.scene.getScene("Menu")?.sys.settings.status === 5);
   const fromOtherTab = await second.evaluate(() =>
@@ -387,7 +387,7 @@ test("one browser is one guest, across reloads", async ({ browser }) => {
   // And a different browser profile is a different person.
   const other = await browser.newContext();
   const otherPage = await other.newPage();
-  await otherPage.goto("/");
+  await otherPage.goto("/play.html");
   await otherPage.waitForFunction(
     () => (window as any).lr?.scene.getScene("Menu")?.sys.settings.status === 5);
   expect(await otherPage.evaluate(() =>

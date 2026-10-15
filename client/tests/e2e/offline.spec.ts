@@ -28,7 +28,7 @@ async function apiUp(): Promise<boolean> {
 
 test("with the meta tier down, single player is unaffected", async ({ page }) => {
   test.skip(await apiUp(), "the API is running -- stop it to exercise this");
-  await page.goto("/");
+  await page.goto("/play.html");
   await page.waitForFunction(
     () => (window as any).lr?.scene.getScene("Menu")?.sys.settings.status === 5);
   // The reachability probe has its own budget; give it room to have failed.

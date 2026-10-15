@@ -49,7 +49,7 @@ const DECK_KEY = "clashofpokemon.deck";
 
 /** Phaser is up and the menu is on screen. */
 async function boot(page: Page) {
-  await page.goto("/");
+  await page.goto("/play.html");
   // The tab is labelled in lower case now, so the match has to be too. It was
   // /^DECK$/ against a tab that renders "deck", which fails on a screen that
   // is otherwise perfectly fine.
@@ -538,7 +538,7 @@ test.skip("a tunnelling card digs its way in rather than standing there", async 
   // Diglett goes into the saved deck before the game boots, because the battle
   // scene loads the sheets its deck names -- a card pushed straight into the
   // hand has no texture, and no animation can resolve for it.
-  await page.goto("/");
+  await page.goto("/play.html");
   await page.evaluate(() => {
     const deck = ["diglett", "pikachu", "machop", "squirtle", "bulbasaur", "abra"];
     localStorage.setItem("clashofpokemon.deck", JSON.stringify(deck));
