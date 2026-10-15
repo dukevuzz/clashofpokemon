@@ -3,15 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <!--
-      viewport-fit=cover so the board reaches under an iPhone notch, and
-      user-scalable=no so a double-tap during a match does not zoom the page.
+      Zoomable, unlike the game. The board must not zoom under a double-tap
+      mid-match; a page of prose must, and taking that away from anyone who
+      needs it to read is not a trade this page has to make.
     -->
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
-    />
-    <meta name="theme-color" content="#0b0b0e" />
-    <title>Clash of Pokémon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#4a5568" />
+    <title>Clash of Pokémon — a real-time Pokémon lane battler in your browser</title>
     <!--
       In the head as well as on the page, so it is in the source and in the
       search result rather than only in the rendering. A rights holder looking
@@ -21,31 +19,128 @@
       name="copyright"
       content="Pokémon © 1995–2026 Nintendo / Creatures Inc. / GAME FREAK inc. Non-commercial fan project, not affiliated with or endorsed by the rights holders."
     />
+
+    <meta name="description" content="A free real-time Pokémon lane battler in your browser. Three-minute matches, 151 creature cards, elixir, towers and type matchups. No download, no sign-up to try." />
+    <link rel="canonical" href="https://www.clashofpokemon.online/" />
+
+    <!--
+      What a shared link looks like. Without these a pasted URL is a bare
+      string in every chat window, which is most of how a game like this
+      travels.
+    -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Clash of Pokémon" />
+    <meta property="og:title" content="Clash of Pokémon — a real-time Pokémon lane battler" />
+    <meta property="og:description" content="Three-minute matches, 151 creature cards, elixir and towers. Free in your browser." />
+    <meta property="og:url" content="https://www.clashofpokemon.online/" />
+    <meta property="og:image" content="https://www.clashofpokemon.online/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="A lane battle in Clash of Pokémon: two towers, a river, and creatures crossing a bridge." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Clash of Pokémon — a real-time Pokémon lane battler" />
+    <meta name="twitter:description" content="Three-minute matches, 151 creature cards, elixir and towers. Free in your browser." />
+    <meta name="twitter:image" content="https://www.clashofpokemon.online/og.png" />
+
     <link rel="stylesheet" href="/fonts.css" />
-    <!-- Dialogs and popups are DOM; see src/ui/modal.ts for why. -->
-    <link rel="stylesheet" href="/ui.css" />
-    <style>
-      html, body {
-        margin: 0; padding: 0; height: 100%; overflow: hidden;
-        background: #0b0b0e;
-        /* No text is drawn by the DOM -- this only affects the loading state. */
-        color: #cfcfd6;
-        font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
-        /* Stops the pull-to-refresh gesture firing when you drag a card down. */
-        overscroll-behavior: none;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        user-select: none;
-      }
-      #game { width: 100vw; height: 100dvh; }
-      /* Force the face to load before Phaser measures anything. */
-      .font-preload { position: absolute; left: -9999px; font-family: "PokemonClassic"; }
-      #game canvas { display: block; }
-    </style>
+    <link rel="stylesheet" href="/landing.css" />
   </head>
   <body>
-    <div id="game"></div>
-    <span class="font-preload">.</span>
-    <script type="module" src="/src/main.ts"></script>
+    <main class="l-wrap">
+      <h1>Clash of Pokémon</h1>
+      <p class="l-lede">
+        A lane battler played with Pokémon. Two players, three minutes,
+        two bridges.
+      </p>
+
+      <p>
+        <a class="l-cta" href="/play">Play in your browser</a>
+      </p>
+      <p class="l-after-cta">
+        Free. Nothing to download, and you can play as a guest before deciding
+        whether you want an account.
+      </p>
+
+      <img
+        class="l-shot"
+        src="/shot-match.png"
+        width="1240" height="2160"
+        alt="A match in progress: two towers either side of a river, a deck of Pokémon cards along the bottom, and an elixir bar filling."
+      />
+
+      <h2>How a match goes</h2>
+      <ul class="l-rules">
+        <li>
+          <b>Three minutes.</b> Both sides start with three towers. Take more of
+          them than your opponent does, or take their king tower and end it
+          early.
+        </li>
+        <li>
+          <b>Elixir is the whole economy.</b> It fills on its own, slowly, for
+          both players at once. Every card costs some. What you can afford
+          decides what you can answer, and spending everything on one push is
+          how most matches are lost.
+        </li>
+        <li>
+          <b>Six cards, chosen before the match.</b> You draw from your own deck
+          as you play, so a deck is a plan rather than a collection — a six-cost
+          creature you cannot pay for is a card that never arrives.
+        </li>
+        <li>
+          <b>Types decide fights.</b> The same matchups you already know. Water
+          puts out fire here too, and bringing the wrong answer costs you the
+          tower behind it.
+        </li>
+        <li>
+          <b>Creatures evolve.</b> Play the same card enough times in one match
+          and it grows into its next form, for the rest of that match.
+        </li>
+      </ul>
+
+      <h2>What is in it</h2>
+      <p>
+        151 creatures, each with its own sprite, its own stats and its own move.
+        Every one is animated in eight directions, drawn by the
+        <a href="https://sprites.pmdcollab.org/">PMD Sprite Collab</a>
+        community. Three lane arenas, weather that changes what the ground does,
+        and a ranked ladder if you want one.
+      </p>
+      <p>
+        <span class="l-tag">real-time</span>
+        <span class="l-tag">1 v 1</span>
+        <span class="l-tag">browser</span>
+        <span class="l-tag">free</span>
+        <span class="l-tag">no download</span>
+        <span class="l-tag">phone or desktop</span>
+      </p>
+
+      <h2>Learn it properly</h2>
+      <p>
+        The <a href="/guide">Field Guide</a> is the manual: elixir, towers,
+        deploying, the type chart, evolution, and a searchable page for every
+        creature in the game with its real numbers.
+      </p>
+
+      <div class="l-notice">
+        <p>
+          <b>This is a non-commercial fan project.</b> Pokémon and all related
+          names, characters and artwork are © Nintendo, Game Freak and The
+          Pokémon Company. This project is not affiliated with, endorsed by, or
+          in any way associated with them.
+        </p>
+        <p style="margin: 0">
+          Nothing here is sold. There are no advertisements, no purchases, no
+          donations and no revenue of any kind, and there never will be. It
+          exists because building it was interesting. If a rights holder would
+          prefer it did not, say so and it will come down.
+        </p>
+      </div>
+
+      <footer>
+        Source on <a href="https://github.com/dukevuzz/clashofpokemon">GitHub</a>.
+        Sprites under CC BY-NC 4.0 — see the
+        <a href="https://github.com/dukevuzz/clashofpokemon/blob/main/CREDITS.md">credits</a>.
+      </footer>
+    </main>
   </body>
 </html>

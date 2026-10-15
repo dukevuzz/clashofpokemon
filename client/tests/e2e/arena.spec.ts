@@ -19,7 +19,7 @@ async function battle(page: any, opts: Record<string, unknown> = {}) {
 }
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/play.html");
   await page.waitForFunction(
     () => (window as any).lr?.scene.getScene("Menu")?.sys.settings.status === 5);
 });
@@ -31,7 +31,7 @@ test("offline matches are dealt varied arenas", async ({ page }) => {
 });
 
 test("a forced arena overrides the roll", async ({ page }) => {
-  await page.goto("/?theme=magma");
+  await page.goto("/play.html?theme=magma");
   await page.waitForFunction(
     () => (window as any).lr?.scene.getScene("Menu")?.sys.settings.status === 5);
   expect(await battle(page)).toBe("magma");

@@ -13,6 +13,7 @@ this project back up, read this file first.
 | 4 | Emotes in match | weekend | not started; best value on the gap board |
 | 5 | [Replays / shareable matches](replays.md) | **days, not a fortnight** | not started — determinism already proven, 28/28 matches reproduce, 549 bytes each |
 | 6 | [Raid mode](raids.md) | large | design sketch — the mode that removes the need for two people online at once |
+| 7 | [A landing page, and a site a crawler can read](landing.md) | a day | **BUILT** on `feat/landing` — `/` is the page, `/play` the game; needs Search Console after merge |
 
 The ranked feature board (drag-to-reorder, tickable) lives at
 https://claude.ai/code/artifact/4b6a860f-5ae0-41b9-9533-bbebdc1f21ec

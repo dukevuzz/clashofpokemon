@@ -8,7 +8,7 @@ test("the Mega button charges, fires, and swaps the sprite", async ({ page }) =>
     localStorage.setItem("clashofpokemon.deck",
       JSON.stringify(["charmander", "pikachu", "squirtle", "bulbasaur", "abra", "gastly"]));
   });
-  await page.goto("http://localhost:5173/");
+  await page.goto("http://localhost:5173/play.html");
   await page.waitForFunction(
     () => (window as any).lr?.scene.getScene("Menu")?.sys.settings.status === 5);
   await page.evaluate(() =>
