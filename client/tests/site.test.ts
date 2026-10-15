@@ -120,6 +120,14 @@ describe("the landing page itself", () => {
     expect(h).toMatch(/href=["']\.?\/?guide(?:\.html)?["']/);
   });
 
+  it("still proves to Google that we own it", () => {
+    // Not one-time setup: Google re-checks, and un-verifies the property if
+    // the tag goes away. Removing it silently costs the site its Search
+    // Console data and its sitemap submission.
+    expect(meta(html(), "google-site-verification"),
+      "the Search Console verification tag is gone").toBeTruthy();
+  });
+
   it("carries the fan-project notice where a person can read it", () => {
     const text = html().replace(/<[^>]+>/g, " ");
     expect(text).toMatch(/Nintendo/);
