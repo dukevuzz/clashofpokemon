@@ -6,6 +6,7 @@ import { config } from "../core/config";
 
 import { DEFAULT_TROOP, TROOPS } from "../core/towerTroops";
 import { branchesFor } from "../core/evolution";
+import { ARENA_ALL, arenaById } from "../core/arenaRoster";
 
 const KEY = "clashofpokemon.deck";
 const BRANCH_KEY = "clashofpokemon.branch";
@@ -74,6 +75,86 @@ export function saveDeck(deck: Card[]) {
   } catch {
     // Private browsing refuses writes; the deck just does not persist.
   }
+}
+
+// -------------------------------------------------------------- arena team
+//
+// Two modes, two rosters, two stored decks -- the same split Clash Royale
+// makes, for the same reason. A lane deck is six cards priced for an elixir
+// economy; an arena team is six creatures picked outright from everything we
+// can draw. Sharing one key would mean editing one silently rewrote the other.
+
+const ARENA_KEY = "clashofpokemon.arenaDeck";
+
+/**
+ * The saved arena team.
+ *
+ * Deliberately the same shape as `loadDeck`, including the distinction that
+ * cost the lane deck two separate bugs: a key that was never written is a new
+ * player and gets a team chosen for them, a key holding "[]" is somebody who
+ * emptied it on purpose and gets nothing back.
+ */
+export function loadArenaDeck(): Card[] {
+  let team: Card[] = [];
+  let saved = false;
+  let savedCount = 0;
+  try {
+    const raw = localStorage.getItem(ARENA_KEY);
+    if (raw !== null) {
+      const ids = JSON.parse(raw) as string[];
+      saved = true;
+      savedCount = Array.isArray(ids) ? ids.length : 0;
+      // Validated against the arena roster, not the lane one: these are
+      // different sets, and an id saved by an older version may have gone.
+      team = (Array.isArray(ids) ? ids : [])
+        .map((id) => arenaById(id))
+        .filter((c): c is Card => Boolean(c))
+        .filter((c, i, all) => all.indexOf(c) === i);
+    }
+  } catch {
+    // A corrupt or unavailable store is not worth failing a launch over.
+  }
+  if (!saved) return starterArenaDeck();
+  if (savedCount > 0 && team.length === 0) return starterArenaDeck();
+  return team.slice(0, config.deckSize);
+}
+
+export function saveArenaDeck(team: Card[]) {
+  try {
+    localStorage.setItem(
+      ARENA_KEY,
+      JSON.stringify(team.slice(0, config.deckSize).map((c) => c.id)),
+    );
+  } catch {
+    // Private browsing refuses writes; the team just does not persist.
+  }
+}
+
+/**
+ * Six recognisable final forms.
+ *
+ * Final forms rather than a spread across the roster: a stage-1 wins about 2%
+ * of bouts against a stage-3, because `tiers.skillDamage` indexes damage by
+ * stage. Handing a new player a team of babies would be a tutorial they lose.
+ *
+ * Named rather than derived so the first thing anyone sees is a team they
+ * recognise, then topped up from the roster if a sheet ever goes away.
+ */
+export function starterArenaDeck(): Card[] {
+  const wanted = ["charizard", "blastoise", "venusaur",
+                  "gengar", "alakazam", "gyarados"];
+  const out: Card[] = [];
+  for (const id of wanted) {
+    const card = arenaById(id);
+    if (card && !out.includes(card)) out.push(card);
+  }
+  // Only reached if one of the six has lost its sheet. Evolved forms only,
+  // for the reason above.
+  for (const card of ARENA_ALL) {
+    if (out.length >= config.deckSize) break;
+    if (card.stage >= 2 && !out.includes(card)) out.push(card);
+  }
+  return out.slice(0, config.deckSize);
 }
 
 /** The Eevee branch committed in the deck builder, if any. */
