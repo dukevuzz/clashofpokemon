@@ -56267,9 +56267,10 @@
     },
     {
       "id": "koffing",
-      "needs": 0,
+      "needs": 2,
       "chain": [
-        "koffing"
+        "koffing",
+        "weezing"
       ]
     },
     {
@@ -56724,9 +56725,10 @@
     },
     {
       "id": "exeggcute",
-      "needs": 0,
+      "needs": 2,
       "chain": [
-        "exeggcute"
+        "exeggcute",
+        "exeggutor"
       ]
     },
     {
