@@ -18,7 +18,6 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties, PointerEvent as ReactPointerEvent, RefObject } from "react";
-import * as cards from "../core/cards";
 import type { Card } from "../core/cards";
 import { config } from "../core/config";
 import { ROLES, RARITY_RANK } from "../core/tiers";
@@ -30,7 +29,8 @@ import { rarityColor, hex } from "./theme";
 import * as portraits from "./portraits";
 import { Showcase } from "../guide/Showcase";
 import { skillOf } from "./skillText";
-import { loadDeck, saveDeck, loadBranch, saveBranch, starterDeck } from "./deckStore";
+import { loadBranch, saveBranch } from "./deckStore";
+import { LANE_SOURCE, type DeckSource } from "./deckSource";
 import { useSwipe } from "./useSwipe";
 
 type Sort = "cost" | "name" | "rarity";
@@ -61,9 +61,9 @@ const rgbCss = (rgb?: number[]) =>
   rgb ? `rgb(${rgb.map((v) => Math.round(v * 255)).join(",")})` : "#999";
 
 /** Every type present on the roster, so the bar never offers an empty filter. */
-function rosterTypes(): string[] {
+function rosterTypes(roster: readonly Card[]): string[] {
   const seen = new Set<string>();
-  for (const c of cards.ALL) for (const t of c.types) seen.add(t);
+  for (const c of roster) for (const t of c.types) seen.add(t);
   return [...seen].sort();
 }
 
@@ -71,17 +71,22 @@ export interface DeckProps {
   back(): void;
   /** Start the match. Only reached with a full deck. */
   play(): void;
+  /**
+   * Which deck is being edited. Defaults to the lane deck, so every existing
+   * caller keeps the screen it already had.
+   */
+  source?: DeckSource;
 }
 
-export function DeckScreen({ back, play }: DeckProps) {
+export function DeckScreen({ back, play, source = LANE_SOURCE }: DeckProps) {
   // Padded to a fixed length on the way in, so slot indices are stable from
   // the first render and an empty slot is a slot rather than a missing one.
-  const [deck, setDeck] = useState<deckEdit.DeckSlots>(() => deckEdit.toSlots(loadDeck()));
+  const [deck, setDeck] = useState<deckEdit.DeckSlots>(() => deckEdit.toSlots(source.load()));
   const [branch, setBranch] = useState<string | undefined>(loadBranch);
   const [filter, setFilter] = useState<Filter>({ kind: "all" });
   const [sort, setSort] = useState<Sort>("cost");
   /** The card the panel is describing, which is not the same as one in the deck. */
-  const [inspect, setInspect] = useState<Card | undefined>(() => deckEdit.picked(deckEdit.toSlots(loadDeck()))[0]);
+  const [inspect, setInspect] = useState<Card | undefined>(() => deckEdit.picked(deckEdit.toSlots(source.load()))[0]);
   /** Which slot was last tapped, so the second tap on it empties it. */
   const [armed, setArmed] = useState<number>();
   /** Something the screen is shouting, in place of the card count. */
@@ -110,11 +115,11 @@ export function DeckScreen({ back, play }: DeckProps) {
    */
   const commit = (next: deckEdit.DeckSlots) => {
     setDeck(next);
-    saveDeck(deckEdit.picked(next));
+    source.save(deckEdit.picked(next));
   };
 
   const visible = useMemo(() => {
-    const list = cards.ALL.filter((c) => {
+    const list = source.roster.filter((c) => {
       if (filter.kind === "role") return c.role === filter.value;
       if (filter.kind === "type") return c.types.includes(filter.value);
       if (filter.kind === "mega") return mega.canEverMega(c);
@@ -172,7 +177,7 @@ export function DeckScreen({ back, play }: DeckProps) {
     commit(deckEdit.clearSlot(deck, i));
   };
 
-  const leave = () => { saveDeck(chosen); back(); };
+  const leave = () => { source.save(chosen); back(); };
   const start = () => {
     if (!full) {
       // Only a full deck starts a match: a short one quietly changes the cycle
@@ -182,22 +187,22 @@ export function DeckScreen({ back, play }: DeckProps) {
       setSay(`pick ${short} more card${short === 1 ? "" : "s"} to play`);
       return;
     }
-    saveDeck(chosen);
+    source.save(chosen);
     play();
   };
 
   const swipe = useSwipe(undefined, leave);
-  const branches = evolution.branchesFor("eevee");
+  const branches = source.branches ? evolution.branchesFor("eevee") : undefined;
 
   return (
     <div className="lr-screen lr-deckscreen" {...swipe}>
       <header>
-        <h1>DECK</h1>
+        <h1>{source.title.toUpperCase()}</h1>
         <span className={say ? "lr-sub lr-shout" : "lr-sub"}>
           {say ?? `${chosen.length} / ${config.deckSize} cards`}
         </span>
         <span className="lr-spacer" />
-        <span className="lr-deckavg">{avg.toFixed(1)} avg</span>
+        {source.costs && <span className="lr-deckavg">{avg.toFixed(1)} avg</span>}
         <button className="lr-link" onClick={leave}>‹ back</button>
       </header>
 
@@ -256,14 +261,14 @@ export function DeckScreen({ back, play }: DeckProps) {
         <div className="lr-filters">
           <Chips
             label="ROLE"
-            items={ROLES.filter((r) => cards.ALL.some((c) => c.role === r))
+            items={ROLES.filter((r) => source.roster.some((c) => c.role === r))
               .map((r) => ({ key: r, label: r, filter: { kind: "role", value: r } as Filter }))}
             active={filter}
             pick={setFilter}
           />
           <Chips
             label="TYPE"
-            items={rosterTypes().map((t) => ({
+            items={rosterTypes(source.roster).map((t) => ({
               key: t,
               label: TYPE_SHORT[t] ?? t,
               filter: { kind: "type", value: t } as Filter,
@@ -344,7 +349,7 @@ export function DeckScreen({ back, play }: DeckProps) {
         <button className="lr-btn" onClick={leave}>Back</button>
         <button
           className="lr-btn"
-          onClick={() => { setArmed(undefined); commit(deckEdit.toSlots(starterDeck())); }}
+          onClick={() => { setArmed(undefined); commit(deckEdit.toSlots(source.starter())); }}
         >
           Reset
         </button>
